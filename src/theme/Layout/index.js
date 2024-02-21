@@ -71,7 +71,7 @@ export default function Layout(props) {
   return (
     <LayoutProvider>
       <BrowserOnly>
-      <ThemeListener>
+      {/* <ThemeListener> */}
         <PageMetadata title={title} description={description} />
 
         <SkipToContent />
@@ -96,7 +96,7 @@ export default function Layout(props) {
         </div>
 
         {!noFooter && <Footer />}
-      </ThemeListener>
+      {/* </ThemeListener> */}
       </BrowserOnly>
     </LayoutProvider>
   );
