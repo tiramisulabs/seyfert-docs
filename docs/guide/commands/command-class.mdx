@@ -1,0 +1,86 @@
+# Extending Command
+
+The command class is the one that provides all the utilities inside a command and prepares it to receive all the command metadata.
+
+## Handling errors
+
+Within Seyfert, there are different types of errors, depending on how critical the problem is.
+
+### Command
+
+```ts showLineNumbers
+import { Command, createStringOption, Options , type CommandContext, type OnOptionsReturnObject } from 'seyfert';
+
+@Options({
+  url: createStringOption({
+    description: 'how to be a gamer',
+    value(data, ok: OKFunction<URL>, fail) {
+        if (isUrl(data.value)) return ok(new URL(data.value));
+        fail('expected a valid url');
+    }
+  })
+});
+export class HandlingErrors extends Command {
+
+    async onOptionsError(context: CommandContext, metadata: OnOptionsReturnObject) {
+        await context.editOrReply({
+            content: Object.entries(metadata)
+                .filter((_) => _[1].failed)
+                .map((error) => `${error[0]}: ${error[1].value}`)
+                .join('\n'),
+        }); // url: expected a valid url
+    }
+
+}
+```
+
+### Middleware return stop
+
+When a middleware returns a stop, seyfert issues this error and stops the progress of the command to be handled.
+
+:::note
+Learn more about middleware utilities [here](#)
+:::
+
+```ts showLineNumbers
+const OnlyDev = createMiddleware(({ context, next, stop, pass }) => {
+    if (!Devs.includes(context.author.id)) return stop('User is not a developer')
+    next()
+});
+
+export default { OnlyDev }
+```
+
+```ts showLineNumbers
+import { Command, Middlewares, type CommandContext } from 'seyfert';
+
+@Middlewares(['OnlyDev'])
+export class HandlingErrors extends Command {
+    
+    async onMiddlewaresError(context: CommandContext, error: Error) {
+        await context.editOrReply({
+            content: error.message, //User is not a developer
+        });
+    }
+
+}
+```
+
+```ts showLineNumbers
+import { Command, type CommandContext } from 'seyfert';
+
+export class HandlingErrors extends Command {
+
+    async run(context: CommandContext) {
+        throw new Error('Error, ehm, lol player detected')
+    }
+
+    async onRunError(context: CommandContext, error: unknown) {
+        context.client.logger.fatal(error)
+        await context.editOrReply({
+            content: error instanceof Error ? error.message : `Error: ${error}`,
+        });//"Error, ehm, lol player detected"
+    }
+
+}
+```

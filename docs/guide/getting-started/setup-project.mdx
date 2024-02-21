@@ -1,0 +1,162 @@
+import TabItem from '@theme/TabItem';
+import Tabs from '@theme/Tabs';
+import { FileTree } from '../../../src/components/FileTree';
+
+# Setup Seyfert Project
+
+:::info
+
+You may want to skip these steps by going directly to our template:
+```bash
+git clone https://github.com/tiramisulabs/template.git
+```
+:::
+
+### Typescript settings
+To make Seyfert work as intended you must update your `tsconfig.json` file and add `emitDecoratorMedatada` and `experimentalDecorators`:
+
+<Tabs>
+    <TabItem value="example" label="Example">
+```json title="tsconfig.json" {5-6} showLineNumbers
+{
+    "compilerOptions": {
+        "target": "esnext",
+        "module": "commonjs",
+        "emitDecoratorMetadata": true,
+        "experimentalDecorator": true,
+        "outDir": "./dist"
+    }
+}
+```
+    </TabItem>
+    <TabItem value="weuse" label="We use">
+```json title="tsconfig.json" {9-10} showLineNumbers
+{
+    "compilerOptions": {
+        "module": "CommonJS",
+        "target": "ES2021",
+        "moduleResolution": "node",
+        "declaration": false,
+        "sourceMap": false,
+        "strict": true,
+        "experimentalDecorators": true,
+        "emitDecoratorMetadata": true,
+        "noUnusedLocals": true,
+        "noUnusedParameters": true,
+        "noImplicitReturns": true,
+        "noFallthroughCasesInSwitch": true,
+        "skipLibCheck": true,
+        "outDir": "./dist",
+        "stripInternal": true
+    },
+    "exclude": [
+        "**/dist"
+    ],
+    "include": [
+        "src"
+    ]
+}
+```
+    </TabItem>
+</Tabs>
+
+### Selecting Your Bot Type.
+
+Currently, Seyfert supports two types of applications: one based on the Discord gateway, which is the most commonly used, and another based on the Discord HTTP interaction system, which is less frequently used. It is important to understand the differences between these two types in order to choose the appropriate application for your needs.
+
+:::info
+
+In these first steps, the options that are shared by both types of applications are shown. Later on, they will be separated.
+
+:::
+
+<Tabs>
+    <TabItem value="gateway" label="Gateway">
+        - Gateway client receive all events from discord like messageCreate, interactionCreate, guildCreate, ready...
+        - The events that the client receive depends of the client intents
+    </TabItem>
+    <TabItem value="http" label="HTTP">
+        - Unlike gateway, the client only execute commands from interactionCreate event
+    </TabItem>
+</Tabs>
+
+### Configuration
+
+Once `tsconfig.json` has been modified, we still have a few steps to go before we can run the application, in this case you need to tell seyfert your project structure:
+so you need to create a file called `seyfert.config.js` in the root of your project and add the following code:
+
+<Tabs>
+    <TabItem value="gateway" label="Gateway">
+ ```js title="seyfert.config.js" showLineNumbers
+// @ts-check is better
+const { config } = require('seyfert');
+
+module.exports = config.bot({
+    token: process.env.BOT_TOKEN,
+    intents: ["Guilds"]
+    locations: {
+        base: "src",	
+        output: "dist", //If you are using bun, set "src" instead
+        commands: "commands"
+    }
+});
+```
+    </TabItem>
+    <TabItem value="http" label="HTTP">
+```js title="seyfert.config.js" showLineNumbers
+// @ts-check is better
+const { config } = require('seyfert');
+
+module.exports = config.http({
+    token: process.env.BOT_TOKEN,
+    applicationId: process.env.BOT_APP_ID,
+    port: 3000 // by default is 8080,
+    publicKey: procces.env.BOT_PUBLIC_KEY,
+    locations: {
+        base: "src",
+        output: "dist", //If you are using bun, set "src" instead
+        commands: "commands"
+    }
+});
+```
+    </TabItem>
+</Tabs>
+
+And let's create the index file in the `src` folder and add the following code:
+
+<Tabs>
+    <TabItem value="gateway" label="Gateway">
+```ts {5-8} title="src/index.ts" showLineNumbers
+import { Client } from 'seyfert';
+
+const client = new Client();
+
+// This will start the connection with the gateway and load commands, events, components and langs
+client.start();
+```
+    </TabItem>
+    <TabItem value="http" label="HTTP">
+```ts {5-8} title="src/index.ts" showLineNumbers
+import { HttpClient } from 'seyfert';
+
+const client = new HttpClient();
+
+// This will start listening to `https://yourweb.xyz/interactions` and load commands, components and langs
+client.start();
+```
+    </TabItem>
+</Tabs>
+
+So after complete this steps your project structure should look like this:
+
+<FileTree>
+    <FileTree.Folder name="src">
+        <FileTree.Folder name="commands">
+            <FileTree.File name="ping.ts" />
+        </FileTree.Folder>
+        <FileTree.File name="index.ts" />
+    </FileTree.Folder>
+    <FileTree.File name="seyfert.config.js" />
+    <FileTree.File name="package.json" />
+    <FileTree.File name="tsconfig.json" />
+</FileTree>
