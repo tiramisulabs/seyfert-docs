@@ -70,7 +70,7 @@ export default function Layout(props) {
   useKeyboardNavigation();
   return (
     <LayoutProvider>
-      <BrowserOnly>
+      {/* <BrowserOnly> */}
       {/* <ThemeListener> */}
         <PageMetadata title={title} description={description} />
 
@@ -97,7 +97,7 @@ export default function Layout(props) {
 
         {!noFooter && <Footer />}
       {/* </ThemeListener> */}
-      </BrowserOnly>
+      {/* </BrowserOnly> */}
     </LayoutProvider>
   );
 }
