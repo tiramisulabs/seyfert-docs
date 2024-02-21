@@ -16,6 +16,7 @@ import ErrorPageContent from "@theme/ErrorPageContent";
 import styles from "./styles.module.css";
 import { useColorMode } from "@docusaurus/theme-common";
 import { useEffect } from "react";
+import BrowserOnly from "@docusaurus/BrowserOnly";
 
 const ThemeListener = ({ children }) => {
   const { colorMode } = useColorMode();
@@ -69,6 +70,7 @@ export default function Layout(props) {
   useKeyboardNavigation();
   return (
     <LayoutProvider>
+      <BrowserOnly>
       <ThemeListener>
         <PageMetadata title={title} description={description} />
 
@@ -95,6 +97,7 @@ export default function Layout(props) {
 
         {!noFooter && <Footer />}
       </ThemeListener>
+      </BrowserOnly>
     </LayoutProvider>
   );
 }
