@@ -1,0 +1,23 @@
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
+# Sub-Zero (SubCommands)
+
+We have touching on the basics of creating a command, but what if we want to create a command that has sub-commands? For example, we want to create a command that has a `create` and `delete` sub-command. This is where sub-commands come in.
+
+## Creating a Sub-Command
+
+To create a sub-command, we need to create a new class that extends `SubCommand` and implement the `execute` method. We then need to add the sub-command to the parent command.
+
+<Tabs>
+  <TabItem value="create.ts" label="Create.ts" default>
+    ```ts showLineNumbers
+import { Command, SubCommand, CommandContext } from 'seyfert';
+```
+  </TabItem>
+  <TabItem value="delete.ts" label="delete">
+    ```ts showLineNumbers
+import { Command, SubCommand, CommandContext } from 'seyfert';
+```
+  </TabItem>
+</Tabs>

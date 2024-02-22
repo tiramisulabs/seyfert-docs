@@ -99,7 +99,7 @@ export const loggerMiddleware = createMiddleware<void>((middle) => {
 });
 ```
 
-Now every time the `ping` command is executed in a DM, the logger middleware will stop the execution of the command and send the error message to the error handler
+Now every time the `ping` command is executed in a DM, the logger middleware will stop the execution of the command and send the error message to the handler. Learn how to handle errors [here](/docs/guide/commands/command-class#middleware-return-stop).
 
 :::note
 Notice you can join to the interaction data by using `middle.context.interaction`
@@ -167,5 +167,7 @@ export default class PingCommand extends Command {
 ```
 
 :::note
+
 If you want to pass data from more than one middleware you can use the `|` operator, for example `CommandContext<never, "logger" | "otherMiddleware">`
+
 :::
