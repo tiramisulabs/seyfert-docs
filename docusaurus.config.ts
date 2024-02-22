@@ -6,25 +6,13 @@ import tailwindPlugin from "./plugins/tailwind-config.cjs";
 const config: Config = {
   title: "Seyfert",
   tagline: "Making Discord API more fun",
-  favicon: "img/favicon.ico",
-
-  // Set the production url of your site here
-  url: "https://your-docusaurus-site.example.com",
-  // Set the /<baseUrl>/ pathname under which your site is served
-  // For GitHub pages deployment, it is often '/<projectName>/'
+  favicon: "img/logo.jpg",
+  url: "https://seyfert-docs.vercel.app/",
   baseUrl: "/",
-
-  // GitHub pages deployment config.
-  // If you aren't using GitHub pages, you don't need these.
-  organizationName: "facebook", // Usually your GitHub org/user name.
-  projectName: "docusaurus", // Usually your repo name.
-
+  organizationName: "seyfert",
+  projectName: "seyfert",
   onBrokenLinks: "ignore",
   onBrokenMarkdownLinks: "warn",
-
-  // Even if you don't use internationalization, you can use this field to set
-  // useful metadata like html lang. For example, if your site is Chinese, you
-  // may want to replace "en" with "zh-Hans".
   i18n: {
     defaultLocale: "en",
     locales: ["en"],
@@ -32,24 +20,14 @@ const config: Config = {
   markdown: {
     format: "detect",
   },
-
   presets: [
     [
       "classic",
       {
         docs: {
           sidebarPath: "./sidebars.ts",
-          // Please change this to your repo.
-          // Remove this to remove the "edit this page" links.
           editUrl:
-            "https://github.com/facebook/docusaurus/tree/main/packages/create-docusaurus/templates/shared/",
-        },
-        blog: {
-          showReadingTime: true,
-          // Please change this to your repo.
-          // Remove this to remove the "edit this page" links.
-          editUrl:
-            "https://github.com/facebook/docusaurus/tree/main/packages/create-docusaurus/templates/shared/",
+            "https://github.com/FreeAoi/seyfert-docs",
         },
         theme: {
           customCss: "./src/css/custom.css",
@@ -59,13 +37,11 @@ const config: Config = {
   ],
 
   themeConfig: {
-    // Replace with your project's social card
-    image: "img/docusaurus-social-card.jpg",
     navbar: {
-      title: "My Site",
+      title: "Seyfert",
       logo: {
-        alt: "My Site Logo",
-        src: "img/logo.svg",
+        alt: "Seyfert Logo",
+        src: "img/logo.jpg",
       },
       items: [
         {
@@ -83,47 +59,7 @@ const config: Config = {
     },
     footer: {
       style: "dark",
-      links: [
-        {
-          title: "Docs",
-          items: [
-            {
-              label: "Tutorial",
-              to: "/docs/intro",
-            },
-          ],
-        },
-        {
-          title: "Community",
-          items: [
-            {
-              label: "Stack Overflow",
-              href: "https://stackoverflow.com/questions/tagged/docusaurus",
-            },
-            {
-              label: "Discord",
-              href: "https://discordapp.com/invite/docusaurus",
-            },
-            {
-              label: "Twitter",
-              href: "https://twitter.com/docusaurus",
-            },
-          ],
-        },
-        {
-          title: "More",
-          items: [
-            {
-              label: "Blog",
-              to: "/blog",
-            },
-            {
-              label: "GitHub",
-              href: "https://github.com/facebook/docusaurus",
-            },
-          ],
-        },
-      ],
+      links: [],
       copyright: `Copyright © ${new Date().getFullYear()} Seyfert, Built with Docusaurus.`,
     },
     prism: {
@@ -133,14 +69,6 @@ const config: Config = {
     },
   } satisfies Preset.ThemeConfig,
   plugins: [
-    // [
-    //   "docusaurus-plugin-typedoc",
-    //   {
-    //     sidebar: {
-    //       pretty: true,
-    //     },
-    //   },
-    // ],
     ['docusaurus-plugin-typedoc-api',
       {
         projectRoot: process.cwd(),
