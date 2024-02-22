@@ -23,6 +23,7 @@ interface FileProps {
   active?: boolean;
 }
 
+// TODO: overflow to this component
 function Tree({ children }: { children: ReactNode }): ReactElement {
   return (
     <div className="mt-6 select-none border-solid border border-neutral-200/70 dark:border-neutral-700 dark:text-white text-sm rounded">

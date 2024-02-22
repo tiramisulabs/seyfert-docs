@@ -58,6 +58,8 @@ const ThemeListener = ({ children }) => {
   return <>{children}</>;
 };
 
+
+// TODO: ThemeListener for tailwind detect dark mode correctly
 export default function Layout(props) {
   const {
     children,
