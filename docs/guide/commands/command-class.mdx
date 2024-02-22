@@ -79,7 +79,7 @@ export class HandlingErrors extends Command {
         context.client.logger.fatal(error)
         await context.editOrReply({
             content: error instanceof Error ? error.message : `Error: ${error}`,
-        });//"Error, ehm, lol player detected"
+        });// This will reply with the error message above "Error, ehm, lol player detected"
     }
 
 }
