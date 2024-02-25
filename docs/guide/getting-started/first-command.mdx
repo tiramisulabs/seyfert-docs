@@ -81,10 +81,10 @@ export default class PingCommand extends Command {
         const ping = ctx.client.gateway.latency; //average latency between shards
 
         await ctx.write({
-                content: `The ping is \`${ping}\``
-                flags,
-            });
-        }
+            content: `The ping is \`${ping}\``,
+            flags,
+        });
+    }
 
 }
 ```

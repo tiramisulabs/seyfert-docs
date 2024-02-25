@@ -38,7 +38,9 @@ export class AddCommand extends SubCommand {
 
     // some logic there
 
-    ctx.reply('create command executed');
+    ctx.reply({
+      content: 'create command executed',
+    });
   }
 }
 ```
@@ -55,7 +57,9 @@ export class DeleteCommand extends SubCommand {
 
     // some logic here
 
-    ctx.reply('delete command executed');
+    ctx.reply({
+      content: 'delete command executed',
+    });
   }
 }
 ```

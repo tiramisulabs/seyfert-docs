@@ -14,7 +14,7 @@ const { config } = require('seyfert');
 
 module.exports = config.bot({
     token: process.env.BOT_TOKEN,
-    intents: ["Guilds"]
+    intents: ["Guilds"],
     locations: {
         base: "src",
         output: "dist",
@@ -50,7 +50,9 @@ export default createEvent({
         if (!message.author || message.author.bot) return;
 
         if (message.content === "ping") {
-            await message.channel.send("pong");
+            await message.write({
+                content: "pong",
+            });
         }
     }
 })

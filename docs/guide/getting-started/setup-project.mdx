@@ -93,7 +93,7 @@ const { config } = require('seyfert');
 
 module.exports = config.bot({
     token: process.env.BOT_TOKEN,
-    intents: ["Guilds"]
+    intents: ["Guilds"],
     locations: {
         base: "src",	
         output: "dist", //If you are using bun, set "src" instead
@@ -110,7 +110,7 @@ const { config } = require('seyfert');
 module.exports = config.http({
     token: process.env.BOT_TOKEN,
     applicationId: process.env.BOT_APP_ID,
-    port: 3000 // by default is 8080,
+    port: 3000, // by default is 8080
     publicKey: procces.env.BOT_PUBLIC_KEY,
     locations: {
         base: "src",
