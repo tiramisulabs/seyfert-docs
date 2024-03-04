@@ -1,0 +1,165 @@
+import TabItem from '@theme/TabItem';
+import Tabs from '@theme/Tabs';
+
+# Music Library
+
+In Seyfert, there is the possibility to play music through a library named [kazagumo](https://npmjs.com/package/kazagumo).
+
+
+### Installation
+
+First, `kazagumo` will obviously be installed, and this other dependencie `shoukaku`.
+Both are necessary to be able to play music.
+
+<Tabs>
+  <TabItem value="npm" label="npm" default>
+    ```bash copy 
+npm install kazagumo shoukaku
+	```
+  </TabItem>
+  <TabItem value="pnpm" label="pnpm">
+    ```bash copy
+pnpm add kazagumo shoukaku
+    ```
+  </TabItem>
+    <TabItem value="bun" label="bun">
+    ```bash copy
+bun add kazagumo shoukaku
+    ```
+    </TabItem>
+  <TabItem value="yarn" label="yarn">
+    ```bash copy
+yarn add kazagumo shoukaku
+    ```
+    </TabItem>
+
+</Tabs>
+
+### Setup
+
+:::info
+
+In this part, we are going to assume that you read the [Understanding declare module](/docs/guide/getting-started/declare-module) section 
+:::
+
+To see all the kazagumo options or events, see the official [example bot](https://www.npmjs.com/package/kazagumo#example-bot)
+
+:::info
+
+At the moment `shoukaku / kazagumo` doesn't have seyfert support, so a custom connector was created to make it work.
+
+You can see the PR status [here](https://github.com/shipgirlproject/Shoukaku/pull/170).
+:::
+
+<Tabs>
+  <TabItem value="index" label="index.ts" default>
+```ts title="index.ts" showLineNumbers
+import { Client } from 'seyfert';
+import { Kazagumo } from 'kazagumo';
+import { type NodeOption } from 'shoukaku';
+import { SeyfertConnector } from './Connector';
+
+const client = new Client();
+const nodes: NodeOption[] = [
+    {
+        name: 'Node',
+        url: 'localhost:2333',
+        auth: 'youshallnotpass',
+        secure: false
+    },
+];
+
+//Basic configuration, perfect for this case
+client.kazagumo = new Kazagumo({
+    defaultSearchEngine: "youtube",
+    send: (guildId, payload) => this.gateway.send(this.gateway.calculeShardId(guildId), payload),
+}, new SeyfertConnector(this), nodes);
+
+//To see if the node is connected
+client.kazagumo.shoukaku.on("ready", (name) => console.log(`Lavalink ${name}: Ready!`));
+
+declare module 'seyfert' {
+    interface Client {
+        kazagumo: Kazagumo;
+    }
+} 
+
+// This will start the bot and upload the commands.
+client.start().then(() => client.uploadCommands());
+```
+  </TabItem>
+  <TabItem value="command" label="play.ts">
+```ts title="src/commands/play.ts" showLineNumbers
+import { Command, Declare, Options, type CommandContext, createStringOption } from 'seyfert';
+import { MessageFlags } from 'seyfert/lib/common';
+
+const options = {
+    query: createStringOption({
+        description: 'Enter a song name or url.',
+        required: true,
+    }),
+};
+
+@Declare({
+    name: 'play',
+    description: 'Play music.'
+})
+@Options(options)
+export default class PlayCommand extends Command {
+    async run(ctx: CommandContext<typeof options>) {
+        const { options, client, guildId, channelId, member, author } = ctx;
+        const { query } = options;
+
+        if (!guildId || !member || !client.cache.voiceStates) return;
+
+        const voice = await client.cache.voiceStates.get(member.id);
+        if (!voice) return ctx.write({ content: 'You need to be in a voice channel to play music.', flags: MessageFlags.Ephemeral });
+
+        const botVoice = await client.cache.voiceStates.get(client.me.id);
+        if (botVoice && botVoice.channel_id !== voice.channel_id) return ctx.write({ content: 'You need to be in the same voice channel as me.' , flags: MessageFlags.Ephemeral});
+
+        const player = await client.kazagumo.createPlayer({
+            guildId: guildId,
+            textId: channelId,
+            voiceId: voice.channel_id,
+            volume: 100,
+        });
+
+        const result = await client.kazagumo.search(query, { requester: author });
+        if (!result.tracks.length) return ctx.write({ content: 'No results found!' });
+
+        if (result.type === 'PLAYLIST') player.queue.add(result.tracks);
+        else player.queue.add(result.tracks[0]);
+
+        if (!player.playing && !player.paused) player.play();
+        return ctx.write({ content: result.type === 'PLAYLIST' ? `Queued ${result.tracks.length} from ${result.playlistName}` : `Queued ${result.tracks[0].title}` });
+    }
+}
+```
+    </TabItem>
+  <TabItem value="connector" label="Connector.ts" default>
+```ts title="Connector.ts" showLineNumbers
+import { Connector, type NodeOption } from "shoukaku";
+
+export class SeyfertConnector extends Connector {
+    public getId(): string {
+        return this.client.botId;
+    }
+
+    public sendPacket(shardId: number, payload: any): void {
+        return this.client.gateway.send(shardId, payload);
+    }
+
+    public listen(nodes: NodeOption[]): void {
+        this.client.events.values.RAW = {
+            data: { name: "raw" },
+            run: (packet: any) => {
+                if (packet.t === "READY") return this.ready(nodes);
+                return this.raw(packet);
+            }
+        }
+    }
+}
+```
+  </TabItem>
+</Tabs>

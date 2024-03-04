@@ -21,7 +21,8 @@ const sidebars: SidebarsConfig = {
         "guide/getting-started/setup-project",
         "guide/getting-started/first-command",
         "guide/getting-started/listening-event",
-        "guide/getting-started/declare-module"
+        "guide/getting-started/declare-module",
+        "guide/music"
       ],
     },
     {
