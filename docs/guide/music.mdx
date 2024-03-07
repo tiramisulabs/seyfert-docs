@@ -72,8 +72,8 @@ const nodes: NodeOption[] = [
 //Basic configuration, perfect for this case
 client.kazagumo = new Kazagumo({
     defaultSearchEngine: "youtube",
-    send: (guildId, payload) => this.gateway.send(this.gateway.calculeShardId(guildId), payload),
-}, new SeyfertConnector(this), nodes);
+    send: (guildId, payload) => client.gateway.send(client.gateway.calculeShardId(guildId), payload),
+}, new SeyfertConnector(client), nodes);
 
 //To see if the node is connected
 client.kazagumo.shoukaku.on("ready", (name) => console.log(`Lavalink ${name}: Ready!`));
