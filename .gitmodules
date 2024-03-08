@@ -1,0 +1,3 @@
+[submodule "seyfert"]
+	path = seyfert
+	url = https://github.com/potoland/potocuit

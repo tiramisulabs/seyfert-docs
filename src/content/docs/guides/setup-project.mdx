@@ -1,0 +1,126 @@
+---
+title: Setup
+sidebar:
+    label: Setup seyfert project
+---
+
+import { Tabs, TabItem, FileTree } from '@astrojs/starlight/components'
+
+# Setup Seyfert Project
+
+### Typescript settings
+
+To make Seyfert work as intended you must update your `tsconfig.json` file and add `emitDecoratorMedatada` and `experimentalDecorators`:
+
+```json {"Adding this to your own tsconfig is enough":5-7} title="tsconfig.json" copy
+{
+    "compilerOptions": {
+        "target": "esnext",
+        "module": "commonjs",
+
+        "emitDecoratorMetadata": true,
+        "experimentalDecorator": true,
+        "outDir": "./dist"
+    }
+}
+```
+
+### Selecting Your Bot Type.
+
+Currently, Seyfert supports two types of applications: one based on the Discord gateway, which is the most commonly used, and another based on the Discord HTTP interaction system, which is less frequently used. It is important to understand the differences between these two types in order to choose the appropriate application for your needs.
+
+:::note[Read this]
+
+In these first steps, the options that are shared by both types of applications are shown. Later on, they will be separated.
+
+:::
+
+<Tabs>
+    <TabItem label="Gateway">
+        - Gateway client receive all events from discord like messageCreate, interactionCreate, guildCreate, ready...
+        - The events that the client receive depends of the client intents
+    </TabItem>
+    <TabItem label="HTTP">
+        - Unlike gateway, the client only execute commands from interactionCreate event
+    </TabItem>
+</Tabs>
+
+### Configuration
+
+Once `tsconfig.json` has been modified, we still have a few steps to go before we can run the application, in this case you need to tell seyfert your project structure:
+so you need to create a file called `seyfert.config.js` in the root of your project and add the following code:
+
+<Tabs>
+    <TabItem label="Gateway">
+ ```js title="seyfert.config.js" copy wrap 
+// @ts-check is better
+const { config } = require('seyfert');
+
+module.exports = config.bot({
+    token: process.env.BOT_TOKEN,
+    intents: ["Guilds"],
+    locations: {
+        base: "src",    
+        output: "dist", //If you are using bun, set "src" instead
+        commands: "commands"
+    }
+});
+```
+    </TabItem>
+    <TabItem label="HTTP">
+```js title="seyfert.config.js" copy
+// @ts-check is better
+const { config } = require('seyfert');
+
+module.exports = config.http({
+    token: process.env.BOT_TOKEN,
+    applicationId: process.env.BOT_APP_ID,
+    port: 3000, // by default is 8080
+    publicKey: procces.env.BOT_PUBLIC_KEY,
+    locations: {
+        base: "src",
+        output: "dist", //If you are using bun, set "src" instead
+        commands: "commands"
+    }
+});
+```
+    </TabItem>
+</Tabs>
+
+And let's create the index file in the `src` folder and add the following code:
+
+<Tabs>
+    <TabItem label="Gateway">
+```ts {5-8} title="src/index.ts" copy wrap
+import { Client } from 'seyfert';
+
+const client = new Client();
+
+// This will start the connection with the gateway and load commands, events, components and langs
+client.start();
+```
+    </TabItem>
+    <TabItem label="HTTP">
+```ts {5-8} title="src/index.ts" copy wrap
+import { HttpClient } from 'seyfert';
+
+const client = new HttpClient();
+
+// This will start listening to `https://yourweb.xyz/interactions` and load commands, components and langs
+client.start();
+```
+    </TabItem>
+</Tabs>
+
+So after complete this steps your project structure should look like this:
+
+<FileTree>
+
+- src
+  - commands
+  - index.ts
+- seyfert.config.js
+- package.json
+- tsconfig.json
+
+</FileTree>

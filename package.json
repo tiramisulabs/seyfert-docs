@@ -1,0 +1,32 @@
+{
+  "name": "seyfert-docs",
+  "type": "module",
+  "version": "0.0.1",
+  "scripts": {
+    "dev": "astro dev",
+    "start": "astro dev",
+    "build": "astro check && astro build",
+    "preview": "astro preview",
+    "astro": "astro"
+  },
+  "dependencies": {
+    "@astrojs/check": "^0.5.6",
+    "@astrojs/react": "^3.0.10",
+    "@astrojs/starlight": "^0.21.1",
+    "@astrojs/starlight-tailwind": "^2.0.1",
+    "@astrojs/tailwind": "^5.1.0",
+    "@expressive-code/plugin-line-numbers": "^0.33.4",
+    "@heroicons/react": "^2.1.1",
+    "astro": "^4.4.14",
+    "github-slugger": "^2.0.0",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "sharp": "^0.32.6",
+    "starlight-typedoc": "^0.9.0",
+    "tailwindcss": "^3.4.1",
+    "typedoc": "^0.25.11",
+    "typedoc-plugin-markdown": "4.0.0-next.53",
+    "typedoc-plugin-mdn-links": "^3.1.17",
+    "typescript": "^5.4.2"
+  }
+}
