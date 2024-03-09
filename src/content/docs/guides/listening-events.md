@@ -26,7 +26,7 @@ module.exports = config.bot({
 });
 ```
 
-Then you can create a listener by exporting `createEvent` function in file inside the `events` folder. Let's see an example of how create a ready event:
+Then you can create a listener by exporting `createEvent` function in a file inside the `events` folder. Let's see an example of how create a ready event:
 
 ```ts title="src/events/botReady.ts" showLineNumbers
 import { createEvent } from "seyfert";
