@@ -11,27 +11,32 @@ import tailwind from "@astrojs/tailwind";
 export default defineConfig({
   integrations: [starlight({
     plugins: [
-      // Generate the documentation.
-      // starlightTypeDoc({
-      //   entryPoints: ['./seyfert/src/index.ts'],
-      //   tsconfig: './seyfert/tsconfig.json',
-      //   typeDoc: {
-      //     useCodeBlocks: true,
-      //     parametersFormat: "table",
-      //     "propertiesFormat": "table",
-      //     "enumMembersFormat": "table",
-      //     "typeDeclarationFormat": "table",
-      //     "indexFormat": "table",
-      //     "expandParameters": true
-      //   }
-      // })
+      starlightTypeDoc({
+        entryPoints: ['./seyfert/src/index.ts'],
+        tsconfig: './seyfert/tsconfig.json',
+        typeDoc: {
+          useCodeBlocks: true,
+          parametersFormat: "table",
+          "propertiesFormat": "table",
+          "enumMembersFormat": "table",
+          "typeDeclarationFormat": "table",
+          "indexFormat": "table",
+          "expandParameters": true
+        }
+      })
     ],
     expressiveCode: {
-      plugins: [pluginLineNumbers()]
+      plugins: [pluginLineNumbers()],
+      styleOverrides: {
+        codeFontFamily: "JetBrains Mono Variable",
+        uiFontFamily: "JetBrains Mono Variable",
+      }
     },
     title: 'Seyfert',
     customCss: [
-      './src/tailwind.css'
+      './src/tailwind.css',
+      '@fontsource-variable/jetbrains-mono/wght.css',
+      '@fontsource-variable/open-sans/wght.css',
     ],
     social: {
       github: 'https://github.com/withastro/starlight'
@@ -59,7 +64,7 @@ export default defineConfig({
         }
       ]
     },
-      // typeDocSidebarGroup
+      typeDocSidebarGroup
     ]
   }), react(), tailwind({
     applyBaseStyles: false,

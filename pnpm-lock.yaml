@@ -23,6 +23,12 @@ dependencies:
   '@expressive-code/plugin-line-numbers':
     specifier: ^0.33.4
     version: 0.33.4
+  '@fontsource-variable/jetbrains-mono':
+    specifier: ^5.0.20
+    version: 5.0.20
+  '@fontsource-variable/open-sans':
+    specifier: ^5.0.26
+    version: 5.0.26
   '@heroicons/react':
     specifier: ^2.1.1
     version: 2.1.1(react@18.2.0)
@@ -797,6 +803,14 @@ packages:
       '@expressive-code/core': 0.33.4
       hastscript: 7.2.0
       unist-util-visit-parents: 5.1.3
+    dev: false
+
+  /@fontsource-variable/jetbrains-mono@5.0.20:
+    resolution: {integrity: sha512-IWJnmY9vT5Olcac1vzA7FMdnojCrZWMq+g7SqC2jsFpY0LQTjIgp9gBjjw9kUOkNbLw37/evZO4w6rdPeMA68A==}
+    dev: false
+
+  /@fontsource-variable/open-sans@5.0.26:
+    resolution: {integrity: sha512-W1EJND+5FBzJqeoAdPGB3CBZ3heyeaWnGZBCDm83bm8yh0uxFu6GFGkflvaL2oJ+KUYsiEnRophA0NjD3vRZ1g==}
     dev: false
 
   /@heroicons/react@2.1.1(react@18.2.0):

@@ -16,6 +16,8 @@
     "@astrojs/starlight-tailwind": "^2.0.1",
     "@astrojs/tailwind": "^5.1.0",
     "@expressive-code/plugin-line-numbers": "^0.33.4",
+    "@fontsource-variable/jetbrains-mono": "^5.0.20",
+    "@fontsource-variable/open-sans": "^5.0.26",
     "@heroicons/react": "^2.1.1",
     "astro": "^4.4.14",
     "github-slugger": "^2.0.0",
