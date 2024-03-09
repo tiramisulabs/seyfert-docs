@@ -11,4 +11,4 @@ type CommandBaseOption: __TypesWrapper[keyof __TypesWrapper];
 
 ## Source
 
-[seyfert/src/commands/applications/chat.ts:65](https://github.com/potoland/potocuit/blob/e332d7a/src/commands/applications/chat.ts#L65)
+[seyfert/src/commands/applications/chat.ts:66](https://github.com/potoland/potocuit/blob/fe122a1/src/commands/applications/chat.ts#L66)

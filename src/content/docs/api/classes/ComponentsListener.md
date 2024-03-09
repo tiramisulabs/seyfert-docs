@@ -31,7 +31,7 @@ new ComponentsListener<T>(options: ListenerOptions): ComponentsListener<T>
 
 #### Source
 
-[seyfert/src/components/listener.ts:9](https://github.com/potoland/potocuit/blob/e332d7a/src/components/listener.ts#L9)
+[seyfert/src/components/listener.ts:9](https://github.com/potoland/potocuit/blob/fe122a1/src/components/listener.ts#L9)
 
 ## Properties
 
@@ -62,4 +62,4 @@ addRows(...row: RestOrArray<ActionRow<T>>): ComponentsListener<T>
 
 #### Source
 
-[seyfert/src/components/listener.ts:11](https://github.com/potoland/potocuit/blob/e332d7a/src/components/listener.ts#L11)
+[seyfert/src/components/listener.ts:11](https://github.com/potoland/potocuit/blob/fe122a1/src/components/listener.ts#L11)

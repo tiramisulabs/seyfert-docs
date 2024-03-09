@@ -18,4 +18,4 @@ const config: Object;
 
 ## Source
 
-[seyfert/src/index.ts:47](https://github.com/potoland/potocuit/blob/e332d7a/src/index.ts#L47)
+[seyfert/src/index.ts:51](https://github.com/potoland/potocuit/blob/fe122a1/src/index.ts#L51)

@@ -34,7 +34,7 @@ new Webhook(client: BaseClient, data: APIWebhook): Webhook
 
 #### Source
 
-[seyfert/src/structures/Webhook.ts:25](https://github.com/potoland/potocuit/blob/e332d7a/src/structures/Webhook.ts#L25)
+[seyfert/src/structures/Webhook.ts:25](https://github.com/potoland/potocuit/blob/fe122a1/src/structures/Webhook.ts#L25)
 
 ## Properties
 
@@ -74,7 +74,7 @@ createdAt gets the creation Date instace of the current object.
 
 #### Source
 
-[seyfert/src/structures/extra/DiscordBase.ts:27](https://github.com/potoland/potocuit/blob/e332d7a/src/structures/extra/DiscordBase.ts#L27)
+[seyfert/src/structures/extra/DiscordBase.ts:27](https://github.com/potoland/potocuit/blob/fe122a1/src/structures/extra/DiscordBase.ts#L27)
 
 ***
 
@@ -92,7 +92,7 @@ Create a timestamp for the current object.
 
 #### Source
 
-[seyfert/src/structures/extra/DiscordBase.ts:20](https://github.com/potoland/potocuit/blob/e332d7a/src/structures/extra/DiscordBase.ts#L20)
+[seyfert/src/structures/extra/DiscordBase.ts:20](https://github.com/potoland/potocuit/blob/fe122a1/src/structures/extra/DiscordBase.ts#L20)
 
 ## Methods
 
@@ -114,7 +114,7 @@ avatarURL(options?: ImageURLOptions): null | string
 
 #### Source
 
-[seyfert/src/structures/Webhook.ts:51](https://github.com/potoland/potocuit/blob/e332d7a/src/structures/Webhook.ts#L51)
+[seyfert/src/structures/Webhook.ts:51](https://github.com/potoland/potocuit/blob/fe122a1/src/structures/Webhook.ts#L51)
 
 ***
 
@@ -136,7 +136,7 @@ channel(force: boolean): Promise<undefined | BaseChannel<ChannelType> | DMChanne
 
 #### Source
 
-[seyfert/src/structures/Webhook.ts:46](https://github.com/potoland/potocuit/blob/e332d7a/src/structures/Webhook.ts#L46)
+[seyfert/src/structures/Webhook.ts:46](https://github.com/potoland/potocuit/blob/fe122a1/src/structures/Webhook.ts#L46)
 
 ***
 
@@ -158,7 +158,7 @@ delete(reason?: string): Promise<never>
 
 #### Source
 
-[seyfert/src/structures/Webhook.ts:67](https://github.com/potoland/potocuit/blob/e332d7a/src/structures/Webhook.ts#L67)
+[seyfert/src/structures/Webhook.ts:67](https://github.com/potoland/potocuit/blob/fe122a1/src/structures/Webhook.ts#L67)
 
 ***
 
@@ -181,7 +181,7 @@ edit(body: RESTPatchAPIWebhookJSONBody | RESTPatchAPIWebhookWithTokenJSONBody, r
 
 #### Source
 
-[seyfert/src/structures/Webhook.ts:63](https://github.com/potoland/potocuit/blob/e332d7a/src/structures/Webhook.ts#L63)
+[seyfert/src/structures/Webhook.ts:63](https://github.com/potoland/potocuit/blob/fe122a1/src/structures/Webhook.ts#L63)
 
 ***
 
@@ -197,14 +197,14 @@ fetch(): Promise<Webhook>
 
 #### Source
 
-[seyfert/src/structures/Webhook.ts:59](https://github.com/potoland/potocuit/blob/e332d7a/src/structures/Webhook.ts#L59)
+[seyfert/src/structures/Webhook.ts:59](https://github.com/potoland/potocuit/blob/fe122a1/src/structures/Webhook.ts#L59)
 
 ***
 
 ### guild()
 
 ```ts
-guild(force: boolean): Promise<undefined | Guild<"cached"> | Guild<"api">>
+guild(force: boolean): undefined | Promise<Guild<"cached"> | Guild<"api">>
 ```
 
 #### Parameters
@@ -215,11 +215,11 @@ guild(force: boolean): Promise<undefined | Guild<"cached"> | Guild<"api">>
 
 #### Returns
 
-`Promise`\<`undefined` \| [`Guild`](/api/classes/guild/)\<`"cached"`\> \| [`Guild`](/api/classes/guild/)\<`"api"`\>\>
+`undefined` \| `Promise`\<[`Guild`](/api/classes/guild/)\<`"cached"`\> \| [`Guild`](/api/classes/guild/)\<`"api"`\>\>
 
 #### Source
 
-[seyfert/src/structures/Webhook.ts:41](https://github.com/potoland/potocuit/blob/e332d7a/src/structures/Webhook.ts#L41)
+[seyfert/src/structures/Webhook.ts:41](https://github.com/potoland/potocuit/blob/fe122a1/src/structures/Webhook.ts#L41)
 
 ***
 
@@ -250,7 +250,7 @@ static messages(__namedParameters:     Object): Object
 
 #### Source
 
-[seyfert/src/structures/Webhook.ts:71](https://github.com/potoland/potocuit/blob/e332d7a/src/structures/Webhook.ts#L71)
+[seyfert/src/structures/Webhook.ts:71](https://github.com/potoland/potocuit/blob/fe122a1/src/structures/Webhook.ts#L71)
 
 ***
 
@@ -281,4 +281,4 @@ static methods(__namedParameters:     Object): Object
 
 #### Source
 
-[seyfert/src/structures/Webhook.ts:82](https://github.com/potoland/potocuit/blob/e332d7a/src/structures/Webhook.ts#L82)
+[seyfert/src/structures/Webhook.ts:82](https://github.com/potoland/potocuit/blob/fe122a1/src/structures/Webhook.ts#L82)

@@ -40,7 +40,7 @@ app-assets(appId: string): Object
 
 ##### Source
 
-[seyfert/src/api/Routes/cdn.ts:38](https://github.com/potoland/potocuit/blob/e332d7a/src/api/Routes/cdn.ts#L38)
+[seyfert/src/api/Routes/cdn.ts:38](https://github.com/potoland/potocuit/blob/fe122a1/src/api/Routes/cdn.ts#L38)
 
 #### app-assets(id)
 
@@ -64,7 +64,7 @@ app-assets(id: "710982414301790216"): Object
 
 ##### Source
 
-[seyfert/src/api/Routes/cdn.ts:61](https://github.com/potoland/potocuit/blob/e332d7a/src/api/Routes/cdn.ts#L61)
+[seyfert/src/api/Routes/cdn.ts:61](https://github.com/potoland/potocuit/blob/fe122a1/src/api/Routes/cdn.ts#L61)
 
 ***
 
@@ -90,7 +90,7 @@ appIcons(appId: string): Object
 
 #### Source
 
-[seyfert/src/api/Routes/cdn.ts:35](https://github.com/potoland/potocuit/blob/e332d7a/src/api/Routes/cdn.ts#L35)
+[seyfert/src/api/Routes/cdn.ts:35](https://github.com/potoland/potocuit/blob/fe122a1/src/api/Routes/cdn.ts#L35)
 
 ***
 
@@ -116,7 +116,7 @@ avatars(id: string): Object
 
 #### Source
 
-[seyfert/src/api/Routes/cdn.ts:7](https://github.com/potoland/potocuit/blob/e332d7a/src/api/Routes/cdn.ts#L7)
+[seyfert/src/api/Routes/cdn.ts:7](https://github.com/potoland/potocuit/blob/fe122a1/src/api/Routes/cdn.ts#L7)
 
 ***
 
@@ -142,7 +142,7 @@ banners(id: string): Object
 
 #### Source
 
-[seyfert/src/api/Routes/cdn.ts:19](https://github.com/potoland/potocuit/blob/e332d7a/src/api/Routes/cdn.ts#L19)
+[seyfert/src/api/Routes/cdn.ts:19](https://github.com/potoland/potocuit/blob/fe122a1/src/api/Routes/cdn.ts#L19)
 
 ***
 
@@ -168,7 +168,7 @@ discovery-splashes(guidId: string): Object
 
 #### Source
 
-[seyfert/src/api/Routes/cdn.ts:16](https://github.com/potoland/potocuit/blob/e332d7a/src/api/Routes/cdn.ts#L16)
+[seyfert/src/api/Routes/cdn.ts:16](https://github.com/potoland/potocuit/blob/fe122a1/src/api/Routes/cdn.ts#L16)
 
 ***
 
@@ -194,7 +194,7 @@ emojis(id: string): Object
 
 #### Source
 
-[seyfert/src/api/Routes/cdn.ts:32](https://github.com/potoland/potocuit/blob/e332d7a/src/api/Routes/cdn.ts#L32)
+[seyfert/src/api/Routes/cdn.ts:32](https://github.com/potoland/potocuit/blob/fe122a1/src/api/Routes/cdn.ts#L32)
 
 ***
 
@@ -220,7 +220,7 @@ guild-events(id: string): Object
 
 #### Source
 
-[seyfert/src/api/Routes/cdn.ts:55](https://github.com/potoland/potocuit/blob/e332d7a/src/api/Routes/cdn.ts#L55)
+[seyfert/src/api/Routes/cdn.ts:55](https://github.com/potoland/potocuit/blob/fe122a1/src/api/Routes/cdn.ts#L55)
 
 ***
 
@@ -246,7 +246,7 @@ guilds(id: string): Object
 
 #### Source
 
-[seyfert/src/api/Routes/cdn.ts:22](https://github.com/potoland/potocuit/blob/e332d7a/src/api/Routes/cdn.ts#L22)
+[seyfert/src/api/Routes/cdn.ts:22](https://github.com/potoland/potocuit/blob/fe122a1/src/api/Routes/cdn.ts#L22)
 
 ***
 
@@ -272,7 +272,7 @@ icons(guildId: string): Object
 
 #### Source
 
-[seyfert/src/api/Routes/cdn.ts:10](https://github.com/potoland/potocuit/blob/e332d7a/src/api/Routes/cdn.ts#L10)
+[seyfert/src/api/Routes/cdn.ts:10](https://github.com/potoland/potocuit/blob/fe122a1/src/api/Routes/cdn.ts#L10)
 
 ***
 
@@ -298,7 +298,7 @@ role-icons(roleId: string): Object
 
 #### Source
 
-[seyfert/src/api/Routes/cdn.ts:52](https://github.com/potoland/potocuit/blob/e332d7a/src/api/Routes/cdn.ts#L52)
+[seyfert/src/api/Routes/cdn.ts:52](https://github.com/potoland/potocuit/blob/fe122a1/src/api/Routes/cdn.ts#L52)
 
 ***
 
@@ -324,7 +324,7 @@ splashes(guildId: string): Object
 
 #### Source
 
-[seyfert/src/api/Routes/cdn.ts:13](https://github.com/potoland/potocuit/blob/e332d7a/src/api/Routes/cdn.ts#L13)
+[seyfert/src/api/Routes/cdn.ts:13](https://github.com/potoland/potocuit/blob/fe122a1/src/api/Routes/cdn.ts#L13)
 
 ***
 
@@ -350,7 +350,7 @@ stickers(id: string): Object
 
 #### Source
 
-[seyfert/src/api/Routes/cdn.ts:49](https://github.com/potoland/potocuit/blob/e332d7a/src/api/Routes/cdn.ts#L49)
+[seyfert/src/api/Routes/cdn.ts:49](https://github.com/potoland/potocuit/blob/fe122a1/src/api/Routes/cdn.ts#L49)
 
 ***
 
@@ -376,4 +376,4 @@ team-icons(teamId: string): Object
 
 #### Source
 
-[seyfert/src/api/Routes/cdn.ts:46](https://github.com/potoland/potocuit/blob/e332d7a/src/api/Routes/cdn.ts#L46)
+[seyfert/src/api/Routes/cdn.ts:46](https://github.com/potoland/potocuit/blob/fe122a1/src/api/Routes/cdn.ts#L46)

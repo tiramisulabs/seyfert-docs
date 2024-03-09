@@ -40,7 +40,7 @@ new WebhookMessage(
 
 #### Source
 
-[seyfert/src/structures/Message.ts:154](https://github.com/potoland/potocuit/blob/e332d7a/src/structures/Message.ts#L154)
+[seyfert/src/structures/Message.ts:154](https://github.com/potoland/potocuit/blob/fe122a1/src/structures/Message.ts#L154)
 
 ## Properties
 
@@ -53,7 +53,7 @@ new WebhookMessage(
 | `author` | `public` | [`User`](/api/classes/user/) | [`BaseMessage`](/api/classes/basemessage/).`author` |
 | `channelId` | `public` | `string` | [`BaseMessage`](/api/classes/basemessage/).`channelId` |
 | `client` | `readonly` | [`UsingClient`](/api/interfaces/usingclient/) | [`BaseMessage`](/api/classes/basemessage/).`client` |
-| `components` | `public` | `MessageActionRowComponent`\<`ActionRowMessageComponents`\>[] | [`BaseMessage`](/api/classes/basemessage/).`components` |
+| `components` | `public` | `MessageActionRowComponent`\<[`ActionRowMessageComponents`](/api/type-aliases/actionrowmessagecomponents/)\>[] | [`BaseMessage`](/api/classes/basemessage/).`components` |
 | `content` | `public` | `string` | [`BaseMessage`](/api/classes/basemessage/).`content` |
 | `editedTimestamp` | `public` | `null` \| `string` | [`BaseMessage`](/api/classes/basemessage/).`editedTimestamp` |
 | `embeds` | `public` | `Object`[] | [`BaseMessage`](/api/classes/basemessage/).`embeds` |
@@ -68,7 +68,7 @@ new WebhookMessage(
 | `mentions` | `public` | `Object` | [`BaseMessage`](/api/classes/basemessage/).`mentions` |
 | `mentions.channels` | `public` | `APIChannelMention`[] | - |
 | `mentions.roles` | `public` | `string`[] | - |
-| `mentions.users` | `public` | ([`User`](/api/classes/user/) \| [`GuildMember`](/api/classes/guildmember/))[] | - |
+| `mentions.users` | `public` | ([`GuildMember`](/api/classes/guildmember/) \| [`User`](/api/classes/user/))[] | - |
 | `messageReference` | `public` | `undefined` \| `APIMessageReference` | [`BaseMessage`](/api/classes/basemessage/).`messageReference` |
 | `nonce` | `public` | `undefined` \| `string` \| `number` | [`BaseMessage`](/api/classes/basemessage/).`nonce` |
 | `pinned` | `public` | `boolean` | [`BaseMessage`](/api/classes/basemessage/).`pinned` |
@@ -102,7 +102,7 @@ createdAt gets the creation Date instace of the current object.
 
 #### Source
 
-[seyfert/src/structures/extra/DiscordBase.ts:27](https://github.com/potoland/potocuit/blob/e332d7a/src/structures/extra/DiscordBase.ts#L27)
+[seyfert/src/structures/extra/DiscordBase.ts:27](https://github.com/potoland/potocuit/blob/fe122a1/src/structures/extra/DiscordBase.ts#L27)
 
 ***
 
@@ -120,7 +120,7 @@ Create a timestamp for the current object.
 
 #### Source
 
-[seyfert/src/structures/extra/DiscordBase.ts:20](https://github.com/potoland/potocuit/blob/e332d7a/src/structures/extra/DiscordBase.ts#L20)
+[seyfert/src/structures/extra/DiscordBase.ts:20](https://github.com/potoland/potocuit/blob/fe122a1/src/structures/extra/DiscordBase.ts#L20)
 
 ***
 
@@ -136,7 +136,7 @@ get url(): string
 
 #### Source
 
-[seyfert/src/structures/Message.ts:48](https://github.com/potoland/potocuit/blob/e332d7a/src/structures/Message.ts#L48)
+[seyfert/src/structures/Message.ts:48](https://github.com/potoland/potocuit/blob/fe122a1/src/structures/Message.ts#L48)
 
 ## Methods
 
@@ -162,7 +162,7 @@ channel(force: boolean): Promise<AllChannels>
 
 #### Source
 
-[seyfert/src/structures/Message.ts:57](https://github.com/potoland/potocuit/blob/e332d7a/src/structures/Message.ts#L57)
+[seyfert/src/structures/Message.ts:57](https://github.com/potoland/potocuit/blob/fe122a1/src/structures/Message.ts#L57)
 
 ***
 
@@ -184,7 +184,7 @@ delete(reason?: string): Promise<never>
 
 #### Source
 
-[seyfert/src/structures/Message.ts:175](https://github.com/potoland/potocuit/blob/e332d7a/src/structures/Message.ts#L175)
+[seyfert/src/structures/Message.ts:175](https://github.com/potoland/potocuit/blob/fe122a1/src/structures/Message.ts#L175)
 
 ***
 
@@ -206,7 +206,7 @@ edit(body: EditMessageWebhook): Promise<WebhookMessage>
 
 #### Source
 
-[seyfert/src/structures/Message.ts:167](https://github.com/potoland/potocuit/blob/e332d7a/src/structures/Message.ts#L167)
+[seyfert/src/structures/Message.ts:167](https://github.com/potoland/potocuit/blob/fe122a1/src/structures/Message.ts#L167)
 
 ***
 
@@ -222,14 +222,14 @@ fetch(): Promise<RESTGetAPIWebhookWithTokenResult>
 
 #### Source
 
-[seyfert/src/structures/Message.ts:163](https://github.com/potoland/potocuit/blob/e332d7a/src/structures/Message.ts#L163)
+[seyfert/src/structures/Message.ts:163](https://github.com/potoland/potocuit/blob/fe122a1/src/structures/Message.ts#L163)
 
 ***
 
 ### guild()
 
 ```ts
-guild(force: boolean): Promise<undefined | Guild<"cached"> | Guild<"api">>
+guild(force: boolean): undefined | Promise<Guild<"cached"> | Guild<"api">>
 ```
 
 #### Parameters
@@ -240,7 +240,7 @@ guild(force: boolean): Promise<undefined | Guild<"cached"> | Guild<"api">>
 
 #### Returns
 
-`Promise`\<`undefined` \| [`Guild`](/api/classes/guild/)\<`"cached"`\> \| [`Guild`](/api/classes/guild/)\<`"api"`\>\>
+`undefined` \| `Promise`\<[`Guild`](/api/classes/guild/)\<`"cached"`\> \| [`Guild`](/api/classes/guild/)\<`"api"`\>\>
 
 #### Inherited from
 
@@ -248,7 +248,7 @@ guild(force: boolean): Promise<undefined | Guild<"cached"> | Guild<"api">>
 
 #### Source
 
-[seyfert/src/structures/Message.ts:52](https://github.com/potoland/potocuit/blob/e332d7a/src/structures/Message.ts#L52)
+[seyfert/src/structures/Message.ts:52](https://github.com/potoland/potocuit/blob/fe122a1/src/structures/Message.ts#L52)
 
 ***
 
@@ -274,7 +274,7 @@ react(emoji: EmojiResolvable): Promise<never>
 
 #### Source
 
-[seyfert/src/structures/Message.ts:61](https://github.com/potoland/potocuit/blob/e332d7a/src/structures/Message.ts#L61)
+[seyfert/src/structures/Message.ts:61](https://github.com/potoland/potocuit/blob/fe122a1/src/structures/Message.ts#L61)
 
 ***
 
@@ -298,4 +298,4 @@ write(body:     Object): Promise<null | WebhookMessage>
 
 #### Source
 
-[seyfert/src/structures/Message.ts:171](https://github.com/potoland/potocuit/blob/e332d7a/src/structures/Message.ts#L171)
+[seyfert/src/structures/Message.ts:171](https://github.com/potoland/potocuit/blob/fe122a1/src/structures/Message.ts#L171)

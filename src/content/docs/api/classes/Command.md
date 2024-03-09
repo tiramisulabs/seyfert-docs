@@ -46,7 +46,7 @@ new Command(): Command
 | `name` | `string` | `BaseCommand.name` | `BaseCommand.name` |
 | `name_localizations?` | `Partial`\<`Record`\< \| `"id"` \| `"en-US"` \| `"en-GB"` \| `"bg"` \| `"zh-CN"` \| `"zh-TW"` \| `"hr"` \| `"cs"` \| `"da"` \| `"nl"` \| `"fi"` \| `"fr"` \| `"de"` \| `"el"` \| `"hi"` \| `"hu"` \| `"it"` \| `"ja"` \| `"ko"` \| `"lt"` \| `"no"` \| `"pl"` \| `"pt-BR"` \| `"ro"` \| `"ru"` \| `"es-ES"` \| `"es-419"` \| `"sv-SE"` \| `"th"` \| `"tr"` \| `"uk"` \| `"vi"`, `string`\>\> | `BaseCommand.name_localizations` | `BaseCommand.name_localizations` |
 | `nsfw?` | `boolean` | `BaseCommand.nsfw` | `BaseCommand.nsfw` |
-| `options?` | [`SubCommand`](/api/classes/subcommand/)[] \| [`CommandOption`](/api/type-aliases/commandoption/)[] | `BaseCommand.options` | `BaseCommand.options` |
+| `options?` | [`CommandOption`](/api/type-aliases/commandoption/)[] \| [`SubCommand`](/api/classes/subcommand/)[] | `BaseCommand.options` | `BaseCommand.options` |
 | `type` | `ApplicationCommandType` | `BaseCommand.type` | `BaseCommand.type` |
 
 ## Methods
@@ -74,7 +74,7 @@ optional onAfterRun(context: CommandContext<any, never>, error: unknown): any
 
 #### Source
 
-[seyfert/src/commands/applications/chat.ts:254](https://github.com/potoland/potocuit/blob/e332d7a/src/commands/applications/chat.ts#L254)
+[seyfert/src/commands/applications/chat.ts:269](https://github.com/potoland/potocuit/blob/fe122a1/src/commands/applications/chat.ts#L269)
 
 ***
 
@@ -101,7 +101,7 @@ onInternalError(client: UsingClient, error?: unknown): any
 
 #### Source
 
-[seyfert/src/commands/applications/chat.ts:310](https://github.com/potoland/potocuit/blob/e332d7a/src/commands/applications/chat.ts#L310)
+[seyfert/src/commands/applications/chat.ts:325](https://github.com/potoland/potocuit/blob/fe122a1/src/commands/applications/chat.ts#L325)
 
 ***
 
@@ -128,7 +128,7 @@ onMiddlewaresError(context: CommandContext<Object, never>, error: string): any
 
 #### Source
 
-[seyfert/src/commands/applications/chat.ts:304](https://github.com/potoland/potocuit/blob/e332d7a/src/commands/applications/chat.ts#L304)
+[seyfert/src/commands/applications/chat.ts:319](https://github.com/potoland/potocuit/blob/fe122a1/src/commands/applications/chat.ts#L319)
 
 ***
 
@@ -155,7 +155,7 @@ onOptionsError(context: CommandContext<Object, never>, metadata: OnOptionsReturn
 
 #### Source
 
-[seyfert/src/commands/applications/chat.ts:301](https://github.com/potoland/potocuit/blob/e332d7a/src/commands/applications/chat.ts#L301)
+[seyfert/src/commands/applications/chat.ts:316](https://github.com/potoland/potocuit/blob/fe122a1/src/commands/applications/chat.ts#L316)
 
 ***
 
@@ -182,7 +182,7 @@ onPermissionsFail(context: CommandContext<Object, never>, permissions: Permissio
 
 #### Source
 
-[seyfert/src/commands/applications/chat.ts:307](https://github.com/potoland/potocuit/blob/e332d7a/src/commands/applications/chat.ts#L307)
+[seyfert/src/commands/applications/chat.ts:322](https://github.com/potoland/potocuit/blob/fe122a1/src/commands/applications/chat.ts#L322)
 
 ***
 
@@ -209,7 +209,7 @@ onRunError(context: CommandContext<any, never>, error: unknown): any
 
 #### Source
 
-[seyfert/src/commands/applications/chat.ts:298](https://github.com/potoland/potocuit/blob/e332d7a/src/commands/applications/chat.ts#L298)
+[seyfert/src/commands/applications/chat.ts:313](https://github.com/potoland/potocuit/blob/fe122a1/src/commands/applications/chat.ts#L313)
 
 ***
 
@@ -229,7 +229,7 @@ reload(): Promise<void>
 
 #### Source
 
-[seyfert/src/commands/applications/chat.ts:246](https://github.com/potoland/potocuit/blob/e332d7a/src/commands/applications/chat.ts#L246)
+[seyfert/src/commands/applications/chat.ts:261](https://github.com/potoland/potocuit/blob/fe122a1/src/commands/applications/chat.ts#L261)
 
 ***
 
@@ -255,7 +255,7 @@ optional run(context: CommandContext<any, never>): any
 
 #### Source
 
-[seyfert/src/commands/applications/chat.ts:253](https://github.com/potoland/potocuit/blob/e332d7a/src/commands/applications/chat.ts#L253)
+[seyfert/src/commands/applications/chat.ts:268](https://github.com/potoland/potocuit/blob/fe122a1/src/commands/applications/chat.ts#L268)
 
 ***
 
@@ -269,18 +269,18 @@ toJSON(): Object
 
 `Object`
 
-| Member | Type | Value |
-| :------ | :------ | :------ |
-| `default_member_permissions` | `undefined` \| `string` | - |
-| `description` | `string` | - |
-| `description_localizations` | `undefined` \| `Partial`\<`Record`\<   \| `"id"`   \| `"en-US"`   \| `"en-GB"`   \| `"bg"`   \| `"zh-CN"`   \| `"zh-TW"`   \| `"hr"`   \| `"cs"`   \| `"da"`   \| `"nl"`   \| `"fi"`   \| `"fr"`   \| `"de"`   \| `"el"`   \| `"hi"`   \| `"hu"`   \| `"it"`   \| `"ja"`   \| `"ko"`   \| `"lt"`   \| `"no"`   \| `"pl"`   \| `"pt-BR"`   \| `"ro"`   \| `"ru"`   \| `"es-ES"`   \| `"es-419"`   \| `"sv-SE"`   \| `"th"`   \| `"tr"`   \| `"uk"`   \| `"vi"`, `string`\>\> | - |
-| `dm_permission` | `undefined` \| `boolean` | - |
-| `guild_id` | `undefined` \| `string`[] | - |
-| `name` | `string` | - |
-| `name_localizations` | `undefined` \| `Partial`\<`Record`\<   \| `"id"`   \| `"en-US"`   \| `"en-GB"`   \| `"bg"`   \| `"zh-CN"`   \| `"zh-TW"`   \| `"hr"`   \| `"cs"`   \| `"da"`   \| `"nl"`   \| `"fi"`   \| `"fr"`   \| `"de"`   \| `"el"`   \| `"hi"`   \| `"hu"`   \| `"it"`   \| `"ja"`   \| `"ko"`   \| `"lt"`   \| `"no"`   \| `"pl"`   \| `"pt-BR"`   \| `"ro"`   \| `"ru"`   \| `"es-ES"`   \| `"es-419"`   \| `"sv-SE"`   \| `"th"`   \| `"tr"`   \| `"uk"`   \| `"vi"`, `string`\>\> | - |
-| `nsfw` | `boolean` | - |
-| `options` | `APIApplicationCommandOption`[] | - |
-| `type` | `number` | - |
+| Member | Type |
+| :------ | :------ |
+| `default_member_permissions` | `undefined` \| `string` |
+| `description` | `string` |
+| `description_localizations` | `undefined` \| `Partial`\<`Record`\<   \| `"id"`   \| `"en-US"`   \| `"en-GB"`   \| `"bg"`   \| `"zh-CN"`   \| `"zh-TW"`   \| `"hr"`   \| `"cs"`   \| `"da"`   \| `"nl"`   \| `"fi"`   \| `"fr"`   \| `"de"`   \| `"el"`   \| `"hi"`   \| `"hu"`   \| `"it"`   \| `"ja"`   \| `"ko"`   \| `"lt"`   \| `"no"`   \| `"pl"`   \| `"pt-BR"`   \| `"ro"`   \| `"ru"`   \| `"es-ES"`   \| `"es-419"`   \| `"sv-SE"`   \| `"th"`   \| `"tr"`   \| `"uk"`   \| `"vi"`, `string`\>\> |
+| `dm_permission` | `boolean` |
+| `guild_id` | `undefined` \| `string`[] |
+| `name` | `string` |
+| `name_localizations` | `undefined` \| `Partial`\<`Record`\<   \| `"id"`   \| `"en-US"`   \| `"en-GB"`   \| `"bg"`   \| `"zh-CN"`   \| `"zh-TW"`   \| `"hr"`   \| `"cs"`   \| `"da"`   \| `"nl"`   \| `"fi"`   \| `"fr"`   \| `"de"`   \| `"el"`   \| `"hi"`   \| `"hu"`   \| `"it"`   \| `"ja"`   \| `"ko"`   \| `"lt"`   \| `"no"`   \| `"pl"`   \| `"pt-BR"`   \| `"ro"`   \| `"ru"`   \| `"es-ES"`   \| `"es-419"`   \| `"sv-SE"`   \| `"th"`   \| `"tr"`   \| `"uk"`   \| `"vi"`, `string`\>\> |
+| `nsfw` | `undefined` \| `boolean` |
+| `options` | `APIApplicationCommandOption`[] |
+| `type` | `number` |
 
 #### Overrides
 
@@ -288,4 +288,4 @@ toJSON(): Object
 
 #### Source
 
-[seyfert/src/commands/applications/chat.ts:266](https://github.com/potoland/potocuit/blob/e332d7a/src/commands/applications/chat.ts#L266)
+[seyfert/src/commands/applications/chat.ts:281](https://github.com/potoland/potocuit/blob/fe122a1/src/commands/applications/chat.ts#L281)

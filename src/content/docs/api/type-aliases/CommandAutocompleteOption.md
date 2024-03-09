@@ -17,4 +17,4 @@ type CommandAutocompleteOption: CommandBaseAutocompleteOption & Object;
 
 ## Source
 
-[seyfert/src/commands/applications/chat.ts:70](https://github.com/potoland/potocuit/blob/e332d7a/src/commands/applications/chat.ts#L70)
+[seyfert/src/commands/applications/chat.ts:71](https://github.com/potoland/potocuit/blob/fe122a1/src/commands/applications/chat.ts#L71)

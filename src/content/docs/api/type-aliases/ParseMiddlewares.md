@@ -17,4 +17,4 @@ type ParseMiddlewares<T>: { [k in keyof T]: T[k] };
 
 ## Source
 
-[seyfert/src/commands/decorators.ts:113](https://github.com/potoland/potocuit/blob/e332d7a/src/commands/decorators.ts#L113)
+[seyfert/src/commands/decorators.ts:119](https://github.com/potoland/potocuit/blob/fe122a1/src/commands/decorators.ts#L119)

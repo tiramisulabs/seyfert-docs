@@ -17,4 +17,4 @@ type CommandOption: __CommandOption & Object;
 
 ## Source
 
-[seyfert/src/commands/applications/chat.ts:72](https://github.com/potoland/potocuit/blob/e332d7a/src/commands/applications/chat.ts#L72)
+[seyfert/src/commands/applications/chat.ts:73](https://github.com/potoland/potocuit/blob/fe122a1/src/commands/applications/chat.ts#L73)

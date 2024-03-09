@@ -34,7 +34,7 @@ new AutoModerationRule(client: BaseClient, data: APIAutoModerationRule): AutoMod
 
 #### Source
 
-[seyfert/src/structures/AutoModerationRule.ts:14](https://github.com/potoland/potocuit/blob/e332d7a/src/structures/AutoModerationRule.ts#L14)
+[seyfert/src/structures/AutoModerationRule.ts:14](https://github.com/potoland/potocuit/blob/fe122a1/src/structures/AutoModerationRule.ts#L14)
 
 ## Properties
 
@@ -75,7 +75,7 @@ createdAt gets the creation Date instace of the current object.
 
 #### Source
 
-[seyfert/src/structures/extra/DiscordBase.ts:27](https://github.com/potoland/potocuit/blob/e332d7a/src/structures/extra/DiscordBase.ts#L27)
+[seyfert/src/structures/extra/DiscordBase.ts:27](https://github.com/potoland/potocuit/blob/fe122a1/src/structures/extra/DiscordBase.ts#L27)
 
 ***
 
@@ -93,7 +93,7 @@ Create a timestamp for the current object.
 
 #### Source
 
-[seyfert/src/structures/extra/DiscordBase.ts:20](https://github.com/potoland/potocuit/blob/e332d7a/src/structures/extra/DiscordBase.ts#L20)
+[seyfert/src/structures/extra/DiscordBase.ts:20](https://github.com/potoland/potocuit/blob/fe122a1/src/structures/extra/DiscordBase.ts#L20)
 
 ## Methods
 
@@ -115,7 +115,7 @@ delete(reason?: string): Promise<never>
 
 #### Source
 
-[seyfert/src/structures/AutoModerationRule.ts:34](https://github.com/potoland/potocuit/blob/e332d7a/src/structures/AutoModerationRule.ts#L34)
+[seyfert/src/structures/AutoModerationRule.ts:34](https://github.com/potoland/potocuit/blob/fe122a1/src/structures/AutoModerationRule.ts#L34)
 
 ***
 
@@ -145,7 +145,7 @@ edit(body:     Object, reason?: string): Promise<APIAutoModerationRule>
 
 #### Source
 
-[seyfert/src/structures/AutoModerationRule.ts:30](https://github.com/potoland/potocuit/blob/e332d7a/src/structures/AutoModerationRule.ts#L30)
+[seyfert/src/structures/AutoModerationRule.ts:30](https://github.com/potoland/potocuit/blob/fe122a1/src/structures/AutoModerationRule.ts#L30)
 
 ***
 
@@ -161,7 +161,7 @@ fetch(): Promise<APIAutoModerationRule>
 
 #### Source
 
-[seyfert/src/structures/AutoModerationRule.ts:26](https://github.com/potoland/potocuit/blob/e332d7a/src/structures/AutoModerationRule.ts#L26)
+[seyfert/src/structures/AutoModerationRule.ts:26](https://github.com/potoland/potocuit/blob/fe122a1/src/structures/AutoModerationRule.ts#L26)
 
 ***
 
@@ -183,7 +183,7 @@ fetchCreator(force: boolean): Promise<GuildMember>
 
 #### Source
 
-[seyfert/src/structures/AutoModerationRule.ts:18](https://github.com/potoland/potocuit/blob/e332d7a/src/structures/AutoModerationRule.ts#L18)
+[seyfert/src/structures/AutoModerationRule.ts:18](https://github.com/potoland/potocuit/blob/fe122a1/src/structures/AutoModerationRule.ts#L18)
 
 ***
 
@@ -205,7 +205,7 @@ guild(force: boolean): Promise<Guild<"cached"> | Guild<"api">>
 
 #### Source
 
-[seyfert/src/structures/AutoModerationRule.ts:22](https://github.com/potoland/potocuit/blob/e332d7a/src/structures/AutoModerationRule.ts#L22)
+[seyfert/src/structures/AutoModerationRule.ts:22](https://github.com/potoland/potocuit/blob/fe122a1/src/structures/AutoModerationRule.ts#L22)
 
 ***
 
@@ -237,4 +237,4 @@ static methods(__namedParameters:     Object): Object
 
 #### Source
 
-[seyfert/src/structures/AutoModerationRule.ts:38](https://github.com/potoland/potocuit/blob/e332d7a/src/structures/AutoModerationRule.ts#L38)
+[seyfert/src/structures/AutoModerationRule.ts:38](https://github.com/potoland/potocuit/blob/fe122a1/src/structures/AutoModerationRule.ts#L38)

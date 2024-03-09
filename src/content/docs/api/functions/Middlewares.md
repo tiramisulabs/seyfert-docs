@@ -38,4 +38,4 @@ Middlewares(cbs: readonly never[]): <T>(target: T) => (...args: any[]) => __clas
 
 ## Source
 
-[seyfert/src/commands/decorators.ts:117](https://github.com/potoland/potocuit/blob/e332d7a/src/commands/decorators.ts#L117)
+[seyfert/src/commands/decorators.ts:123](https://github.com/potoland/potocuit/blob/fe122a1/src/commands/decorators.ts#L123)

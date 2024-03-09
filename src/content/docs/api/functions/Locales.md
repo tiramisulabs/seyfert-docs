@@ -40,4 +40,4 @@ Locales(__namedParameters:     Object): <T>(target: T) => (...args: any[]) => __
 
 ## Source
 
-[seyfert/src/commands/decorators.ts:32](https://github.com/potoland/potocuit/blob/e332d7a/src/commands/decorators.ts#L32)
+[seyfert/src/commands/decorators.ts:38](https://github.com/potoland/potocuit/blob/fe122a1/src/commands/decorators.ts#L38)

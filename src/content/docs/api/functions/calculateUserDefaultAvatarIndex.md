@@ -23,4 +23,4 @@ Calculates the default avatar index for a given user id.
 
 ## Source
 
-[seyfert/src/api/utils/utils.ts:120](https://github.com/potoland/potocuit/blob/e332d7a/src/api/utils/utils.ts#L120)
+[seyfert/src/api/utils/utils.ts:8](https://github.com/potoland/potocuit/blob/fe122a1/src/api/utils/utils.ts#L8)

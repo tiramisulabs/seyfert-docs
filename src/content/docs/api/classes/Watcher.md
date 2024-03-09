@@ -37,7 +37,7 @@ Initializes a new instance of the Watcher class.
 
 #### Source
 
-[seyfert/src/common/bot/watcher.ts:27](https://github.com/potoland/potocuit/blob/e332d7a/src/common/bot/watcher.ts#L27)
+[seyfert/src/common/bot/watcher.ts:27](https://github.com/potoland/potocuit/blob/fe122a1/src/common/bot/watcher.ts#L27)
 
 ## Properties
 
@@ -47,8 +47,8 @@ Initializes a new instance of the Watcher class.
 | `connectQueue` | `public` | `ConnectQueue` | - | [`ShardManager`](/api/classes/shardmanager/).`connectQueue` | [`ShardManager`](/api/classes/shardmanager/).`connectQueue` |
 | `debugger?` | `public` | [`Logger`](/api/classes/logger/) | - | [`ShardManager`](/api/classes/shardmanager/).`debugger` | [`ShardManager`](/api/classes/shardmanager/).`debugger` |
 | `logger` | `public` | [`Logger`](/api/classes/logger/) | - | - | - |
-| `options` | `public` | `MakeRequired`\<`WatcherOptions`, `"token"` \| `"intents"` \| `"handlePayload"` \| `"info"`\> | - | [`ShardManager`](/api/classes/shardmanager/).`options` | [`ShardManager`](/api/classes/shardmanager/).`options` |
-| `rest?` | `public` | [`REST`](/api/classes/rest/) | - | - | - |
+| `options` | `public` | `MakeRequired`\<`WatcherOptions`, `"token"` \| `"handlePayload"` \| `"info"` \| `"intents"`\> | - | [`ShardManager`](/api/classes/shardmanager/).`options` | [`ShardManager`](/api/classes/shardmanager/).`options` |
+| `rest?` | `public` | [`ApiHandler`](/api/classes/apihandler/) | - | - | - |
 | `size` | `readonly` | `number` |  | [`ShardManager`](/api/classes/shardmanager/).`size` | [`ShardManager`](/api/classes/shardmanager/).`size` |
 | `worker?` | `public` | `Worker` | - | - | - |
 | `[species]` | `readonly` | `MapConstructor` | - | [`ShardManager`](/api/classes/shardmanager/).`[species]` | [`ShardManager`](/api/classes/shardmanager/).`[species]` |
@@ -67,7 +67,7 @@ get concurrency(): number
 
 #### Source
 
-[seyfert/src/websocket/discord/sharder.ts:43](https://github.com/potoland/potocuit/blob/e332d7a/src/websocket/discord/sharder.ts#L43)
+[seyfert/src/websocket/discord/sharder.ts:43](https://github.com/potoland/potocuit/blob/fe122a1/src/websocket/discord/sharder.ts#L43)
 
 ***
 
@@ -83,7 +83,7 @@ get latency(): number
 
 #### Source
 
-[seyfert/src/websocket/discord/sharder.ts:47](https://github.com/potoland/potocuit/blob/e332d7a/src/websocket/discord/sharder.ts#L47)
+[seyfert/src/websocket/discord/sharder.ts:47](https://github.com/potoland/potocuit/blob/fe122a1/src/websocket/discord/sharder.ts#L47)
 
 ***
 
@@ -99,7 +99,7 @@ get remaining(): number
 
 #### Source
 
-[seyfert/src/websocket/discord/sharder.ts:39](https://github.com/potoland/potocuit/blob/e332d7a/src/websocket/discord/sharder.ts#L39)
+[seyfert/src/websocket/discord/sharder.ts:39](https://github.com/potoland/potocuit/blob/fe122a1/src/websocket/discord/sharder.ts#L39)
 
 ## Methods
 
@@ -147,7 +147,7 @@ calculeShardId(guildId: string): number
 
 #### Source
 
-[seyfert/src/websocket/discord/sharder.ts:55](https://github.com/potoland/potocuit/blob/e332d7a/src/websocket/discord/sharder.ts#L55)
+[seyfert/src/websocket/discord/sharder.ts:55](https://github.com/potoland/potocuit/blob/fe122a1/src/websocket/discord/sharder.ts#L55)
 
 ***
 
@@ -221,7 +221,7 @@ disconnect(shardId: number): undefined | Promise<void>
 
 #### Source
 
-[seyfert/src/websocket/discord/sharder.ts:123](https://github.com/potoland/potocuit/blob/e332d7a/src/websocket/discord/sharder.ts#L123)
+[seyfert/src/websocket/discord/sharder.ts:123](https://github.com/potoland/potocuit/blob/fe122a1/src/websocket/discord/sharder.ts#L123)
 
 ***
 
@@ -241,7 +241,7 @@ disconnectAll(): Promise<unknown>
 
 #### Source
 
-[seyfert/src/websocket/discord/sharder.ts:128](https://github.com/potoland/potocuit/blob/e332d7a/src/websocket/discord/sharder.ts#L128)
+[seyfert/src/websocket/discord/sharder.ts:128](https://github.com/potoland/potocuit/blob/fe122a1/src/websocket/discord/sharder.ts#L128)
 
 ***
 
@@ -318,7 +318,7 @@ forceIdentify(shardId: number): Promise<void>
 
 #### Source
 
-[seyfert/src/websocket/discord/sharder.ts:118](https://github.com/potoland/potocuit/blob/e332d7a/src/websocket/discord/sharder.ts#L118)
+[seyfert/src/websocket/discord/sharder.ts:118](https://github.com/potoland/potocuit/blob/fe122a1/src/websocket/discord/sharder.ts#L118)
 
 ***
 
@@ -409,7 +409,7 @@ joinVoice(
 
 #### Source
 
-[seyfert/src/websocket/discord/sharder.ts:153](https://github.com/potoland/potocuit/blob/e332d7a/src/websocket/discord/sharder.ts#L153)
+[seyfert/src/websocket/discord/sharder.ts:153](https://github.com/potoland/potocuit/blob/fe122a1/src/websocket/discord/sharder.ts#L153)
 
 ***
 
@@ -457,7 +457,7 @@ leaveVoice(guild_id: string): void
 
 #### Source
 
-[seyfert/src/websocket/discord/sharder.ts:171](https://github.com/potoland/potocuit/blob/e332d7a/src/websocket/discord/sharder.ts#L171)
+[seyfert/src/websocket/discord/sharder.ts:171](https://github.com/potoland/potocuit/blob/fe122a1/src/websocket/discord/sharder.ts#L171)
 
 ***
 
@@ -475,7 +475,7 @@ Resets the worker instance.
 
 #### Source
 
-[seyfert/src/common/bot/watcher.ts:49](https://github.com/potoland/potocuit/blob/e332d7a/src/common/bot/watcher.ts#L49)
+[seyfert/src/common/bot/watcher.ts:49](https://github.com/potoland/potocuit/blob/fe122a1/src/common/bot/watcher.ts#L49)
 
 ***
 
@@ -508,7 +508,7 @@ send<T>(shardId: number, payload: T): void
 
 #### Source
 
-[seyfert/src/websocket/discord/sharder.ts:186](https://github.com/potoland/potocuit/blob/e332d7a/src/websocket/discord/sharder.ts#L186)
+[seyfert/src/websocket/discord/sharder.ts:186](https://github.com/potoland/potocuit/blob/fe122a1/src/websocket/discord/sharder.ts#L186)
 
 ***
 
@@ -563,7 +563,7 @@ setPresence(payload: GatewayPresenceUpdateData): undefined | Promise<void>
 
 #### Source
 
-[seyfert/src/websocket/discord/sharder.ts:144](https://github.com/potoland/potocuit/blob/e332d7a/src/websocket/discord/sharder.ts#L144)
+[seyfert/src/websocket/discord/sharder.ts:144](https://github.com/potoland/potocuit/blob/fe122a1/src/websocket/discord/sharder.ts#L144)
 
 ***
 
@@ -590,7 +590,7 @@ setShardPresence(shardId: number, payload: GatewayPresenceUpdateData): void
 
 #### Source
 
-[seyfert/src/websocket/discord/sharder.ts:136](https://github.com/potoland/potocuit/blob/e332d7a/src/websocket/discord/sharder.ts#L136)
+[seyfert/src/websocket/discord/sharder.ts:136](https://github.com/potoland/potocuit/blob/fe122a1/src/websocket/discord/sharder.ts#L136)
 
 ***
 
@@ -616,7 +616,7 @@ spawn(shardId: number): Shard
 
 #### Source
 
-[seyfert/src/websocket/discord/sharder.ts:59](https://github.com/potoland/potocuit/blob/e332d7a/src/websocket/discord/sharder.ts#L59)
+[seyfert/src/websocket/discord/sharder.ts:59](https://github.com/potoland/potocuit/blob/fe122a1/src/websocket/discord/sharder.ts#L59)
 
 ***
 
@@ -636,7 +636,7 @@ spawnBuckets(): Shard[][]
 
 #### Source
 
-[seyfert/src/websocket/discord/sharder.ts:98](https://github.com/potoland/potocuit/blob/e332d7a/src/websocket/discord/sharder.ts#L98)
+[seyfert/src/websocket/discord/sharder.ts:98](https://github.com/potoland/potocuit/blob/fe122a1/src/websocket/discord/sharder.ts#L98)
 
 ***
 
@@ -658,7 +658,7 @@ Spawns shards for the watcher.
 
 #### Source
 
-[seyfert/src/common/bot/watcher.ts:72](https://github.com/potoland/potocuit/blob/e332d7a/src/common/bot/watcher.ts#L72)
+[seyfert/src/common/bot/watcher.ts:72](https://github.com/potoland/potocuit/blob/fe122a1/src/common/bot/watcher.ts#L72)
 
 ***
 

@@ -21,7 +21,7 @@ stringSelectMenu.setOptions([
 
 ## Extends
 
-- [`SelectMenu`](/api/classes/selectmenu/)\<`APIStringSelectComponent`, [`StringSelectMenuInteraction`](/api/classes/stringselectmenuinteraction/)\>
+- `Object`
 
 ## Constructors
 
@@ -43,24 +43,27 @@ new StringSelectMenu(data: Partial<APIStringSelectComponent>): StringSelectMenu
 
 #### Overrides
 
-[`SelectMenu`](/api/classes/selectmenu/).[`constructor`](/api/classes/selectmenu/#constructors)
+`(SelectMenu as unknown as ToClass<
+	Omit<SelectMenu<APIStringSelectComponent, StringSelectMenuInteraction>, 'data' | 'toJSON'>,
+	StringSelectMenu
+>).constructor`
 
 #### Source
 
-[seyfert/src/builders/SelectMenu.ts:261](https://github.com/potoland/potocuit/blob/e332d7a/src/builders/SelectMenu.ts#L261)
+[seyfert/src/builders/SelectMenu.ts:267](https://github.com/potoland/potocuit/blob/fe122a1/src/builders/SelectMenu.ts#L267)
 
 ## Properties
 
-| Property | Modifier | Type | Inherited from |
-| :------ | :------ | :------ | :------ |
-| `data` | `public` | `Partial`\<`APIStringSelectComponent`\> | [`SelectMenu`](/api/classes/selectmenu/).`data` |
+| Property | Type |
+| :------ | :------ |
+| `data` | `Omit`\<`APIStringSelectComponent`, `"options"`\> & `Object` |
 
 ## Methods
 
 ### addOption()
 
 ```ts
-addOption(...options: RestOrArray<APISelectMenuOption>): this
+addOption(...options: RestOrArray<StringSelectOption>): this
 ```
 
 Adds options to the string select menu.
@@ -69,7 +72,7 @@ Adds options to the string select menu.
 
 | Parameter | Type | Description |
 | :------ | :------ | :------ |
-| ...`options` | `RestOrArray`\<`APISelectMenuOption`\> | Options to be added. |
+| ...`options` | `RestOrArray`\<[`StringSelectOption`](/api/classes/stringselectoption/)\> | Options to be added. |
 
 #### Returns
 
@@ -79,14 +82,14 @@ The current StringSelectMenu instance.
 
 #### Source
 
-[seyfert/src/builders/SelectMenu.ts:270](https://github.com/potoland/potocuit/blob/e332d7a/src/builders/SelectMenu.ts#L270)
+[seyfert/src/builders/SelectMenu.ts:277](https://github.com/potoland/potocuit/blob/fe122a1/src/builders/SelectMenu.ts#L277)
 
 ***
 
 ### run()
 
 ```ts
-run(func: ComponentCallback<StringSelectMenuInteraction<string[]>>): this
+run(...args: [ComponentCallback<StringSelectMenuInteraction<string[]>>]): StringSelectMenu
 ```
 
 Sets the callback function to be executed when the select menu is interacted with.
@@ -96,58 +99,64 @@ Sets the callback function to be executed when the select menu is interacted wit
 
 | Parameter | Type |
 | :------ | :------ |
-| `func` | [`ComponentCallback`](/api/type-aliases/componentcallback/)\<[`StringSelectMenuInteraction`](/api/classes/stringselectmenuinteraction/)\<`string`[]\>\> |
+| ...`args` | [[`ComponentCallback`](/api/type-aliases/componentcallback/)\<[`StringSelectMenuInteraction`](/api/classes/stringselectmenuinteraction/)\<`string`[]\>\>] |
 
 #### Returns
 
-`this`
+[`StringSelectMenu`](/api/classes/stringselectmenu/)
 
 The current SelectMenu instance.
 
 #### Inherited from
 
-[`SelectMenu`](/api/classes/selectmenu/).[`run`](/api/classes/selectmenu/#run)
+`(SelectMenu as unknown as ToClass<
+	Omit<SelectMenu<APIStringSelectComponent, StringSelectMenuInteraction>, 'data' | 'toJSON'>,
+	StringSelectMenu
+>).run`
 
 #### Source
 
-[seyfert/src/builders/SelectMenu.ts:115](https://github.com/potoland/potocuit/blob/e332d7a/src/builders/SelectMenu.ts#L115)
+[seyfert/src/builders/SelectMenu.ts:117](https://github.com/potoland/potocuit/blob/fe122a1/src/builders/SelectMenu.ts#L117)
 
 ***
 
 ### setCustomId()
 
 ```ts
-setCustomId(id: string): this
+setCustomId(...args: [string]): StringSelectMenu
 ```
 
 Sets the custom ID for the select menu.
 
 #### Parameters
 
-| Parameter | Type | Description |
-| :------ | :------ | :------ |
-| `id` | `string` | The custom ID for the select menu. |
+| Parameter | Type |
+| :------ | :------ |
+| ...`args` | [`string`] |
 
 #### Returns
 
-`this`
+[`StringSelectMenu`](/api/classes/stringselectmenu/)
 
 The current SelectMenu instance.
 
 #### Inherited from
 
-[`SelectMenu`](/api/classes/selectmenu/).[`setCustomId`](/api/classes/selectmenu/#setcustomid)
+`(SelectMenu as unknown as ToClass<
+	Omit<SelectMenu<APIStringSelectComponent, StringSelectMenuInteraction>, 'data' | 'toJSON'>,
+	StringSelectMenu
+>).setCustomId`
 
 #### Source
 
-[seyfert/src/builders/SelectMenu.ts:74](https://github.com/potoland/potocuit/blob/e332d7a/src/builders/SelectMenu.ts#L74)
+[seyfert/src/builders/SelectMenu.ts:76](https://github.com/potoland/potocuit/blob/fe122a1/src/builders/SelectMenu.ts#L76)
 
 ***
 
 ### setDisabled()
 
 ```ts
-setDisabled(disabled: boolean): this
+setDisabled(...args: [boolean]): StringSelectMenu
 ```
 
 Sets whether the select menu is disabled.
@@ -155,30 +164,33 @@ Sets whether the select menu is disabled.
 
 #### Parameters
 
-| Parameter | Type | Default value |
-| :------ | :------ | :------ |
-| `disabled` | `boolean` | `true` |
+| Parameter | Type |
+| :------ | :------ |
+| ...`args` | [`boolean`] |
 
 #### Returns
 
-`this`
+[`StringSelectMenu`](/api/classes/stringselectmenu/)
 
 The current SelectMenu instance.
 
 #### Inherited from
 
-[`SelectMenu`](/api/classes/selectmenu/).[`setDisabled`](/api/classes/selectmenu/#setdisabled)
+`(SelectMenu as unknown as ToClass<
+	Omit<SelectMenu<APIStringSelectComponent, StringSelectMenuInteraction>, 'data' | 'toJSON'>,
+	StringSelectMenu
+>).setDisabled`
 
 #### Source
 
-[seyfert/src/builders/SelectMenu.ts:105](https://github.com/potoland/potocuit/blob/e332d7a/src/builders/SelectMenu.ts#L105)
+[seyfert/src/builders/SelectMenu.ts:107](https://github.com/potoland/potocuit/blob/fe122a1/src/builders/SelectMenu.ts#L107)
 
 ***
 
 ### setOptions()
 
 ```ts
-setOptions(options: APISelectMenuOption[]): this
+setOptions(options: StringSelectOption[]): this
 ```
 
 Sets the options for the string select menu.
@@ -188,7 +200,7 @@ Sets the options for the string select menu.
 
 | Parameter | Type |
 | :------ | :------ |
-| `options` | `APISelectMenuOption`[] |
+| `options` | [`StringSelectOption`](/api/classes/stringselectoption/)[] |
 
 #### Returns
 
@@ -198,67 +210,73 @@ The current StringSelectMenu instance.
 
 #### Source
 
-[seyfert/src/builders/SelectMenu.ts:281](https://github.com/potoland/potocuit/blob/e332d7a/src/builders/SelectMenu.ts#L281)
+[seyfert/src/builders/SelectMenu.ts:287](https://github.com/potoland/potocuit/blob/fe122a1/src/builders/SelectMenu.ts#L287)
 
 ***
 
 ### setPlaceholder()
 
 ```ts
-setPlaceholder(placeholder: string): this
+setPlaceholder(...args: [string]): StringSelectMenu
 ```
 
 Sets the placeholder text for the select menu.
 
 #### Parameters
 
-| Parameter | Type | Description |
-| :------ | :------ | :------ |
-| `placeholder` | `string` | The placeholder text. |
+| Parameter | Type |
+| :------ | :------ |
+| ...`args` | [`string`] |
 
 #### Returns
 
-`this`
+[`StringSelectMenu`](/api/classes/stringselectmenu/)
 
 The current SelectMenu instance.
 
 #### Inherited from
 
-[`SelectMenu`](/api/classes/selectmenu/).[`setPlaceholder`](/api/classes/selectmenu/#setplaceholder)
+`(SelectMenu as unknown as ToClass<
+	Omit<SelectMenu<APIStringSelectComponent, StringSelectMenuInteraction>, 'data' | 'toJSON'>,
+	StringSelectMenu
+>).setPlaceholder`
 
 #### Source
 
-[seyfert/src/builders/SelectMenu.ts:84](https://github.com/potoland/potocuit/blob/e332d7a/src/builders/SelectMenu.ts#L84)
+[seyfert/src/builders/SelectMenu.ts:86](https://github.com/potoland/potocuit/blob/fe122a1/src/builders/SelectMenu.ts#L86)
 
 ***
 
 ### setValuesLength()
 
 ```ts
-setValuesLength(options: Partial<OptionValuesLength>): this
+setValuesLength(...args: [Partial<OptionValuesLength>]): StringSelectMenu
 ```
 
 Sets the maximum and minimum number of selected values for the select menu.
 
 #### Parameters
 
-| Parameter | Type | Description |
-| :------ | :------ | :------ |
-| `options` | `Partial`\<[`OptionValuesLength`](/api/type-aliases/optionvalueslength/)\> | The maximum and minimum values. |
+| Parameter | Type |
+| :------ | :------ |
+| ...`args` | [`Partial`\<[`OptionValuesLength`](/api/type-aliases/optionvalueslength/)\>] |
 
 #### Returns
 
-`this`
+[`StringSelectMenu`](/api/classes/stringselectmenu/)
 
 The current SelectMenu instance.
 
 #### Inherited from
 
-[`SelectMenu`](/api/classes/selectmenu/).[`setValuesLength`](/api/classes/selectmenu/#setvalueslength)
+`(SelectMenu as unknown as ToClass<
+	Omit<SelectMenu<APIStringSelectComponent, StringSelectMenuInteraction>, 'data' | 'toJSON'>,
+	StringSelectMenu
+>).setValuesLength`
 
 #### Source
 
-[seyfert/src/builders/SelectMenu.ts:94](https://github.com/potoland/potocuit/blob/e332d7a/src/builders/SelectMenu.ts#L94)
+[seyfert/src/builders/SelectMenu.ts:96](https://github.com/potoland/potocuit/blob/fe122a1/src/builders/SelectMenu.ts#L96)
 
 ***
 
@@ -272,10 +290,6 @@ toJSON(): APIStringSelectComponent
 
 `APIStringSelectComponent`
 
-#### Inherited from
-
-[`SelectMenu`](/api/classes/selectmenu/).[`toJSON`](/api/classes/selectmenu/#tojson)
-
 #### Source
 
-[seyfert/src/builders/Base.ts:8](https://github.com/potoland/potocuit/blob/e332d7a/src/builders/Base.ts#L8)
+[seyfert/src/builders/SelectMenu.ts:292](https://github.com/potoland/potocuit/blob/fe122a1/src/builders/SelectMenu.ts#L292)

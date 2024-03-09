@@ -35,7 +35,7 @@ new VoiceChannelMethods(client: BaseClient, data:     Object): VoiceChannelMetho
 
 #### Source
 
-[seyfert/src/structures/extra/DiscordBase.ts:7](https://github.com/potoland/potocuit/blob/e332d7a/src/structures/extra/DiscordBase.ts#L7)
+[seyfert/src/structures/extra/DiscordBase.ts:7](https://github.com/potoland/potocuit/blob/fe122a1/src/structures/extra/DiscordBase.ts#L7)
 
 ## Properties
 
@@ -61,7 +61,7 @@ createdAt gets the creation Date instace of the current object.
 
 #### Source
 
-[seyfert/src/structures/extra/DiscordBase.ts:27](https://github.com/potoland/potocuit/blob/e332d7a/src/structures/extra/DiscordBase.ts#L27)
+[seyfert/src/structures/extra/DiscordBase.ts:27](https://github.com/potoland/potocuit/blob/fe122a1/src/structures/extra/DiscordBase.ts#L27)
 
 ***
 
@@ -79,7 +79,7 @@ Create a timestamp for the current object.
 
 #### Source
 
-[seyfert/src/structures/extra/DiscordBase.ts:20](https://github.com/potoland/potocuit/blob/e332d7a/src/structures/extra/DiscordBase.ts#L20)
+[seyfert/src/structures/extra/DiscordBase.ts:20](https://github.com/potoland/potocuit/blob/fe122a1/src/structures/extra/DiscordBase.ts#L20)
 
 ***
 
@@ -97,7 +97,7 @@ The URL to the channel
 
 #### Source
 
-[seyfert/src/structures/channels.ts:57](https://github.com/potoland/potocuit/blob/e332d7a/src/structures/channels.ts#L57)
+[seyfert/src/structures/channels.ts:59](https://github.com/potoland/potocuit/blob/fe122a1/src/structures/channels.ts#L59)
 
 ## Methods
 
@@ -123,7 +123,7 @@ delete(reason?: string): Promise<AllChannels>
 
 #### Source
 
-[seyfert/src/structures/channels.ts:65](https://github.com/potoland/potocuit/blob/e332d7a/src/structures/channels.ts#L65)
+[seyfert/src/structures/channels.ts:67](https://github.com/potoland/potocuit/blob/fe122a1/src/structures/channels.ts#L67)
 
 ***
 
@@ -150,7 +150,7 @@ edit(body: RESTPatchAPIChannelJSONBody, reason?: string): Promise<AllChannels>
 
 #### Source
 
-[seyfert/src/structures/channels.ts:69](https://github.com/potoland/potocuit/blob/e332d7a/src/structures/channels.ts#L69)
+[seyfert/src/structures/channels.ts:71](https://github.com/potoland/potocuit/blob/fe122a1/src/structures/channels.ts#L71)
 
 ***
 
@@ -176,7 +176,7 @@ fetch(force: boolean): Promise<AllChannels>
 
 #### Source
 
-[seyfert/src/structures/channels.ts:61](https://github.com/potoland/potocuit/blob/e332d7a/src/structures/channels.ts#L61)
+[seyfert/src/structures/channels.ts:63](https://github.com/potoland/potocuit/blob/fe122a1/src/structures/channels.ts#L63)
 
 ***
 
@@ -208,7 +208,7 @@ is<T>(channelTypes: T): this is IChannelTypes[T[number]]
 
 #### Source
 
-[seyfert/src/structures/channels.ts:129](https://github.com/potoland/potocuit/blob/e332d7a/src/structures/channels.ts#L129)
+[seyfert/src/structures/channels.ts:134](https://github.com/potoland/potocuit/blob/fe122a1/src/structures/channels.ts#L134)
 
 ***
 
@@ -228,7 +228,7 @@ isCategory(): this is CategoryChannel
 
 #### Source
 
-[seyfert/src/structures/channels.ts:109](https://github.com/potoland/potocuit/blob/e332d7a/src/structures/channels.ts#L109)
+[seyfert/src/structures/channels.ts:114](https://github.com/potoland/potocuit/blob/fe122a1/src/structures/channels.ts#L114)
 
 ***
 
@@ -248,7 +248,7 @@ isDM(): this is DMChannel
 
 #### Source
 
-[seyfert/src/structures/channels.ts:85](https://github.com/potoland/potocuit/blob/e332d7a/src/structures/channels.ts#L85)
+[seyfert/src/structures/channels.ts:90](https://github.com/potoland/potocuit/blob/fe122a1/src/structures/channels.ts#L90)
 
 ***
 
@@ -268,7 +268,7 @@ isDirectory(): this is DirectoryChannel
 
 #### Source
 
-[seyfert/src/structures/channels.ts:97](https://github.com/potoland/potocuit/blob/e332d7a/src/structures/channels.ts#L97)
+[seyfert/src/structures/channels.ts:102](https://github.com/potoland/potocuit/blob/fe122a1/src/structures/channels.ts#L102)
 
 ***
 
@@ -288,7 +288,7 @@ isForum(): this is ForumChannel
 
 #### Source
 
-[seyfert/src/structures/channels.ts:89](https://github.com/potoland/potocuit/blob/e332d7a/src/structures/channels.ts#L89)
+[seyfert/src/structures/channels.ts:94](https://github.com/potoland/potocuit/blob/fe122a1/src/structures/channels.ts#L94)
 
 ***
 
@@ -308,7 +308,7 @@ isGuildTextable(): this is AllGuildTextableChannels
 
 #### Source
 
-[seyfert/src/structures/channels.ts:121](https://github.com/potoland/potocuit/blob/e332d7a/src/structures/channels.ts#L121)
+[seyfert/src/structures/channels.ts:126](https://github.com/potoland/potocuit/blob/fe122a1/src/structures/channels.ts#L126)
 
 ***
 
@@ -328,7 +328,7 @@ isMedia(): this is MediaChannel
 
 #### Source
 
-[seyfert/src/structures/channels.ts:81](https://github.com/potoland/potocuit/blob/e332d7a/src/structures/channels.ts#L81)
+[seyfert/src/structures/channels.ts:86](https://github.com/potoland/potocuit/blob/fe122a1/src/structures/channels.ts#L86)
 
 ***
 
@@ -348,7 +348,7 @@ isNews(): this is NewsChannel
 
 #### Source
 
-[seyfert/src/structures/channels.ts:113](https://github.com/potoland/potocuit/blob/e332d7a/src/structures/channels.ts#L113)
+[seyfert/src/structures/channels.ts:118](https://github.com/potoland/potocuit/blob/fe122a1/src/structures/channels.ts#L118)
 
 ***
 
@@ -368,7 +368,7 @@ isStage(): this is StageChannel
 
 #### Source
 
-[seyfert/src/structures/channels.ts:77](https://github.com/potoland/potocuit/blob/e332d7a/src/structures/channels.ts#L77)
+[seyfert/src/structures/channels.ts:82](https://github.com/potoland/potocuit/blob/fe122a1/src/structures/channels.ts#L82)
 
 ***
 
@@ -388,7 +388,7 @@ isTextGuild(): this is TextGuildChannel
 
 #### Source
 
-[seyfert/src/structures/channels.ts:105](https://github.com/potoland/potocuit/blob/e332d7a/src/structures/channels.ts#L105)
+[seyfert/src/structures/channels.ts:110](https://github.com/potoland/potocuit/blob/fe122a1/src/structures/channels.ts#L110)
 
 ***
 
@@ -408,7 +408,7 @@ isTextable(): this is AllTextableChannels
 
 #### Source
 
-[seyfert/src/structures/channels.ts:117](https://github.com/potoland/potocuit/blob/e332d7a/src/structures/channels.ts#L117)
+[seyfert/src/structures/channels.ts:122](https://github.com/potoland/potocuit/blob/fe122a1/src/structures/channels.ts#L122)
 
 ***
 
@@ -428,7 +428,7 @@ isThread(): this is ThreadChannel
 
 #### Source
 
-[seyfert/src/structures/channels.ts:93](https://github.com/potoland/potocuit/blob/e332d7a/src/structures/channels.ts#L93)
+[seyfert/src/structures/channels.ts:98](https://github.com/potoland/potocuit/blob/fe122a1/src/structures/channels.ts#L98)
 
 ***
 
@@ -448,7 +448,7 @@ isThreadOnly(): this is MediaChannel | ForumChannel
 
 #### Source
 
-[seyfert/src/structures/channels.ts:125](https://github.com/potoland/potocuit/blob/e332d7a/src/structures/channels.ts#L125)
+[seyfert/src/structures/channels.ts:130](https://github.com/potoland/potocuit/blob/fe122a1/src/structures/channels.ts#L130)
 
 ***
 
@@ -468,7 +468,7 @@ isVoice(): this is VoiceChannel
 
 #### Source
 
-[seyfert/src/structures/channels.ts:101](https://github.com/potoland/potocuit/blob/e332d7a/src/structures/channels.ts#L101)
+[seyfert/src/structures/channels.ts:106](https://github.com/potoland/potocuit/blob/fe122a1/src/structures/channels.ts#L106)
 
 ***
 
@@ -491,7 +491,7 @@ setBitrate(bitrate: null | number, reason?: string): Promise<AllChannels>
 
 #### Source
 
-[seyfert/src/structures/channels.ts:312](https://github.com/potoland/potocuit/blob/e332d7a/src/structures/channels.ts#L312)
+[seyfert/src/structures/channels.ts:341](https://github.com/potoland/potocuit/blob/fe122a1/src/structures/channels.ts#L341)
 
 ***
 
@@ -514,7 +514,7 @@ setRTC(rtc_region: null | string, reason?: string): Promise<AllChannels>
 
 #### Source
 
-[seyfert/src/structures/channels.ts:320](https://github.com/potoland/potocuit/blob/e332d7a/src/structures/channels.ts#L320)
+[seyfert/src/structures/channels.ts:349](https://github.com/potoland/potocuit/blob/fe122a1/src/structures/channels.ts#L349)
 
 ***
 
@@ -537,7 +537,7 @@ setUserLimit(user_limit: null | number, reason?: string): Promise<AllChannels>
 
 #### Source
 
-[seyfert/src/structures/channels.ts:316](https://github.com/potoland/potocuit/blob/e332d7a/src/structures/channels.ts#L316)
+[seyfert/src/structures/channels.ts:345](https://github.com/potoland/potocuit/blob/fe122a1/src/structures/channels.ts#L345)
 
 ***
 
@@ -560,7 +560,7 @@ setVideoQuality(quality: "Auto" | "Full", reason?: string): Promise<AllChannels>
 
 #### Source
 
-[seyfert/src/structures/channels.ts:324](https://github.com/potoland/potocuit/blob/e332d7a/src/structures/channels.ts#L324)
+[seyfert/src/structures/channels.ts:353](https://github.com/potoland/potocuit/blob/fe122a1/src/structures/channels.ts#L353)
 
 ***
 
@@ -580,4 +580,4 @@ toString(): string
 
 #### Source
 
-[seyfert/src/structures/channels.ts:73](https://github.com/potoland/potocuit/blob/e332d7a/src/structures/channels.ts#L73)
+[seyfert/src/structures/channels.ts:78](https://github.com/potoland/potocuit/blob/fe122a1/src/structures/channels.ts#L78)

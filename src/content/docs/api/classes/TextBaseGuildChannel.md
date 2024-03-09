@@ -7,14 +7,14 @@ title: "TextBaseGuildChannel"
 
 ## Extends
 
-- `ObjectToLower`\<`Omit`\<`APITextChannel`, `"type"`\>\>.[`MessagesMethods`](/api/classes/messagesmethods/).[`BaseGuildChannel`](/api/classes/baseguildchannel/)
+- `ObjectToLower`\<`Omit`\<`APITextChannel`, `"type"` \| `"permission_overwrites"`\>\>.[`MessagesMethods`](/api/classes/messagesmethods/).[`BaseGuildChannel`](/api/classes/baseguildchannel/)
 
 ## Constructors
 
 ### new TextBaseGuildChannel(client, data)
 
 ```ts
-new TextBaseGuildChannel(client: BaseClient, data: APIChannelBase<ChannelType>): TextBaseGuildChannel
+new TextBaseGuildChannel(client: BaseClient, data: APIGuildChannel<ChannelType>): TextBaseGuildChannel
 ```
 
 #### Parameters
@@ -22,7 +22,7 @@ new TextBaseGuildChannel(client: BaseClient, data: APIChannelBase<ChannelType>):
 | Parameter | Type |
 | :------ | :------ |
 | `client` | `BaseClient` |
-| `data` | `APIChannelBase`\<`ChannelType`\> |
+| `data` | `APIGuildChannel`\<`ChannelType`\> |
 
 #### Returns
 
@@ -34,7 +34,7 @@ new TextBaseGuildChannel(client: BaseClient, data: APIChannelBase<ChannelType>):
 
 #### Source
 
-[seyfert/src/structures/channels.ts:46](https://github.com/potoland/potocuit/blob/e332d7a/src/structures/channels.ts#L46)
+[seyfert/src/structures/channels.ts:169](https://github.com/potoland/potocuit/blob/fe122a1/src/structures/channels.ts#L169)
 
 ## Properties
 
@@ -58,7 +58,9 @@ new TextBaseGuildChannel(client: BaseClient, data: APIChannelBase<ChannelType>):
 | `name` | `public` | `string` | [`BaseGuildChannel`](/api/classes/baseguildchannel/).`name` |
 | `nsfw` | `public` | `undefined` \| `boolean` | [`BaseGuildChannel`](/api/classes/baseguildchannel/).`nsfw` |
 | `parentId` | `public` | `undefined` \| `null` \| `string` | [`BaseGuildChannel`](/api/classes/baseguildchannel/).`parentId` |
-| `permissionOverwrites` | `public` | `undefined` \| `APIOverwrite`[] | [`BaseGuildChannel`](/api/classes/baseguildchannel/).`permissionOverwrites` |
+| `permissionOverwrites` | `public` | `Object` | [`BaseGuildChannel`](/api/classes/baseguildchannel/).`permissionOverwrites` |
+| `permissionOverwrites.fetch` | `public` | () => [`ReturnCache`](/api/type-aliases/returncache/)\<`undefined` \| `Object`[]\> | - |
+| `permissionOverwrites.values` | `public` | () => `Object`[][] | - |
 | `pins` | `public` | `Object` | [`MessagesMethods`](/api/classes/messagesmethods/).`pins` |
 | `pins.delete` | `public` | (`messageId`: `string`, `reason`?: `string`) => `Promise`\<`never`\> | - |
 | `pins.fetch` | `public` | () => `Promise`\<[`Message`](/api/classes/message/)[]\> | - |
@@ -89,7 +91,7 @@ createdAt gets the creation Date instace of the current object.
 
 #### Source
 
-[seyfert/src/structures/extra/DiscordBase.ts:27](https://github.com/potoland/potocuit/blob/e332d7a/src/structures/extra/DiscordBase.ts#L27)
+[seyfert/src/structures/extra/DiscordBase.ts:27](https://github.com/potoland/potocuit/blob/fe122a1/src/structures/extra/DiscordBase.ts#L27)
 
 ***
 
@@ -107,7 +109,7 @@ Create a timestamp for the current object.
 
 #### Source
 
-[seyfert/src/structures/extra/DiscordBase.ts:20](https://github.com/potoland/potocuit/blob/e332d7a/src/structures/extra/DiscordBase.ts#L20)
+[seyfert/src/structures/extra/DiscordBase.ts:20](https://github.com/potoland/potocuit/blob/fe122a1/src/structures/extra/DiscordBase.ts#L20)
 
 ***
 
@@ -125,7 +127,7 @@ The URL to the channel
 
 #### Source
 
-[seyfert/src/structures/channels.ts:168](https://github.com/potoland/potocuit/blob/e332d7a/src/structures/channels.ts#L168)
+[seyfert/src/structures/channels.ts:195](https://github.com/potoland/potocuit/blob/fe122a1/src/structures/channels.ts#L195)
 
 ## Methods
 
@@ -151,7 +153,7 @@ delete(reason?: string): Promise<AllChannels>
 
 #### Source
 
-[seyfert/src/structures/channels.ts:65](https://github.com/potoland/potocuit/blob/e332d7a/src/structures/channels.ts#L65)
+[seyfert/src/structures/channels.ts:67](https://github.com/potoland/potocuit/blob/fe122a1/src/structures/channels.ts#L67)
 
 ***
 
@@ -178,7 +180,7 @@ edit(body: RESTPatchAPIChannelJSONBody, reason?: string): Promise<AllChannels>
 
 #### Source
 
-[seyfert/src/structures/channels.ts:69](https://github.com/potoland/potocuit/blob/e332d7a/src/structures/channels.ts#L69)
+[seyfert/src/structures/channels.ts:71](https://github.com/potoland/potocuit/blob/fe122a1/src/structures/channels.ts#L71)
 
 ***
 
@@ -204,7 +206,7 @@ fetch(force: boolean): Promise<AllChannels>
 
 #### Source
 
-[seyfert/src/structures/channels.ts:61](https://github.com/potoland/potocuit/blob/e332d7a/src/structures/channels.ts#L61)
+[seyfert/src/structures/channels.ts:63](https://github.com/potoland/potocuit/blob/fe122a1/src/structures/channels.ts#L63)
 
 ***
 
@@ -230,7 +232,7 @@ guild(force: boolean): Promise<Guild<"cached"> | Guild<"api">>
 
 #### Source
 
-[seyfert/src/structures/channels.ts:164](https://github.com/potoland/potocuit/blob/e332d7a/src/structures/channels.ts#L164)
+[seyfert/src/structures/channels.ts:191](https://github.com/potoland/potocuit/blob/fe122a1/src/structures/channels.ts#L191)
 
 ***
 
@@ -262,7 +264,7 @@ is<T>(channelTypes: T): this is IChannelTypes[T[number]]
 
 #### Source
 
-[seyfert/src/structures/channels.ts:129](https://github.com/potoland/potocuit/blob/e332d7a/src/structures/channels.ts#L129)
+[seyfert/src/structures/channels.ts:134](https://github.com/potoland/potocuit/blob/fe122a1/src/structures/channels.ts#L134)
 
 ***
 
@@ -282,7 +284,7 @@ isCategory(): this is CategoryChannel
 
 #### Source
 
-[seyfert/src/structures/channels.ts:109](https://github.com/potoland/potocuit/blob/e332d7a/src/structures/channels.ts#L109)
+[seyfert/src/structures/channels.ts:114](https://github.com/potoland/potocuit/blob/fe122a1/src/structures/channels.ts#L114)
 
 ***
 
@@ -302,7 +304,7 @@ isDM(): this is DMChannel
 
 #### Source
 
-[seyfert/src/structures/channels.ts:85](https://github.com/potoland/potocuit/blob/e332d7a/src/structures/channels.ts#L85)
+[seyfert/src/structures/channels.ts:90](https://github.com/potoland/potocuit/blob/fe122a1/src/structures/channels.ts#L90)
 
 ***
 
@@ -322,7 +324,7 @@ isDirectory(): this is DirectoryChannel
 
 #### Source
 
-[seyfert/src/structures/channels.ts:97](https://github.com/potoland/potocuit/blob/e332d7a/src/structures/channels.ts#L97)
+[seyfert/src/structures/channels.ts:102](https://github.com/potoland/potocuit/blob/fe122a1/src/structures/channels.ts#L102)
 
 ***
 
@@ -342,7 +344,7 @@ isForum(): this is ForumChannel
 
 #### Source
 
-[seyfert/src/structures/channels.ts:89](https://github.com/potoland/potocuit/blob/e332d7a/src/structures/channels.ts#L89)
+[seyfert/src/structures/channels.ts:94](https://github.com/potoland/potocuit/blob/fe122a1/src/structures/channels.ts#L94)
 
 ***
 
@@ -362,7 +364,7 @@ isGuildTextable(): this is AllGuildTextableChannels
 
 #### Source
 
-[seyfert/src/structures/channels.ts:121](https://github.com/potoland/potocuit/blob/e332d7a/src/structures/channels.ts#L121)
+[seyfert/src/structures/channels.ts:126](https://github.com/potoland/potocuit/blob/fe122a1/src/structures/channels.ts#L126)
 
 ***
 
@@ -382,7 +384,7 @@ isMedia(): this is MediaChannel
 
 #### Source
 
-[seyfert/src/structures/channels.ts:81](https://github.com/potoland/potocuit/blob/e332d7a/src/structures/channels.ts#L81)
+[seyfert/src/structures/channels.ts:86](https://github.com/potoland/potocuit/blob/fe122a1/src/structures/channels.ts#L86)
 
 ***
 
@@ -402,7 +404,7 @@ isNews(): this is NewsChannel
 
 #### Source
 
-[seyfert/src/structures/channels.ts:113](https://github.com/potoland/potocuit/blob/e332d7a/src/structures/channels.ts#L113)
+[seyfert/src/structures/channels.ts:118](https://github.com/potoland/potocuit/blob/fe122a1/src/structures/channels.ts#L118)
 
 ***
 
@@ -422,7 +424,7 @@ isStage(): this is StageChannel
 
 #### Source
 
-[seyfert/src/structures/channels.ts:77](https://github.com/potoland/potocuit/blob/e332d7a/src/structures/channels.ts#L77)
+[seyfert/src/structures/channels.ts:82](https://github.com/potoland/potocuit/blob/fe122a1/src/structures/channels.ts#L82)
 
 ***
 
@@ -442,7 +444,7 @@ isTextGuild(): this is TextGuildChannel
 
 #### Source
 
-[seyfert/src/structures/channels.ts:105](https://github.com/potoland/potocuit/blob/e332d7a/src/structures/channels.ts#L105)
+[seyfert/src/structures/channels.ts:110](https://github.com/potoland/potocuit/blob/fe122a1/src/structures/channels.ts#L110)
 
 ***
 
@@ -462,7 +464,7 @@ isTextable(): this is AllTextableChannels
 
 #### Source
 
-[seyfert/src/structures/channels.ts:117](https://github.com/potoland/potocuit/blob/e332d7a/src/structures/channels.ts#L117)
+[seyfert/src/structures/channels.ts:122](https://github.com/potoland/potocuit/blob/fe122a1/src/structures/channels.ts#L122)
 
 ***
 
@@ -482,7 +484,7 @@ isThread(): this is ThreadChannel
 
 #### Source
 
-[seyfert/src/structures/channels.ts:93](https://github.com/potoland/potocuit/blob/e332d7a/src/structures/channels.ts#L93)
+[seyfert/src/structures/channels.ts:98](https://github.com/potoland/potocuit/blob/fe122a1/src/structures/channels.ts#L98)
 
 ***
 
@@ -502,7 +504,7 @@ isThreadOnly(): this is MediaChannel | ForumChannel
 
 #### Source
 
-[seyfert/src/structures/channels.ts:125](https://github.com/potoland/potocuit/blob/e332d7a/src/structures/channels.ts#L125)
+[seyfert/src/structures/channels.ts:130](https://github.com/potoland/potocuit/blob/fe122a1/src/structures/channels.ts#L130)
 
 ***
 
@@ -522,7 +524,94 @@ isVoice(): this is VoiceChannel
 
 #### Source
 
-[seyfert/src/structures/channels.ts:101](https://github.com/potoland/potocuit/blob/e332d7a/src/structures/channels.ts#L101)
+[seyfert/src/structures/channels.ts:106](https://github.com/potoland/potocuit/blob/fe122a1/src/structures/channels.ts#L106)
+
+***
+
+### memberPermissions()
+
+```ts
+memberPermissions(member: GuildMember, checkAdmin: boolean): Promise<PermissionsBitField>
+```
+
+#### Parameters
+
+| Parameter | Type | Default value |
+| :------ | :------ | :------ |
+| `member` | [`GuildMember`](/api/classes/guildmember/) | `undefined` |
+| `checkAdmin` | `boolean` | `true` |
+
+#### Returns
+
+`Promise`\<`PermissionsBitField`\>
+
+#### Inherited from
+
+[`BaseGuildChannel`](/api/classes/baseguildchannel/).[`memberPermissions`](/api/classes/baseguildchannel/#memberpermissions)
+
+#### Source
+
+[seyfert/src/structures/channels.ts:179](https://github.com/potoland/potocuit/blob/fe122a1/src/structures/channels.ts#L179)
+
+***
+
+### overwritesFor()
+
+```ts
+overwritesFor(member: GuildMember): Promise<Object>
+```
+
+#### Parameters
+
+| Parameter | Type |
+| :------ | :------ |
+| `member` | [`GuildMember`](/api/classes/guildmember/) |
+
+#### Returns
+
+`Promise`\<`Object`\>
+
+> | Member | Type | Value |
+> | :------ | :------ | :------ |
+> | `everyone` | `undefined` \| `Object` | everyoneOverwrites |
+> | `member` | `undefined` \| `Object` | memberOverwrites |
+> | `roles` | `Object`[] | roleOverwrites |
+>
+
+#### Inherited from
+
+[`BaseGuildChannel`](/api/classes/baseguildchannel/).[`overwritesFor`](/api/classes/baseguildchannel/#overwritesfor)
+
+#### Source
+
+[seyfert/src/structures/channels.ts:187](https://github.com/potoland/potocuit/blob/fe122a1/src/structures/channels.ts#L187)
+
+***
+
+### rolePermissions()
+
+```ts
+rolePermissions(role: GuildRole, checkAdmin: boolean): Promise<PermissionsBitField>
+```
+
+#### Parameters
+
+| Parameter | Type | Default value |
+| :------ | :------ | :------ |
+| `role` | [`GuildRole`](/api/classes/guildrole/) | `undefined` |
+| `checkAdmin` | `boolean` | `true` |
+
+#### Returns
+
+`Promise`\<`PermissionsBitField`\>
+
+#### Inherited from
+
+[`BaseGuildChannel`](/api/classes/baseguildchannel/).[`rolePermissions`](/api/classes/baseguildchannel/#rolepermissions)
+
+#### Source
+
+[seyfert/src/structures/channels.ts:183](https://github.com/potoland/potocuit/blob/fe122a1/src/structures/channels.ts#L183)
 
 ***
 
@@ -549,7 +638,7 @@ setName(name: string, reason?: string): Promise<AllChannels>
 
 #### Source
 
-[seyfert/src/structures/channels.ts:176](https://github.com/potoland/potocuit/blob/e332d7a/src/structures/channels.ts#L176)
+[seyfert/src/structures/channels.ts:203](https://github.com/potoland/potocuit/blob/fe122a1/src/structures/channels.ts#L203)
 
 ***
 
@@ -576,7 +665,7 @@ setParent(parent_id: null | string, reason?: string): Promise<AllChannels>
 
 #### Source
 
-[seyfert/src/structures/channels.ts:180](https://github.com/potoland/potocuit/blob/e332d7a/src/structures/channels.ts#L180)
+[seyfert/src/structures/channels.ts:207](https://github.com/potoland/potocuit/blob/fe122a1/src/structures/channels.ts#L207)
 
 ***
 
@@ -603,7 +692,7 @@ setPosition(position: number, reason?: string): Promise<AllChannels>
 
 #### Source
 
-[seyfert/src/structures/channels.ts:172](https://github.com/potoland/potocuit/blob/e332d7a/src/structures/channels.ts#L172)
+[seyfert/src/structures/channels.ts:199](https://github.com/potoland/potocuit/blob/fe122a1/src/structures/channels.ts#L199)
 
 ***
 
@@ -623,7 +712,7 @@ toString(): string
 
 #### Source
 
-[seyfert/src/structures/channels.ts:73](https://github.com/potoland/potocuit/blob/e332d7a/src/structures/channels.ts#L73)
+[seyfert/src/structures/channels.ts:78](https://github.com/potoland/potocuit/blob/fe122a1/src/structures/channels.ts#L78)
 
 ***
 
@@ -643,7 +732,7 @@ typing(): Promise<never>
 
 #### Source
 
-[seyfert/src/structures/channels.ts:187](https://github.com/potoland/potocuit/blob/e332d7a/src/structures/channels.ts#L187)
+[seyfert/src/structures/channels.ts:214](https://github.com/potoland/potocuit/blob/fe122a1/src/structures/channels.ts#L214)
 
 ***
 
@@ -671,7 +760,7 @@ static __intent__(id: "@me"): "DirectMessages"
 
 ##### Source
 
-[seyfert/src/structures/channels.ts:50](https://github.com/potoland/potocuit/blob/e332d7a/src/structures/channels.ts#L50)
+[seyfert/src/structures/channels.ts:52](https://github.com/potoland/potocuit/blob/fe122a1/src/structures/channels.ts#L52)
 
 #### \_\_intent\_\_(id)
 
@@ -695,7 +784,7 @@ static __intent__(id: string): "Guilds" | "DirectMessages"
 
 ##### Source
 
-[seyfert/src/structures/channels.ts:51](https://github.com/potoland/potocuit/blob/e332d7a/src/structures/channels.ts#L51)
+[seyfert/src/structures/channels.ts:53](https://github.com/potoland/potocuit/blob/fe122a1/src/structures/channels.ts#L53)
 
 ***
 
@@ -732,4 +821,4 @@ static allMethods(ctx:     Object): Object
 
 #### Source
 
-[seyfert/src/structures/channels.ts:133](https://github.com/potoland/potocuit/blob/e332d7a/src/structures/channels.ts#L133)
+[seyfert/src/structures/channels.ts:138](https://github.com/potoland/potocuit/blob/fe122a1/src/structures/channels.ts#L138)

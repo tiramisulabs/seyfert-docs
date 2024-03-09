@@ -51,7 +51,7 @@ __reply?: __InternalReplyFunction): AutocompleteInteraction<FromGuild>
 
 #### Source
 
-[seyfert/src/structures/Interaction.ts:303](https://github.com/potoland/potocuit/blob/e332d7a/src/structures/Interaction.ts#L303)
+[seyfert/src/structures/Interaction.ts:307](https://github.com/potoland/potocuit/blob/fe122a1/src/structures/Interaction.ts#L307)
 
 ## Properties
 
@@ -99,7 +99,7 @@ createdAt gets the creation Date instace of the current object.
 
 #### Source
 
-[seyfert/src/structures/extra/DiscordBase.ts:27](https://github.com/potoland/potocuit/blob/e332d7a/src/structures/extra/DiscordBase.ts#L27)
+[seyfert/src/structures/extra/DiscordBase.ts:27](https://github.com/potoland/potocuit/blob/fe122a1/src/structures/extra/DiscordBase.ts#L27)
 
 ***
 
@@ -117,7 +117,7 @@ Create a timestamp for the current object.
 
 #### Source
 
-[seyfert/src/structures/extra/DiscordBase.ts:20](https://github.com/potoland/potocuit/blob/e332d7a/src/structures/extra/DiscordBase.ts#L20)
+[seyfert/src/structures/extra/DiscordBase.ts:20](https://github.com/potoland/potocuit/blob/fe122a1/src/structures/extra/DiscordBase.ts#L20)
 
 ## Methods
 
@@ -143,7 +143,33 @@ deferReply(flags?: MessageFlags): Promise<void>
 
 #### Source
 
-[seyfert/src/structures/Interaction.ts:215](https://github.com/potoland/potocuit/blob/e332d7a/src/structures/Interaction.ts#L215)
+[seyfert/src/structures/Interaction.ts:215](https://github.com/potoland/potocuit/blob/fe122a1/src/structures/Interaction.ts#L215)
+
+***
+
+### fetchGuild()
+
+```ts
+fetchGuild(force: boolean): undefined | Promise<Guild<"cached"> | Guild<"api">>
+```
+
+#### Parameters
+
+| Parameter | Type | Default value |
+| :------ | :------ | :------ |
+| `force` | `boolean` | `false` |
+
+#### Returns
+
+`undefined` \| `Promise`\<[`Guild`](/api/classes/guild/)\<`"cached"`\> \| [`Guild`](/api/classes/guild/)\<`"api"`\>\>
+
+#### Inherited from
+
+[`BaseInteraction`](/api/classes/baseinteraction/).[`fetchGuild`](/api/classes/baseinteraction/#fetchguild)
+
+#### Source
+
+[seyfert/src/structures/Interaction.ts:277](https://github.com/potoland/potocuit/blob/fe122a1/src/structures/Interaction.ts#L277)
 
 ***
 
@@ -159,7 +185,7 @@ getInput(): string
 
 #### Source
 
-[seyfert/src/structures/Interaction.ts:318](https://github.com/potoland/potocuit/blob/e332d7a/src/structures/Interaction.ts#L318)
+[seyfert/src/structures/Interaction.ts:322](https://github.com/potoland/potocuit/blob/fe122a1/src/structures/Interaction.ts#L322)
 
 ***
 
@@ -187,7 +213,7 @@ reply(..._args: unknown[]): Promise<void>
 
 #### Source
 
-[seyfert/src/structures/Interaction.ts:327](https://github.com/potoland/potocuit/blob/e332d7a/src/structures/Interaction.ts#L327)
+[seyfert/src/structures/Interaction.ts:331](https://github.com/potoland/potocuit/blob/fe122a1/src/structures/Interaction.ts#L331)
 
 ***
 
@@ -209,7 +235,7 @@ respond(choices: undefined | APIApplicationCommandOptionChoice<string | number>[
 
 #### Source
 
-[seyfert/src/structures/Interaction.ts:322](https://github.com/potoland/potocuit/blob/e332d7a/src/structures/Interaction.ts#L322)
+[seyfert/src/structures/Interaction.ts:326](https://github.com/potoland/potocuit/blob/fe122a1/src/structures/Interaction.ts#L326)
 
 ***
 
@@ -240,7 +266,7 @@ __reply?: __InternalReplyFunction): StringSelectMenuInteraction<string[]> | Auto
 
 #### Source
 
-[seyfert/src/structures/Interaction.ts:224](https://github.com/potoland/potocuit/blob/e332d7a/src/structures/Interaction.ts#L224)
+[seyfert/src/structures/Interaction.ts:224](https://github.com/potoland/potocuit/blob/fe122a1/src/structures/Interaction.ts#L224)
 
 ***
 
@@ -272,7 +298,7 @@ static transformBody<T>(body: Omit<RESTPostAPIChannelMessageJSONBody, "component
 
 #### Source
 
-[seyfert/src/structures/Interaction.ts:163](https://github.com/potoland/potocuit/blob/e332d7a/src/structures/Interaction.ts#L163)
+[seyfert/src/structures/Interaction.ts:163](https://github.com/potoland/potocuit/blob/fe122a1/src/structures/Interaction.ts#L163)
 
 ***
 
@@ -298,4 +324,4 @@ static transformBodyRequest(body: ReplyInteractionBody): APIInteractionResponse
 
 #### Source
 
-[seyfert/src/structures/Interaction.ts:119](https://github.com/potoland/potocuit/blob/e332d7a/src/structures/Interaction.ts#L119)
+[seyfert/src/structures/Interaction.ts:119](https://github.com/potoland/potocuit/blob/fe122a1/src/structures/Interaction.ts#L119)

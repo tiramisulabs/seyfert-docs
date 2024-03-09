@@ -13,7 +13,7 @@ createMiddleware<T>(data: ParseMiddlewareType<T>): ParseMiddlewareType<T>
 
 | Type parameter | Value |
 | :------ | :------ |
-| `T` | [`MiddlewareContext`](/api/type-aliases/middlewarecontext/)\<`unknown`, [`CommandContext`](/api/classes/commandcontext/)\<`Object`, `never`\>\> |
+| `T` | [`MiddlewareContext`](/api/type-aliases/middlewarecontext/)\<`unknown`, [`CommandContext`](/api/classes/commandcontext/)\<`Object`, `never`\> \| [`MenuCommandContext`](/api/classes/menucommandcontext/)\<[`UserCommandInteraction`](/api/classes/usercommandinteraction/)\<`boolean`\> \| [`MessageCommandInteraction`](/api/classes/messagecommandinteraction/)\<`boolean`\>, `never`\>\> |
 
 ## Parameters
 
@@ -27,4 +27,4 @@ createMiddleware<T>(data: ParseMiddlewareType<T>): ParseMiddlewareType<T>
 
 ## Source
 
-[seyfert/src/commands/applications/options.ts:84](https://github.com/potoland/potocuit/blob/e332d7a/src/commands/applications/options.ts#L84)
+[seyfert/src/commands/applications/options.ts:97](https://github.com/potoland/potocuit/blob/fe122a1/src/commands/applications/options.ts#L97)

@@ -13,7 +13,7 @@ createBooleanOption<T>(data: T): T & Object
 
 | Type parameter | Value |
 | :------ | :------ |
-| `T` extends `SeyfertBooleanOption` | `SeyfertBooleanOption` |
+| `T` extends [`SeyfertBooleanOption`](/api/type-aliases/seyfertbooleanoption/) | [`SeyfertBooleanOption`](/api/type-aliases/seyfertbooleanoption/) |
 
 ## Parameters
 
@@ -27,4 +27,4 @@ createBooleanOption<T>(data: T): T & Object
 
 ## Source
 
-[seyfert/src/commands/applications/options.ts:52](https://github.com/potoland/potocuit/blob/e332d7a/src/commands/applications/options.ts#L52)
+[seyfert/src/commands/applications/options.ts:59](https://github.com/potoland/potocuit/blob/fe122a1/src/commands/applications/options.ts#L59)

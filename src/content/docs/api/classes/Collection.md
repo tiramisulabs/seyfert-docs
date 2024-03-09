@@ -203,7 +203,7 @@ console.log(allGreaterThanZero); // Output: true
 
 #### Source
 
-[seyfert/src/collection.ts:120](https://github.com/potoland/potocuit/blob/e332d7a/src/collection.ts#L120)
+[seyfert/src/collection.ts:120](https://github.com/potoland/potocuit/blob/fe122a1/src/collection.ts#L120)
 
 ***
 
@@ -240,7 +240,7 @@ console.log(filteredArray); // Output: ['two']
 
 #### Source
 
-[seyfert/src/collection.ts:67](https://github.com/potoland/potocuit/blob/e332d7a/src/collection.ts#L67)
+[seyfert/src/collection.ts:67](https://github.com/potoland/potocuit/blob/fe122a1/src/collection.ts#L67)
 
 ***
 
@@ -277,7 +277,7 @@ console.log(firstEvenValue); // Output: 2
 
 #### Source
 
-[seyfert/src/collection.ts:164](https://github.com/potoland/potocuit/blob/e332d7a/src/collection.ts#L164)
+[seyfert/src/collection.ts:164](https://github.com/potoland/potocuit/blob/fe122a1/src/collection.ts#L164)
 
 ***
 
@@ -314,7 +314,7 @@ console.log(firstEvenKey); // Output: 2
 
 #### Source
 
-[seyfert/src/collection.ts:185](https://github.com/potoland/potocuit/blob/e332d7a/src/collection.ts#L185)
+[seyfert/src/collection.ts:185](https://github.com/potoland/potocuit/blob/fe122a1/src/collection.ts#L185)
 
 ***
 
@@ -466,7 +466,7 @@ console.log(mappedArray); // Output: ['1: one', '2: two', '3: three']
 
 #### Source
 
-[seyfert/src/collection.ts:44](https://github.com/potoland/potocuit/blob/e332d7a/src/collection.ts#L44)
+[seyfert/src/collection.ts:44](https://github.com/potoland/potocuit/blob/fe122a1/src/collection.ts#L44)
 
 ***
 
@@ -510,7 +510,7 @@ console.log(sum); // Output: 6
 
 #### Source
 
-[seyfert/src/collection.ts:90](https://github.com/potoland/potocuit/blob/e332d7a/src/collection.ts#L90)
+[seyfert/src/collection.ts:90](https://github.com/potoland/potocuit/blob/fe122a1/src/collection.ts#L90)
 
 ***
 
@@ -576,7 +576,7 @@ console.log(hasEvenValue); // Output: true
 
 #### Source
 
-[seyfert/src/collection.ts:142](https://github.com/potoland/potocuit/blob/e332d7a/src/collection.ts#L142)
+[seyfert/src/collection.ts:142](https://github.com/potoland/potocuit/blob/fe122a1/src/collection.ts#L142)
 
 ***
 
@@ -614,7 +614,7 @@ console.log(collection.size); // Output: 2
 
 #### Source
 
-[seyfert/src/collection.ts:23](https://github.com/potoland/potocuit/blob/e332d7a/src/collection.ts#L23)
+[seyfert/src/collection.ts:23](https://github.com/potoland/potocuit/blob/fe122a1/src/collection.ts#L23)
 
 ***
 

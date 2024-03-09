@@ -38,4 +38,4 @@ Declare(declare: DeclareOptions): <T>(target: T) => (...args: any[]) => __class<
 
 ## Source
 
-[seyfert/src/commands/decorators.ts:124](https://github.com/potoland/potocuit/blob/e332d7a/src/commands/decorators.ts#L124)
+[seyfert/src/commands/decorators.ts:130](https://github.com/potoland/potocuit/blob/fe122a1/src/commands/decorators.ts#L130)

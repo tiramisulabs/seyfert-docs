@@ -18,4 +18,4 @@ type OptionValuesLength: Object;
 
 ## Source
 
-[seyfert/src/builders/Base.ts:13](https://github.com/potoland/potocuit/blob/e332d7a/src/builders/Base.ts#L13)
+[seyfert/src/builders/Base.ts:13](https://github.com/potoland/potocuit/blob/fe122a1/src/builders/Base.ts#L13)

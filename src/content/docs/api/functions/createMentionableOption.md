@@ -13,7 +13,7 @@ createMentionableOption<T>(data: T): T & Object
 
 | Type parameter | Value |
 | :------ | :------ |
-| `T` extends `SeyfertMentionableOption` | `SeyfertMentionableOption` |
+| `T` extends [`SeyfertMentionableOption`](/api/type-aliases/seyfertmentionableoption/) | [`SeyfertMentionableOption`](/api/type-aliases/seyfertmentionableoption/) |
 
 ## Parameters
 
@@ -27,4 +27,4 @@ createMentionableOption<T>(data: T): T & Object
 
 ## Source
 
-[seyfert/src/commands/applications/options.ts:68](https://github.com/potoland/potocuit/blob/e332d7a/src/commands/applications/options.ts#L68)
+[seyfert/src/commands/applications/options.ts:75](https://github.com/potoland/potocuit/blob/fe122a1/src/commands/applications/options.ts#L75)

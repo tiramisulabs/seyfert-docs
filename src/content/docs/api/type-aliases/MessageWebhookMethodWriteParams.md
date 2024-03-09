@@ -11,4 +11,4 @@ type MessageWebhookMethodWriteParams: MessageWebhookPayload<MessageWebhookCreate
 
 ## Source
 
-[seyfert/src/structures/Webhook.ts:96](https://github.com/potoland/potocuit/blob/e332d7a/src/structures/Webhook.ts#L96)
+[seyfert/src/structures/Webhook.ts:96](https://github.com/potoland/potocuit/blob/fe122a1/src/structures/Webhook.ts#L96)

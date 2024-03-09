@@ -17,4 +17,4 @@ type UserAvatarDefault:
 
 ## Source
 
-[seyfert/src/api/Routes/cdn.ts:68](https://github.com/potoland/potocuit/blob/e332d7a/src/api/Routes/cdn.ts#L68)
+[seyfert/src/api/Routes/cdn.ts:68](https://github.com/potoland/potocuit/blob/fe122a1/src/api/Routes/cdn.ts#L68)

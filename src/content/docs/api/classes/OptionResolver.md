@@ -34,7 +34,7 @@ new OptionResolver(
 
 #### Source
 
-[seyfert/src/commands/optionresolver.ts:19](https://github.com/potoland/potocuit/blob/e332d7a/src/commands/optionresolver.ts#L19)
+[seyfert/src/commands/optionresolver.ts:15](https://github.com/potoland/potocuit/blob/fe122a1/src/commands/optionresolver.ts#L15)
 
 ## Properties
 
@@ -60,7 +60,7 @@ get fullCommandName(): string
 
 #### Source
 
-[seyfert/src/commands/optionresolver.ts:39](https://github.com/potoland/potocuit/blob/e332d7a/src/commands/optionresolver.ts#L39)
+[seyfert/src/commands/optionresolver.ts:35](https://github.com/potoland/potocuit/blob/fe122a1/src/commands/optionresolver.ts#L35)
 
 ## Methods
 
@@ -82,7 +82,7 @@ get(name: string): undefined | OptionResolved
 
 #### Source
 
-[seyfert/src/commands/optionresolver.ts:76](https://github.com/potoland/potocuit/blob/e332d7a/src/commands/optionresolver.ts#L76)
+[seyfert/src/commands/optionresolver.ts:72](https://github.com/potoland/potocuit/blob/fe122a1/src/commands/optionresolver.ts#L72)
 
 ***
 
@@ -98,7 +98,7 @@ getAutocomplete(): undefined | CommandAutocompleteOption
 
 #### Source
 
-[seyfert/src/commands/optionresolver.ts:58](https://github.com/potoland/potocuit/blob/e332d7a/src/commands/optionresolver.ts#L58)
+[seyfert/src/commands/optionresolver.ts:54](https://github.com/potoland/potocuit/blob/fe122a1/src/commands/optionresolver.ts#L54)
 
 ***
 
@@ -114,7 +114,7 @@ getAutocompleteValue(): undefined | string
 
 #### Source
 
-[seyfert/src/commands/optionresolver.ts:54](https://github.com/potoland/potocuit/blob/e332d7a/src/commands/optionresolver.ts#L54)
+[seyfert/src/commands/optionresolver.ts:50](https://github.com/potoland/potocuit/blob/fe122a1/src/commands/optionresolver.ts#L50)
 
 ***
 
@@ -137,23 +137,23 @@ getChannel(name: string, required?: true): AllChannels
 
 #### Source
 
-[seyfert/src/commands/optionresolver.ts:124](https://github.com/potoland/potocuit/blob/e332d7a/src/commands/optionresolver.ts#L124)
+[seyfert/src/commands/optionresolver.ts:120](https://github.com/potoland/potocuit/blob/fe122a1/src/commands/optionresolver.ts#L120)
 
 ***
 
 ### getCommand()
 
 ```ts
-getCommand(): undefined | SubCommand | Command
+getCommand(): undefined | Command | SubCommand
 ```
 
 #### Returns
 
-`undefined` \| [`SubCommand`](/api/classes/subcommand/) \| [`Command`](/api/classes/command/)
+`undefined` \| [`Command`](/api/classes/command/) \| [`SubCommand`](/api/classes/subcommand/)
 
 #### Source
 
-[seyfert/src/commands/optionresolver.ts:45](https://github.com/potoland/potocuit/blob/e332d7a/src/commands/optionresolver.ts#L45)
+[seyfert/src/commands/optionresolver.ts:41](https://github.com/potoland/potocuit/blob/fe122a1/src/commands/optionresolver.ts#L41)
 
 ***
 
@@ -169,7 +169,7 @@ getGroup(): null | string
 
 #### Source
 
-[seyfert/src/commands/optionresolver.ts:72](https://github.com/potoland/potocuit/blob/e332d7a/src/commands/optionresolver.ts#L72)
+[seyfert/src/commands/optionresolver.ts:68](https://github.com/potoland/potocuit/blob/fe122a1/src/commands/optionresolver.ts#L68)
 
 ***
 
@@ -191,7 +191,7 @@ getHoisted(name: string): undefined | OptionResolved
 
 #### Source
 
-[seyfert/src/commands/optionresolver.ts:80](https://github.com/potoland/potocuit/blob/e332d7a/src/commands/optionresolver.ts#L80)
+[seyfert/src/commands/optionresolver.ts:76](https://github.com/potoland/potocuit/blob/fe122a1/src/commands/optionresolver.ts#L76)
 
 ***
 
@@ -207,7 +207,7 @@ getParent(): undefined | string
 
 #### Source
 
-[seyfert/src/commands/optionresolver.ts:64](https://github.com/potoland/potocuit/blob/e332d7a/src/commands/optionresolver.ts#L64)
+[seyfert/src/commands/optionresolver.ts:60](https://github.com/potoland/potocuit/blob/fe122a1/src/commands/optionresolver.ts#L60)
 
 ***
 
@@ -230,7 +230,7 @@ getString(name: string, required?: true): string
 
 #### Source
 
-[seyfert/src/commands/optionresolver.ts:130](https://github.com/potoland/potocuit/blob/e332d7a/src/commands/optionresolver.ts#L130)
+[seyfert/src/commands/optionresolver.ts:126](https://github.com/potoland/potocuit/blob/fe122a1/src/commands/optionresolver.ts#L126)
 
 ***
 
@@ -246,7 +246,7 @@ getSubCommand(): null | string
 
 #### Source
 
-[seyfert/src/commands/optionresolver.ts:68](https://github.com/potoland/potocuit/blob/e332d7a/src/commands/optionresolver.ts#L68)
+[seyfert/src/commands/optionresolver.ts:64](https://github.com/potoland/potocuit/blob/fe122a1/src/commands/optionresolver.ts#L64)
 
 ***
 
@@ -258,13 +258,14 @@ getValue(name: string):
   | string
   | number
   | boolean
-  | APIAttachment
-  | InteractionGuildMember
+  | Attachment
+  | GuildRole
+  | GuildMember
   | User
   | BaseChannel<ChannelType>
   | DMChannel
   | CategoryChannel
-  | GuildRole
+  | InteractionGuildMember
 ```
 
 #### Parameters
@@ -279,17 +280,18 @@ getValue(name: string):
   \| `string`
   \| `number`
   \| `boolean`
-  \| `APIAttachment`
-  \| [`InteractionGuildMember`](/api/classes/interactionguildmember/)
+  \| [`Attachment`](/api/classes/attachment/)
+  \| [`GuildRole`](/api/classes/guildrole/)
+  \| [`GuildMember`](/api/classes/guildmember/)
   \| [`User`](/api/classes/user/)
   \| [`BaseChannel`](/api/classes/basechannel/)\<`ChannelType`\>
   \| [`DMChannel`](/api/classes/dmchannel/)
   \| [`CategoryChannel`](/api/classes/categorychannel/)
-  \| [`GuildRole`](/api/classes/guildrole/)
+  \| [`InteractionGuildMember`](/api/classes/interactionguildmember/)
 
 #### Source
 
-[seyfert/src/commands/optionresolver.ts:84](https://github.com/potoland/potocuit/blob/e332d7a/src/commands/optionresolver.ts#L84)
+[seyfert/src/commands/optionresolver.ts:80](https://github.com/potoland/potocuit/blob/fe122a1/src/commands/optionresolver.ts#L80)
 
 ***
 
@@ -312,4 +314,4 @@ transformOption(option: APIApplicationCommandInteractionDataOption, resolved?: A
 
 #### Source
 
-[seyfert/src/commands/optionresolver.ts:136](https://github.com/potoland/potocuit/blob/e332d7a/src/commands/optionresolver.ts#L136)
+[seyfert/src/commands/optionresolver.ts:132](https://github.com/potoland/potocuit/blob/fe122a1/src/commands/optionresolver.ts#L132)

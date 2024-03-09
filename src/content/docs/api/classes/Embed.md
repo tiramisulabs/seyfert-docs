@@ -10,7 +10,7 @@ Represents a message embed.
 ## Example
 
 ```ts
-const embed = new MessageEmbed();
+const embed = new Embed();
 embed.setTitle('Seyfert');
 embed.setDescription('Better than discord.js');
 embed.setColor('Green');
@@ -25,7 +25,7 @@ const embedJSON = embed.json();
 new Embed(data: Partial<APIEmbed>): Embed
 ```
 
-Creates a new instance of MessageEmbed.
+Creates a new instance of Embed.
 
 #### Parameters
 
@@ -40,12 +40,12 @@ Creates a new instance of MessageEmbed.
 #### Example
 
 ```ts
-const embed = new MessageEmbed({ title: 'Hello', description: 'This is an example embed' });
+const embed = new Embed({ title: 'Hello', description: 'This is an example embed' });
 ```
 
 #### Source
 
-[seyfert/src/builders/MessageEmbed.ts:30](https://github.com/potoland/potocuit/blob/e332d7a/src/builders/MessageEmbed.ts#L30)
+[seyfert/src/builders/Embed.ts:29](https://github.com/potoland/potocuit/blob/fe122a1/src/builders/Embed.ts#L29)
 
 ## Properties
 
@@ -73,7 +73,7 @@ Adds one or more fields to the embed.
 
 `this`
 
-The updated MessageEmbed instance.
+The updated Embed instance.
 
 #### Example
 
@@ -83,7 +83,7 @@ embed.addFields({ name: 'Field 1', value: 'Value 1' }, { name: 'Field 2', value:
 
 #### Source
 
-[seyfert/src/builders/MessageEmbed.ts:78](https://github.com/potoland/potocuit/blob/e332d7a/src/builders/MessageEmbed.ts#L78)
+[seyfert/src/builders/Embed.ts:77](https://github.com/potoland/potocuit/blob/fe122a1/src/builders/Embed.ts#L77)
 
 ***
 
@@ -109,7 +109,7 @@ Sets the author of the embed.
 
 `this`
 
-The updated MessageEmbed instance.
+The updated Embed instance.
 
 #### Example
 
@@ -119,7 +119,7 @@ embed.setAuthor({ name: 'John Doe', iconURL: 'https://example.com/avatar.png' })
 
 #### Source
 
-[seyfert/src/builders/MessageEmbed.ts:41](https://github.com/potoland/potocuit/blob/e332d7a/src/builders/MessageEmbed.ts#L41)
+[seyfert/src/builders/Embed.ts:40](https://github.com/potoland/potocuit/blob/fe122a1/src/builders/Embed.ts#L40)
 
 ***
 
@@ -141,7 +141,7 @@ Sets the color of the embed.
 
 `this`
 
-The updated MessageEmbed instance.
+The updated Embed instance.
 
 #### Example
 
@@ -152,7 +152,7 @@ embed.setColor('Blurple');
 
 #### Source
 
-[seyfert/src/builders/MessageEmbed.ts:54](https://github.com/potoland/potocuit/blob/e332d7a/src/builders/MessageEmbed.ts#L54)
+[seyfert/src/builders/Embed.ts:53](https://github.com/potoland/potocuit/blob/fe122a1/src/builders/Embed.ts#L53)
 
 ***
 
@@ -174,7 +174,7 @@ Sets the description of the embed.
 
 `this`
 
-The updated MessageEmbed instance.
+The updated Embed instance.
 
 #### Example
 
@@ -184,7 +184,7 @@ embed.setDescription('This is the description of the embed');
 
 #### Source
 
-[seyfert/src/builders/MessageEmbed.ts:66](https://github.com/potoland/potocuit/blob/e332d7a/src/builders/MessageEmbed.ts#L66)
+[seyfert/src/builders/Embed.ts:65](https://github.com/potoland/potocuit/blob/fe122a1/src/builders/Embed.ts#L65)
 
 ***
 
@@ -206,7 +206,7 @@ Sets the fields of the embed.
 
 `this`
 
-The updated MessageEmbed instance.
+The updated Embed instance.
 
 #### Example
 
@@ -216,7 +216,7 @@ embed.setFields([{ name: 'Field 1', value: 'Value 1' }, { name: 'Field 2', value
 
 #### Source
 
-[seyfert/src/builders/MessageEmbed.ts:90](https://github.com/potoland/potocuit/blob/e332d7a/src/builders/MessageEmbed.ts#L90)
+[seyfert/src/builders/Embed.ts:89](https://github.com/potoland/potocuit/blob/fe122a1/src/builders/Embed.ts#L89)
 
 ***
 
@@ -240,7 +240,7 @@ Sets the footer of the embed.
 
 `this`
 
-The updated MessageEmbed instance.
+The updated Embed instance.
 
 #### Example
 
@@ -250,7 +250,7 @@ embed.setFooter({ text: 'This is the footer', iconURL: 'https://example.com/foot
 
 #### Source
 
-[seyfert/src/builders/MessageEmbed.ts:102](https://github.com/potoland/potocuit/blob/e332d7a/src/builders/MessageEmbed.ts#L102)
+[seyfert/src/builders/Embed.ts:101](https://github.com/potoland/potocuit/blob/fe122a1/src/builders/Embed.ts#L101)
 
 ***
 
@@ -272,7 +272,7 @@ Sets the image of the embed.
 
 `this`
 
-The updated MessageEmbed instance.
+The updated Embed instance.
 
 #### Example
 
@@ -282,7 +282,7 @@ embed.setImage('https://example.com/image.png');
 
 #### Source
 
-[seyfert/src/builders/MessageEmbed.ts:114](https://github.com/potoland/potocuit/blob/e332d7a/src/builders/MessageEmbed.ts#L114)
+[seyfert/src/builders/Embed.ts:113](https://github.com/potoland/potocuit/blob/fe122a1/src/builders/Embed.ts#L113)
 
 ***
 
@@ -304,7 +304,7 @@ Sets the thumbnail of the embed.
 
 [`Embed`](/api/classes/embed/)
 
-The updated MessageEmbed instance.
+The updated Embed instance.
 
 #### Example
 
@@ -314,7 +314,7 @@ embed.setThumbnail('https://example.com/thumbnail.png');
 
 #### Source
 
-[seyfert/src/builders/MessageEmbed.ts:164](https://github.com/potoland/potocuit/blob/e332d7a/src/builders/MessageEmbed.ts#L164)
+[seyfert/src/builders/Embed.ts:163](https://github.com/potoland/potocuit/blob/fe122a1/src/builders/Embed.ts#L163)
 
 ***
 
@@ -336,7 +336,7 @@ Sets the timestamp of the embed.
 
 `this`
 
-The updated MessageEmbed instance.
+The updated Embed instance.
 
 #### Example
 
@@ -348,7 +348,7 @@ embed.setTimestamp(new Date());
 
 #### Source
 
-[seyfert/src/builders/MessageEmbed.ts:128](https://github.com/potoland/potocuit/blob/e332d7a/src/builders/MessageEmbed.ts#L128)
+[seyfert/src/builders/Embed.ts:127](https://github.com/potoland/potocuit/blob/fe122a1/src/builders/Embed.ts#L127)
 
 ***
 
@@ -370,7 +370,7 @@ Sets the title of the embed.
 
 `this`
 
-The updated MessageEmbed instance.
+The updated Embed instance.
 
 #### Example
 
@@ -380,7 +380,7 @@ embed.setTitle('This is the title');
 
 #### Source
 
-[seyfert/src/builders/MessageEmbed.ts:140](https://github.com/potoland/potocuit/blob/e332d7a/src/builders/MessageEmbed.ts#L140)
+[seyfert/src/builders/Embed.ts:139](https://github.com/potoland/potocuit/blob/fe122a1/src/builders/Embed.ts#L139)
 
 ***
 
@@ -402,7 +402,7 @@ Sets the URL of the embed.
 
 `this`
 
-The updated MessageEmbed instance.
+The updated Embed instance.
 
 #### Example
 
@@ -412,7 +412,7 @@ embed.setURL('https://seyfert.com');
 
 #### Source
 
-[seyfert/src/builders/MessageEmbed.ts:152](https://github.com/potoland/potocuit/blob/e332d7a/src/builders/MessageEmbed.ts#L152)
+[seyfert/src/builders/Embed.ts:151](https://github.com/potoland/potocuit/blob/fe122a1/src/builders/Embed.ts#L151)
 
 ***
 
@@ -422,7 +422,7 @@ embed.setURL('https://seyfert.com');
 toJSON(): APIEmbed
 ```
 
-Converts the MessageEmbed instance to a JSON object.
+Converts the Embed instance to a JSON object.
 
 #### Returns
 
@@ -432,4 +432,4 @@ The JSON representation of the MessageEmbed instance.
 
 #### Source
 
-[seyfert/src/builders/MessageEmbed.ts:173](https://github.com/potoland/potocuit/blob/e332d7a/src/builders/MessageEmbed.ts#L173)
+[seyfert/src/builders/Embed.ts:172](https://github.com/potoland/potocuit/blob/fe122a1/src/builders/Embed.ts#L172)

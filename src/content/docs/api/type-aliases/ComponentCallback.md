@@ -29,4 +29,4 @@ type ComponentCallback<T>: (interaction: T, stop: ComponentStopCallback, refresh
 
 ## Source
 
-[seyfert/src/builders/types.ts:6](https://github.com/potoland/potocuit/blob/e332d7a/src/builders/types.ts#L6)
+[seyfert/src/builders/types.ts:6](https://github.com/potoland/potocuit/blob/fe122a1/src/builders/types.ts#L6)

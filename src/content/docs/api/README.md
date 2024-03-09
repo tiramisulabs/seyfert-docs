@@ -10,7 +10,6 @@ title: "seyfert"
 | Enumeration | Description |
 | :------ | :------ |
 | [ProxyRequestMethod](/api/enumerations/proxyrequestmethod/) | - |
-| [RESTEvents](/api/enumerations/restevents/) | The events that the REST manager emits |
 | [RequestMethod](/api/enumerations/requestmethod/) | Possible API methods to be used when doing requests |
 
 ## Classes
@@ -19,8 +18,10 @@ title: "seyfert"
 | :------ | :------ |
 | [ActionRow](/api/classes/actionrow/) | Represents an Action Row component in a message. |
 | [AnonymousGuild](/api/classes/anonymousguild/) | Class for anonymous guilds. |
+| [ApiHandler](/api/classes/apihandler/) | - |
 | [ApplicationCommandInteraction](/api/classes/applicationcommandinteraction/) | - |
 | [Attachment](/api/classes/attachment/) | - |
+| [AttachmentBuilder](/api/classes/attachmentbuilder/) | - |
 | [AutoModerationRule](/api/classes/automoderationrule/) | - |
 | [AutocompleteInteraction](/api/classes/autocompleteinteraction/) | - |
 | [BaseChannel](/api/classes/basechannel/) | - |
@@ -32,6 +33,7 @@ title: "seyfert"
 | [Button](/api/classes/button/) | Represents a button component. |
 | [ButtonInteraction](/api/classes/buttoninteraction/) | - |
 | [CDN](/api/classes/cdn/) | The CDN link builder |
+| [Cache](/api/classes/cache/) | - |
 | [CategoryChannel](/api/classes/categorychannel/) | - |
 | [ChannelSelectMenu](/api/classes/channelselectmenu/) | Represents a Select Menu for selecting channels. |
 | [ChannelSelectMenuInteraction](/api/classes/channelselectmenuinteraction/) | - |
@@ -47,8 +49,8 @@ title: "seyfert"
 | [ContextMenuCommand](/api/classes/contextmenucommand/) | - |
 | [DMChannel](/api/classes/dmchannel/) | - |
 | [DirectoryChannel](/api/classes/directorychannel/) | - |
-| [DiscordAPIError](/api/classes/discordapierror/) | Represents an API error returned by Discord |
 | [Embed](/api/classes/embed/) | Represents a message embed. |
+| [EventHandler](/api/classes/eventhandler/) | - |
 | [ForumChannel](/api/classes/forumchannel/) | - |
 | [Guild](/api/classes/guild/) | - |
 | [GuildEmoji](/api/classes/guildemoji/) | - |
@@ -56,13 +58,14 @@ title: "seyfert"
 | [GuildPreview](/api/classes/guildpreview/) | Represent Discord Guild Preview Object |
 | [GuildRole](/api/classes/guildrole/) | - |
 | [GuildTemplate](/api/classes/guildtemplate/) | - |
-| [HTTPError](/api/classes/httperror/) | Represents a HTTP error |
 | [HttpClient](/api/classes/httpclient/) | - |
 | [Interaction](/api/classes/interaction/) | - |
 | [InteractionGuildMember](/api/classes/interactionguildmember/) | Represents a guild member |
+| [LangsHandler](/api/classes/langshandler/) | - |
 | [LimitedCollection](/api/classes/limitedcollection/) | Creates a new array with the results of calling a provided function on every element in the collection. |
 | [Logger](/api/classes/logger/) | Represents a logger utility for logging messages with various log levels. |
 | [MediaChannel](/api/classes/mediachannel/) | - |
+| [MemoryAdapter](/api/classes/memoryadapter/) | - |
 | [MentionableSelectMenu](/api/classes/mentionableselectmenu/) | Represents a Select Menu for selecting mentionable entities. |
 | [MentionableSelectMenuInteraction](/api/classes/mentionableselectmenuinteraction/) | - |
 | [MenuCommandContext](/api/classes/menucommandcontext/) | - |
@@ -74,8 +77,7 @@ title: "seyfert"
 | [ModalSubmitInteraction](/api/classes/modalsubmitinteraction/) | - |
 | [NewsChannel](/api/classes/newschannel/) | - |
 | [OptionResolver](/api/classes/optionresolver/) | - |
-| [REST](/api/classes/rest/) | Represents the class that manages handlers for endpoints |
-| [RateLimitError](/api/classes/ratelimiterror/) | Data emitted on `RESTEvents.RateLimited` |
+| [RedisAdapter](/api/classes/redisadapter/) | - |
 | [RoleSelectMenu](/api/classes/roleselectmenu/) | Represents a Select Menu for selecting roles. |
 | [RoleSelectMenuInteraction](/api/classes/roleselectmenuinteraction/) | - |
 | [Router](/api/classes/router/) | - |
@@ -106,6 +108,7 @@ title: "seyfert"
 | [WebhookChannelMethods](/api/classes/webhookchannelmethods/) | - |
 | [WebhookGuildMethods](/api/classes/webhookguildmethods/) | - |
 | [WebhookMessage](/api/classes/webhookmessage/) | - |
+| [WorkerAdapter](/api/classes/workeradapter/) | - |
 | [WorkerClient](/api/classes/workerclient/) | - |
 | [WorkerManager](/api/classes/workermanager/) | - |
 
@@ -113,33 +116,30 @@ title: "seyfert"
 
 | Interface | Description |
 | :------ | :------ |
-| [APIRequest](/api/interfaces/apirequest/) | - |
+| [Adapter](/api/interfaces/adapter/) | - |
+| [ApiHandlerInternalOptions](/api/interfaces/apihandlerinternaloptions/) | - |
+| [ApiHandlerOptions](/api/interfaces/apihandleroptions/) | - |
+| [ApiRequestOptions](/api/interfaces/apirequestoptions/) | - |
 | [AttachmentData](/api/interfaces/attachmentdata/) | - |
 | [AttachmentResolvableMap](/api/interfaces/attachmentresolvablemap/) | - |
 | [BaseImageURLOptions](/api/interfaces/baseimageurloptions/) | The options used for image URLs |
 | [CDNRoute](/api/interfaces/cdnroute/) | - |
+| [ClientDataEvent](/api/interfaces/clientdataevent/) | - |
+| [ClientEvent](/api/interfaces/clientevent/) | - |
 | [ClientOptions](/api/interfaces/clientoptions/) | - |
 | [CreateStickerBodyRequest](/api/interfaces/createstickerbodyrequest/) | - |
+| [DeclareEventsOptions](/api/interfaces/declareeventsoptions/) | - |
 | [DefaultLocale](/api/interfaces/defaultlocale/) | - |
-| [DiscordErrorData](/api/interfaces/discorderrordata/) | - |
 | [ExtendContext](/api/interfaces/extendcontext/) | - |
 | [GlobalMetadata](/api/interfaces/globalmetadata/) | - |
 | [ImageURLOptions](/api/interfaces/imageurloptions/) | The options used for image URLs with animated content |
-| [InvalidRequestWarningData](/api/interfaces/invalidrequestwarningdata/) | - |
+| [InternalOptions](/api/interfaces/internaloptions/) | - |
 | [ListenerOptions](/api/interfaces/listeneroptions/) | - |
 | [MakeURLOptions](/api/interfaces/makeurloptions/) | The options to use when making a CDN URL |
-| [OAuthErrorData](/api/interfaces/oautherrordata/) | - |
 | [OptionResolved](/api/interfaces/optionresolved/) | - |
-| [RESTOptions](/api/interfaces/restoptions/) | Options to be passed when creating the REST instance |
-| [RateLimitData](/api/interfaces/ratelimitdata/) | Data emitted on `RESTEvents.RateLimited` |
-| [RawFile](/api/interfaces/rawfile/) | Represents a file to be added to the request |
+| [RawFile](/api/interfaces/rawfile/) | - |
 | [RegisteredMiddlewares](/api/interfaces/registeredmiddlewares/) | - |
-| [RequestBody](/api/interfaces/requestbody/) | - |
-| [RequestData](/api/interfaces/requestdata/) | Represents possible data to be given to an endpoint |
-| [RequestHeaders](/api/interfaces/requestheaders/) | Possible headers for an API call |
-| [ResponseLike](/api/interfaces/responselike/) | - |
-| [RestEvents](/api/interfaces/restevents/) | - |
-| [RestEventsMap](/api/interfaces/resteventsmap/) | - |
+| [RequestHeaders](/api/interfaces/requestheaders/) | - |
 | [ReturnOptionsTypes](/api/interfaces/returnoptionstypes/) | - |
 | [UsingClient](/api/interfaces/usingclient/) | - |
 
@@ -148,6 +148,7 @@ title: "seyfert"
 | Type alias | Description |
 | :------ | :------ |
 | [APIRoutes](/api/type-aliases/apiroutes/) | - |
+| [ActionRowMessageComponents](/api/type-aliases/actionrowmessagecomponents/) | - |
 | [AllChannels](/api/type-aliases/allchannels/) | - |
 | [AllGuildChannels](/api/type-aliases/allguildchannels/) | - |
 | [AllGuildTextableChannels](/api/type-aliases/allguildtextablechannels/) | - |
@@ -156,12 +157,14 @@ title: "seyfert"
 | [AttachmentDataType](/api/type-aliases/attachmentdatatype/) | - |
 | [AttachmentResolvable](/api/type-aliases/attachmentresolvable/) | - |
 | [AutocompleteCallback](/api/type-aliases/autocompletecallback/) | - |
-| [Awaitable](/api/type-aliases/awaitable/) | - |
 | [BuilderComponents](/api/type-aliases/buildercomponents/) | - |
 | [BuilderSelectMenus](/api/type-aliases/builderselectmenus/) | - |
 | [ButtonID](/api/type-aliases/buttonid/) | - |
 | [ButtonLink](/api/type-aliases/buttonlink/) | - |
 | [ButtonStylesForID](/api/type-aliases/buttonstylesforid/) | - |
+| [CachedEvents](/api/type-aliases/cachedevents/) | - |
+| [CallbackEventHandler](/api/type-aliases/callbackeventhandler/) | - |
+| [ClientNameEvents](/api/type-aliases/clientnameevents/) | - |
 | [CommandAutocompleteOption](/api/type-aliases/commandautocompleteoption/) | - |
 | [CommandBaseAutocompleteOption](/api/type-aliases/commandbaseautocompleteoption/) | - |
 | [CommandBaseOption](/api/type-aliases/commandbaseoption/) | - |
@@ -173,17 +176,22 @@ title: "seyfert"
 | [ComponentStopCallback](/api/type-aliases/componentstopcallback/) | - |
 | [ContextOptions](/api/type-aliases/contextoptions/) | - |
 | [EditMessageWebhook](/api/type-aliases/editmessagewebhook/) | - |
+| [EventContext](/api/type-aliases/eventcontext/) | - |
 | [FixedComponents](/api/type-aliases/fixedcomponents/) | - |
-| [FlatObjectKeys](/api/type-aliases/flatobjectkeys/) | - |
 | [GatewayGuildMemberAddDispatchDataFixed](/api/type-aliases/gatewayguildmemberadddispatchdatafixed/) | - |
+| [GuildBased](/api/type-aliases/guildbased/) | - |
 | [GuildMemberData](/api/type-aliases/guildmemberdata/) | - |
-| [HandlerRequestData](/api/type-aliases/handlerrequestdata/) | - |
+| [GuildRelated](/api/type-aliases/guildrelated/) | - |
+| [HttpMethods](/api/type-aliases/httpmethods/) | - |
 | [ImageExtension](/api/type-aliases/imageextension/) | - |
 | [ImageSize](/api/type-aliases/imagesize/) | - |
+| [InferAsyncCache](/api/type-aliases/inferasynccache/) | - |
+| [InferWithPrefix](/api/type-aliases/inferwithprefix/) | - |
 | [InteractionTarget](/api/type-aliases/interactiontarget/) | - |
 | [MaxEmojis](/api/type-aliases/maxemojis/) | Maximun custom guild emojis per level |
 | [MaxStickers](/api/type-aliases/maxstickers/) | Maximun custom guild stickers per level |
 | [MessageBuilderComponents](/api/type-aliases/messagebuildercomponents/) | - |
+| [MessageComponents](/api/type-aliases/messagecomponents/) | - |
 | [MessageData](/api/type-aliases/messagedata/) | - |
 | [MessageWebhookMethodEditParams](/api/type-aliases/messagewebhookmethodeditparams/) | - |
 | [MessageWebhookMethodWriteParams](/api/type-aliases/messagewebhookmethodwriteparams/) | - |
@@ -192,6 +200,7 @@ title: "seyfert"
 | [ModalBuilderComponents](/api/type-aliases/modalbuildercomponents/) | - |
 | [ModalSubmitCallback](/api/type-aliases/modalsubmitcallback/) | - |
 | [NextFunction](/api/type-aliases/nextfunction/) | - |
+| [NonGuildBased](/api/type-aliases/nonguildbased/) | - |
 | [OKFunction](/api/type-aliases/okfunction/) | - |
 | [OnAutocompleteErrorCallback](/api/type-aliases/onautocompleteerrorcallback/) | - |
 | [OnOptionsReturnObject](/api/type-aliases/onoptionsreturnobject/) | - |
@@ -205,20 +214,30 @@ title: "seyfert"
 | [ParseMiddlewares](/api/type-aliases/parsemiddlewares/) | - |
 | [PassFunction](/api/type-aliases/passfunction/) | - |
 | [PermissionStrings](/api/type-aliases/permissionstrings/) | - |
-| [RESTConstructorOptions](/api/type-aliases/restconstructoroptions/) | - |
-| [RateLimitQueueFilter](/api/type-aliases/ratelimitqueuefilter/) | - |
+| [RPV](/api/type-aliases/rpv/) | - |
 | [ReplyInteractionBody](/api/type-aliases/replyinteractionbody/) | - |
 | [RequestObject](/api/type-aliases/requestobject/) | - |
 | [RequestOptions](/api/type-aliases/requestoptions/) | - |
 | [RestArguments](/api/type-aliases/restarguments/) | - |
-| [RouteLike](/api/type-aliases/routelike/) | - |
+| [ReturnCache](/api/type-aliases/returncache/) | - |
 | [RuntimeConfig](/api/type-aliases/runtimeconfig/) | - |
 | [RuntimeConfigHTTP](/api/type-aliases/runtimeconfighttp/) | - |
+| [SeyfertAttachmentOption](/api/type-aliases/seyfertattachmentoption/) | - |
+| [SeyfertBasicOption](/api/type-aliases/seyfertbasicoption/) | - |
+| [SeyfertBooleanOption](/api/type-aliases/seyfertbooleanoption/) | - |
+| [SeyfertChannelOption](/api/type-aliases/seyfertchanneloption/) | - |
+| [SeyfertIntegerOption](/api/type-aliases/seyfertintegeroption/) | - |
+| [SeyfertMentionableOption](/api/type-aliases/seyfertmentionableoption/) | - |
+| [SeyfertNumberOption](/api/type-aliases/seyfertnumberoption/) | - |
+| [SeyfertRoleOption](/api/type-aliases/seyfertroleoption/) | - |
+| [SeyfertStringOption](/api/type-aliases/seyfertstringoption/) | - |
+| [SeyfertUserOption](/api/type-aliases/seyfertuseroption/) | - |
 | [StickerExtension](/api/type-aliases/stickerextension/) | - |
 | [StopFunction](/api/type-aliases/stopfunction/) | - |
 | [UserAvatarDefault](/api/type-aliases/useravatardefault/) | - |
 | [WriteMessageWebhook](/api/type-aliases/writemessagewebhook/) | - |
 | [\_\_CommandOption](/api/type-aliases/commandoption-1/) | - |
+| [\_\_InternalParseLocale](/api/type-aliases/internalparselocale/) | - |
 | [\_\_TypeWrapper](/api/type-aliases/typewrapper/) | - |
 | [\_\_TypesWrapper](/api/type-aliases/typeswrapper/) | - |
 
@@ -229,10 +248,9 @@ title: "seyfert"
 | [ALLOWED\_EXTENSIONS](/api/variables/allowed_extensions/) | - |
 | [ALLOWED\_SIZES](/api/variables/allowed_sizes/) | - |
 | [ALLOWED\_STICKER\_EXTENSIONS](/api/variables/allowed_sticker_extensions/) | - |
-| [BurstHandlerMajorIdKey](/api/variables/bursthandlermajoridkey/) | - |
 | [CDNRouter](/api/variables/cdnrouter/) | - |
-| [DefaultRestOptions](/api/variables/defaultrestoptions/) | - |
 | [DefaultUserAgent](/api/variables/defaultuseragent/) | - |
+| [InteractionCommandType](/api/variables/interactioncommandtype/) | - |
 | [OverwrittenMimeTypes](/api/variables/overwrittenmimetypes/) | - |
 | [PermissionFlagsBits](/api/variables/permissionflagsbits/) | https://discord.com/developers/docs/topics/permissions#permissions-bitwise-permission-flags<br /><br />These flags are exported as `BigInt`s and NOT numbers. Wrapping them in `Number()`<br />may cause issues, try to use BigInts as much as possible or modules that can<br />replicate them in some way |
 | [config](/api/variables/config/) | - |
@@ -246,11 +264,13 @@ title: "seyfert"
 | [Group](/api/functions/group/) | - |
 | [Groups](/api/functions/groups/) | - |
 | [GroupsT](/api/functions/groupst/) | - |
+| [LangRouter](/api/functions/langrouter/) | - |
 | [Locales](/api/functions/locales/) | - |
 | [LocalesT](/api/functions/localest/) | - |
 | [Middlewares](/api/functions/middlewares/) | - |
 | [Options](/api/functions/options/) | - |
 | [calculateUserDefaultAvatarIndex](/api/functions/calculateuserdefaultavatarindex/) | Calculates the default avatar index for a given user id. |
+| [componentFactory](/api/functions/componentfactory/) | Return a new component instance based on the component type. |
 | [createAttachmentOption](/api/functions/createattachmentoption/) | - |
 | [createBooleanOption](/api/functions/createbooleanoption/) | - |
 | [createChannelOption](/api/functions/createchanneloption/) | - |
@@ -265,8 +285,6 @@ title: "seyfert"
 | [extendContext](/api/functions/extendcontext/) | Extends the context of a command interaction. |
 | [fromComponent](/api/functions/fromcomponent/) | - |
 | [generateShardInfo](/api/functions/generateshardinfo/) | - |
-| [makeURLSearchParams](/api/functions/makeurlsearchparams/) | Creates and populates an URLSearchParams instance from an object, stripping<br />out null and undefined values, while also coercing non-strings to strings. |
-| [parseResponse](/api/functions/parseresponse/) | Converts the response to usable data |
 | [resolveAttachment](/api/functions/resolveattachment/) | Resolves an attachment to a REST API attachment. |
 | [resolveAttachmentData](/api/functions/resolveattachmentdata/) | Resolves the data of an attachment. |
 | [resolveBase64](/api/functions/resolvebase64/) | Resolves a base64 data to a data URL. |

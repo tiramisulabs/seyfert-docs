@@ -27,4 +27,4 @@ type NextFunction<T>: (data: T) => void;
 
 ## Source
 
-[seyfert/src/commands/applications/shared.ts:6](https://github.com/potoland/potocuit/blob/e332d7a/src/commands/applications/shared.ts#L6)
+[seyfert/src/commands/applications/shared.ts:6](https://github.com/potoland/potocuit/blob/fe122a1/src/commands/applications/shared.ts#L6)

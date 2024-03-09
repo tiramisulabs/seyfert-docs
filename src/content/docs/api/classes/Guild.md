@@ -40,7 +40,7 @@ new Guild<State>(client: BaseClient, data: APIGuild | GatewayGuildCreateDispatch
 
 #### Source
 
-[seyfert/src/structures/Guild.ts:24](https://github.com/potoland/potocuit/blob/e332d7a/src/structures/Guild.ts#L24)
+[seyfert/src/structures/Guild.ts:24](https://github.com/potoland/potocuit/blob/fe122a1/src/structures/Guild.ts#L24)
 
 ## Properties
 
@@ -53,7 +53,7 @@ new Guild<State>(client: BaseClient, data: APIGuild | GatewayGuildCreateDispatch
 | `approximateMemberCount` | `public` | `undefined` \| `number` | `ObjectToLower.approximateMemberCount` |
 | `approximatePresenceCount` | `public` | `undefined` \| `number` | `ObjectToLower.approximatePresenceCount` |
 | `banner` | `public` | `null` \| `string` | `ObjectToLower.banner` |
-| `cache` | `public` | `Cache` | `DiscordBase.cache` |
+| `cache` | `public` | [`Cache`](/api/classes/cache/) | `DiscordBase.cache` |
 | `channels` | `public` | `Object` | - |
 | `channels.create` | `readonly` | (`body`: `RESTPostAPIGuildChannelJSONBody`) => `Promise`\<[`AllChannels`](/api/type-aliases/allchannels/)\> | - |
 | `channels.delete` | `public` | (`id`: `string`, `reason`?: `string`) => `Promise`\<[`AllChannels`](/api/type-aliases/allchannels/)\> | - |
@@ -114,7 +114,7 @@ new Guild<State>(client: BaseClient, data: APIGuild | GatewayGuildCreateDispatch
 | `premiumTier` | `public` | `GuildPremiumTier` | `ObjectToLower.premiumTier` |
 | `publicUpdatesChannelId` | `public` | `null` \| `string` | `ObjectToLower.publicUpdatesChannelId` |
 | `region` | `public` | `string` | `ObjectToLower.region` |
-| `rest` | `public` | [`REST`](/api/classes/rest/) | `DiscordBase.rest` |
+| `rest` | `public` | [`ApiHandler`](/api/classes/apihandler/) | `DiscordBase.rest` |
 | `roles` | `public` | `Object` | - |
 | `roles.create` | `public` | (`body`: `RESTPostAPIGuildRoleJSONBody`) => `Promise`\<`any`\> | - |
 | `roles.delete` | `public` | (`roleId`: `string`, `reason`?: `string`) => `Promise`\<`undefined` \| `void`\> | - |
@@ -163,7 +163,7 @@ get maxEmojis(): MaxEmojis
 
 #### Source
 
-[seyfert/src/structures/Guild.ts:50](https://github.com/potoland/potocuit/blob/e332d7a/src/structures/Guild.ts#L50)
+[seyfert/src/structures/Guild.ts:50](https://github.com/potoland/potocuit/blob/fe122a1/src/structures/Guild.ts#L50)
 
 ***
 
@@ -179,7 +179,7 @@ get maxStickers(): MaxStickers
 
 #### Source
 
-[seyfert/src/structures/Guild.ts:37](https://github.com/potoland/potocuit/blob/e332d7a/src/structures/Guild.ts#L37)
+[seyfert/src/structures/Guild.ts:37](https://github.com/potoland/potocuit/blob/fe122a1/src/structures/Guild.ts#L37)
 
 ## Methods
 
@@ -209,7 +209,7 @@ https://discord.com/developers/docs/reference#image-formatting
 
 #### Source
 
-[seyfert/src/structures/extra/BaseGuild.ts:67](https://github.com/potoland/potocuit/blob/e332d7a/src/structures/extra/BaseGuild.ts#L67)
+[seyfert/src/structures/extra/BaseGuild.ts:67](https://github.com/potoland/potocuit/blob/fe122a1/src/structures/extra/BaseGuild.ts#L67)
 
 ***
 
@@ -233,14 +233,14 @@ Fetch guild on API
 
 #### Source
 
-[seyfert/src/structures/extra/BaseGuild.ts:32](https://github.com/potoland/potocuit/blob/e332d7a/src/structures/extra/BaseGuild.ts#L32)
+[seyfert/src/structures/extra/BaseGuild.ts:32](https://github.com/potoland/potocuit/blob/fe122a1/src/structures/extra/BaseGuild.ts#L32)
 
 ***
 
 ### fetchOwner()
 
 ```ts
-fetchOwner(force: boolean): Promise<GuildMember> | Promise<null>
+fetchOwner(force: boolean): Promise<null> | Promise<GuildMember>
 ```
 
 #### Parameters
@@ -251,11 +251,11 @@ fetchOwner(force: boolean): Promise<GuildMember> | Promise<null>
 
 #### Returns
 
-`Promise`\<[`GuildMember`](/api/classes/guildmember/)\> \| `Promise`\<`null`\>
+`Promise`\<`null`\> \| `Promise`\<[`GuildMember`](/api/classes/guildmember/)\>
 
 #### Source
 
-[seyfert/src/structures/Guild.ts:63](https://github.com/potoland/potocuit/blob/e332d7a/src/structures/Guild.ts#L63)
+[seyfert/src/structures/Guild.ts:63](https://github.com/potoland/potocuit/blob/fe122a1/src/structures/Guild.ts#L63)
 
 ***
 
@@ -283,7 +283,7 @@ https://discord.com/developers/docs/reference#image-formatting
 
 #### Source
 
-[seyfert/src/structures/extra/BaseGuild.ts:41](https://github.com/potoland/potocuit/blob/e332d7a/src/structures/extra/BaseGuild.ts#L41)
+[seyfert/src/structures/extra/BaseGuild.ts:41](https://github.com/potoland/potocuit/blob/fe122a1/src/structures/extra/BaseGuild.ts#L41)
 
 ***
 
@@ -313,7 +313,7 @@ https://discord.com/developers/docs/reference#image-formatting
 
 #### Source
 
-[seyfert/src/structures/extra/BaseGuild.ts:54](https://github.com/potoland/potocuit/blob/e332d7a/src/structures/extra/BaseGuild.ts#L54)
+[seyfert/src/structures/extra/BaseGuild.ts:54](https://github.com/potoland/potocuit/blob/fe122a1/src/structures/extra/BaseGuild.ts#L54)
 
 ***
 
@@ -329,4 +329,4 @@ toString(): string
 
 #### Source
 
-[seyfert/src/structures/extra/BaseGuild.ts:74](https://github.com/potoland/potocuit/blob/e332d7a/src/structures/extra/BaseGuild.ts#L74)
+[seyfert/src/structures/extra/BaseGuild.ts:74](https://github.com/potoland/potocuit/blob/fe122a1/src/structures/extra/BaseGuild.ts#L74)

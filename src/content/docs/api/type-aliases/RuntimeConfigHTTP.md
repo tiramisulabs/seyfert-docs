@@ -17,4 +17,4 @@ type RuntimeConfigHTTP: Omit<MakeRequired<RC, "publicKey" | "applicationId">, "i
 
 ## Source
 
-[seyfert/src/client/base.ts:282](https://github.com/potoland/potocuit/blob/e332d7a/src/client/base.ts#L282)
+[seyfert/src/client/base.ts:284](https://github.com/potoland/potocuit/blob/fe122a1/src/client/base.ts#L284)

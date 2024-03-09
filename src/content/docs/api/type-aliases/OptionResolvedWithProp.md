@@ -11,4 +11,4 @@ type OptionResolvedWithProp: Exclude<OptionResolved, Object>;
 
 ## Source
 
-[seyfert/src/commands/optionresolver.ts:201](https://github.com/potoland/potocuit/blob/e332d7a/src/commands/optionresolver.ts#L201)
+[seyfert/src/commands/optionresolver.ts:200](https://github.com/potoland/potocuit/blob/fe122a1/src/commands/optionresolver.ts#L200)

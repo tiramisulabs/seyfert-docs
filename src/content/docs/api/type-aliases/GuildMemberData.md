@@ -11,4 +11,4 @@ type GuildMemberData: APIGuildMember | GatewayGuildMemberUpdateDispatchData | Ga
 
 ## Source
 
-[seyfert/src/structures/GuildMember.ts:19](https://github.com/potoland/potocuit/blob/e332d7a/src/structures/GuildMember.ts#L19)
+[seyfert/src/structures/GuildMember.ts:19](https://github.com/potoland/potocuit/blob/fe122a1/src/structures/GuildMember.ts#L19)

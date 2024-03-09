@@ -33,7 +33,7 @@ new StringSelectOption(data: Partial<APISelectMenuOption>): StringSelectOption
 
 #### Source
 
-[seyfert/src/builders/SelectMenu.ts:293](https://github.com/potoland/potocuit/blob/e332d7a/src/builders/SelectMenu.ts#L293)
+[seyfert/src/builders/SelectMenu.ts:307](https://github.com/potoland/potocuit/blob/fe122a1/src/builders/SelectMenu.ts#L307)
 
 ## Properties
 
@@ -66,7 +66,7 @@ The current StringSelectOption instance.
 
 #### Source
 
-[seyfert/src/builders/SelectMenu.ts:330](https://github.com/potoland/potocuit/blob/e332d7a/src/builders/SelectMenu.ts#L330)
+[seyfert/src/builders/SelectMenu.ts:344](https://github.com/potoland/potocuit/blob/fe122a1/src/builders/SelectMenu.ts#L344)
 
 ***
 
@@ -93,34 +93,33 @@ The current StringSelectOption instance.
 
 #### Source
 
-[seyfert/src/builders/SelectMenu.ts:320](https://github.com/potoland/potocuit/blob/e332d7a/src/builders/SelectMenu.ts#L320)
+[seyfert/src/builders/SelectMenu.ts:334](https://github.com/potoland/potocuit/blob/fe122a1/src/builders/SelectMenu.ts#L334)
 
 ***
 
 ### setEmoji()
 
 ```ts
-setEmoji(emoji: APIMessageComponentEmoji): this
+setEmoji(emoji: EmojiResolvable): StringSelectOption
 ```
 
 Sets the emoji for the option.
- emoji - The emoji for the option.
 
 #### Parameters
 
-| Parameter | Type |
-| :------ | :------ |
-| `emoji` | `APIMessageComponentEmoji` |
+| Parameter | Type | Description |
+| :------ | :------ | :------ |
+| `emoji` | `EmojiResolvable` | The emoji to set. |
 
 #### Returns
 
-`this`
+[`StringSelectOption`](/api/classes/stringselectoption/)
 
-The current StringSelectOption instance.
+The modified option instance.
 
 #### Source
 
-[seyfert/src/builders/SelectMenu.ts:340](https://github.com/potoland/potocuit/blob/e332d7a/src/builders/SelectMenu.ts#L340)
+[seyfert/src/builders/SelectMenu.ts:354](https://github.com/potoland/potocuit/blob/fe122a1/src/builders/SelectMenu.ts#L354)
 
 ***
 
@@ -147,7 +146,7 @@ The current StringSelectOption instance.
 
 #### Source
 
-[seyfert/src/builders/SelectMenu.ts:300](https://github.com/potoland/potocuit/blob/e332d7a/src/builders/SelectMenu.ts#L300)
+[seyfert/src/builders/SelectMenu.ts:314](https://github.com/potoland/potocuit/blob/fe122a1/src/builders/SelectMenu.ts#L314)
 
 ***
 
@@ -174,7 +173,7 @@ The current StringSelectOption instance.
 
 #### Source
 
-[seyfert/src/builders/SelectMenu.ts:310](https://github.com/potoland/potocuit/blob/e332d7a/src/builders/SelectMenu.ts#L310)
+[seyfert/src/builders/SelectMenu.ts:324](https://github.com/potoland/potocuit/blob/fe122a1/src/builders/SelectMenu.ts#L324)
 
 ***
 
@@ -194,4 +193,4 @@ The option data in JSON format.
 
 #### Source
 
-[seyfert/src/builders/SelectMenu.ts:349](https://github.com/potoland/potocuit/blob/e332d7a/src/builders/SelectMenu.ts#L349)
+[seyfert/src/builders/SelectMenu.ts:365](https://github.com/potoland/potocuit/blob/fe122a1/src/builders/SelectMenu.ts#L365)

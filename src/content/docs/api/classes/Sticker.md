@@ -34,7 +34,7 @@ new Sticker(client: BaseClient, data: APISticker): Sticker
 
 #### Source
 
-[seyfert/src/structures/Sticker.ts:17](https://github.com/potoland/potocuit/blob/e332d7a/src/structures/Sticker.ts#L17)
+[seyfert/src/structures/Sticker.ts:17](https://github.com/potoland/potocuit/blob/fe122a1/src/structures/Sticker.ts#L17)
 
 ## Properties
 
@@ -70,7 +70,7 @@ createdAt gets the creation Date instace of the current object.
 
 #### Source
 
-[seyfert/src/structures/extra/DiscordBase.ts:27](https://github.com/potoland/potocuit/blob/e332d7a/src/structures/extra/DiscordBase.ts#L27)
+[seyfert/src/structures/extra/DiscordBase.ts:27](https://github.com/potoland/potocuit/blob/fe122a1/src/structures/extra/DiscordBase.ts#L27)
 
 ***
 
@@ -88,7 +88,7 @@ Create a timestamp for the current object.
 
 #### Source
 
-[seyfert/src/structures/extra/DiscordBase.ts:20](https://github.com/potoland/potocuit/blob/e332d7a/src/structures/extra/DiscordBase.ts#L20)
+[seyfert/src/structures/extra/DiscordBase.ts:20](https://github.com/potoland/potocuit/blob/fe122a1/src/structures/extra/DiscordBase.ts#L20)
 
 ## Methods
 
@@ -110,7 +110,7 @@ delete(reason?: string): undefined | Promise<void>
 
 #### Source
 
-[seyfert/src/structures/Sticker.ts:39](https://github.com/potoland/potocuit/blob/e332d7a/src/structures/Sticker.ts#L39)
+[seyfert/src/structures/Sticker.ts:39](https://github.com/potoland/potocuit/blob/fe122a1/src/structures/Sticker.ts#L39)
 
 ***
 
@@ -133,7 +133,7 @@ edit(body: RESTPatchAPIGuildStickerJSONBody, reason?: string): undefined | Promi
 
 #### Source
 
-[seyfert/src/structures/Sticker.ts:29](https://github.com/potoland/potocuit/blob/e332d7a/src/structures/Sticker.ts#L29)
+[seyfert/src/structures/Sticker.ts:29](https://github.com/potoland/potocuit/blob/fe122a1/src/structures/Sticker.ts#L29)
 
 ***
 
@@ -155,14 +155,14 @@ fetch(force: boolean): undefined | Promise<Sticker>
 
 #### Source
 
-[seyfert/src/structures/Sticker.ts:34](https://github.com/potoland/potocuit/blob/e332d7a/src/structures/Sticker.ts#L34)
+[seyfert/src/structures/Sticker.ts:34](https://github.com/potoland/potocuit/blob/fe122a1/src/structures/Sticker.ts#L34)
 
 ***
 
 ### guild()
 
 ```ts
-guild(force: boolean): Promise<undefined | Guild<"cached"> | Guild<"api">>
+guild(force: boolean): undefined | Promise<Guild<"cached"> | Guild<"api">>
 ```
 
 #### Parameters
@@ -173,11 +173,11 @@ guild(force: boolean): Promise<undefined | Guild<"cached"> | Guild<"api">>
 
 #### Returns
 
-`Promise`\<`undefined` \| [`Guild`](/api/classes/guild/)\<`"cached"`\> \| [`Guild`](/api/classes/guild/)\<`"api"`\>\>
+`undefined` \| `Promise`\<[`Guild`](/api/classes/guild/)\<`"cached"`\> \| [`Guild`](/api/classes/guild/)\<`"api"`\>\>
 
 #### Source
 
-[seyfert/src/structures/Sticker.ts:24](https://github.com/potoland/potocuit/blob/e332d7a/src/structures/Sticker.ts#L24)
+[seyfert/src/structures/Sticker.ts:24](https://github.com/potoland/potocuit/blob/fe122a1/src/structures/Sticker.ts#L24)
 
 ***
 
@@ -209,4 +209,4 @@ static methods(__namedParameters:     Object): Object
 
 #### Source
 
-[seyfert/src/structures/Sticker.ts:44](https://github.com/potoland/potocuit/blob/e332d7a/src/structures/Sticker.ts#L44)
+[seyfert/src/structures/Sticker.ts:44](https://github.com/potoland/potocuit/blob/fe122a1/src/structures/Sticker.ts#L44)

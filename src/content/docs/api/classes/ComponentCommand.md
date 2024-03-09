@@ -45,7 +45,7 @@ abstract filter(interaction: ComponentInteraction<boolean, APIMessageComponentIn
 
 #### Source
 
-[seyfert/src/components/command.ts:16](https://github.com/potoland/potocuit/blob/e332d7a/src/components/command.ts#L16)
+[seyfert/src/components/command.ts:16](https://github.com/potoland/potocuit/blob/fe122a1/src/components/command.ts#L16)
 
 ***
 
@@ -67,4 +67,4 @@ abstract run(interaction: ComponentInteraction<boolean, APIMessageComponentInter
 
 #### Source
 
-[seyfert/src/components/command.ts:17](https://github.com/potoland/potocuit/blob/e332d7a/src/components/command.ts#L17)
+[seyfert/src/components/command.ts:17](https://github.com/potoland/potocuit/blob/fe122a1/src/components/command.ts#L17)

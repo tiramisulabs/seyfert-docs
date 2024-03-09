@@ -46,7 +46,7 @@ new GuildMember(
 
 #### Source
 
-[seyfert/src/structures/GuildMember.ts:121](https://github.com/potoland/potocuit/blob/e332d7a/src/structures/GuildMember.ts#L121)
+[seyfert/src/structures/GuildMember.ts:135](https://github.com/potoland/potocuit/blob/fe122a1/src/structures/GuildMember.ts#L135)
 
 ## Properties
 
@@ -82,7 +82,7 @@ get bot(): undefined | boolean
 
 #### Source
 
-[seyfert/src/structures/GuildMember.ts:136](https://github.com/potoland/potocuit/blob/e332d7a/src/structures/GuildMember.ts#L136)
+[seyfert/src/structures/GuildMember.ts:150](https://github.com/potoland/potocuit/blob/fe122a1/src/structures/GuildMember.ts#L150)
 
 ***
 
@@ -100,7 +100,7 @@ createdAt gets the creation Date instace of the current object.
 
 #### Source
 
-[seyfert/src/structures/extra/DiscordBase.ts:27](https://github.com/potoland/potocuit/blob/e332d7a/src/structures/extra/DiscordBase.ts#L27)
+[seyfert/src/structures/extra/DiscordBase.ts:27](https://github.com/potoland/potocuit/blob/fe122a1/src/structures/extra/DiscordBase.ts#L27)
 
 ***
 
@@ -118,7 +118,7 @@ Create a timestamp for the current object.
 
 #### Source
 
-[seyfert/src/structures/extra/DiscordBase.ts:20](https://github.com/potoland/potocuit/blob/e332d7a/src/structures/extra/DiscordBase.ts#L20)
+[seyfert/src/structures/extra/DiscordBase.ts:20](https://github.com/potoland/potocuit/blob/fe122a1/src/structures/extra/DiscordBase.ts#L20)
 
 ***
 
@@ -136,7 +136,7 @@ gets the nickname or the username
 
 #### Source
 
-[seyfert/src/structures/GuildMember.ts:153](https://github.com/potoland/potocuit/blob/e332d7a/src/structures/GuildMember.ts#L153)
+[seyfert/src/structures/GuildMember.ts:167](https://github.com/potoland/potocuit/blob/fe122a1/src/structures/GuildMember.ts#L167)
 
 ***
 
@@ -152,7 +152,7 @@ get globalName(): null | string
 
 #### Source
 
-[seyfert/src/structures/GuildMember.ts:148](https://github.com/potoland/potocuit/blob/e332d7a/src/structures/GuildMember.ts#L148)
+[seyfert/src/structures/GuildMember.ts:162](https://github.com/potoland/potocuit/blob/fe122a1/src/structures/GuildMember.ts#L162)
 
 ***
 
@@ -168,7 +168,7 @@ get name(): string
 
 #### Source
 
-[seyfert/src/structures/GuildMember.ts:140](https://github.com/potoland/potocuit/blob/e332d7a/src/structures/GuildMember.ts#L140)
+[seyfert/src/structures/GuildMember.ts:154](https://github.com/potoland/potocuit/blob/fe122a1/src/structures/GuildMember.ts#L154)
 
 ***
 
@@ -185,12 +185,13 @@ get roles(): Object
 | Member | Type | Value |
 | :------ | :------ | :------ |
 | `add` | (`id`: `string`) => `Promise`\<`void`\> | - |
+| `permissions` | () => `Promise`\<`PermissionsBitField`\> | - |
 | `remove` | (`id`: `string`) => `Promise`\<`void`\> | - |
 | `values` | readonly `string`[] | - |
 
 #### Source
 
-[seyfert/src/structures/GuildMember.ts:88](https://github.com/potoland/potocuit/blob/e332d7a/src/structures/GuildMember.ts#L88)
+[seyfert/src/structures/GuildMember.ts:96](https://github.com/potoland/potocuit/blob/fe122a1/src/structures/GuildMember.ts#L96)
 
 ***
 
@@ -206,7 +207,7 @@ get tag(): string
 
 #### Source
 
-[seyfert/src/structures/GuildMember.ts:132](https://github.com/potoland/potocuit/blob/e332d7a/src/structures/GuildMember.ts#L132)
+[seyfert/src/structures/GuildMember.ts:146](https://github.com/potoland/potocuit/blob/fe122a1/src/structures/GuildMember.ts#L146)
 
 ***
 
@@ -222,7 +223,7 @@ get username(): string
 
 #### Source
 
-[seyfert/src/structures/GuildMember.ts:144](https://github.com/potoland/potocuit/blob/e332d7a/src/structures/GuildMember.ts#L144)
+[seyfert/src/structures/GuildMember.ts:158](https://github.com/potoland/potocuit/blob/fe122a1/src/structures/GuildMember.ts#L158)
 
 ## Methods
 
@@ -244,7 +245,7 @@ avatarURL(options?: ImageURLOptions): string
 
 #### Source
 
-[seyfert/src/structures/GuildMember.ts:165](https://github.com/potoland/potocuit/blob/e332d7a/src/structures/GuildMember.ts#L165)
+[seyfert/src/structures/GuildMember.ts:179](https://github.com/potoland/potocuit/blob/fe122a1/src/structures/GuildMember.ts#L179)
 
 ***
 
@@ -271,7 +272,7 @@ ban(body?: RESTPutAPIGuildBanJSONBody, reason?: string): Promise<void>
 
 #### Source
 
-[seyfert/src/structures/GuildMember.ts:61](https://github.com/potoland/potocuit/blob/e332d7a/src/structures/GuildMember.ts#L61)
+[seyfert/src/structures/GuildMember.ts:61](https://github.com/potoland/potocuit/blob/fe122a1/src/structures/GuildMember.ts#L61)
 
 ***
 
@@ -293,7 +294,7 @@ dm(force: boolean): Promise<DMChannel>
 
 #### Source
 
-[seyfert/src/structures/GuildMember.ts:157](https://github.com/potoland/potocuit/blob/e332d7a/src/structures/GuildMember.ts#L157)
+[seyfert/src/structures/GuildMember.ts:171](https://github.com/potoland/potocuit/blob/fe122a1/src/structures/GuildMember.ts#L171)
 
 ***
 
@@ -315,7 +316,7 @@ dynamicAvatarURL(options?: ImageURLOptions): string
 
 #### Source
 
-[seyfert/src/structures/GuildMember.ts:169](https://github.com/potoland/potocuit/blob/e332d7a/src/structures/GuildMember.ts#L169)
+[seyfert/src/structures/GuildMember.ts:183](https://github.com/potoland/potocuit/blob/fe122a1/src/structures/GuildMember.ts#L183)
 
 ***
 
@@ -342,7 +343,7 @@ edit(body: RESTPatchAPIGuildMemberJSONBody, reason?: string): Promise<GuildMembe
 
 #### Source
 
-[seyfert/src/structures/GuildMember.ts:69](https://github.com/potoland/potocuit/blob/e332d7a/src/structures/GuildMember.ts#L69)
+[seyfert/src/structures/GuildMember.ts:69](https://github.com/potoland/potocuit/blob/fe122a1/src/structures/GuildMember.ts#L69)
 
 ***
 
@@ -368,7 +369,23 @@ fetch(force: boolean): Promise<GuildMember>
 
 #### Source
 
-[seyfert/src/structures/GuildMember.ts:57](https://github.com/potoland/potocuit/blob/e332d7a/src/structures/GuildMember.ts#L57)
+[seyfert/src/structures/GuildMember.ts:57](https://github.com/potoland/potocuit/blob/fe122a1/src/structures/GuildMember.ts#L57)
+
+***
+
+### fetchPermissions()
+
+```ts
+fetchPermissions(): Promise<PermissionsBitField>
+```
+
+#### Returns
+
+`Promise`\<`PermissionsBitField`\>
+
+#### Source
+
+[seyfert/src/structures/GuildMember.ts:191](https://github.com/potoland/potocuit/blob/fe122a1/src/structures/GuildMember.ts#L191)
 
 ***
 
@@ -394,7 +411,7 @@ guild(force: boolean): Promise<Guild<"cached"> | Guild<"api">>
 
 #### Source
 
-[seyfert/src/structures/GuildMember.ts:53](https://github.com/potoland/potocuit/blob/e332d7a/src/structures/GuildMember.ts#L53)
+[seyfert/src/structures/GuildMember.ts:53](https://github.com/potoland/potocuit/blob/fe122a1/src/structures/GuildMember.ts#L53)
 
 ***
 
@@ -420,7 +437,27 @@ kick(reason?: string): Promise<void>
 
 #### Source
 
-[seyfert/src/structures/GuildMember.ts:65](https://github.com/potoland/potocuit/blob/e332d7a/src/structures/GuildMember.ts#L65)
+[seyfert/src/structures/GuildMember.ts:65](https://github.com/potoland/potocuit/blob/fe122a1/src/structures/GuildMember.ts#L65)
+
+***
+
+### presence()
+
+```ts
+presence(): ReturnCache<undefined | Omit<GatewayPresenceUpdate, "user"> & Object & Object>
+```
+
+#### Returns
+
+[`ReturnCache`](/api/type-aliases/returncache/)\<`undefined` \| `Omit`\<`GatewayPresenceUpdate`, `"user"`\> & `Object` & `Object`\>
+
+#### Inherited from
+
+[`BaseGuildMember`](/api/classes/baseguildmember/).[`presence`](/api/classes/baseguildmember/#presence)
+
+#### Source
+
+[seyfert/src/structures/GuildMember.ts:73](https://github.com/potoland/potocuit/blob/fe122a1/src/structures/GuildMember.ts#L73)
 
 ***
 
@@ -440,7 +477,27 @@ toString(): string
 
 #### Source
 
-[seyfert/src/structures/GuildMember.ts:73](https://github.com/potoland/potocuit/blob/e332d7a/src/structures/GuildMember.ts#L73)
+[seyfert/src/structures/GuildMember.ts:81](https://github.com/potoland/potocuit/blob/fe122a1/src/structures/GuildMember.ts#L81)
+
+***
+
+### voice()
+
+```ts
+voice(): ReturnCache<undefined | Omit<GatewayVoiceState, "member"> & Object & Object>
+```
+
+#### Returns
+
+[`ReturnCache`](/api/type-aliases/returncache/)\<`undefined` \| `Omit`\<`GatewayVoiceState`, `"member"`\> & `Object` & `Object`\>
+
+#### Inherited from
+
+[`BaseGuildMember`](/api/classes/baseguildmember/).[`voice`](/api/classes/baseguildmember/#voice)
+
+#### Source
+
+[seyfert/src/structures/GuildMember.ts:77](https://github.com/potoland/potocuit/blob/fe122a1/src/structures/GuildMember.ts#L77)
 
 ***
 
@@ -462,7 +519,7 @@ write(body: Omit<RESTPostAPIChannelMessageJSONBody, "components" | "embeds"> & R
 
 #### Source
 
-[seyfert/src/structures/GuildMember.ts:161](https://github.com/potoland/potocuit/blob/e332d7a/src/structures/GuildMember.ts#L161)
+[seyfert/src/structures/GuildMember.ts:175](https://github.com/potoland/potocuit/blob/fe122a1/src/structures/GuildMember.ts#L175)
 
 ***
 
@@ -502,4 +559,4 @@ static methods(__namedParameters:     Object): Object
 
 #### Source
 
-[seyfert/src/structures/GuildMember.ts:96](https://github.com/potoland/potocuit/blob/e332d7a/src/structures/GuildMember.ts#L96)
+[seyfert/src/structures/GuildMember.ts:110](https://github.com/potoland/potocuit/blob/fe122a1/src/structures/GuildMember.ts#L110)

@@ -46,7 +46,7 @@ Creates a new TextInput instance.
 
 #### Source
 
-[seyfert/src/builders/Modal.ts:106](https://github.com/potoland/potocuit/blob/e332d7a/src/builders/Modal.ts#L106)
+[seyfert/src/builders/Modal.ts:105](https://github.com/potoland/potocuit/blob/fe122a1/src/builders/Modal.ts#L105)
 
 ## Properties
 
@@ -78,7 +78,7 @@ The current TextInput instance.
 
 #### Source
 
-[seyfert/src/builders/Modal.ts:156](https://github.com/potoland/potocuit/blob/e332d7a/src/builders/Modal.ts#L156)
+[seyfert/src/builders/Modal.ts:155](https://github.com/potoland/potocuit/blob/fe122a1/src/builders/Modal.ts#L155)
 
 ***
 
@@ -104,7 +104,7 @@ The current TextInput instance.
 
 #### Source
 
-[seyfert/src/builders/Modal.ts:125](https://github.com/potoland/potocuit/blob/e332d7a/src/builders/Modal.ts#L125)
+[seyfert/src/builders/Modal.ts:124](https://github.com/potoland/potocuit/blob/fe122a1/src/builders/Modal.ts#L124)
 
 ***
 
@@ -130,7 +130,7 @@ The current TextInput instance.
 
 #### Source
 
-[seyfert/src/builders/Modal.ts:145](https://github.com/potoland/potocuit/blob/e332d7a/src/builders/Modal.ts#L145)
+[seyfert/src/builders/Modal.ts:144](https://github.com/potoland/potocuit/blob/fe122a1/src/builders/Modal.ts#L144)
 
 ***
 
@@ -156,7 +156,7 @@ The current TextInput instance.
 
 #### Source
 
-[seyfert/src/builders/Modal.ts:135](https://github.com/potoland/potocuit/blob/e332d7a/src/builders/Modal.ts#L135)
+[seyfert/src/builders/Modal.ts:134](https://github.com/potoland/potocuit/blob/fe122a1/src/builders/Modal.ts#L134)
 
 ***
 
@@ -182,7 +182,7 @@ The current TextInput instance.
 
 #### Source
 
-[seyfert/src/builders/Modal.ts:176](https://github.com/potoland/potocuit/blob/e332d7a/src/builders/Modal.ts#L176)
+[seyfert/src/builders/Modal.ts:175](https://github.com/potoland/potocuit/blob/fe122a1/src/builders/Modal.ts#L175)
 
 ***
 
@@ -208,7 +208,7 @@ The current TextInput instance.
 
 #### Source
 
-[seyfert/src/builders/Modal.ts:115](https://github.com/potoland/potocuit/blob/e332d7a/src/builders/Modal.ts#L115)
+[seyfert/src/builders/Modal.ts:114](https://github.com/potoland/potocuit/blob/fe122a1/src/builders/Modal.ts#L114)
 
 ***
 
@@ -234,7 +234,7 @@ The current TextInput instance.
 
 #### Source
 
-[seyfert/src/builders/Modal.ts:166](https://github.com/potoland/potocuit/blob/e332d7a/src/builders/Modal.ts#L166)
+[seyfert/src/builders/Modal.ts:165](https://github.com/potoland/potocuit/blob/fe122a1/src/builders/Modal.ts#L165)
 
 ***
 
@@ -254,4 +254,4 @@ toJSON(): APITextInputComponent
 
 #### Source
 
-[seyfert/src/builders/Base.ts:8](https://github.com/potoland/potocuit/blob/e332d7a/src/builders/Base.ts#L8)
+[seyfert/src/builders/Base.ts:8](https://github.com/potoland/potocuit/blob/fe122a1/src/builders/Base.ts#L8)

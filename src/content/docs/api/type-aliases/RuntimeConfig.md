@@ -11,4 +11,4 @@ type RuntimeConfig: OmitInsert<InternalRuntimeConfig, "intents", Object>;
 
 ## Source
 
-[seyfert/src/client/base.ts:287](https://github.com/potoland/potocuit/blob/e332d7a/src/client/base.ts#L287)
+[seyfert/src/client/base.ts:289](https://github.com/potoland/potocuit/blob/fe122a1/src/client/base.ts#L289)

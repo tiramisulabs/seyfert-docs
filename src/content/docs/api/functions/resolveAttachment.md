@@ -25,4 +25,4 @@ The resolved REST API attachment.
 
 ## Source
 
-[seyfert/src/builders/Attachment.ts:107](https://github.com/potoland/potocuit/blob/e332d7a/src/builders/Attachment.ts#L107)
+[seyfert/src/builders/Attachment.ts:123](https://github.com/potoland/potocuit/blob/fe122a1/src/builders/Attachment.ts#L123)

@@ -18,4 +18,4 @@ type CommandBaseAutocompleteOption: __TypesWrapper[keyof __TypesWrapper] & Objec
 
 ## Source
 
-[seyfert/src/commands/applications/chat.ts:66](https://github.com/potoland/potocuit/blob/e332d7a/src/commands/applications/chat.ts#L66)
+[seyfert/src/commands/applications/chat.ts:67](https://github.com/potoland/potocuit/blob/fe122a1/src/commands/applications/chat.ts#L67)

@@ -26,4 +26,4 @@ type RequestObject<M, B, Q, F>: Object & RequestOptions & M extends \${Get}\ ? u
 
 ## Source
 
-[seyfert/src/api/REST.ts:516](https://github.com/potoland/potocuit/blob/e332d7a/src/api/REST.ts#L516)
+[seyfert/src/api/api.ts:381](https://github.com/potoland/potocuit/blob/fe122a1/src/api/api.ts#L381)

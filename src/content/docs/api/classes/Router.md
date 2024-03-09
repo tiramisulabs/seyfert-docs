@@ -10,14 +10,14 @@ title: "Router"
 ### new Router(rest)
 
 ```ts
-new Router(rest: REST): Router
+new Router(rest: ApiHandler): Router
 ```
 
 #### Parameters
 
 | Parameter | Type |
 | :------ | :------ |
-| `rest` | [`REST`](/api/classes/rest/) |
+| `rest` | [`ApiHandler`](/api/classes/apihandler/) |
 
 #### Returns
 
@@ -25,7 +25,7 @@ new Router(rest: REST): Router
 
 #### Source
 
-[seyfert/src/api/Router.ts:19](https://github.com/potoland/potocuit/blob/e332d7a/src/api/Router.ts#L19)
+[seyfert/src/api/Router.ts:20](https://github.com/potoland/potocuit/blob/fe122a1/src/api/Router.ts#L20)
 
 ## Methods
 
@@ -47,7 +47,7 @@ createProxy(route: string[]): APIRoutes
 
 #### Source
 
-[seyfert/src/api/Router.ts:21](https://github.com/potoland/potocuit/blob/e332d7a/src/api/Router.ts#L21)
+[seyfert/src/api/Router.ts:22](https://github.com/potoland/potocuit/blob/fe122a1/src/api/Router.ts#L22)
 
 ***
 
@@ -63,4 +63,4 @@ noop(): void
 
 #### Source
 
-[seyfert/src/api/Router.ts:15](https://github.com/potoland/potocuit/blob/e332d7a/src/api/Router.ts#L15)
+[seyfert/src/api/Router.ts:16](https://github.com/potoland/potocuit/blob/fe122a1/src/api/Router.ts#L16)

@@ -38,4 +38,4 @@ Group(groupName: string): <T>(target: T) => (...args: any[]) => __class<T> & T
 
 ## Source
 
-[seyfert/src/commands/decorators.ts:85](https://github.com/potoland/potocuit/blob/e332d7a/src/commands/decorators.ts#L85)
+[seyfert/src/commands/decorators.ts:91](https://github.com/potoland/potocuit/blob/fe122a1/src/commands/decorators.ts#L91)

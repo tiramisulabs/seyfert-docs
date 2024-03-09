@@ -33,7 +33,7 @@ new ShardManager(options: ShardManagerOptions): ShardManager
 
 #### Source
 
-[seyfert/src/websocket/discord/sharder.ts:25](https://github.com/potoland/potocuit/blob/e332d7a/src/websocket/discord/sharder.ts#L25)
+[seyfert/src/websocket/discord/sharder.ts:25](https://github.com/potoland/potocuit/blob/fe122a1/src/websocket/discord/sharder.ts#L25)
 
 ## Properties
 
@@ -60,7 +60,7 @@ get concurrency(): number
 
 #### Source
 
-[seyfert/src/websocket/discord/sharder.ts:43](https://github.com/potoland/potocuit/blob/e332d7a/src/websocket/discord/sharder.ts#L43)
+[seyfert/src/websocket/discord/sharder.ts:43](https://github.com/potoland/potocuit/blob/fe122a1/src/websocket/discord/sharder.ts#L43)
 
 ***
 
@@ -76,7 +76,7 @@ get latency(): number
 
 #### Source
 
-[seyfert/src/websocket/discord/sharder.ts:47](https://github.com/potoland/potocuit/blob/e332d7a/src/websocket/discord/sharder.ts#L47)
+[seyfert/src/websocket/discord/sharder.ts:47](https://github.com/potoland/potocuit/blob/fe122a1/src/websocket/discord/sharder.ts#L47)
 
 ***
 
@@ -92,7 +92,7 @@ get remaining(): number
 
 #### Source
 
-[seyfert/src/websocket/discord/sharder.ts:39](https://github.com/potoland/potocuit/blob/e332d7a/src/websocket/discord/sharder.ts#L39)
+[seyfert/src/websocket/discord/sharder.ts:39](https://github.com/potoland/potocuit/blob/fe122a1/src/websocket/discord/sharder.ts#L39)
 
 ## Methods
 
@@ -136,7 +136,7 @@ calculeShardId(guildId: string): number
 
 #### Source
 
-[seyfert/src/websocket/discord/sharder.ts:55](https://github.com/potoland/potocuit/blob/e332d7a/src/websocket/discord/sharder.ts#L55)
+[seyfert/src/websocket/discord/sharder.ts:55](https://github.com/potoland/potocuit/blob/fe122a1/src/websocket/discord/sharder.ts#L55)
 
 ***
 
@@ -206,7 +206,7 @@ disconnect(shardId: number): undefined | Promise<void>
 
 #### Source
 
-[seyfert/src/websocket/discord/sharder.ts:123](https://github.com/potoland/potocuit/blob/e332d7a/src/websocket/discord/sharder.ts#L123)
+[seyfert/src/websocket/discord/sharder.ts:123](https://github.com/potoland/potocuit/blob/fe122a1/src/websocket/discord/sharder.ts#L123)
 
 ***
 
@@ -222,7 +222,7 @@ disconnectAll(): Promise<unknown>
 
 #### Source
 
-[seyfert/src/websocket/discord/sharder.ts:128](https://github.com/potoland/potocuit/blob/e332d7a/src/websocket/discord/sharder.ts#L128)
+[seyfert/src/websocket/discord/sharder.ts:128](https://github.com/potoland/potocuit/blob/fe122a1/src/websocket/discord/sharder.ts#L128)
 
 ***
 
@@ -295,7 +295,7 @@ forceIdentify(shardId: number): Promise<void>
 
 #### Source
 
-[seyfert/src/websocket/discord/sharder.ts:118](https://github.com/potoland/potocuit/blob/e332d7a/src/websocket/discord/sharder.ts#L118)
+[seyfert/src/websocket/discord/sharder.ts:118](https://github.com/potoland/potocuit/blob/fe122a1/src/websocket/discord/sharder.ts#L118)
 
 ***
 
@@ -382,7 +382,7 @@ joinVoice(
 
 #### Source
 
-[seyfert/src/websocket/discord/sharder.ts:153](https://github.com/potoland/potocuit/blob/e332d7a/src/websocket/discord/sharder.ts#L153)
+[seyfert/src/websocket/discord/sharder.ts:153](https://github.com/potoland/potocuit/blob/fe122a1/src/websocket/discord/sharder.ts#L153)
 
 ***
 
@@ -426,7 +426,7 @@ leaveVoice(guild_id: string): void
 
 #### Source
 
-[seyfert/src/websocket/discord/sharder.ts:171](https://github.com/potoland/potocuit/blob/e332d7a/src/websocket/discord/sharder.ts#L171)
+[seyfert/src/websocket/discord/sharder.ts:171](https://github.com/potoland/potocuit/blob/fe122a1/src/websocket/discord/sharder.ts#L171)
 
 ***
 
@@ -455,7 +455,7 @@ send<T>(shardId: number, payload: T): void
 
 #### Source
 
-[seyfert/src/websocket/discord/sharder.ts:186](https://github.com/potoland/potocuit/blob/e332d7a/src/websocket/discord/sharder.ts#L186)
+[seyfert/src/websocket/discord/sharder.ts:186](https://github.com/potoland/potocuit/blob/fe122a1/src/websocket/discord/sharder.ts#L186)
 
 ***
 
@@ -506,7 +506,7 @@ setPresence(payload: GatewayPresenceUpdateData): undefined | Promise<void>
 
 #### Source
 
-[seyfert/src/websocket/discord/sharder.ts:144](https://github.com/potoland/potocuit/blob/e332d7a/src/websocket/discord/sharder.ts#L144)
+[seyfert/src/websocket/discord/sharder.ts:144](https://github.com/potoland/potocuit/blob/fe122a1/src/websocket/discord/sharder.ts#L144)
 
 ***
 
@@ -529,7 +529,7 @@ setShardPresence(shardId: number, payload: GatewayPresenceUpdateData): void
 
 #### Source
 
-[seyfert/src/websocket/discord/sharder.ts:136](https://github.com/potoland/potocuit/blob/e332d7a/src/websocket/discord/sharder.ts#L136)
+[seyfert/src/websocket/discord/sharder.ts:136](https://github.com/potoland/potocuit/blob/fe122a1/src/websocket/discord/sharder.ts#L136)
 
 ***
 
@@ -551,7 +551,7 @@ spawn(shardId: number): Shard
 
 #### Source
 
-[seyfert/src/websocket/discord/sharder.ts:59](https://github.com/potoland/potocuit/blob/e332d7a/src/websocket/discord/sharder.ts#L59)
+[seyfert/src/websocket/discord/sharder.ts:59](https://github.com/potoland/potocuit/blob/fe122a1/src/websocket/discord/sharder.ts#L59)
 
 ***
 
@@ -567,7 +567,7 @@ spawnBuckets(): Shard[][]
 
 #### Source
 
-[seyfert/src/websocket/discord/sharder.ts:98](https://github.com/potoland/potocuit/blob/e332d7a/src/websocket/discord/sharder.ts#L98)
+[seyfert/src/websocket/discord/sharder.ts:98](https://github.com/potoland/potocuit/blob/fe122a1/src/websocket/discord/sharder.ts#L98)
 
 ***
 
@@ -583,7 +583,7 @@ spawnShards(): Promise<void>
 
 #### Source
 
-[seyfert/src/websocket/discord/sharder.ts:79](https://github.com/potoland/potocuit/blob/e332d7a/src/websocket/discord/sharder.ts#L79)
+[seyfert/src/websocket/discord/sharder.ts:79](https://github.com/potoland/potocuit/blob/fe122a1/src/websocket/discord/sharder.ts#L79)
 
 ***
 

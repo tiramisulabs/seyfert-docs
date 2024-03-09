@@ -38,4 +38,4 @@ Groups(groups: Record<string, Object>): <T>(target: T) => (...args: any[]) => __
 
 ## Source
 
-[seyfert/src/commands/decorators.ts:69](https://github.com/potoland/potocuit/blob/e332d7a/src/commands/decorators.ts#L69)
+[seyfert/src/commands/decorators.ts:75](https://github.com/potoland/potocuit/blob/fe122a1/src/commands/decorators.ts#L75)

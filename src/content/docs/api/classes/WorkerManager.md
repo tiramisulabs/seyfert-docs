@@ -33,20 +33,20 @@ new WorkerManager(options: WorkerManagerOptions): WorkerManager
 
 #### Source
 
-[seyfert/src/websocket/discord/workermanager.ts:21](https://github.com/potoland/potocuit/blob/e332d7a/src/websocket/discord/workermanager.ts#L21)
+[seyfert/src/websocket/discord/workermanager.ts:21](https://github.com/potoland/potocuit/blob/fe122a1/src/websocket/discord/workermanager.ts#L21)
 
 ## Properties
 
 | Property | Modifier | Type | Description | Inherited from |
 | :------ | :------ | :------ | :------ | :------ |
 | `[toStringTag]` | `readonly` | `string` | - | `Map.[toStringTag]` |
-| `cacheAdapter` | `public` | `Adapter` | - | - |
+| `cacheAdapter` | `public` | [`Adapter`](/api/interfaces/adapter/) | - | - |
 | `connectQueue` | `public` | `ConnectQueue` | - | - |
 | `debugger?` | `public` | [`Logger`](/api/classes/logger/) | - | - |
 | `memberUpdateHandler` | `public` | `MemberUpdateHandler` | - | - |
 | `options` | `public` | `Required`\<`WorkerManagerOptions`\> | - | - |
 | `presenceUpdateHandler` | `public` | `PresenceUpdateHandler` | - | - |
-| `promises` | `public` | `Map`\<`string`, (`value`: `any`) => `void`\> | - | - |
+| `promises` | `public` | `Map`\<`string`, `Object`\> | - | - |
 | `size` | `readonly` | `number` |  | `Map.size` |
 | `[species]` | `readonly` | `MapConstructor` | - | `Map.[species]` |
 
@@ -64,7 +64,7 @@ get concurrency(): number
 
 #### Source
 
-[seyfert/src/websocket/discord/workermanager.ts:56](https://github.com/potoland/potocuit/blob/e332d7a/src/websocket/discord/workermanager.ts#L56)
+[seyfert/src/websocket/discord/workermanager.ts:56](https://github.com/potoland/potocuit/blob/fe122a1/src/websocket/discord/workermanager.ts#L56)
 
 ***
 
@@ -80,7 +80,7 @@ get remaining(): number
 
 #### Source
 
-[seyfert/src/websocket/discord/workermanager.ts:52](https://github.com/potoland/potocuit/blob/e332d7a/src/websocket/discord/workermanager.ts#L52)
+[seyfert/src/websocket/discord/workermanager.ts:52](https://github.com/potoland/potocuit/blob/fe122a1/src/websocket/discord/workermanager.ts#L52)
 
 ***
 
@@ -96,7 +96,7 @@ get shardsPerWorker(): number
 
 #### Source
 
-[seyfert/src/websocket/discord/workermanager.ts:68](https://github.com/potoland/potocuit/blob/e332d7a/src/websocket/discord/workermanager.ts#L68)
+[seyfert/src/websocket/discord/workermanager.ts:68](https://github.com/potoland/potocuit/blob/fe122a1/src/websocket/discord/workermanager.ts#L68)
 
 ***
 
@@ -112,7 +112,7 @@ get totalShards(): number
 
 #### Source
 
-[seyfert/src/websocket/discord/workermanager.ts:64](https://github.com/potoland/potocuit/blob/e332d7a/src/websocket/discord/workermanager.ts#L64)
+[seyfert/src/websocket/discord/workermanager.ts:64](https://github.com/potoland/potocuit/blob/fe122a1/src/websocket/discord/workermanager.ts#L64)
 
 ***
 
@@ -128,7 +128,7 @@ get totalWorkers(): number
 
 #### Source
 
-[seyfert/src/websocket/discord/workermanager.ts:60](https://github.com/potoland/potocuit/blob/e332d7a/src/websocket/discord/workermanager.ts#L60)
+[seyfert/src/websocket/discord/workermanager.ts:60](https://github.com/potoland/potocuit/blob/fe122a1/src/websocket/discord/workermanager.ts#L60)
 
 ***
 
@@ -144,7 +144,7 @@ get workers(): number
 
 #### Source
 
-[seyfert/src/websocket/discord/workermanager.ts:72](https://github.com/potoland/potocuit/blob/e332d7a/src/websocket/discord/workermanager.ts#L72)
+[seyfert/src/websocket/discord/workermanager.ts:72](https://github.com/potoland/potocuit/blob/fe122a1/src/websocket/discord/workermanager.ts#L72)
 
 ## Methods
 
@@ -188,7 +188,7 @@ calculateShardId(guildId: string): number
 
 #### Source
 
-[seyfert/src/websocket/discord/workermanager.ts:92](https://github.com/potoland/potocuit/blob/e332d7a/src/websocket/discord/workermanager.ts#L92)
+[seyfert/src/websocket/discord/workermanager.ts:92](https://github.com/potoland/potocuit/blob/fe122a1/src/websocket/discord/workermanager.ts#L92)
 
 ***
 
@@ -210,7 +210,7 @@ calculateWorkerId(shardId: number): number
 
 #### Source
 
-[seyfert/src/websocket/discord/workermanager.ts:96](https://github.com/potoland/potocuit/blob/e332d7a/src/websocket/discord/workermanager.ts#L96)
+[seyfert/src/websocket/discord/workermanager.ts:96](https://github.com/potoland/potocuit/blob/fe122a1/src/websocket/discord/workermanager.ts#L96)
 
 ***
 
@@ -252,7 +252,7 @@ createWorker(workerData: WorkerData): Worker
 
 #### Source
 
-[seyfert/src/websocket/discord/workermanager.ts:150](https://github.com/potoland/potocuit/blob/e332d7a/src/websocket/discord/workermanager.ts#L150)
+[seyfert/src/websocket/discord/workermanager.ts:150](https://github.com/potoland/potocuit/blob/fe122a1/src/websocket/discord/workermanager.ts#L150)
 
 ***
 
@@ -383,7 +383,7 @@ getShardInfo(shardId: number): Promise<WorkerShardInfo>
 
 #### Source
 
-[seyfert/src/websocket/discord/workermanager.ts:296](https://github.com/potoland/potocuit/blob/e332d7a/src/websocket/discord/workermanager.ts#L296)
+[seyfert/src/websocket/discord/workermanager.ts:303](https://github.com/potoland/potocuit/blob/fe122a1/src/websocket/discord/workermanager.ts#L303)
 
 ***
 
@@ -405,7 +405,7 @@ getWorkerInfo(workerId: number): Promise<WorkerInfo>
 
 #### Source
 
-[seyfert/src/websocket/discord/workermanager.ts:311](https://github.com/potoland/potocuit/blob/e332d7a/src/websocket/discord/workermanager.ts#L311)
+[seyfert/src/websocket/discord/workermanager.ts:318](https://github.com/potoland/potocuit/blob/fe122a1/src/websocket/discord/workermanager.ts#L318)
 
 ***
 
@@ -427,7 +427,7 @@ handleWorkerMessage(message: WorkerMessage): Promise<void>
 
 #### Source
 
-[seyfert/src/websocket/discord/workermanager.ts:173](https://github.com/potoland/potocuit/blob/e332d7a/src/websocket/discord/workermanager.ts#L173)
+[seyfert/src/websocket/discord/workermanager.ts:173](https://github.com/potoland/potocuit/blob/fe122a1/src/websocket/discord/workermanager.ts#L173)
 
 ***
 
@@ -493,7 +493,7 @@ prepareSpaces(): number[][]
 
 #### Source
 
-[seyfert/src/websocket/discord/workermanager.ts:104](https://github.com/potoland/potocuit/blob/e332d7a/src/websocket/discord/workermanager.ts#L104)
+[seyfert/src/websocket/discord/workermanager.ts:104](https://github.com/potoland/potocuit/blob/fe122a1/src/websocket/discord/workermanager.ts#L104)
 
 ***
 
@@ -515,7 +515,7 @@ prepareWorkers(shards: number[][]): Promise<void>
 
 #### Source
 
-[seyfert/src/websocket/discord/workermanager.ts:127](https://github.com/potoland/potocuit/blob/e332d7a/src/websocket/discord/workermanager.ts#L127)
+[seyfert/src/websocket/discord/workermanager.ts:127](https://github.com/potoland/potocuit/blob/fe122a1/src/websocket/discord/workermanager.ts#L127)
 
 ***
 
@@ -538,7 +538,7 @@ send(data: GatewaySendPayload, shardId: number): Promise<true>
 
 #### Source
 
-[seyfert/src/websocket/discord/workermanager.ts:276](https://github.com/potoland/potocuit/blob/e332d7a/src/websocket/discord/workermanager.ts#L276)
+[seyfert/src/websocket/discord/workermanager.ts:283](https://github.com/potoland/potocuit/blob/fe122a1/src/websocket/discord/workermanager.ts#L283)
 
 ***
 
@@ -581,7 +581,7 @@ setCache(adapter: Adapter): void
 
 | Parameter | Type |
 | :------ | :------ |
-| `adapter` | `Adapter` |
+| `adapter` | [`Adapter`](/api/interfaces/adapter/) |
 
 #### Returns
 
@@ -589,7 +589,7 @@ setCache(adapter: Adapter): void
 
 #### Source
 
-[seyfert/src/websocket/discord/workermanager.ts:48](https://github.com/potoland/potocuit/blob/e332d7a/src/websocket/discord/workermanager.ts#L48)
+[seyfert/src/websocket/discord/workermanager.ts:48](https://github.com/potoland/potocuit/blob/fe122a1/src/websocket/discord/workermanager.ts#L48)
 
 ***
 
@@ -612,7 +612,7 @@ spawn(workerId: number, shardId: number): void
 
 #### Source
 
-[seyfert/src/websocket/discord/workermanager.ts:157](https://github.com/potoland/potocuit/blob/e332d7a/src/websocket/discord/workermanager.ts#L157)
+[seyfert/src/websocket/discord/workermanager.ts:157](https://github.com/potoland/potocuit/blob/fe122a1/src/websocket/discord/workermanager.ts#L157)
 
 ***
 
@@ -628,7 +628,7 @@ start(): Promise<void>
 
 #### Source
 
-[seyfert/src/websocket/discord/workermanager.ts:325](https://github.com/potoland/potocuit/blob/e332d7a/src/websocket/discord/workermanager.ts#L325)
+[seyfert/src/websocket/discord/workermanager.ts:332](https://github.com/potoland/potocuit/blob/fe122a1/src/websocket/discord/workermanager.ts#L332)
 
 ***
 
@@ -652,7 +652,7 @@ syncLatency(__namedParameters:     Object): Promise<undefined | number>
 
 #### Source
 
-[seyfert/src/websocket/discord/workermanager.ts:76](https://github.com/potoland/potocuit/blob/e332d7a/src/websocket/discord/workermanager.ts#L76)
+[seyfert/src/websocket/discord/workermanager.ts:76](https://github.com/potoland/potocuit/blob/fe122a1/src/websocket/discord/workermanager.ts#L76)
 
 ***
 

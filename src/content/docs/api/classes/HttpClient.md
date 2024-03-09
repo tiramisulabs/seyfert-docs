@@ -11,11 +11,17 @@ title: "HttpClient"
 
 ## Constructors
 
-### new HttpClient()
+### new HttpClient(options)
 
 ```ts
-new HttpClient(): HttpClient
+new HttpClient(options?: BaseClientOptions): HttpClient
 ```
+
+#### Parameters
+
+| Parameter | Type |
+| :------ | :------ |
+| `options`? | `BaseClientOptions` |
 
 #### Returns
 
@@ -27,18 +33,22 @@ new HttpClient(): HttpClient
 
 #### Source
 
-[seyfert/src/client/httpclient.ts:29](https://github.com/potoland/potocuit/blob/e332d7a/src/client/httpclient.ts#L29)
+[seyfert/src/client/httpclient.ts:31](https://github.com/potoland/potocuit/blob/fe122a1/src/client/httpclient.ts#L31)
 
 ## Properties
 
 | Property | Type | Inherited from |
 | :------ | :------ | :------ |
 | `app` | `TemplatedApp` | - |
-| `cache` | `Cache` | `BaseClient.cache` |
+| `cache` | [`Cache`](/api/classes/cache/) | `BaseClient.cache` |
 | `channels` | `Object` | `BaseClient.channels` |
 | `channels.delete` | (`id`: `string`, `optional`: `Partial`\<`Object`\>) => `Promise`\<[`AllChannels`](/api/type-aliases/allchannels/)\> | - |
 | `channels.edit` | (`id`: `string`, `body`: `RESTPatchAPIChannelJSONBody`, `optional`: `Partial`\<`Object`\>) => `Promise`\<[`AllChannels`](/api/type-aliases/allchannels/)\> | - |
 | `channels.fetch` | (`id`: `string`, `force`?: `boolean`) => `Promise`\<[`AllChannels`](/api/type-aliases/allchannels/)\> | - |
+| `channels.overwrites` | `Object` | - |
+| `channels.overwrites.memberPermissions` | (`channelId`: `string`, `member`: [`GuildMember`](/api/classes/guildmember/), `checkAdmin`: `boolean`) => `Promise`\<`PermissionsBitField`\> | - |
+| `channels.overwrites.overwritesFor` | (`channelId`: `string`, `member`: [`GuildMember`](/api/classes/guildmember/)) => `Promise`\<`Object`\> | - |
+| `channels.overwrites.rolePermissions` | (`channelId`: `string`, `role`: [`GuildRole`](/api/classes/guildrole/), `checkAdmin`: `boolean`) => `Promise`\<`PermissionsBitField`\> | - |
 | `channels.pins` | `Object` | - |
 | `channels.pins.delete` | (`messageId`: `string`, `channelId`: `string`, `reason`?: `string`) => `Promise`\<`never`\> | - |
 | `channels.pins.fetch` | (`channelId`: `string`) => `Promise`\<[`Message`](/api/classes/message/)[]\> | - |
@@ -63,6 +73,9 @@ new HttpClient(): HttpClient
 | `guilds.emojis.fetch` | (`guildId`: `string`, `emojiId`: `string`, `force`: `boolean`) => `Promise`\<[`GuildEmoji`](/api/classes/guildemoji/)\> | - |
 | `guilds.emojis.list` | (`guildId`: `string`, `force`: `boolean`) => `Promise`\<[`GuildEmoji`](/api/classes/guildemoji/)[]\> | - |
 | `guilds.fetch` | (`id`: `string`, `force`: `boolean`) => `Promise`\<[`Guild`](/api/classes/guild/)\<`"cached"`\> \| [`Guild`](/api/classes/guild/)\<`"api"`\>\> | - |
+| `guilds.fetchSelf` | (`id`: `string`) => `Promise`\<[`GuildMember`](/api/classes/guildmember/)\> | - |
+| `guilds.leave` | (`id`: `string`) => `Promise`\<`undefined` \| `void`\> | - |
+| `guilds.list` | (`query`?: `RESTGetAPICurrentUserGuildsQuery`) => `Promise`\<[`AnonymousGuild`](/api/classes/anonymousguild/)[]\> | - |
 | `guilds.moderation` | `Object` | - |
 | `guilds.moderation.create` | (`guildId`: `string`, `body`: `RESTPostAPIAutoModerationRuleJSONBody`) => `Promise`\<`APIAutoModerationRule`\> | - |
 | `guilds.moderation.delete` | (`guildId`: `string`, `ruleId`: `string`, `reason`?: `string`) => `Promise`\<`never`\> | - |
@@ -76,7 +89,7 @@ new HttpClient(): HttpClient
 | `guilds.stickers.fetch` | (`guildId`: `string`, `stickerId`: `string`, `force`: `boolean`) => `Promise`\<[`Sticker`](/api/classes/sticker/)\> | - |
 | `guilds.stickers.list` | (`guildId`: `string`) => `Promise`\<[`Sticker`](/api/classes/sticker/)[]\> | - |
 | `guilds.widgetURL` | (`id`: `string`, `style`?: `GuildWidgetStyle`) => `Promise`\<`APIGuildWidgetSettings`\> | - |
-| `langs` | `LangsHandler` | `BaseClient.langs` |
+| `langs` | [`LangsHandler`](/api/classes/langshandler/) | `BaseClient.langs` |
 | `logger` | [`Logger`](/api/classes/logger/) | `BaseClient.logger` |
 | `members` | `Object` | `BaseClient.members` |
 | `members.add` | (`guildId`: `string`, `memberId`: `string`, `body`: `RESTPutAPIGuildMemberJSONBody`) => `Promise`\<`undefined` \| [`GuildMember`](/api/classes/guildmember/)\> | - |
@@ -107,7 +120,7 @@ new HttpClient(): HttpClient
 | `options` | `undefined` \| `BaseClientOptions` | `BaseClient.options` |
 | `publicKey` | `string` | - |
 | `publicKeyHex` | `Buffer` | - |
-| `rest` | [`REST`](/api/classes/rest/) | `BaseClient.rest` |
+| `rest` | [`ApiHandler`](/api/classes/apihandler/) | `BaseClient.rest` |
 | `roles` | `Object` | `BaseClient.roles` |
 | `roles.create` | (`guildId`: `string`, `body`: `RESTPostAPIGuildRoleJSONBody`, `reason`?: `string`) => `Promise`\<`any`\> | - |
 | `roles.delete` | (`guildId`: `string`, `roleId`: `string`, `reason`?: `string`) => `Promise`\<`undefined` \| `void`\> | - |
@@ -160,7 +173,7 @@ set applicationId(id: string): void
 
 #### Source
 
-[seyfert/src/client/base.ts:86](https://github.com/potoland/potocuit/blob/e332d7a/src/client/base.ts#L86)
+[seyfert/src/client/base.ts:84](https://github.com/potoland/potocuit/blob/fe122a1/src/client/base.ts#L84)
 
 ***
 
@@ -186,7 +199,7 @@ set botId(id: string): void
 
 #### Source
 
-[seyfert/src/client/base.ts:78](https://github.com/potoland/potocuit/blob/e332d7a/src/client/base.ts#L78)
+[seyfert/src/client/base.ts:76](https://github.com/potoland/potocuit/blob/fe122a1/src/client/base.ts#L76)
 
 ***
 
@@ -202,7 +215,7 @@ get proxy(): APIRoutes
 
 #### Source
 
-[seyfert/src/client/base.ts:90](https://github.com/potoland/potocuit/blob/e332d7a/src/client/base.ts#L90)
+[seyfert/src/client/base.ts:88](https://github.com/potoland/potocuit/blob/fe122a1/src/client/base.ts#L88)
 
 ## Methods
 
@@ -228,7 +241,7 @@ getRC<T>(): Promise<Object & Omit<T, "debug" | "locations"> & Object>
 
 #### Source
 
-[seyfert/src/client/base.ts:215](https://github.com/potoland/potocuit/blob/e332d7a/src/client/base.ts#L215)
+[seyfert/src/client/base.ts:217](https://github.com/potoland/potocuit/blob/fe122a1/src/client/base.ts#L217)
 
 ***
 
@@ -254,7 +267,7 @@ loadCommands(dir?: string): Promise<void>
 
 #### Source
 
-[seyfert/src/client/base.ts:188](https://github.com/potoland/potocuit/blob/e332d7a/src/client/base.ts#L188)
+[seyfert/src/client/base.ts:189](https://github.com/potoland/potocuit/blob/fe122a1/src/client/base.ts#L189)
 
 ***
 
@@ -280,7 +293,7 @@ loadComponents(dir?: string): Promise<void>
 
 #### Source
 
-[seyfert/src/client/base.ts:195](https://github.com/potoland/potocuit/blob/e332d7a/src/client/base.ts#L195)
+[seyfert/src/client/base.ts:197](https://github.com/potoland/potocuit/blob/fe122a1/src/client/base.ts#L197)
 
 ***
 
@@ -306,7 +319,7 @@ loadLangs(dir?: string): Promise<void>
 
 #### Source
 
-[seyfert/src/client/base.ts:207](https://github.com/potoland/potocuit/blob/e332d7a/src/client/base.ts#L207)
+[seyfert/src/client/base.ts:205](https://github.com/potoland/potocuit/blob/fe122a1/src/client/base.ts#L205)
 
 ***
 
@@ -333,7 +346,7 @@ onPacket(res: HttpResponse, req: HttpRequest): Promise<void>
 
 #### Source
 
-[seyfert/src/client/httpclient.ts:116](https://github.com/potoland/potocuit/blob/e332d7a/src/client/httpclient.ts#L116)
+[seyfert/src/client/httpclient.ts:118](https://github.com/potoland/potocuit/blob/fe122a1/src/client/httpclient.ts#L118)
 
 ***
 
@@ -359,7 +372,7 @@ setServices(__namedParameters: ServicesOptions): void
 
 #### Source
 
-[seyfert/src/client/base.ts:94](https://github.com/potoland/potocuit/blob/e332d7a/src/client/base.ts#L94)
+[seyfert/src/client/base.ts:92](https://github.com/potoland/potocuit/blob/fe122a1/src/client/base.ts#L92)
 
 ***
 
@@ -385,7 +398,7 @@ start(options: DeepPartial<Omit<StartOptions, "connection">>): Promise<void>
 
 #### Source
 
-[seyfert/src/client/httpclient.ts:94](https://github.com/potoland/potocuit/blob/e332d7a/src/client/httpclient.ts#L94)
+[seyfert/src/client/httpclient.ts:96](https://github.com/potoland/potocuit/blob/fe122a1/src/client/httpclient.ts#L96)
 
 ***
 
@@ -403,7 +416,7 @@ t(locale: string): __InternalParseLocale<DefaultLocale> & Object
 
 #### Returns
 
-`__InternalParseLocale`\<[`DefaultLocale`](/api/interfaces/defaultlocale/)\> & `Object`
+[`__InternalParseLocale`](/api/type-aliases/internalparselocale/)\<[`DefaultLocale`](/api/interfaces/defaultlocale/)\> & `Object`
 
 #### Inherited from
 
@@ -411,7 +424,7 @@ t(locale: string): __InternalParseLocale<DefaultLocale> & Object
 
 #### Source
 
-[seyfert/src/client/base.ts:203](https://github.com/potoland/potocuit/blob/e332d7a/src/client/base.ts#L203)
+[seyfert/src/client/base.ts:213](https://github.com/potoland/potocuit/blob/fe122a1/src/client/base.ts#L213)
 
 ***
 
@@ -437,4 +450,4 @@ uploadCommands(applicationId?: string): Promise<void>
 
 #### Source
 
-[seyfert/src/client/base.ts:159](https://github.com/potoland/potocuit/blob/e332d7a/src/client/base.ts#L159)
+[seyfert/src/client/base.ts:160](https://github.com/potoland/potocuit/blob/fe122a1/src/client/base.ts#L160)

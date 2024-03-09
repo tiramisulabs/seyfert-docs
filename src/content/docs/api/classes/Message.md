@@ -34,7 +34,7 @@ new Message(client: BaseClient, data: MessageData): Message
 
 #### Source
 
-[seyfert/src/structures/Message.ts:113](https://github.com/potoland/potocuit/blob/e332d7a/src/structures/Message.ts#L113)
+[seyfert/src/structures/Message.ts:113](https://github.com/potoland/potocuit/blob/fe122a1/src/structures/Message.ts#L113)
 
 ## Properties
 
@@ -47,7 +47,7 @@ new Message(client: BaseClient, data: MessageData): Message
 | `author` | `public` | [`User`](/api/classes/user/) | [`BaseMessage`](/api/classes/basemessage/).`author` |
 | `channelId` | `public` | `string` | [`BaseMessage`](/api/classes/basemessage/).`channelId` |
 | `client` | `readonly` | [`UsingClient`](/api/interfaces/usingclient/) | [`BaseMessage`](/api/classes/basemessage/).`client` |
-| `components` | `public` | `MessageActionRowComponent`\<`ActionRowMessageComponents`\>[] | [`BaseMessage`](/api/classes/basemessage/).`components` |
+| `components` | `public` | `MessageActionRowComponent`\<[`ActionRowMessageComponents`](/api/type-aliases/actionrowmessagecomponents/)\>[] | [`BaseMessage`](/api/classes/basemessage/).`components` |
 | `content` | `public` | `string` | [`BaseMessage`](/api/classes/basemessage/).`content` |
 | `editedTimestamp` | `public` | `null` \| `string` | [`BaseMessage`](/api/classes/basemessage/).`editedTimestamp` |
 | `embeds` | `public` | `Object`[] | [`BaseMessage`](/api/classes/basemessage/).`embeds` |
@@ -62,7 +62,7 @@ new Message(client: BaseClient, data: MessageData): Message
 | `mentions` | `public` | `Object` | [`BaseMessage`](/api/classes/basemessage/).`mentions` |
 | `mentions.channels` | `public` | `APIChannelMention`[] | - |
 | `mentions.roles` | `public` | `string`[] | - |
-| `mentions.users` | `public` | ([`User`](/api/classes/user/) \| [`GuildMember`](/api/classes/guildmember/))[] | - |
+| `mentions.users` | `public` | ([`GuildMember`](/api/classes/guildmember/) \| [`User`](/api/classes/user/))[] | - |
 | `messageReference` | `public` | `undefined` \| `APIMessageReference` | [`BaseMessage`](/api/classes/basemessage/).`messageReference` |
 | `nonce` | `public` | `undefined` \| `string` \| `number` | [`BaseMessage`](/api/classes/basemessage/).`nonce` |
 | `pinned` | `public` | `boolean` | [`BaseMessage`](/api/classes/basemessage/).`pinned` |
@@ -95,7 +95,7 @@ createdAt gets the creation Date instace of the current object.
 
 #### Source
 
-[seyfert/src/structures/extra/DiscordBase.ts:27](https://github.com/potoland/potocuit/blob/e332d7a/src/structures/extra/DiscordBase.ts#L27)
+[seyfert/src/structures/extra/DiscordBase.ts:27](https://github.com/potoland/potocuit/blob/fe122a1/src/structures/extra/DiscordBase.ts#L27)
 
 ***
 
@@ -113,7 +113,7 @@ Create a timestamp for the current object.
 
 #### Source
 
-[seyfert/src/structures/extra/DiscordBase.ts:20](https://github.com/potoland/potocuit/blob/e332d7a/src/structures/extra/DiscordBase.ts#L20)
+[seyfert/src/structures/extra/DiscordBase.ts:20](https://github.com/potoland/potocuit/blob/fe122a1/src/structures/extra/DiscordBase.ts#L20)
 
 ***
 
@@ -129,7 +129,7 @@ get url(): string
 
 #### Source
 
-[seyfert/src/structures/Message.ts:48](https://github.com/potoland/potocuit/blob/e332d7a/src/structures/Message.ts#L48)
+[seyfert/src/structures/Message.ts:48](https://github.com/potoland/potocuit/blob/fe122a1/src/structures/Message.ts#L48)
 
 ## Methods
 
@@ -155,7 +155,7 @@ channel(force: boolean): Promise<AllChannels>
 
 #### Source
 
-[seyfert/src/structures/Message.ts:57](https://github.com/potoland/potocuit/blob/e332d7a/src/structures/Message.ts#L57)
+[seyfert/src/structures/Message.ts:57](https://github.com/potoland/potocuit/blob/fe122a1/src/structures/Message.ts#L57)
 
 ***
 
@@ -177,7 +177,7 @@ crosspost(reason?: string): Promise<Message>
 
 #### Source
 
-[seyfert/src/structures/Message.ts:145](https://github.com/potoland/potocuit/blob/e332d7a/src/structures/Message.ts#L145)
+[seyfert/src/structures/Message.ts:145](https://github.com/potoland/potocuit/blob/fe122a1/src/structures/Message.ts#L145)
 
 ***
 
@@ -199,7 +199,7 @@ delete(reason?: string): Promise<void>
 
 #### Source
 
-[seyfert/src/structures/Message.ts:141](https://github.com/potoland/potocuit/blob/e332d7a/src/structures/Message.ts#L141)
+[seyfert/src/structures/Message.ts:141](https://github.com/potoland/potocuit/blob/fe122a1/src/structures/Message.ts#L141)
 
 ***
 
@@ -221,7 +221,7 @@ edit(body: Omit<RESTPatchAPIChannelMessageJSONBody, "components" | "embeds"> & R
 
 #### Source
 
-[seyfert/src/structures/Message.ts:133](https://github.com/potoland/potocuit/blob/e332d7a/src/structures/Message.ts#L133)
+[seyfert/src/structures/Message.ts:133](https://github.com/potoland/potocuit/blob/fe122a1/src/structures/Message.ts#L133)
 
 ***
 
@@ -237,14 +237,14 @@ fetch(): Promise<Message>
 
 #### Source
 
-[seyfert/src/structures/Message.ts:117](https://github.com/potoland/potocuit/blob/e332d7a/src/structures/Message.ts#L117)
+[seyfert/src/structures/Message.ts:117](https://github.com/potoland/potocuit/blob/fe122a1/src/structures/Message.ts#L117)
 
 ***
 
 ### guild()
 
 ```ts
-guild(force: boolean): Promise<undefined | Guild<"cached"> | Guild<"api">>
+guild(force: boolean): undefined | Promise<Guild<"cached"> | Guild<"api">>
 ```
 
 #### Parameters
@@ -255,7 +255,7 @@ guild(force: boolean): Promise<undefined | Guild<"cached"> | Guild<"api">>
 
 #### Returns
 
-`Promise`\<`undefined` \| [`Guild`](/api/classes/guild/)\<`"cached"`\> \| [`Guild`](/api/classes/guild/)\<`"api"`\>\>
+`undefined` \| `Promise`\<[`Guild`](/api/classes/guild/)\<`"cached"`\> \| [`Guild`](/api/classes/guild/)\<`"api"`\>\>
 
 #### Inherited from
 
@@ -263,7 +263,7 @@ guild(force: boolean): Promise<undefined | Guild<"cached"> | Guild<"api">>
 
 #### Source
 
-[seyfert/src/structures/Message.ts:52](https://github.com/potoland/potocuit/blob/e332d7a/src/structures/Message.ts#L52)
+[seyfert/src/structures/Message.ts:52](https://github.com/potoland/potocuit/blob/fe122a1/src/structures/Message.ts#L52)
 
 ***
 
@@ -289,21 +289,22 @@ react(emoji: EmojiResolvable): Promise<never>
 
 #### Source
 
-[seyfert/src/structures/Message.ts:61](https://github.com/potoland/potocuit/blob/e332d7a/src/structures/Message.ts#L61)
+[seyfert/src/structures/Message.ts:61](https://github.com/potoland/potocuit/blob/fe122a1/src/structures/Message.ts#L61)
 
 ***
 
 ### reply()
 
 ```ts
-reply(body: Omit<Omit<RESTPostAPIChannelMessageJSONBody, "components" | "embeds"> & ResolverProps, "message_reference">): Promise<Message>
+reply(body: Omit<Omit<RESTPostAPIChannelMessageJSONBody, "components" | "embeds"> & ResolverProps, "message_reference">, fail: boolean): Promise<Message>
 ```
 
 #### Parameters
 
-| Parameter | Type |
-| :------ | :------ |
-| `body` | `Omit`\<`Omit`\<`RESTPostAPIChannelMessageJSONBody`, `"components"` \| `"embeds"`\> & `ResolverProps`, `"message_reference"`\> |
+| Parameter | Type | Default value |
+| :------ | :------ | :------ |
+| `body` | `Omit`\<`Omit`\<`RESTPostAPIChannelMessageJSONBody`, `"components"` \| `"embeds"`\> & `ResolverProps`, `"message_reference"`\> | `undefined` |
+| `fail` | `boolean` | `true` |
 
 #### Returns
 
@@ -311,7 +312,7 @@ reply(body: Omit<Omit<RESTPostAPIChannelMessageJSONBody, "components" | "embeds"
 
 #### Source
 
-[seyfert/src/structures/Message.ts:121](https://github.com/potoland/potocuit/blob/e332d7a/src/structures/Message.ts#L121)
+[seyfert/src/structures/Message.ts:121](https://github.com/potoland/potocuit/blob/fe122a1/src/structures/Message.ts#L121)
 
 ***
 
@@ -333,4 +334,4 @@ write(body: Omit<RESTPostAPIChannelMessageJSONBody, "components" | "embeds"> & R
 
 #### Source
 
-[seyfert/src/structures/Message.ts:137](https://github.com/potoland/potocuit/blob/e332d7a/src/structures/Message.ts#L137)
+[seyfert/src/structures/Message.ts:137](https://github.com/potoland/potocuit/blob/fe122a1/src/structures/Message.ts#L137)

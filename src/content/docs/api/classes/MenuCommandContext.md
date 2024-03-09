@@ -5,16 +5,16 @@ prev: false
 title: "MenuCommandContext"
 ---
 
+## Extends
+
+- [`ExtendContext`](/api/interfaces/extendcontext/)
+
 ## Type parameters
 
 | Type parameter | Value |
 | :------ | :------ |
 | `T` extends [`MessageCommandInteraction`](/api/classes/messagecommandinteraction/) \| [`UserCommandInteraction`](/api/classes/usercommandinteraction/) | - |
 | `M` extends keyof [`RegisteredMiddlewares`](/api/interfaces/registeredmiddlewares/) | `never` |
-
-## Implements
-
-- [`ExtendContext`](/api/interfaces/extendcontext/)
 
 ## Constructors
 
@@ -39,9 +39,13 @@ shardId: number): MenuCommandContext<T, M>
 
 [`MenuCommandContext`](/api/classes/menucommandcontext/)\<`T`, `M`\>
 
+#### Inherited from
+
+`ExtendContext.constructor`
+
 #### Source
 
-[seyfert/src/commands/applications/menucontext.ts:20](https://github.com/potoland/potocuit/blob/e332d7a/src/commands/applications/menucontext.ts#L20)
+[seyfert/src/commands/applications/menucontext.ts:33](https://github.com/potoland/potocuit/blob/fe122a1/src/commands/applications/menucontext.ts#L33)
 
 ## Properties
 
@@ -67,7 +71,39 @@ get author(): User
 
 #### Source
 
-[seyfert/src/commands/applications/menucontext.ts:79](https://github.com/potoland/potocuit/blob/e332d7a/src/commands/applications/menucontext.ts#L79)
+[seyfert/src/commands/applications/menucontext.ts:136](https://github.com/potoland/potocuit/blob/fe122a1/src/commands/applications/menucontext.ts#L136)
+
+***
+
+### channelId
+
+```ts
+get channelId(): string
+```
+
+#### Returns
+
+`string`
+
+#### Source
+
+[seyfert/src/commands/applications/menucontext.ts:132](https://github.com/potoland/potocuit/blob/fe122a1/src/commands/applications/menucontext.ts#L132)
+
+***
+
+### guildId
+
+```ts
+get guildId(): undefined | string
+```
+
+#### Returns
+
+`undefined` \| `string`
+
+#### Source
+
+[seyfert/src/commands/applications/menucontext.ts:128](https://github.com/potoland/potocuit/blob/fe122a1/src/commands/applications/menucontext.ts#L128)
 
 ***
 
@@ -83,7 +119,23 @@ get member(): undefined | InteractionGuildMember
 
 #### Source
 
-[seyfert/src/commands/applications/menucontext.ts:83](https://github.com/potoland/potocuit/blob/e332d7a/src/commands/applications/menucontext.ts#L83)
+[seyfert/src/commands/applications/menucontext.ts:140](https://github.com/potoland/potocuit/blob/fe122a1/src/commands/applications/menucontext.ts#L140)
+
+***
+
+### modal
+
+```ts
+get modal(): (body: ModalCreateBodyRequest) => Promise<void> | (body: ModalCreateBodyRequest) => Promise<void>
+```
+
+#### Returns
+
+(`body`: `ModalCreateBodyRequest`) => `Promise`\<`void`\> \| (`body`: `ModalCreateBodyRequest`) => `Promise`\<`void`\>
+
+#### Source
+
+[seyfert/src/commands/applications/menucontext.ts:68](https://github.com/potoland/potocuit/blob/fe122a1/src/commands/applications/menucontext.ts#L68)
 
 ***
 
@@ -99,7 +151,7 @@ get proxy(): APIRoutes
 
 #### Source
 
-[seyfert/src/commands/applications/menucontext.ts:29](https://github.com/potoland/potocuit/blob/e332d7a/src/commands/applications/menucontext.ts#L29)
+[seyfert/src/commands/applications/menucontext.ts:42](https://github.com/potoland/potocuit/blob/fe122a1/src/commands/applications/menucontext.ts#L42)
 
 ***
 
@@ -111,11 +163,11 @@ get t(): __InternalParseLocale<DefaultLocale> & Object
 
 #### Returns
 
-`__InternalParseLocale`\<[`DefaultLocale`](/api/interfaces/defaultlocale/)\> & `Object`
+[`__InternalParseLocale`](/api/type-aliases/internalparselocale/)\<[`DefaultLocale`](/api/interfaces/defaultlocale/)\> & `Object`
 
 #### Source
 
-[seyfert/src/commands/applications/menucontext.ts:47](https://github.com/potoland/potocuit/blob/e332d7a/src/commands/applications/menucontext.ts#L47)
+[seyfert/src/commands/applications/menucontext.ts:60](https://github.com/potoland/potocuit/blob/fe122a1/src/commands/applications/menucontext.ts#L60)
 
 ***
 
@@ -131,9 +183,53 @@ get target(): InteractionTarget<T>
 
 #### Source
 
-[seyfert/src/commands/applications/menucontext.ts:34](https://github.com/potoland/potocuit/blob/e332d7a/src/commands/applications/menucontext.ts#L34)
+[seyfert/src/commands/applications/menucontext.ts:47](https://github.com/potoland/potocuit/blob/fe122a1/src/commands/applications/menucontext.ts#L47)
 
 ## Methods
+
+### channel()
+
+#### channel(mode)
+
+```ts
+channel(mode?: "rest" | "flow"): Promise<AllChannels>
+```
+
+##### Parameters
+
+| Parameter | Type |
+| :------ | :------ |
+| `mode`? | `"rest"` \| `"flow"` |
+
+##### Returns
+
+`Promise`\<[`AllChannels`](/api/type-aliases/allchannels/)\>
+
+##### Source
+
+[seyfert/src/commands/applications/menucontext.ts:92](https://github.com/potoland/potocuit/blob/fe122a1/src/commands/applications/menucontext.ts#L92)
+
+#### channel(mode)
+
+```ts
+channel(mode?: "cache"): ReturnCache<AllChannels>
+```
+
+##### Parameters
+
+| Parameter | Type |
+| :------ | :------ |
+| `mode`? | `"cache"` |
+
+##### Returns
+
+[`ReturnCache`](/api/type-aliases/returncache/)\<[`AllChannels`](/api/type-aliases/allchannels/)\>
+
+##### Source
+
+[seyfert/src/commands/applications/menucontext.ts:93](https://github.com/potoland/potocuit/blob/fe122a1/src/commands/applications/menucontext.ts#L93)
+
+***
 
 ### deferReply()
 
@@ -153,7 +249,7 @@ deferReply(ephemeral: boolean): Promise<void>
 
 #### Source
 
-[seyfert/src/commands/applications/menucontext.ts:59](https://github.com/potoland/potocuit/blob/e332d7a/src/commands/applications/menucontext.ts#L59)
+[seyfert/src/commands/applications/menucontext.ts:72](https://github.com/potoland/potocuit/blob/fe122a1/src/commands/applications/menucontext.ts#L72)
 
 ***
 
@@ -169,7 +265,7 @@ deleteResponse(): Promise<void>
 
 #### Source
 
-[seyfert/src/commands/applications/menucontext.ts:67](https://github.com/potoland/potocuit/blob/e332d7a/src/commands/applications/menucontext.ts#L67)
+[seyfert/src/commands/applications/menucontext.ts:80](https://github.com/potoland/potocuit/blob/fe122a1/src/commands/applications/menucontext.ts#L80)
 
 ***
 
@@ -191,7 +287,7 @@ editOrReply(body: Omit<RESTPatchAPIWebhookWithTokenMessageJSONBody, "components"
 
 #### Source
 
-[seyfert/src/commands/applications/menucontext.ts:71](https://github.com/potoland/potocuit/blob/e332d7a/src/commands/applications/menucontext.ts#L71)
+[seyfert/src/commands/applications/menucontext.ts:84](https://github.com/potoland/potocuit/blob/fe122a1/src/commands/applications/menucontext.ts#L84)
 
 ***
 
@@ -213,7 +309,7 @@ editResponse(body: Omit<RESTPatchAPIWebhookWithTokenMessageJSONBody, "components
 
 #### Source
 
-[seyfert/src/commands/applications/menucontext.ts:63](https://github.com/potoland/potocuit/blob/e332d7a/src/commands/applications/menucontext.ts#L63)
+[seyfert/src/commands/applications/menucontext.ts:76](https://github.com/potoland/potocuit/blob/fe122a1/src/commands/applications/menucontext.ts#L76)
 
 ***
 
@@ -229,29 +325,159 @@ fetchResponse(): Promise<undefined | WebhookMessage>
 
 #### Source
 
-[seyfert/src/commands/applications/menucontext.ts:75](https://github.com/potoland/potocuit/blob/e332d7a/src/commands/applications/menucontext.ts#L75)
+[seyfert/src/commands/applications/menucontext.ts:88](https://github.com/potoland/potocuit/blob/fe122a1/src/commands/applications/menucontext.ts#L88)
 
 ***
 
-### modal()
+### guild()
+
+#### guild(mode)
 
 ```ts
-modal(body: ModalCreateBodyRequest): Promise<void>
+guild(mode?: "rest" | "flow"): Promise<undefined | Guild<"cached" | "api">>
 ```
 
-#### Parameters
+##### Parameters
 
 | Parameter | Type |
 | :------ | :------ |
-| `body` | `ModalCreateBodyRequest` |
+| `mode`? | `"rest"` \| `"flow"` |
+
+##### Returns
+
+`Promise`\<`undefined` \| [`Guild`](/api/classes/guild/)\<`"cached"` \| `"api"`\>\>
+
+##### Source
+
+[seyfert/src/commands/applications/menucontext.ts:113](https://github.com/potoland/potocuit/blob/fe122a1/src/commands/applications/menucontext.ts#L113)
+
+#### guild(mode)
+
+```ts
+guild(mode?: "cache"): ReturnCache<undefined | Guild<"cached">>
+```
+
+##### Parameters
+
+| Parameter | Type |
+| :------ | :------ |
+| `mode`? | `"cache"` |
+
+##### Returns
+
+[`ReturnCache`](/api/type-aliases/returncache/)\<`undefined` \| [`Guild`](/api/classes/guild/)\<`"cached"`\>\>
+
+##### Source
+
+[seyfert/src/commands/applications/menucontext.ts:114](https://github.com/potoland/potocuit/blob/fe122a1/src/commands/applications/menucontext.ts#L114)
+
+***
+
+### isChat()
+
+```ts
+isChat(): this is CommandContext<Object, never>
+```
 
 #### Returns
 
-`Promise`\<`void`\>
+`this is CommandContext<Object, never>`
 
 #### Source
 
-[seyfert/src/commands/applications/menucontext.ts:55](https://github.com/potoland/potocuit/blob/e332d7a/src/commands/applications/menucontext.ts#L55)
+[seyfert/src/commands/applications/menucontext.ts:144](https://github.com/potoland/potocuit/blob/fe122a1/src/commands/applications/menucontext.ts#L144)
+
+***
+
+### isMenu()
+
+```ts
+isMenu(): this is MenuCommandContext<any, never>
+```
+
+#### Returns
+
+`this is MenuCommandContext<any, never>`
+
+#### Source
+
+[seyfert/src/commands/applications/menucontext.ts:148](https://github.com/potoland/potocuit/blob/fe122a1/src/commands/applications/menucontext.ts#L148)
+
+***
+
+### isMenuMessage()
+
+```ts
+isMenuMessage(): this is MenuCommandContext<MessageCommandInteraction<boolean>, never>
+```
+
+#### Returns
+
+`this is MenuCommandContext<MessageCommandInteraction<boolean>, never>`
+
+#### Source
+
+[seyfert/src/commands/applications/menucontext.ts:156](https://github.com/potoland/potocuit/blob/fe122a1/src/commands/applications/menucontext.ts#L156)
+
+***
+
+### isMenuUser()
+
+```ts
+isMenuUser(): this is MenuCommandContext<UserCommandInteraction<boolean>, never>
+```
+
+#### Returns
+
+`this is MenuCommandContext<UserCommandInteraction<boolean>, never>`
+
+#### Source
+
+[seyfert/src/commands/applications/menucontext.ts:152](https://github.com/potoland/potocuit/blob/fe122a1/src/commands/applications/menucontext.ts#L152)
+
+***
+
+### me()
+
+#### me(mode)
+
+```ts
+me(mode?: "rest" | "flow"): Promise<GuildMember>
+```
+
+##### Parameters
+
+| Parameter | Type |
+| :------ | :------ |
+| `mode`? | `"rest"` \| `"flow"` |
+
+##### Returns
+
+`Promise`\<[`GuildMember`](/api/classes/guildmember/)\>
+
+##### Source
+
+[seyfert/src/commands/applications/menucontext.ts:100](https://github.com/potoland/potocuit/blob/fe122a1/src/commands/applications/menucontext.ts#L100)
+
+#### me(mode)
+
+```ts
+me(mode?: "cache"): ReturnCache<undefined | GuildMember>
+```
+
+##### Parameters
+
+| Parameter | Type |
+| :------ | :------ |
+| `mode`? | `"cache"` |
+
+##### Returns
+
+[`ReturnCache`](/api/type-aliases/returncache/)\<`undefined` \| [`GuildMember`](/api/classes/guildmember/)\>
+
+##### Source
+
+[seyfert/src/commands/applications/menucontext.ts:101](https://github.com/potoland/potocuit/blob/fe122a1/src/commands/applications/menucontext.ts#L101)
 
 ***
 
@@ -273,4 +499,4 @@ write(body: Omit<APIInteractionResponseCallbackData, "components" | "embeds"> & 
 
 #### Source
 
-[seyfert/src/commands/applications/menucontext.ts:51](https://github.com/potoland/potocuit/blob/e332d7a/src/commands/applications/menucontext.ts#L51)
+[seyfert/src/commands/applications/menucontext.ts:64](https://github.com/potoland/potocuit/blob/fe122a1/src/commands/applications/menucontext.ts#L64)

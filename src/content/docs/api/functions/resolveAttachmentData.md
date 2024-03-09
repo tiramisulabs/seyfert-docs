@@ -26,4 +26,4 @@ The resolved attachment data.
 
 ## Source
 
-[seyfert/src/builders/Attachment.ts:151](https://github.com/potoland/potocuit/blob/e332d7a/src/builders/Attachment.ts#L151)
+[seyfert/src/builders/Attachment.ts:176](https://github.com/potoland/potocuit/blob/fe122a1/src/builders/Attachment.ts#L176)

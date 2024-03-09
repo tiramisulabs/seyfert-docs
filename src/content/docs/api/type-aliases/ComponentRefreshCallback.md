@@ -15,4 +15,4 @@ type ComponentRefreshCallback: () => any;
 
 ## Source
 
-[seyfert/src/builders/types.ts:13](https://github.com/potoland/potocuit/blob/e332d7a/src/builders/types.ts#L13)
+[seyfert/src/builders/types.ts:13](https://github.com/potoland/potocuit/blob/fe122a1/src/builders/types.ts#L13)

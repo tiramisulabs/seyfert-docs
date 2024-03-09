@@ -34,7 +34,7 @@ new BaseMessage(client: BaseClient, data: MessageData): BaseMessage
 
 #### Source
 
-[seyfert/src/structures/Message.ts:37](https://github.com/potoland/potocuit/blob/e332d7a/src/structures/Message.ts#L37)
+[seyfert/src/structures/Message.ts:37](https://github.com/potoland/potocuit/blob/fe122a1/src/structures/Message.ts#L37)
 
 ## Properties
 
@@ -47,7 +47,7 @@ new BaseMessage(client: BaseClient, data: MessageData): BaseMessage
 | `author` | `public` | [`User`](/api/classes/user/) | - |
 | `channelId` | `public` | `string` | `ObjectToLower.channelId` |
 | `client` | `readonly` | [`UsingClient`](/api/interfaces/usingclient/) | `DiscordBase.client` |
-| `components` | `public` | `MessageActionRowComponent`\<`ActionRowMessageComponents`\>[] | - |
+| `components` | `public` | `MessageActionRowComponent`\<[`ActionRowMessageComponents`](/api/type-aliases/actionrowmessagecomponents/)\>[] | - |
 | `content` | `public` | `string` | `ObjectToLower.content` |
 | `editedTimestamp` | `public` | `null` \| `string` | `ObjectToLower.editedTimestamp` |
 | `embeds` | `public` | `Object`[] | `ObjectToLower.embeds` |
@@ -62,7 +62,7 @@ new BaseMessage(client: BaseClient, data: MessageData): BaseMessage
 | `mentions` | `public` | `Object` | - |
 | `mentions.channels` | `public` | `APIChannelMention`[] | - |
 | `mentions.roles` | `public` | `string`[] | - |
-| `mentions.users` | `public` | ([`User`](/api/classes/user/) \| [`GuildMember`](/api/classes/guildmember/))[] | - |
+| `mentions.users` | `public` | ([`GuildMember`](/api/classes/guildmember/) \| [`User`](/api/classes/user/))[] | - |
 | `messageReference` | `public` | `undefined` \| `APIMessageReference` | `ObjectToLower.messageReference` |
 | `nonce` | `public` | `undefined` \| `string` \| `number` | `ObjectToLower.nonce` |
 | `pinned` | `public` | `boolean` | `ObjectToLower.pinned` |
@@ -95,7 +95,7 @@ createdAt gets the creation Date instace of the current object.
 
 #### Source
 
-[seyfert/src/structures/extra/DiscordBase.ts:27](https://github.com/potoland/potocuit/blob/e332d7a/src/structures/extra/DiscordBase.ts#L27)
+[seyfert/src/structures/extra/DiscordBase.ts:27](https://github.com/potoland/potocuit/blob/fe122a1/src/structures/extra/DiscordBase.ts#L27)
 
 ***
 
@@ -113,7 +113,7 @@ Create a timestamp for the current object.
 
 #### Source
 
-[seyfert/src/structures/extra/DiscordBase.ts:20](https://github.com/potoland/potocuit/blob/e332d7a/src/structures/extra/DiscordBase.ts#L20)
+[seyfert/src/structures/extra/DiscordBase.ts:20](https://github.com/potoland/potocuit/blob/fe122a1/src/structures/extra/DiscordBase.ts#L20)
 
 ***
 
@@ -129,7 +129,7 @@ get url(): string
 
 #### Source
 
-[seyfert/src/structures/Message.ts:48](https://github.com/potoland/potocuit/blob/e332d7a/src/structures/Message.ts#L48)
+[seyfert/src/structures/Message.ts:48](https://github.com/potoland/potocuit/blob/fe122a1/src/structures/Message.ts#L48)
 
 ## Methods
 
@@ -151,14 +151,14 @@ channel(force: boolean): Promise<AllChannels>
 
 #### Source
 
-[seyfert/src/structures/Message.ts:57](https://github.com/potoland/potocuit/blob/e332d7a/src/structures/Message.ts#L57)
+[seyfert/src/structures/Message.ts:57](https://github.com/potoland/potocuit/blob/fe122a1/src/structures/Message.ts#L57)
 
 ***
 
 ### guild()
 
 ```ts
-guild(force: boolean): Promise<undefined | Guild<"cached"> | Guild<"api">>
+guild(force: boolean): undefined | Promise<Guild<"cached"> | Guild<"api">>
 ```
 
 #### Parameters
@@ -169,11 +169,11 @@ guild(force: boolean): Promise<undefined | Guild<"cached"> | Guild<"api">>
 
 #### Returns
 
-`Promise`\<`undefined` \| [`Guild`](/api/classes/guild/)\<`"cached"`\> \| [`Guild`](/api/classes/guild/)\<`"api"`\>\>
+`undefined` \| `Promise`\<[`Guild`](/api/classes/guild/)\<`"cached"`\> \| [`Guild`](/api/classes/guild/)\<`"api"`\>\>
 
 #### Source
 
-[seyfert/src/structures/Message.ts:52](https://github.com/potoland/potocuit/blob/e332d7a/src/structures/Message.ts#L52)
+[seyfert/src/structures/Message.ts:52](https://github.com/potoland/potocuit/blob/fe122a1/src/structures/Message.ts#L52)
 
 ***
 
@@ -195,4 +195,4 @@ react(emoji: EmojiResolvable): Promise<never>
 
 #### Source
 
-[seyfert/src/structures/Message.ts:61](https://github.com/potoland/potocuit/blob/e332d7a/src/structures/Message.ts#L61)
+[seyfert/src/structures/Message.ts:61](https://github.com/potoland/potocuit/blob/fe122a1/src/structures/Message.ts#L61)

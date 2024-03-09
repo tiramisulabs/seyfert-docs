@@ -17,4 +17,4 @@ type ContextOptions<T>: ContextOptionsAux<T>;
 
 ## Source
 
-[seyfert/src/commands/applications/chat.ts:97](https://github.com/potoland/potocuit/blob/e332d7a/src/commands/applications/chat.ts#L97)
+[seyfert/src/commands/applications/chat.ts:98](https://github.com/potoland/potocuit/blob/fe122a1/src/commands/applications/chat.ts#L98)

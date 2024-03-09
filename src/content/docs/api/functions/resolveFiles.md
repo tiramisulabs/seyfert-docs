@@ -6,7 +6,7 @@ title: "resolveFiles"
 ---
 
 ```ts
-resolveFiles(resources: (Attachment | RawFile)[]): Promise<RawFile[]>
+resolveFiles(resources: (AttachmentBuilder | Attachment | RawFile)[]): Promise<RawFile[]>
 ```
 
 Resolves a list of attachments to raw files.
@@ -15,7 +15,7 @@ Resolves a list of attachments to raw files.
 
 | Parameter | Type | Description |
 | :------ | :------ | :------ |
-| `resources` | ([`Attachment`](/api/classes/attachment/) \| [`RawFile`](/api/interfaces/rawfile/))[] | The list of attachments to resolve. |
+| `resources` | ([`AttachmentBuilder`](/api/classes/attachmentbuilder/) \| [`Attachment`](/api/classes/attachment/) \| [`RawFile`](/api/interfaces/rawfile/))[] | The list of attachments to resolve. |
 
 ## Returns
 
@@ -25,4 +25,4 @@ The resolved raw files.
 
 ## Source
 
-[seyfert/src/builders/Attachment.ts:125](https://github.com/potoland/potocuit/blob/e332d7a/src/builders/Attachment.ts#L125)
+[seyfert/src/builders/Attachment.ts:141](https://github.com/potoland/potocuit/blob/fe122a1/src/builders/Attachment.ts#L141)

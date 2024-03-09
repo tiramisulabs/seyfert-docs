@@ -27,4 +27,4 @@ type ModalSubmitCallback<T>: (interaction: T) => any;
 
 ## Source
 
-[seyfert/src/builders/types.ts:14](https://github.com/potoland/potocuit/blob/e332d7a/src/builders/types.ts#L14)
+[seyfert/src/builders/types.ts:14](https://github.com/potoland/potocuit/blob/fe122a1/src/builders/types.ts#L14)

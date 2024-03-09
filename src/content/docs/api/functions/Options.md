@@ -38,4 +38,4 @@ Options(options: OptionsRecord | () => SubCommand[]): <T>(target: T) => (...args
 
 ## Source
 
-[seyfert/src/commands/decorators.ts:92](https://github.com/potoland/potocuit/blob/e332d7a/src/commands/decorators.ts#L92)
+[seyfert/src/commands/decorators.ts:98](https://github.com/potoland/potocuit/blob/fe122a1/src/commands/decorators.ts#L98)

@@ -40,7 +40,7 @@ new GuildPreview(client: BaseClient, data: APIGuildPreview): GuildPreview
 
 #### Source
 
-[seyfert/src/structures/GuildPreview.ts:10](https://github.com/potoland/potocuit/blob/e332d7a/src/structures/GuildPreview.ts#L10)
+[seyfert/src/structures/GuildPreview.ts:10](https://github.com/potoland/potocuit/blob/fe122a1/src/structures/GuildPreview.ts#L10)
 
 ## Properties
 
@@ -74,7 +74,7 @@ createdAt gets the creation Date instace of the current object.
 
 #### Source
 
-[seyfert/src/structures/extra/DiscordBase.ts:27](https://github.com/potoland/potocuit/blob/e332d7a/src/structures/extra/DiscordBase.ts#L27)
+[seyfert/src/structures/extra/DiscordBase.ts:27](https://github.com/potoland/potocuit/blob/fe122a1/src/structures/extra/DiscordBase.ts#L27)
 
 ***
 
@@ -92,7 +92,7 @@ Create a timestamp for the current object.
 
 #### Source
 
-[seyfert/src/structures/extra/DiscordBase.ts:20](https://github.com/potoland/potocuit/blob/e332d7a/src/structures/extra/DiscordBase.ts#L20)
+[seyfert/src/structures/extra/DiscordBase.ts:20](https://github.com/potoland/potocuit/blob/fe122a1/src/structures/extra/DiscordBase.ts#L20)
 
 ***
 
@@ -108,7 +108,7 @@ get partnered(): boolean
 
 #### Source
 
-[seyfert/src/structures/extra/BaseGuild.ts:11](https://github.com/potoland/potocuit/blob/e332d7a/src/structures/extra/BaseGuild.ts#L11)
+[seyfert/src/structures/extra/BaseGuild.ts:11](https://github.com/potoland/potocuit/blob/fe122a1/src/structures/extra/BaseGuild.ts#L11)
 
 ***
 
@@ -130,7 +130,7 @@ https://discord.com/developers/docs/resources/guild#guild-object-guild-features
 
 #### Source
 
-[seyfert/src/structures/extra/BaseGuild.ts:22](https://github.com/potoland/potocuit/blob/e332d7a/src/structures/extra/BaseGuild.ts#L22)
+[seyfert/src/structures/extra/BaseGuild.ts:22](https://github.com/potoland/potocuit/blob/fe122a1/src/structures/extra/BaseGuild.ts#L22)
 
 ## Methods
 
@@ -164,7 +164,7 @@ https://discord.com/developers/docs/reference#image-formatting
 
 #### Source
 
-[seyfert/src/structures/extra/BaseGuild.ts:67](https://github.com/potoland/potocuit/blob/e332d7a/src/structures/extra/BaseGuild.ts#L67)
+[seyfert/src/structures/extra/BaseGuild.ts:67](https://github.com/potoland/potocuit/blob/fe122a1/src/structures/extra/BaseGuild.ts#L67)
 
 ***
 
@@ -186,7 +186,7 @@ Fetch guild on API
 
 #### Source
 
-[seyfert/src/structures/extra/BaseGuild.ts:32](https://github.com/potoland/potocuit/blob/e332d7a/src/structures/extra/BaseGuild.ts#L32)
+[seyfert/src/structures/extra/BaseGuild.ts:32](https://github.com/potoland/potocuit/blob/fe122a1/src/structures/extra/BaseGuild.ts#L32)
 
 ***
 
@@ -218,7 +218,7 @@ https://discord.com/developers/docs/reference#image-formatting
 
 #### Source
 
-[seyfert/src/structures/extra/BaseGuild.ts:41](https://github.com/potoland/potocuit/blob/e332d7a/src/structures/extra/BaseGuild.ts#L41)
+[seyfert/src/structures/extra/BaseGuild.ts:41](https://github.com/potoland/potocuit/blob/fe122a1/src/structures/extra/BaseGuild.ts#L41)
 
 ***
 
@@ -252,7 +252,7 @@ https://discord.com/developers/docs/reference#image-formatting
 
 #### Source
 
-[seyfert/src/structures/extra/BaseGuild.ts:54](https://github.com/potoland/potocuit/blob/e332d7a/src/structures/extra/BaseGuild.ts#L54)
+[seyfert/src/structures/extra/BaseGuild.ts:54](https://github.com/potoland/potocuit/blob/fe122a1/src/structures/extra/BaseGuild.ts#L54)
 
 ***
 
@@ -272,4 +272,4 @@ toString(): string
 
 #### Source
 
-[seyfert/src/structures/extra/BaseGuild.ts:74](https://github.com/potoland/potocuit/blob/e332d7a/src/structures/extra/BaseGuild.ts#L74)
+[seyfert/src/structures/extra/BaseGuild.ts:74](https://github.com/potoland/potocuit/blob/fe122a1/src/structures/extra/BaseGuild.ts#L74)

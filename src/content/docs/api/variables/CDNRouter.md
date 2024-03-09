@@ -17,4 +17,4 @@ const CDNRouter: Object;
 
 ## Source
 
-[seyfert/src/api/Router.ts:36](https://github.com/potoland/potocuit/blob/e332d7a/src/api/Router.ts#L36)
+[seyfert/src/api/Router.ts:38](https://github.com/potoland/potocuit/blob/fe122a1/src/api/Router.ts#L38)

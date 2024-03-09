@@ -13,7 +13,7 @@ createChannelOption<T>(data: T): T & Object
 
 | Type parameter | Value |
 | :------ | :------ |
-| `T` extends `SeyfertChannelOption` | `SeyfertChannelOption` |
+| `T` extends [`SeyfertChannelOption`](/api/type-aliases/seyfertchanneloption/) | [`SeyfertChannelOption`](/api/type-aliases/seyfertchanneloption/) |
 
 ## Parameters
 
@@ -27,4 +27,4 @@ createChannelOption<T>(data: T): T & Object
 
 ## Source
 
-[seyfert/src/commands/applications/options.ts:60](https://github.com/potoland/potocuit/blob/e332d7a/src/commands/applications/options.ts#L60)
+[seyfert/src/commands/applications/options.ts:67](https://github.com/potoland/potocuit/blob/fe122a1/src/commands/applications/options.ts#L67)

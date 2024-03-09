@@ -16,4 +16,4 @@ type BuilderSelectMenus:
 
 ## Source
 
-[seyfert/src/builders/SelectMenu.ts:29](https://github.com/potoland/potocuit/blob/e332d7a/src/builders/SelectMenu.ts#L29)
+[seyfert/src/builders/SelectMenu.ts:31](https://github.com/potoland/potocuit/blob/fe122a1/src/builders/SelectMenu.ts#L31)

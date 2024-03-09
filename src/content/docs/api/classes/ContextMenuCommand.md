@@ -58,7 +58,7 @@ optional onAfterRun(context: MenuCommandContext<any, never>, error: unknown): an
 
 #### Source
 
-[seyfert/src/commands/applications/menu.ts:103](https://github.com/potoland/potocuit/blob/e332d7a/src/commands/applications/menu.ts#L103)
+[seyfert/src/commands/applications/menu.ts:103](https://github.com/potoland/potocuit/blob/fe122a1/src/commands/applications/menu.ts#L103)
 
 ***
 
@@ -81,7 +81,7 @@ onInternalError(client: UsingClient, error?: unknown): any
 
 #### Source
 
-[seyfert/src/commands/applications/menu.ts:113](https://github.com/potoland/potocuit/blob/e332d7a/src/commands/applications/menu.ts#L113)
+[seyfert/src/commands/applications/menu.ts:113](https://github.com/potoland/potocuit/blob/fe122a1/src/commands/applications/menu.ts#L113)
 
 ***
 
@@ -104,7 +104,7 @@ onMiddlewaresError(context: MenuCommandContext<any, never>, error: string): any
 
 #### Source
 
-[seyfert/src/commands/applications/menu.ts:107](https://github.com/potoland/potocuit/blob/e332d7a/src/commands/applications/menu.ts#L107)
+[seyfert/src/commands/applications/menu.ts:107](https://github.com/potoland/potocuit/blob/fe122a1/src/commands/applications/menu.ts#L107)
 
 ***
 
@@ -127,7 +127,7 @@ onPermissionsFail(context: MenuCommandContext<any, never>, permissions: Permissi
 
 #### Source
 
-[seyfert/src/commands/applications/menu.ts:110](https://github.com/potoland/potocuit/blob/e332d7a/src/commands/applications/menu.ts#L110)
+[seyfert/src/commands/applications/menu.ts:110](https://github.com/potoland/potocuit/blob/fe122a1/src/commands/applications/menu.ts#L110)
 
 ***
 
@@ -150,7 +150,7 @@ onRunError(context: MenuCommandContext<any, never>, error: unknown): any
 
 #### Source
 
-[seyfert/src/commands/applications/menu.ts:104](https://github.com/potoland/potocuit/blob/e332d7a/src/commands/applications/menu.ts#L104)
+[seyfert/src/commands/applications/menu.ts:104](https://github.com/potoland/potocuit/blob/fe122a1/src/commands/applications/menu.ts#L104)
 
 ***
 
@@ -166,7 +166,7 @@ reload(): Promise<void>
 
 #### Source
 
-[seyfert/src/commands/applications/menu.ts:95](https://github.com/potoland/potocuit/blob/e332d7a/src/commands/applications/menu.ts#L95)
+[seyfert/src/commands/applications/menu.ts:95](https://github.com/potoland/potocuit/blob/fe122a1/src/commands/applications/menu.ts#L95)
 
 ***
 
@@ -188,7 +188,7 @@ optional abstract run(context: MenuCommandContext<any, never>): any
 
 #### Source
 
-[seyfert/src/commands/applications/menu.ts:102](https://github.com/potoland/potocuit/blob/e332d7a/src/commands/applications/menu.ts#L102)
+[seyfert/src/commands/applications/menu.ts:102](https://github.com/potoland/potocuit/blob/fe122a1/src/commands/applications/menu.ts#L102)
 
 ***
 
@@ -216,4 +216,4 @@ toJSON(): Object
 
 #### Source
 
-[seyfert/src/commands/applications/menu.ts:81](https://github.com/potoland/potocuit/blob/e332d7a/src/commands/applications/menu.ts#L81)
+[seyfert/src/commands/applications/menu.ts:81](https://github.com/potoland/potocuit/blob/fe122a1/src/commands/applications/menu.ts#L81)

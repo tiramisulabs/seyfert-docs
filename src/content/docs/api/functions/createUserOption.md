@@ -13,7 +13,7 @@ createUserOption<T>(data: T): T & Object
 
 | Type parameter | Value |
 | :------ | :------ |
-| `T` extends `SeyfertUserOption` | `SeyfertUserOption` |
+| `T` extends [`SeyfertUserOption`](/api/type-aliases/seyfertuseroption/) | [`SeyfertUserOption`](/api/type-aliases/seyfertuseroption/) |
 
 ## Parameters
 
@@ -27,4 +27,4 @@ createUserOption<T>(data: T): T & Object
 
 ## Source
 
-[seyfert/src/commands/applications/options.ts:56](https://github.com/potoland/potocuit/blob/e332d7a/src/commands/applications/options.ts#L56)
+[seyfert/src/commands/applications/options.ts:63](https://github.com/potoland/potocuit/blob/fe122a1/src/commands/applications/options.ts#L63)

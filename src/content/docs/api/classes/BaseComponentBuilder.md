@@ -37,7 +37,7 @@ new BaseComponentBuilder<TYPE>(data: Partial<TYPE>): BaseComponentBuilder<TYPE>
 
 #### Source
 
-[seyfert/src/builders/Base.ts:6](https://github.com/potoland/potocuit/blob/e332d7a/src/builders/Base.ts#L6)
+[seyfert/src/builders/Base.ts:6](https://github.com/potoland/potocuit/blob/fe122a1/src/builders/Base.ts#L6)
 
 ## Properties
 
@@ -59,4 +59,4 @@ toJSON(): TYPE
 
 #### Source
 
-[seyfert/src/builders/Base.ts:8](https://github.com/potoland/potocuit/blob/e332d7a/src/builders/Base.ts#L8)
+[seyfert/src/builders/Base.ts:8](https://github.com/potoland/potocuit/blob/fe122a1/src/builders/Base.ts#L8)

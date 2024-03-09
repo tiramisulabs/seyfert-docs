@@ -21,4 +21,4 @@ generateShardInfo(shard: Shard): WorkerShardInfo
 
 ## Source
 
-[seyfert/src/client/workerclient.ts:236](https://github.com/potoland/potocuit/blob/e332d7a/src/client/workerclient.ts#L236)
+[seyfert/src/client/workerclient.ts:259](https://github.com/potoland/potocuit/blob/fe122a1/src/client/workerclient.ts#L259)

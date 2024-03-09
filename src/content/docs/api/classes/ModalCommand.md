@@ -44,7 +44,7 @@ abstract filter(interaction: ModalSubmitInteraction<boolean>): boolean | Promise
 
 #### Source
 
-[seyfert/src/components/command.ts:26](https://github.com/potoland/potocuit/blob/e332d7a/src/components/command.ts#L26)
+[seyfert/src/components/command.ts:26](https://github.com/potoland/potocuit/blob/fe122a1/src/components/command.ts#L26)
 
 ***
 
@@ -66,4 +66,4 @@ abstract run(interaction: ModalSubmitInteraction<boolean>): any
 
 #### Source
 
-[seyfert/src/components/command.ts:27](https://github.com/potoland/potocuit/blob/e332d7a/src/components/command.ts#L27)
+[seyfert/src/components/command.ts:27](https://github.com/potoland/potocuit/blob/fe122a1/src/components/command.ts#L27)

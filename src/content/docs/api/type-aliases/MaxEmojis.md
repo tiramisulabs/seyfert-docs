@@ -13,4 +13,4 @@ Maximun custom guild emojis per level
 
 ## Source
 
-[seyfert/src/structures/Guild.ts:81](https://github.com/potoland/potocuit/blob/e332d7a/src/structures/Guild.ts#L81)
+[seyfert/src/structures/Guild.ts:81](https://github.com/potoland/potocuit/blob/fe122a1/src/structures/Guild.ts#L81)

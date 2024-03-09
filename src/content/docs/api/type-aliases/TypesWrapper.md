@@ -11,4 +11,4 @@ type __TypesWrapper: { [P in keyof typeof ApplicationCommandOptionType]: \${type
 
 ## Source
 
-[seyfert/src/commands/applications/chat.ts:56](https://github.com/potoland/potocuit/blob/e332d7a/src/commands/applications/chat.ts#L56)
+[seyfert/src/commands/applications/chat.ts:57](https://github.com/potoland/potocuit/blob/fe122a1/src/commands/applications/chat.ts#L57)

@@ -21,4 +21,4 @@ fromComponent(data: APIActionRowComponentTypes | BuilderComponents | APIActionRo
 
 ## Source
 
-[seyfert/src/builders/index.ts:23](https://github.com/potoland/potocuit/blob/e332d7a/src/builders/index.ts#L23)
+[seyfert/src/builders/index.ts:23](https://github.com/potoland/potocuit/blob/fe122a1/src/builders/index.ts#L23)

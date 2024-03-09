@@ -32,4 +32,4 @@ type MiddlewareContext<T, C>: (context: Object) => any;
 
 ## Source
 
-[seyfert/src/commands/applications/shared.ts:15](https://github.com/potoland/potocuit/blob/e332d7a/src/commands/applications/shared.ts#L15)
+[seyfert/src/commands/applications/shared.ts:18](https://github.com/potoland/potocuit/blob/fe122a1/src/commands/applications/shared.ts#L18)

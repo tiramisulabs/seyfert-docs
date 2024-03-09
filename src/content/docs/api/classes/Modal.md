@@ -47,7 +47,7 @@ Creates a new Modal instance.
 
 #### Source
 
-[seyfert/src/builders/Modal.ts:36](https://github.com/potoland/potocuit/blob/e332d7a/src/builders/Modal.ts#L36)
+[seyfert/src/builders/Modal.ts:35](https://github.com/potoland/potocuit/blob/fe122a1/src/builders/Modal.ts#L35)
 
 ## Properties
 
@@ -80,7 +80,7 @@ The current Modal instance.
 
 #### Source
 
-[seyfert/src/builders/Modal.ts:45](https://github.com/potoland/potocuit/blob/e332d7a/src/builders/Modal.ts#L45)
+[seyfert/src/builders/Modal.ts:44](https://github.com/potoland/potocuit/blob/fe122a1/src/builders/Modal.ts#L44)
 
 ***
 
@@ -106,7 +106,7 @@ The current Modal instance.
 
 #### Source
 
-[seyfert/src/builders/Modal.ts:75](https://github.com/potoland/potocuit/blob/e332d7a/src/builders/Modal.ts#L75)
+[seyfert/src/builders/Modal.ts:74](https://github.com/potoland/potocuit/blob/fe122a1/src/builders/Modal.ts#L74)
 
 ***
 
@@ -132,7 +132,7 @@ The current Modal instance.
 
 #### Source
 
-[seyfert/src/builders/Modal.ts:65](https://github.com/potoland/potocuit/blob/e332d7a/src/builders/Modal.ts#L65)
+[seyfert/src/builders/Modal.ts:64](https://github.com/potoland/potocuit/blob/fe122a1/src/builders/Modal.ts#L64)
 
 ***
 
@@ -158,7 +158,7 @@ The current Modal instance.
 
 #### Source
 
-[seyfert/src/builders/Modal.ts:55](https://github.com/potoland/potocuit/blob/e332d7a/src/builders/Modal.ts#L55)
+[seyfert/src/builders/Modal.ts:54](https://github.com/potoland/potocuit/blob/fe122a1/src/builders/Modal.ts#L54)
 
 ***
 
@@ -178,4 +178,4 @@ The modal data in JSON format.
 
 #### Source
 
-[seyfert/src/builders/Modal.ts:84](https://github.com/potoland/potocuit/blob/e332d7a/src/builders/Modal.ts#L84)
+[seyfert/src/builders/Modal.ts:83](https://github.com/potoland/potocuit/blob/fe122a1/src/builders/Modal.ts#L83)

@@ -45,7 +45,7 @@ __reply?: __InternalReplyFunction): ApplicationCommandInteraction<FromGuild, Typ
 
 #### Source
 
-[seyfert/src/structures/Interaction.ts:93](https://github.com/potoland/potocuit/blob/e332d7a/src/structures/Interaction.ts#L93)
+[seyfert/src/structures/Interaction.ts:93](https://github.com/potoland/potocuit/blob/fe122a1/src/structures/Interaction.ts#L93)
 
 ## Properties
 
@@ -86,7 +86,7 @@ createdAt gets the creation Date instace of the current object.
 
 #### Source
 
-[seyfert/src/structures/extra/DiscordBase.ts:27](https://github.com/potoland/potocuit/blob/e332d7a/src/structures/extra/DiscordBase.ts#L27)
+[seyfert/src/structures/extra/DiscordBase.ts:27](https://github.com/potoland/potocuit/blob/fe122a1/src/structures/extra/DiscordBase.ts#L27)
 
 ***
 
@@ -104,7 +104,7 @@ Create a timestamp for the current object.
 
 #### Source
 
-[seyfert/src/structures/extra/DiscordBase.ts:20](https://github.com/potoland/potocuit/blob/e332d7a/src/structures/extra/DiscordBase.ts#L20)
+[seyfert/src/structures/extra/DiscordBase.ts:20](https://github.com/potoland/potocuit/blob/fe122a1/src/structures/extra/DiscordBase.ts#L20)
 
 ## Methods
 
@@ -130,7 +130,7 @@ createResponse(__namedParameters: Omit<RESTPostAPIWebhookWithTokenJSONBody, "com
 
 #### Source
 
-[seyfert/src/structures/Interaction.ts:405](https://github.com/potoland/potocuit/blob/e332d7a/src/structures/Interaction.ts#L405)
+[seyfert/src/structures/Interaction.ts:409](https://github.com/potoland/potocuit/blob/fe122a1/src/structures/Interaction.ts#L409)
 
 ***
 
@@ -156,7 +156,7 @@ deferReply(flags?: MessageFlags): Promise<void>
 
 #### Source
 
-[seyfert/src/structures/Interaction.ts:215](https://github.com/potoland/potocuit/blob/e332d7a/src/structures/Interaction.ts#L215)
+[seyfert/src/structures/Interaction.ts:215](https://github.com/potoland/potocuit/blob/fe122a1/src/structures/Interaction.ts#L215)
 
 ***
 
@@ -182,7 +182,7 @@ deleteMessage(messageId: string): Promise<void>
 
 #### Source
 
-[seyfert/src/structures/Interaction.ts:397](https://github.com/potoland/potocuit/blob/e332d7a/src/structures/Interaction.ts#L397)
+[seyfert/src/structures/Interaction.ts:401](https://github.com/potoland/potocuit/blob/fe122a1/src/structures/Interaction.ts#L401)
 
 ***
 
@@ -202,7 +202,7 @@ deleteResponse(): Promise<void>
 
 #### Source
 
-[seyfert/src/structures/Interaction.ts:393](https://github.com/potoland/potocuit/blob/e332d7a/src/structures/Interaction.ts#L393)
+[seyfert/src/structures/Interaction.ts:397](https://github.com/potoland/potocuit/blob/fe122a1/src/structures/Interaction.ts#L397)
 
 ***
 
@@ -229,7 +229,7 @@ editMessage(messageId: string, body: Omit<RESTPatchAPIWebhookWithTokenMessageJSO
 
 #### Source
 
-[seyfert/src/structures/Interaction.ts:375](https://github.com/potoland/potocuit/blob/e332d7a/src/structures/Interaction.ts#L375)
+[seyfert/src/structures/Interaction.ts:379](https://github.com/potoland/potocuit/blob/fe122a1/src/structures/Interaction.ts#L379)
 
 ***
 
@@ -262,7 +262,7 @@ editOrReply<FR>(body: Omit<APIInteractionResponseCallbackData, "components" | "e
 
 #### Source
 
-[seyfert/src/structures/Interaction.ts:363](https://github.com/potoland/potocuit/blob/e332d7a/src/structures/Interaction.ts#L363)
+[seyfert/src/structures/Interaction.ts:367](https://github.com/potoland/potocuit/blob/fe122a1/src/structures/Interaction.ts#L367)
 
 ***
 
@@ -288,7 +288,33 @@ editResponse(body: Omit<RESTPatchAPIWebhookWithTokenMessageJSONBody, "components
 
 #### Source
 
-[seyfert/src/structures/Interaction.ts:389](https://github.com/potoland/potocuit/blob/e332d7a/src/structures/Interaction.ts#L389)
+[seyfert/src/structures/Interaction.ts:393](https://github.com/potoland/potocuit/blob/fe122a1/src/structures/Interaction.ts#L393)
+
+***
+
+### fetchGuild()
+
+```ts
+fetchGuild(force: boolean): undefined | Promise<Guild<"cached"> | Guild<"api">>
+```
+
+#### Parameters
+
+| Parameter | Type | Default value |
+| :------ | :------ | :------ |
+| `force` | `boolean` | `false` |
+
+#### Returns
+
+`undefined` \| `Promise`\<[`Guild`](/api/classes/guild/)\<`"cached"`\> \| [`Guild`](/api/classes/guild/)\<`"api"`\>\>
+
+#### Inherited from
+
+[`Interaction`](/api/classes/interaction/).[`fetchGuild`](/api/classes/interaction/#fetchguild)
+
+#### Source
+
+[seyfert/src/structures/Interaction.ts:277](https://github.com/potoland/potocuit/blob/fe122a1/src/structures/Interaction.ts#L277)
 
 ***
 
@@ -314,7 +340,7 @@ fetchMessage(messageId: string): Promise<undefined | WebhookMessage>
 
 #### Source
 
-[seyfert/src/structures/Interaction.ts:336](https://github.com/potoland/potocuit/blob/e332d7a/src/structures/Interaction.ts#L336)
+[seyfert/src/structures/Interaction.ts:340](https://github.com/potoland/potocuit/blob/fe122a1/src/structures/Interaction.ts#L340)
 
 ***
 
@@ -334,7 +360,7 @@ fetchResponse(): Promise<undefined | WebhookMessage>
 
 #### Source
 
-[seyfert/src/structures/Interaction.ts:340](https://github.com/potoland/potocuit/blob/e332d7a/src/structures/Interaction.ts#L340)
+[seyfert/src/structures/Interaction.ts:344](https://github.com/potoland/potocuit/blob/fe122a1/src/structures/Interaction.ts#L344)
 
 ***
 
@@ -360,7 +386,7 @@ modal(body: ModalCreateBodyRequest): Promise<void>
 
 #### Source
 
-[seyfert/src/structures/Interaction.ts:356](https://github.com/potoland/potocuit/blob/e332d7a/src/structures/Interaction.ts#L356)
+[seyfert/src/structures/Interaction.ts:360](https://github.com/potoland/potocuit/blob/fe122a1/src/structures/Interaction.ts#L360)
 
 ***
 
@@ -386,7 +412,7 @@ reply(body: ReplyInteractionBody): Promise<void>
 
 #### Source
 
-[seyfert/src/structures/Interaction.ts:189](https://github.com/potoland/potocuit/blob/e332d7a/src/structures/Interaction.ts#L189)
+[seyfert/src/structures/Interaction.ts:189](https://github.com/potoland/potocuit/blob/fe122a1/src/structures/Interaction.ts#L189)
 
 ***
 
@@ -408,7 +434,7 @@ respond(data: APIInteractionResponseChannelMessageWithSource | APIInteractionRes
 
 #### Source
 
-[seyfert/src/structures/Interaction.ts:424](https://github.com/potoland/potocuit/blob/e332d7a/src/structures/Interaction.ts#L424)
+[seyfert/src/structures/Interaction.ts:428](https://github.com/potoland/potocuit/blob/fe122a1/src/structures/Interaction.ts#L428)
 
 ***
 
@@ -441,7 +467,7 @@ write<FR>(body: Omit<APIInteractionResponseCallbackData, "components" | "embeds"
 
 #### Source
 
-[seyfert/src/structures/Interaction.ts:344](https://github.com/potoland/potocuit/blob/e332d7a/src/structures/Interaction.ts#L344)
+[seyfert/src/structures/Interaction.ts:348](https://github.com/potoland/potocuit/blob/fe122a1/src/structures/Interaction.ts#L348)
 
 ***
 
@@ -472,7 +498,7 @@ __reply?: __InternalReplyFunction): StringSelectMenuInteraction<string[]> | Auto
 
 #### Source
 
-[seyfert/src/structures/Interaction.ts:224](https://github.com/potoland/potocuit/blob/e332d7a/src/structures/Interaction.ts#L224)
+[seyfert/src/structures/Interaction.ts:224](https://github.com/potoland/potocuit/blob/fe122a1/src/structures/Interaction.ts#L224)
 
 ***
 
@@ -504,7 +530,7 @@ static transformBody<T>(body: Omit<RESTPostAPIChannelMessageJSONBody, "component
 
 #### Source
 
-[seyfert/src/structures/Interaction.ts:163](https://github.com/potoland/potocuit/blob/e332d7a/src/structures/Interaction.ts#L163)
+[seyfert/src/structures/Interaction.ts:163](https://github.com/potoland/potocuit/blob/fe122a1/src/structures/Interaction.ts#L163)
 
 ***
 
@@ -530,4 +556,4 @@ static transformBodyRequest(body: ReplyInteractionBody): APIInteractionResponse
 
 #### Source
 
-[seyfert/src/structures/Interaction.ts:119](https://github.com/potoland/potocuit/blob/e332d7a/src/structures/Interaction.ts#L119)
+[seyfert/src/structures/Interaction.ts:119](https://github.com/potoland/potocuit/blob/fe122a1/src/structures/Interaction.ts#L119)

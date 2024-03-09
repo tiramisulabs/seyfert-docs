@@ -29,7 +29,7 @@ Constructs a new Logger instance with the provided options.
 
 #### Source
 
-[seyfert/src/common/it/logger.ts:49](https://github.com/potoland/potocuit/blob/e332d7a/src/common/it/logger.ts#L49)
+[seyfert/src/common/it/logger.ts:66](https://github.com/potoland/potocuit/blob/fe122a1/src/common/it/logger.ts#L66)
 
 ## Properties
 
@@ -38,7 +38,10 @@ Constructs a new Logger instance with the provided options.
 | `options` | `readonly` | `Required`\<`LoggerOptions`\> | The options for configuring the logger. |
 | `DEFAULT_OPTIONS` | `static` | `Required`\<`LoggerOptions`\> | The default options for the logger. |
 | `colorFunctions` | `static` | `Map`\<`LogLevels`, (`str`: `string`) => `string`\> | A map containing color functions for different log levels. |
+| `dirname` | `static` | `string` | - |
 | `prefixes` | `static` | `Map`\<`LogLevels`, `string`\> | A map containing prefixes for different log levels. |
+| `saveOnFile?` | `static` | `string`[] \| `"all"` | - |
+| `streams` | `static` | `Partial`\<`Record`\<`string`, `WriteStream`\>\> | - |
 
 ## Accessors
 
@@ -68,7 +71,7 @@ Sets whether the logger is active or not.
 
 #### Source
 
-[seyfert/src/common/it/logger.ts:77](https://github.com/potoland/potocuit/blob/e332d7a/src/common/it/logger.ts#L77)
+[seyfert/src/common/it/logger.ts:102](https://github.com/potoland/potocuit/blob/fe122a1/src/common/it/logger.ts#L102)
 
 ***
 
@@ -98,7 +101,7 @@ Sets the log level of the logger.
 
 #### Source
 
-[seyfert/src/common/it/logger.ts:63](https://github.com/potoland/potocuit/blob/e332d7a/src/common/it/logger.ts#L63)
+[seyfert/src/common/it/logger.ts:80](https://github.com/potoland/potocuit/blob/fe122a1/src/common/it/logger.ts#L80)
 
 ***
 
@@ -128,7 +131,33 @@ Sets the name of the logger.
 
 #### Source
 
-[seyfert/src/common/it/logger.ts:91](https://github.com/potoland/potocuit/blob/e332d7a/src/common/it/logger.ts#L91)
+[seyfert/src/common/it/logger.ts:116](https://github.com/potoland/potocuit/blob/fe122a1/src/common/it/logger.ts#L116)
+
+***
+
+### saveOnFile
+
+```ts
+get saveOnFile(): boolean
+```
+
+```ts
+set saveOnFile(saveOnFile: boolean): void
+```
+
+#### Parameters
+
+| Parameter | Type |
+| :------ | :------ |
+| `saveOnFile` | `boolean` |
+
+#### Returns
+
+`boolean`
+
+#### Source
+
+[seyfert/src/common/it/logger.ts:88](https://github.com/potoland/potocuit/blob/fe122a1/src/common/it/logger.ts#L88)
 
 ## Methods
 
@@ -152,7 +181,7 @@ Logs a debug message.
 
 #### Source
 
-[seyfert/src/common/it/logger.ts:129](https://github.com/potoland/potocuit/blob/e332d7a/src/common/it/logger.ts#L129)
+[seyfert/src/common/it/logger.ts:154](https://github.com/potoland/potocuit/blob/fe122a1/src/common/it/logger.ts#L154)
 
 ***
 
@@ -176,7 +205,7 @@ Logs an error message.
 
 #### Source
 
-[seyfert/src/common/it/logger.ts:153](https://github.com/potoland/potocuit/blob/e332d7a/src/common/it/logger.ts#L153)
+[seyfert/src/common/it/logger.ts:178](https://github.com/potoland/potocuit/blob/fe122a1/src/common/it/logger.ts#L178)
 
 ***
 
@@ -200,7 +229,7 @@ Logs a fatal error message.
 
 #### Source
 
-[seyfert/src/common/it/logger.ts:161](https://github.com/potoland/potocuit/blob/e332d7a/src/common/it/logger.ts#L161)
+[seyfert/src/common/it/logger.ts:186](https://github.com/potoland/potocuit/blob/fe122a1/src/common/it/logger.ts#L186)
 
 ***
 
@@ -224,7 +253,7 @@ Logs an info message.
 
 #### Source
 
-[seyfert/src/common/it/logger.ts:137](https://github.com/potoland/potocuit/blob/e332d7a/src/common/it/logger.ts#L137)
+[seyfert/src/common/it/logger.ts:162](https://github.com/potoland/potocuit/blob/fe122a1/src/common/it/logger.ts#L162)
 
 ***
 
@@ -251,7 +280,7 @@ The logged message.
 
 #### Source
 
-[seyfert/src/common/it/logger.ts:101](https://github.com/potoland/potocuit/blob/e332d7a/src/common/it/logger.ts#L101)
+[seyfert/src/common/it/logger.ts:126](https://github.com/potoland/potocuit/blob/fe122a1/src/common/it/logger.ts#L126)
 
 ***
 
@@ -275,7 +304,23 @@ Logs a warning message.
 
 #### Source
 
-[seyfert/src/common/it/logger.ts:145](https://github.com/potoland/potocuit/blob/e332d7a/src/common/it/logger.ts#L145)
+[seyfert/src/common/it/logger.ts:170](https://github.com/potoland/potocuit/blob/fe122a1/src/common/it/logger.ts#L170)
+
+***
+
+### clearLogs()
+
+```ts
+static clearLogs(): Promise<void>
+```
+
+#### Returns
+
+`Promise`\<`void`\>
+
+#### Source
+
+[seyfert/src/common/it/logger.ts:54](https://github.com/potoland/potocuit/blob/fe122a1/src/common/it/logger.ts#L54)
 
 ***
 
@@ -307,7 +352,7 @@ Logger.customize((logger, level, args) => {
 
 #### Source
 
-[seyfert/src/common/it/logger.ts:41](https://github.com/potoland/potocuit/blob/e332d7a/src/common/it/logger.ts#L41)
+[seyfert/src/common/it/logger.ts:50](https://github.com/potoland/potocuit/blob/fe122a1/src/common/it/logger.ts#L50)
 
 ***
 
@@ -333,4 +378,4 @@ The input message as is.
 
 #### Source
 
-[seyfert/src/common/it/logger.ts:179](https://github.com/potoland/potocuit/blob/e332d7a/src/common/it/logger.ts#L179)
+[seyfert/src/common/it/logger.ts:220](https://github.com/potoland/potocuit/blob/fe122a1/src/common/it/logger.ts#L220)

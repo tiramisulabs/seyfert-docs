@@ -11,4 +11,4 @@ type BuilderComponents: MessageBuilderComponents | TextInput;
 
 ## Source
 
-[seyfert/src/builders/types.ts:20](https://github.com/potoland/potocuit/blob/e332d7a/src/builders/types.ts#L20)
+[seyfert/src/builders/types.ts:20](https://github.com/potoland/potocuit/blob/fe122a1/src/builders/types.ts#L20)

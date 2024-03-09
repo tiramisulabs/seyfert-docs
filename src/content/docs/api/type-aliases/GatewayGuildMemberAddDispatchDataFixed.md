@@ -17,4 +17,4 @@ type GatewayGuildMemberAddDispatchDataFixed<Pending>: Pending extends true ? Omi
 
 ## Source
 
-[seyfert/src/structures/GuildMember.ts:31](https://github.com/potoland/potocuit/blob/e332d7a/src/structures/GuildMember.ts#L31)
+[seyfert/src/structures/GuildMember.ts:31](https://github.com/potoland/potocuit/blob/fe122a1/src/structures/GuildMember.ts#L31)

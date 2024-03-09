@@ -21,4 +21,4 @@ throwError(msg: string): never
 
 ## Source
 
-[seyfert/src/index.ts:21](https://github.com/potoland/potocuit/blob/e332d7a/src/index.ts#L21)
+[seyfert/src/index.ts:25](https://github.com/potoland/potocuit/blob/fe122a1/src/index.ts#L25)

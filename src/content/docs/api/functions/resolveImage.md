@@ -25,4 +25,4 @@ The resolved base64 data URL.
 
 ## Source
 
-[seyfert/src/builders/Attachment.ts:209](https://github.com/potoland/potocuit/blob/e332d7a/src/builders/Attachment.ts#L209)
+[seyfert/src/builders/Attachment.ts:234](https://github.com/potoland/potocuit/blob/fe122a1/src/builders/Attachment.ts#L234)

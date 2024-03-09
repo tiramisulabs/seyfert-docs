@@ -13,7 +13,7 @@ createAttachmentOption<T>(data: T): T & Object
 
 | Type parameter | Value |
 | :------ | :------ |
-| `T` extends `SeyfertAttachmentOption` | `SeyfertAttachmentOption` |
+| `T` extends [`SeyfertAttachmentOption`](/api/type-aliases/seyfertattachmentoption/) | [`SeyfertAttachmentOption`](/api/type-aliases/seyfertattachmentoption/) |
 
 ## Parameters
 
@@ -27,4 +27,4 @@ createAttachmentOption<T>(data: T): T & Object
 
 ## Source
 
-[seyfert/src/commands/applications/options.ts:76](https://github.com/potoland/potocuit/blob/e332d7a/src/commands/applications/options.ts#L76)
+[seyfert/src/commands/applications/options.ts:83](https://github.com/potoland/potocuit/blob/fe122a1/src/commands/applications/options.ts#L83)

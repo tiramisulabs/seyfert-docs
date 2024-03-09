@@ -35,7 +35,7 @@ new WebhookChannelMethods(client: BaseClient, data:     Object): WebhookChannelM
 
 #### Source
 
-[seyfert/src/structures/extra/DiscordBase.ts:7](https://github.com/potoland/potocuit/blob/e332d7a/src/structures/extra/DiscordBase.ts#L7)
+[seyfert/src/structures/extra/DiscordBase.ts:7](https://github.com/potoland/potocuit/blob/fe122a1/src/structures/extra/DiscordBase.ts#L7)
 
 ## Properties
 
@@ -63,7 +63,7 @@ createdAt gets the creation Date instace of the current object.
 
 #### Source
 
-[seyfert/src/structures/extra/DiscordBase.ts:27](https://github.com/potoland/potocuit/blob/e332d7a/src/structures/extra/DiscordBase.ts#L27)
+[seyfert/src/structures/extra/DiscordBase.ts:27](https://github.com/potoland/potocuit/blob/fe122a1/src/structures/extra/DiscordBase.ts#L27)
 
 ***
 
@@ -81,7 +81,7 @@ Create a timestamp for the current object.
 
 #### Source
 
-[seyfert/src/structures/extra/DiscordBase.ts:20](https://github.com/potoland/potocuit/blob/e332d7a/src/structures/extra/DiscordBase.ts#L20)
+[seyfert/src/structures/extra/DiscordBase.ts:20](https://github.com/potoland/potocuit/blob/fe122a1/src/structures/extra/DiscordBase.ts#L20)
 
 ## Methods
 
@@ -110,4 +110,4 @@ static channel(ctx:     Object): Object
 
 #### Source
 
-[seyfert/src/structures/channels.ts:345](https://github.com/potoland/potocuit/blob/e332d7a/src/structures/channels.ts#L345)
+[seyfert/src/structures/channels.ts:374](https://github.com/potoland/potocuit/blob/fe122a1/src/structures/channels.ts#L374)

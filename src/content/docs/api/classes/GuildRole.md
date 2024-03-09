@@ -7,7 +7,7 @@ title: "GuildRole"
 
 ## Extends
 
-- `DiscordBase`.`ObjectToLower`\<`APIRole`\>
+- `DiscordBase`.`ObjectToLower`\<`Omit`\<`APIRole`, `"permissions"`\>\>
 
 ## Constructors
 
@@ -38,7 +38,7 @@ new GuildRole(
 
 #### Source
 
-[seyfert/src/structures/GuildRole.ts:15](https://github.com/potoland/potocuit/blob/e332d7a/src/structures/GuildRole.ts#L15)
+[seyfert/src/structures/GuildRole.ts:17](https://github.com/potoland/potocuit/blob/fe122a1/src/structures/GuildRole.ts#L17)
 
 ## Properties
 
@@ -54,7 +54,7 @@ new GuildRole(
 | `managed` | `public` | `boolean` | `ObjectToLower.managed` |
 | `mentionable` | `public` | `boolean` | `ObjectToLower.mentionable` |
 | `name` | `public` | `string` | `ObjectToLower.name` |
-| `permissions` | `public` | `string` | `ObjectToLower.permissions` |
+| `permissions` | `public` | `PermissionsBitField` | - |
 | `position` | `public` | `number` | `ObjectToLower.position` |
 | `tags` | `public` | `undefined` \| `APIRoleTags` | `ObjectToLower.tags` |
 | `unicodeEmoji` | `public` | `undefined` \| `null` \| `string` | `ObjectToLower.unicodeEmoji` |
@@ -75,7 +75,7 @@ createdAt gets the creation Date instace of the current object.
 
 #### Source
 
-[seyfert/src/structures/extra/DiscordBase.ts:27](https://github.com/potoland/potocuit/blob/e332d7a/src/structures/extra/DiscordBase.ts#L27)
+[seyfert/src/structures/extra/DiscordBase.ts:27](https://github.com/potoland/potocuit/blob/fe122a1/src/structures/extra/DiscordBase.ts#L27)
 
 ***
 
@@ -93,7 +93,7 @@ Create a timestamp for the current object.
 
 #### Source
 
-[seyfert/src/structures/extra/DiscordBase.ts:20](https://github.com/potoland/potocuit/blob/e332d7a/src/structures/extra/DiscordBase.ts#L20)
+[seyfert/src/structures/extra/DiscordBase.ts:20](https://github.com/potoland/potocuit/blob/fe122a1/src/structures/extra/DiscordBase.ts#L20)
 
 ## Methods
 
@@ -115,7 +115,7 @@ delete(reason?: string): Promise<undefined | void>
 
 #### Source
 
-[seyfert/src/structures/GuildRole.ts:32](https://github.com/potoland/potocuit/blob/e332d7a/src/structures/GuildRole.ts#L32)
+[seyfert/src/structures/GuildRole.ts:35](https://github.com/potoland/potocuit/blob/fe122a1/src/structures/GuildRole.ts#L35)
 
 ***
 
@@ -138,14 +138,14 @@ edit(body: RESTPatchAPIGuildRoleJSONBody, reason?: string): Promise<any>
 
 #### Source
 
-[seyfert/src/structures/GuildRole.ts:28](https://github.com/potoland/potocuit/blob/e332d7a/src/structures/GuildRole.ts#L28)
+[seyfert/src/structures/GuildRole.ts:31](https://github.com/potoland/potocuit/blob/fe122a1/src/structures/GuildRole.ts#L31)
 
 ***
 
 ### guild()
 
 ```ts
-guild(force: boolean): Promise<undefined | Guild<"cached"> | Guild<"api">>
+guild(force: boolean): undefined | Promise<Guild<"cached"> | Guild<"api">>
 ```
 
 #### Parameters
@@ -156,11 +156,11 @@ guild(force: boolean): Promise<undefined | Guild<"cached"> | Guild<"api">>
 
 #### Returns
 
-`Promise`\<`undefined` \| [`Guild`](/api/classes/guild/)\<`"cached"`\> \| [`Guild`](/api/classes/guild/)\<`"api"`\>\>
+`undefined` \| `Promise`\<[`Guild`](/api/classes/guild/)\<`"cached"`\> \| [`Guild`](/api/classes/guild/)\<`"api"`\>\>
 
 #### Source
 
-[seyfert/src/structures/GuildRole.ts:23](https://github.com/potoland/potocuit/blob/e332d7a/src/structures/GuildRole.ts#L23)
+[seyfert/src/structures/GuildRole.ts:26](https://github.com/potoland/potocuit/blob/fe122a1/src/structures/GuildRole.ts#L26)
 
 ***
 
@@ -192,4 +192,4 @@ static methods(ctx:     Object): Object
 
 #### Source
 
-[seyfert/src/structures/GuildRole.ts:36](https://github.com/potoland/potocuit/blob/e332d7a/src/structures/GuildRole.ts#L36)
+[seyfert/src/structures/GuildRole.ts:39](https://github.com/potoland/potocuit/blob/fe122a1/src/structures/GuildRole.ts#L39)

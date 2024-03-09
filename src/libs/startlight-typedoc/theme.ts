@@ -32,7 +32,6 @@ class StarlightTypeDocThemeRenderContext extends MarkdownThemeRenderContext {
         // @ts-expect-error - https://github.com/tgreyuk/typedoc-plugin-markdown/blob/37f9de583074e725159f57d70f3ed130007a964c/docs/pages/customizing/custom-theme.mdx
         ...this.partials,
         linkTo: (text: string, link: string) => {
-            let markdown = this.#markdownThemeRenderContext.partials.linkTo(text, link)
             const url = this.parseUrl(link)
             return `[${text}](${url})`
         },

@@ -17,4 +17,4 @@ type InteractionTarget<T>: T extends MessageCommandInteraction ? Message : User;
 
 ## Source
 
-[seyfert/src/commands/applications/menucontext.ts:14](https://github.com/potoland/potocuit/blob/e332d7a/src/commands/applications/menucontext.ts#L14)
+[seyfert/src/commands/applications/menucontext.ts:22](https://github.com/potoland/potocuit/blob/fe122a1/src/commands/applications/menucontext.ts#L22)

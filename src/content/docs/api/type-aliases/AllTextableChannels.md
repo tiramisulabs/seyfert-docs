@@ -16,4 +16,4 @@ type AllTextableChannels:
 
 ## Source
 
-[seyfert/src/structures/channels.ts:506](https://github.com/potoland/potocuit/blob/e332d7a/src/structures/channels.ts#L506)
+[seyfert/src/structures/channels.ts:537](https://github.com/potoland/potocuit/blob/fe122a1/src/structures/channels.ts#L537)

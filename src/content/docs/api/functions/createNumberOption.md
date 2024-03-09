@@ -13,7 +13,7 @@ createNumberOption<T>(data: T): T & Object
 
 | Type parameter | Value |
 | :------ | :------ |
-| `T` extends `SeyfertNumberOption` | `SeyfertNumberOption` |
+| `T` extends [`SeyfertNumberOption`](/api/type-aliases/seyfertnumberoption/) | [`SeyfertNumberOption`](/api/type-aliases/seyfertnumberoption/) |
 
 ## Parameters
 
@@ -27,4 +27,4 @@ createNumberOption<T>(data: T): T & Object
 
 ## Source
 
-[seyfert/src/commands/applications/options.ts:72](https://github.com/potoland/potocuit/blob/e332d7a/src/commands/applications/options.ts#L72)
+[seyfert/src/commands/applications/options.ts:79](https://github.com/potoland/potocuit/blob/fe122a1/src/commands/applications/options.ts#L79)

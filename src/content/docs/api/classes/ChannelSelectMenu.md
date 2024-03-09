@@ -44,7 +44,7 @@ new ChannelSelectMenu(data: Partial<APIChannelSelectComponent>): ChannelSelectMe
 
 #### Source
 
-[seyfert/src/builders/SelectMenu.ts:212](https://github.com/potoland/potocuit/blob/e332d7a/src/builders/SelectMenu.ts#L212)
+[seyfert/src/builders/SelectMenu.ts:214](https://github.com/potoland/potocuit/blob/fe122a1/src/builders/SelectMenu.ts#L214)
 
 ## Properties
 
@@ -76,7 +76,7 @@ The current ChannelSelectMenu instance.
 
 #### Source
 
-[seyfert/src/builders/SelectMenu.ts:221](https://github.com/potoland/potocuit/blob/e332d7a/src/builders/SelectMenu.ts#L221)
+[seyfert/src/builders/SelectMenu.ts:223](https://github.com/potoland/potocuit/blob/fe122a1/src/builders/SelectMenu.ts#L223)
 
 ***
 
@@ -107,7 +107,7 @@ The current SelectMenu instance.
 
 #### Source
 
-[seyfert/src/builders/SelectMenu.ts:115](https://github.com/potoland/potocuit/blob/e332d7a/src/builders/SelectMenu.ts#L115)
+[seyfert/src/builders/SelectMenu.ts:117](https://github.com/potoland/potocuit/blob/fe122a1/src/builders/SelectMenu.ts#L117)
 
 ***
 
@@ -134,7 +134,7 @@ The current ChannelSelectMenu instance.
 
 #### Source
 
-[seyfert/src/builders/SelectMenu.ts:243](https://github.com/potoland/potocuit/blob/e332d7a/src/builders/SelectMenu.ts#L243)
+[seyfert/src/builders/SelectMenu.ts:245](https://github.com/potoland/potocuit/blob/fe122a1/src/builders/SelectMenu.ts#L245)
 
 ***
 
@@ -164,7 +164,7 @@ The current SelectMenu instance.
 
 #### Source
 
-[seyfert/src/builders/SelectMenu.ts:74](https://github.com/potoland/potocuit/blob/e332d7a/src/builders/SelectMenu.ts#L74)
+[seyfert/src/builders/SelectMenu.ts:76](https://github.com/potoland/potocuit/blob/fe122a1/src/builders/SelectMenu.ts#L76)
 
 ***
 
@@ -190,7 +190,7 @@ The current ChannelSelectMenu instance.
 
 #### Source
 
-[seyfert/src/builders/SelectMenu.ts:233](https://github.com/potoland/potocuit/blob/e332d7a/src/builders/SelectMenu.ts#L233)
+[seyfert/src/builders/SelectMenu.ts:235](https://github.com/potoland/potocuit/blob/fe122a1/src/builders/SelectMenu.ts#L235)
 
 ***
 
@@ -221,7 +221,7 @@ The current SelectMenu instance.
 
 #### Source
 
-[seyfert/src/builders/SelectMenu.ts:105](https://github.com/potoland/potocuit/blob/e332d7a/src/builders/SelectMenu.ts#L105)
+[seyfert/src/builders/SelectMenu.ts:107](https://github.com/potoland/potocuit/blob/fe122a1/src/builders/SelectMenu.ts#L107)
 
 ***
 
@@ -251,7 +251,7 @@ The current SelectMenu instance.
 
 #### Source
 
-[seyfert/src/builders/SelectMenu.ts:84](https://github.com/potoland/potocuit/blob/e332d7a/src/builders/SelectMenu.ts#L84)
+[seyfert/src/builders/SelectMenu.ts:86](https://github.com/potoland/potocuit/blob/fe122a1/src/builders/SelectMenu.ts#L86)
 
 ***
 
@@ -281,7 +281,7 @@ The current SelectMenu instance.
 
 #### Source
 
-[seyfert/src/builders/SelectMenu.ts:94](https://github.com/potoland/potocuit/blob/e332d7a/src/builders/SelectMenu.ts#L94)
+[seyfert/src/builders/SelectMenu.ts:96](https://github.com/potoland/potocuit/blob/fe122a1/src/builders/SelectMenu.ts#L96)
 
 ***
 
@@ -301,4 +301,4 @@ toJSON(): APIChannelSelectComponent
 
 #### Source
 
-[seyfert/src/builders/Base.ts:8](https://github.com/potoland/potocuit/blob/e332d7a/src/builders/Base.ts#L8)
+[seyfert/src/builders/Base.ts:8](https://github.com/potoland/potocuit/blob/fe122a1/src/builders/Base.ts#L8)

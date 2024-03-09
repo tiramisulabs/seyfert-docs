@@ -17,4 +17,4 @@ type ParseClient<T>: T;
 
 ## Source
 
-[seyfert/src/commands/applications/shared.ts:13](https://github.com/potoland/potocuit/blob/e332d7a/src/commands/applications/shared.ts#L13)
+[seyfert/src/commands/applications/shared.ts:15](https://github.com/potoland/potocuit/blob/fe122a1/src/commands/applications/shared.ts#L15)

@@ -13,7 +13,7 @@ createIntegerOption<T>(data: T): T & Object
 
 | Type parameter | Value |
 | :------ | :------ |
-| `T` extends `SeyfertIntegerOption` | `SeyfertIntegerOption` |
+| `T` extends [`SeyfertIntegerOption`](/api/type-aliases/seyfertintegeroption/) | [`SeyfertIntegerOption`](/api/type-aliases/seyfertintegeroption/) |
 
 ## Parameters
 
@@ -27,4 +27,4 @@ createIntegerOption<T>(data: T): T & Object
 
 ## Source
 
-[seyfert/src/commands/applications/options.ts:48](https://github.com/potoland/potocuit/blob/e332d7a/src/commands/applications/options.ts#L48)
+[seyfert/src/commands/applications/options.ts:55](https://github.com/potoland/potocuit/blob/fe122a1/src/commands/applications/options.ts#L55)

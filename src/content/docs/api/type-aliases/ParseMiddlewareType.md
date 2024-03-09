@@ -6,7 +6,7 @@ title: "ParseMiddlewareType"
 ---
 
 ```ts
-type ParseMiddlewareType<T>: T extends MiddlewareContext<any, CommandContext> ? T : MiddlewareContext<T, CommandContext>;
+type ParseMiddlewareType<T>: T extends MiddlewareContext<any, CommandContext | MenuCommandContext<MessageCommandInteraction<boolean> | UserCommandInteraction<boolean>>> ? T : MiddlewareContext<T, CommandContext | MenuCommandContext<MessageCommandInteraction<boolean> | UserCommandInteraction<boolean>>>;
 ```
 
 ## Type parameters
@@ -17,4 +17,4 @@ type ParseMiddlewareType<T>: T extends MiddlewareContext<any, CommandContext> ? 
 
 ## Source
 
-[seyfert/src/commands/applications/options.ts:80](https://github.com/potoland/potocuit/blob/e332d7a/src/commands/applications/options.ts#L80)
+[seyfert/src/commands/applications/options.ts:87](https://github.com/potoland/potocuit/blob/fe122a1/src/commands/applications/options.ts#L87)

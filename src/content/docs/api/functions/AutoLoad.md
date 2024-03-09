@@ -32,4 +32,4 @@ AutoLoad(): <T>(target: T) => (...args: any[]) => __class<T> & T
 
 ## Source
 
-[seyfert/src/commands/decorators.ts:106](https://github.com/potoland/potocuit/blob/e332d7a/src/commands/decorators.ts#L106)
+[seyfert/src/commands/decorators.ts:112](https://github.com/potoland/potocuit/blob/fe122a1/src/commands/decorators.ts#L112)

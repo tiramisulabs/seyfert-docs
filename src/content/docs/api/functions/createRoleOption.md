@@ -13,7 +13,7 @@ createRoleOption<T>(data: T): T & Object
 
 | Type parameter | Value |
 | :------ | :------ |
-| `T` extends `SeyfertRoleOption` | `SeyfertRoleOption` |
+| `T` extends [`SeyfertRoleOption`](/api/type-aliases/seyfertroleoption/) | [`SeyfertRoleOption`](/api/type-aliases/seyfertroleoption/) |
 
 ## Parameters
 
@@ -27,4 +27,4 @@ createRoleOption<T>(data: T): T & Object
 
 ## Source
 
-[seyfert/src/commands/applications/options.ts:64](https://github.com/potoland/potocuit/blob/e332d7a/src/commands/applications/options.ts#L64)
+[seyfert/src/commands/applications/options.ts:71](https://github.com/potoland/potocuit/blob/fe122a1/src/commands/applications/options.ts#L71)

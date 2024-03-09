@@ -11,4 +11,4 @@ type ImageExtension: typeof ALLOWED_EXTENSIONS[number];
 
 ## Source
 
-[seyfert/src/api/utils/constants.ts:41](https://github.com/potoland/potocuit/blob/e332d7a/src/api/utils/constants.ts#L41)
+[seyfert/src/api/utils/constants.ts:6](https://github.com/potoland/potocuit/blob/fe122a1/src/api/utils/constants.ts#L6)

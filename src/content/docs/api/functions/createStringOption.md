@@ -13,7 +13,7 @@ createStringOption<T>(data: T): T & Object
 
 | Type parameter | Value |
 | :------ | :------ |
-| `T` extends `SeyfertStringOption` | `SeyfertStringOption` |
+| `T` extends [`SeyfertStringOption`](/api/type-aliases/seyfertstringoption/) | [`SeyfertStringOption`](/api/type-aliases/seyfertstringoption/) |
 
 ## Parameters
 
@@ -27,4 +27,4 @@ createStringOption<T>(data: T): T & Object
 
 ## Source
 
-[seyfert/src/commands/applications/options.ts:44](https://github.com/potoland/potocuit/blob/e332d7a/src/commands/applications/options.ts#L44)
+[seyfert/src/commands/applications/options.ts:51](https://github.com/potoland/potocuit/blob/fe122a1/src/commands/applications/options.ts#L51)

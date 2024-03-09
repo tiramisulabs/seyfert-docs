@@ -42,7 +42,7 @@ new StringSelectMenuInteraction<T>(...args: any[]): StringSelectMenuInteraction<
 
 #### Source
 
-[seyfert/src/common/types/util.ts:3](https://github.com/potoland/potocuit/blob/e332d7a/src/common/types/util.ts#L3)
+[seyfert/src/common/types/util.ts:3](https://github.com/potoland/potocuit/blob/fe122a1/src/common/types/util.ts#L3)
 
 ## Properties
 
@@ -69,7 +69,7 @@ new StringSelectMenuInteraction<T>(...args: any[]): StringSelectMenuInteraction<
 	Omit<SelectMenuInteraction, 'data'>,
 	StringSelectMenuInteraction
 >).applicationId` |
-| `cache` | `public` | `Cache` | `(SelectMenuInteraction as unknown as ToClass<
+| `cache` | `public` | [`Cache`](/api/classes/cache/) | `(SelectMenuInteraction as unknown as ToClass<
 	Omit<SelectMenuInteraction, 'data'>,
 	StringSelectMenuInteraction
 >).cache` | `(SelectMenuInteraction as unknown as ToClass<
@@ -182,7 +182,7 @@ new StringSelectMenuInteraction<T>(...args: any[]): StringSelectMenuInteraction<
 	Omit<SelectMenuInteraction, 'data'>,
 	StringSelectMenuInteraction
 >).replied` |
-| `rest` | `public` | [`REST`](/api/classes/rest/) | `(SelectMenuInteraction as unknown as ToClass<
+| `rest` | `public` | [`ApiHandler`](/api/classes/apihandler/) | `(SelectMenuInteraction as unknown as ToClass<
 	Omit<SelectMenuInteraction, 'data'>,
 	StringSelectMenuInteraction
 >).rest` | `(SelectMenuInteraction as unknown as ToClass<
@@ -252,7 +252,7 @@ createResponse(__namedParameters: Omit<RESTPostAPIWebhookWithTokenJSONBody, "com
 
 #### Source
 
-[seyfert/src/structures/Interaction.ts:405](https://github.com/potoland/potocuit/blob/e332d7a/src/structures/Interaction.ts#L405)
+[seyfert/src/structures/Interaction.ts:409](https://github.com/potoland/potocuit/blob/fe122a1/src/structures/Interaction.ts#L409)
 
 ***
 
@@ -281,7 +281,7 @@ deferReply(flags?: MessageFlags): Promise<void>
 
 #### Source
 
-[seyfert/src/structures/Interaction.ts:215](https://github.com/potoland/potocuit/blob/e332d7a/src/structures/Interaction.ts#L215)
+[seyfert/src/structures/Interaction.ts:215](https://github.com/potoland/potocuit/blob/fe122a1/src/structures/Interaction.ts#L215)
 
 ***
 
@@ -304,7 +304,7 @@ deferUpdate(): Promise<void>
 
 #### Source
 
-[seyfert/src/structures/Interaction.ts:459](https://github.com/potoland/potocuit/blob/e332d7a/src/structures/Interaction.ts#L459)
+[seyfert/src/structures/Interaction.ts:463](https://github.com/potoland/potocuit/blob/fe122a1/src/structures/Interaction.ts#L463)
 
 ***
 
@@ -333,7 +333,7 @@ deleteMessage(messageId: string): Promise<void>
 
 #### Source
 
-[seyfert/src/structures/Interaction.ts:397](https://github.com/potoland/potocuit/blob/e332d7a/src/structures/Interaction.ts#L397)
+[seyfert/src/structures/Interaction.ts:401](https://github.com/potoland/potocuit/blob/fe122a1/src/structures/Interaction.ts#L401)
 
 ***
 
@@ -356,7 +356,7 @@ deleteResponse(): Promise<void>
 
 #### Source
 
-[seyfert/src/structures/Interaction.ts:393](https://github.com/potoland/potocuit/blob/e332d7a/src/structures/Interaction.ts#L393)
+[seyfert/src/structures/Interaction.ts:397](https://github.com/potoland/potocuit/blob/fe122a1/src/structures/Interaction.ts#L397)
 
 ***
 
@@ -386,7 +386,7 @@ editMessage(messageId: string, body: Omit<RESTPatchAPIWebhookWithTokenMessageJSO
 
 #### Source
 
-[seyfert/src/structures/Interaction.ts:375](https://github.com/potoland/potocuit/blob/e332d7a/src/structures/Interaction.ts#L375)
+[seyfert/src/structures/Interaction.ts:379](https://github.com/potoland/potocuit/blob/fe122a1/src/structures/Interaction.ts#L379)
 
 ***
 
@@ -422,7 +422,7 @@ editOrReply<FR>(body: Omit<APIInteractionResponseCallbackData, "components" | "e
 
 #### Source
 
-[seyfert/src/structures/Interaction.ts:363](https://github.com/potoland/potocuit/blob/e332d7a/src/structures/Interaction.ts#L363)
+[seyfert/src/structures/Interaction.ts:367](https://github.com/potoland/potocuit/blob/fe122a1/src/structures/Interaction.ts#L367)
 
 ***
 
@@ -451,7 +451,36 @@ editResponse(body: Omit<RESTPatchAPIWebhookWithTokenMessageJSONBody, "components
 
 #### Source
 
-[seyfert/src/structures/Interaction.ts:389](https://github.com/potoland/potocuit/blob/e332d7a/src/structures/Interaction.ts#L389)
+[seyfert/src/structures/Interaction.ts:393](https://github.com/potoland/potocuit/blob/fe122a1/src/structures/Interaction.ts#L393)
+
+***
+
+### fetchGuild()
+
+```ts
+fetchGuild(force: boolean): undefined | Promise<Guild<"cached"> | Guild<"api">>
+```
+
+#### Parameters
+
+| Parameter | Type | Default value |
+| :------ | :------ | :------ |
+| `force` | `boolean` | `false` |
+
+#### Returns
+
+`undefined` \| `Promise`\<[`Guild`](/api/classes/guild/)\<`"cached"`\> \| [`Guild`](/api/classes/guild/)\<`"api"`\>\>
+
+#### Inherited from
+
+`(SelectMenuInteraction as unknown as ToClass<
+	Omit<SelectMenuInteraction, 'data'>,
+	StringSelectMenuInteraction
+>).fetchGuild`
+
+#### Source
+
+[seyfert/src/structures/Interaction.ts:277](https://github.com/potoland/potocuit/blob/fe122a1/src/structures/Interaction.ts#L277)
 
 ***
 
@@ -480,7 +509,7 @@ fetchMessage(messageId: string): Promise<undefined | WebhookMessage>
 
 #### Source
 
-[seyfert/src/structures/Interaction.ts:336](https://github.com/potoland/potocuit/blob/e332d7a/src/structures/Interaction.ts#L336)
+[seyfert/src/structures/Interaction.ts:340](https://github.com/potoland/potocuit/blob/fe122a1/src/structures/Interaction.ts#L340)
 
 ***
 
@@ -503,7 +532,7 @@ fetchResponse(): Promise<undefined | WebhookMessage>
 
 #### Source
 
-[seyfert/src/structures/Interaction.ts:340](https://github.com/potoland/potocuit/blob/e332d7a/src/structures/Interaction.ts#L340)
+[seyfert/src/structures/Interaction.ts:344](https://github.com/potoland/potocuit/blob/fe122a1/src/structures/Interaction.ts#L344)
 
 ***
 
@@ -526,7 +555,7 @@ isButton(): this is ButtonInteraction
 
 #### Source
 
-[seyfert/src/structures/Interaction.ts:473](https://github.com/potoland/potocuit/blob/e332d7a/src/structures/Interaction.ts#L473)
+[seyfert/src/structures/Interaction.ts:477](https://github.com/potoland/potocuit/blob/fe122a1/src/structures/Interaction.ts#L477)
 
 ***
 
@@ -549,7 +578,7 @@ isChannelSelectMenu(): this is ChannelSelectMenuInteraction
 
 #### Source
 
-[seyfert/src/structures/Interaction.ts:477](https://github.com/potoland/potocuit/blob/e332d7a/src/structures/Interaction.ts#L477)
+[seyfert/src/structures/Interaction.ts:481](https://github.com/potoland/potocuit/blob/fe122a1/src/structures/Interaction.ts#L481)
 
 ***
 
@@ -572,7 +601,7 @@ isMentionableSelectMenu(): this is MentionableSelectMenuInteraction
 
 #### Source
 
-[seyfert/src/structures/Interaction.ts:485](https://github.com/potoland/potocuit/blob/e332d7a/src/structures/Interaction.ts#L485)
+[seyfert/src/structures/Interaction.ts:489](https://github.com/potoland/potocuit/blob/fe122a1/src/structures/Interaction.ts#L489)
 
 ***
 
@@ -595,7 +624,7 @@ isRoleSelectMenu(): this is RoleSelectMenuInteraction
 
 #### Source
 
-[seyfert/src/structures/Interaction.ts:481](https://github.com/potoland/potocuit/blob/e332d7a/src/structures/Interaction.ts#L481)
+[seyfert/src/structures/Interaction.ts:485](https://github.com/potoland/potocuit/blob/fe122a1/src/structures/Interaction.ts#L485)
 
 ***
 
@@ -618,7 +647,7 @@ isStringSelectMenu(): this is StringSelectMenuInteraction<string[]>
 
 #### Source
 
-[seyfert/src/structures/Interaction.ts:493](https://github.com/potoland/potocuit/blob/e332d7a/src/structures/Interaction.ts#L493)
+[seyfert/src/structures/Interaction.ts:497](https://github.com/potoland/potocuit/blob/fe122a1/src/structures/Interaction.ts#L497)
 
 ***
 
@@ -641,7 +670,7 @@ isUserSelectMenu(): this is UserSelectMenuInteraction
 
 #### Source
 
-[seyfert/src/structures/Interaction.ts:489](https://github.com/potoland/potocuit/blob/e332d7a/src/structures/Interaction.ts#L489)
+[seyfert/src/structures/Interaction.ts:493](https://github.com/potoland/potocuit/blob/fe122a1/src/structures/Interaction.ts#L493)
 
 ***
 
@@ -670,7 +699,7 @@ modal(body: ModalCreateBodyRequest): Promise<void>
 
 #### Source
 
-[seyfert/src/structures/Interaction.ts:356](https://github.com/potoland/potocuit/blob/e332d7a/src/structures/Interaction.ts#L356)
+[seyfert/src/structures/Interaction.ts:360](https://github.com/potoland/potocuit/blob/fe122a1/src/structures/Interaction.ts#L360)
 
 ***
 
@@ -699,7 +728,7 @@ reply(body: ReplyInteractionBody): Promise<void>
 
 #### Source
 
-[seyfert/src/structures/Interaction.ts:189](https://github.com/potoland/potocuit/blob/e332d7a/src/structures/Interaction.ts#L189)
+[seyfert/src/structures/Interaction.ts:189](https://github.com/potoland/potocuit/blob/fe122a1/src/structures/Interaction.ts#L189)
 
 ***
 
@@ -728,7 +757,7 @@ update(data: Omit<APIInteractionResponseCallbackData, "components" | "embeds"> &
 
 #### Source
 
-[seyfert/src/structures/Interaction.ts:452](https://github.com/potoland/potocuit/blob/e332d7a/src/structures/Interaction.ts#L452)
+[seyfert/src/structures/Interaction.ts:456](https://github.com/potoland/potocuit/blob/fe122a1/src/structures/Interaction.ts#L456)
 
 ***
 
@@ -764,4 +793,4 @@ write<FR>(body: Omit<APIInteractionResponseCallbackData, "components" | "embeds"
 
 #### Source
 
-[seyfert/src/structures/Interaction.ts:344](https://github.com/potoland/potocuit/blob/e332d7a/src/structures/Interaction.ts#L344)
+[seyfert/src/structures/Interaction.ts:348](https://github.com/potoland/potocuit/blob/fe122a1/src/structures/Interaction.ts#L348)

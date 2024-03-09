@@ -11,4 +11,4 @@ type ButtonStylesForID: Exclude<ButtonStyle, ButtonStyle.Link>;
 
 ## Source
 
-[seyfert/src/builders/Button.ts:16](https://github.com/potoland/potocuit/blob/e332d7a/src/builders/Button.ts#L16)
+[seyfert/src/builders/Button.ts:16](https://github.com/potoland/potocuit/blob/fe122a1/src/builders/Button.ts#L16)

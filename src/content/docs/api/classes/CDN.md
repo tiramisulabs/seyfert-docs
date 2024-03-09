@@ -27,7 +27,7 @@ new CDN(base: string): CDN
 
 #### Source
 
-[seyfert/src/api/CDN.ts:65](https://github.com/potoland/potocuit/blob/e332d7a/src/api/CDN.ts#L65)
+[seyfert/src/api/CDN.ts:62](https://github.com/potoland/potocuit/blob/fe122a1/src/api/CDN.ts#L62)
 
 ## Methods
 
@@ -56,7 +56,7 @@ Generates an app asset URL for a client's asset.
 
 #### Source
 
-[seyfert/src/api/CDN.ts:74](https://github.com/potoland/potocuit/blob/e332d7a/src/api/CDN.ts#L74)
+[seyfert/src/api/CDN.ts:71](https://github.com/potoland/potocuit/blob/fe122a1/src/api/CDN.ts#L71)
 
 ***
 
@@ -85,7 +85,7 @@ Generates an app icon URL for a client's icon.
 
 #### Source
 
-[seyfert/src/api/CDN.ts:85](https://github.com/potoland/potocuit/blob/e332d7a/src/api/CDN.ts#L85)
+[seyfert/src/api/CDN.ts:82](https://github.com/potoland/potocuit/blob/fe122a1/src/api/CDN.ts#L82)
 
 ***
 
@@ -114,7 +114,7 @@ Generates an avatar URL, e.g. for a user or a webhook.
 
 #### Source
 
-[seyfert/src/api/CDN.ts:96](https://github.com/potoland/potocuit/blob/e332d7a/src/api/CDN.ts#L96)
+[seyfert/src/api/CDN.ts:93](https://github.com/potoland/potocuit/blob/fe122a1/src/api/CDN.ts#L93)
 
 ***
 
@@ -143,7 +143,7 @@ Generates a user avatar decoration URL.
 
 #### Source
 
-[seyfert/src/api/CDN.ts:107](https://github.com/potoland/potocuit/blob/e332d7a/src/api/CDN.ts#L107)
+[seyfert/src/api/CDN.ts:104](https://github.com/potoland/potocuit/blob/fe122a1/src/api/CDN.ts#L104)
 
 ***
 
@@ -172,7 +172,7 @@ Generates a banner URL, e.g. for a user or a guild.
 
 #### Source
 
-[seyfert/src/api/CDN.ts:122](https://github.com/potoland/potocuit/blob/e332d7a/src/api/CDN.ts#L122)
+[seyfert/src/api/CDN.ts:119](https://github.com/potoland/potocuit/blob/fe122a1/src/api/CDN.ts#L119)
 
 ***
 
@@ -201,7 +201,7 @@ Generates an icon URL for a channel, e.g. a group DM.
 
 #### Source
 
-[seyfert/src/api/CDN.ts:133](https://github.com/potoland/potocuit/blob/e332d7a/src/api/CDN.ts#L133)
+[seyfert/src/api/CDN.ts:130](https://github.com/potoland/potocuit/blob/fe122a1/src/api/CDN.ts#L130)
 
 ***
 
@@ -230,7 +230,7 @@ or `discriminator % 5` if they're using the legacy username system.
 
 #### Source
 
-[seyfert/src/api/CDN.ts:145](https://github.com/potoland/potocuit/blob/e332d7a/src/api/CDN.ts#L145)
+[seyfert/src/api/CDN.ts:142](https://github.com/potoland/potocuit/blob/fe122a1/src/api/CDN.ts#L142)
 
 ***
 
@@ -259,13 +259,11 @@ Generates a discovery splash URL for a guild's discovery splash.
 
 #### Source
 
-[seyfert/src/api/CDN.ts:156](https://github.com/potoland/potocuit/blob/e332d7a/src/api/CDN.ts#L156)
+[seyfert/src/api/CDN.ts:153](https://github.com/potoland/potocuit/blob/fe122a1/src/api/CDN.ts#L153)
 
 ***
 
 ### emoji()
-
-#### emoji(emojiId, options)
 
 ```ts
 emoji(emojiId: string, options?: Readonly<BaseImageURLOptions>): string
@@ -273,52 +271,20 @@ emoji(emojiId: string, options?: Readonly<BaseImageURLOptions>): string
 
 Generates an emoji's URL for an emoji.
 
-##### Parameters
+#### Parameters
 
 | Parameter | Type | Description |
 | :------ | :------ | :------ |
 | `emojiId` | `string` | The emoji id |
 | `options`? | `Readonly`\<[`BaseImageURLOptions`](/api/interfaces/baseimageurloptions/)\> | Optional options for the emoji |
 
-##### Returns
+#### Returns
 
 `string`
 
-##### Source
+#### Source
 
-[seyfert/src/api/CDN.ts:166](https://github.com/potoland/potocuit/blob/e332d7a/src/api/CDN.ts#L166)
-
-#### emoji(emojiId, extension)
-
-```ts
-emoji(emojiId: string, extension?: 
-  | "jpeg"
-  | "png"
-  | "webp"
-  | "gif"
-  | "jpg"): string
-```
-
-Generates an emoji's URL for an emoji.
-
-:::caution[Deprecated]
-This overload is deprecated. Pass an object containing the extension instead.
-:::
-
-##### Parameters
-
-| Parameter | Type | Description |
-| :------ | :------ | :------ |
-| `emojiId` | `string` | The emoji id |
-| `extension`? |  \| `"jpeg"` \| `"png"` \| `"webp"` \| `"gif"` \| `"jpg"` | The extension of the emoji |
-
-##### Returns
-
-`string`
-
-##### Source
-
-[seyfert/src/api/CDN.ts:176](https://github.com/potoland/potocuit/blob/e332d7a/src/api/CDN.ts#L176)
+[seyfert/src/api/CDN.ts:163](https://github.com/potoland/potocuit/blob/fe122a1/src/api/CDN.ts#L163)
 
 ***
 
@@ -349,7 +315,7 @@ Generates a guild member avatar URL.
 
 #### Source
 
-[seyfert/src/api/CDN.ts:206](https://github.com/potoland/potocuit/blob/e332d7a/src/api/CDN.ts#L206)
+[seyfert/src/api/CDN.ts:177](https://github.com/potoland/potocuit/blob/fe122a1/src/api/CDN.ts#L177)
 
 ***
 
@@ -380,7 +346,7 @@ Generates a guild member banner URL.
 
 #### Source
 
-[seyfert/src/api/CDN.ts:223](https://github.com/potoland/potocuit/blob/e332d7a/src/api/CDN.ts#L223)
+[seyfert/src/api/CDN.ts:194](https://github.com/potoland/potocuit/blob/fe122a1/src/api/CDN.ts#L194)
 
 ***
 
@@ -409,7 +375,7 @@ Generates a cover image for a guild scheduled event.
 
 #### Source
 
-[seyfert/src/api/CDN.ts:305](https://github.com/potoland/potocuit/blob/e332d7a/src/api/CDN.ts#L305)
+[seyfert/src/api/CDN.ts:276](https://github.com/potoland/potocuit/blob/fe122a1/src/api/CDN.ts#L276)
 
 ***
 
@@ -438,7 +404,7 @@ Generates an icon URL, e.g. for a guild.
 
 #### Source
 
-[seyfert/src/api/CDN.ts:239](https://github.com/potoland/potocuit/blob/e332d7a/src/api/CDN.ts#L239)
+[seyfert/src/api/CDN.ts:210](https://github.com/potoland/potocuit/blob/fe122a1/src/api/CDN.ts#L210)
 
 ***
 
@@ -467,7 +433,7 @@ Generates a URL for the icon of a role
 
 #### Source
 
-[seyfert/src/api/CDN.ts:250](https://github.com/potoland/potocuit/blob/e332d7a/src/api/CDN.ts#L250)
+[seyfert/src/api/CDN.ts:221](https://github.com/potoland/potocuit/blob/fe122a1/src/api/CDN.ts#L221)
 
 ***
 
@@ -496,7 +462,7 @@ Generates a guild invite splash URL for a guild's invite splash.
 
 #### Source
 
-[seyfert/src/api/CDN.ts:261](https://github.com/potoland/potocuit/blob/e332d7a/src/api/CDN.ts#L261)
+[seyfert/src/api/CDN.ts:232](https://github.com/potoland/potocuit/blob/fe122a1/src/api/CDN.ts#L232)
 
 ***
 
@@ -521,7 +487,7 @@ Generates a sticker URL.
 
 #### Source
 
-[seyfert/src/api/CDN.ts:273](https://github.com/potoland/potocuit/blob/e332d7a/src/api/CDN.ts#L273)
+[seyfert/src/api/CDN.ts:244](https://github.com/potoland/potocuit/blob/fe122a1/src/api/CDN.ts#L244)
 
 ***
 
@@ -546,7 +512,7 @@ Generates a sticker pack banner URL.
 
 #### Source
 
-[seyfert/src/api/CDN.ts:283](https://github.com/potoland/potocuit/blob/e332d7a/src/api/CDN.ts#L283)
+[seyfert/src/api/CDN.ts:254](https://github.com/potoland/potocuit/blob/fe122a1/src/api/CDN.ts#L254)
 
 ***
 
@@ -575,4 +541,4 @@ Generates a team icon URL for a team's icon.
 
 #### Source
 
-[seyfert/src/api/CDN.ts:294](https://github.com/potoland/potocuit/blob/e332d7a/src/api/CDN.ts#L294)
+[seyfert/src/api/CDN.ts:265](https://github.com/potoland/potocuit/blob/fe122a1/src/api/CDN.ts#L265)

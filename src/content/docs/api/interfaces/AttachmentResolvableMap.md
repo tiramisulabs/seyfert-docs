@@ -9,6 +9,6 @@ title: "AttachmentResolvableMap"
 
 | Property | Type |
 | :------ | :------ |
-| `buffer` | `Buffer` |
+| `buffer` | `ArrayBuffer` \| `Buffer` |
 | `path` | `string` |
 | `url` | `string` |

@@ -11,4 +11,4 @@ type MessageWebhookMethodEditParams: MessageWebhookPayload<MessageWebhookUpdateB
 
 ## Source
 
-[seyfert/src/structures/Webhook.ts:92](https://github.com/potoland/potocuit/blob/e332d7a/src/structures/Webhook.ts#L92)
+[seyfert/src/structures/Webhook.ts:92](https://github.com/potoland/potocuit/blob/fe122a1/src/structures/Webhook.ts#L92)

@@ -22,4 +22,4 @@ type OnAutocompleteErrorCallback: (interaction: AutocompleteInteraction, error: 
 
 ## Source
 
-[seyfert/src/commands/applications/chat.ts:64](https://github.com/potoland/potocuit/blob/e332d7a/src/commands/applications/chat.ts#L64)
+[seyfert/src/commands/applications/chat.ts:65](https://github.com/potoland/potocuit/blob/fe122a1/src/commands/applications/chat.ts#L65)

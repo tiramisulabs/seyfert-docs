@@ -11,4 +11,4 @@ type APIRoutes: ApplicationRoutes & ChannelRoutes & GatewayRoutes & GuildRoutes 
 
 ## Source
 
-[seyfert/src/api/Routes/index.ts:15](https://github.com/potoland/potocuit/blob/e332d7a/src/api/Routes/index.ts#L15)
+[seyfert/src/api/Routes/index.ts:15](https://github.com/potoland/potocuit/blob/fe122a1/src/api/Routes/index.ts#L15)

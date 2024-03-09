@@ -34,7 +34,7 @@ new GuildTemplate(client: BaseClient, data: APITemplate): GuildTemplate
 
 #### Source
 
-[seyfert/src/structures/GuildTemplate.ts:14](https://github.com/potoland/potocuit/blob/e332d7a/src/structures/GuildTemplate.ts#L14)
+[seyfert/src/structures/GuildTemplate.ts:14](https://github.com/potoland/potocuit/blob/fe122a1/src/structures/GuildTemplate.ts#L14)
 
 ## Properties
 
@@ -99,7 +99,7 @@ delete(): Promise<APITemplate>
 
 #### Source
 
-[seyfert/src/structures/GuildTemplate.ts:35](https://github.com/potoland/potocuit/blob/e332d7a/src/structures/GuildTemplate.ts#L35)
+[seyfert/src/structures/GuildTemplate.ts:35](https://github.com/potoland/potocuit/blob/fe122a1/src/structures/GuildTemplate.ts#L35)
 
 ***
 
@@ -121,7 +121,7 @@ edit(body: AddUndefinedToPossiblyUndefinedPropertiesOfInterface<Partial<RESTPost
 
 #### Source
 
-[seyfert/src/structures/GuildTemplate.ts:31](https://github.com/potoland/potocuit/blob/e332d7a/src/structures/GuildTemplate.ts#L31)
+[seyfert/src/structures/GuildTemplate.ts:31](https://github.com/potoland/potocuit/blob/fe122a1/src/structures/GuildTemplate.ts#L31)
 
 ***
 
@@ -137,7 +137,7 @@ fetch(): Promise<APITemplate>
 
 #### Source
 
-[seyfert/src/structures/GuildTemplate.ts:23](https://github.com/potoland/potocuit/blob/e332d7a/src/structures/GuildTemplate.ts#L23)
+[seyfert/src/structures/GuildTemplate.ts:23](https://github.com/potoland/potocuit/blob/fe122a1/src/structures/GuildTemplate.ts#L23)
 
 ***
 
@@ -159,7 +159,7 @@ guild(force: boolean): Promise<Guild<"cached"> | Guild<"api">>
 
 #### Source
 
-[seyfert/src/structures/GuildTemplate.ts:19](https://github.com/potoland/potocuit/blob/e332d7a/src/structures/GuildTemplate.ts#L19)
+[seyfert/src/structures/GuildTemplate.ts:19](https://github.com/potoland/potocuit/blob/fe122a1/src/structures/GuildTemplate.ts#L19)
 
 ***
 
@@ -175,7 +175,7 @@ sync(): Promise<APITemplate>
 
 #### Source
 
-[seyfert/src/structures/GuildTemplate.ts:27](https://github.com/potoland/potocuit/blob/e332d7a/src/structures/GuildTemplate.ts#L27)
+[seyfert/src/structures/GuildTemplate.ts:27](https://github.com/potoland/potocuit/blob/fe122a1/src/structures/GuildTemplate.ts#L27)
 
 ***
 
@@ -208,4 +208,4 @@ static methods(ctx:     Object): Object
 
 #### Source
 
-[seyfert/src/structures/GuildTemplate.ts:39](https://github.com/potoland/potocuit/blob/e332d7a/src/structures/GuildTemplate.ts#L39)
+[seyfert/src/structures/GuildTemplate.ts:39](https://github.com/potoland/potocuit/blob/fe122a1/src/structures/GuildTemplate.ts#L39)

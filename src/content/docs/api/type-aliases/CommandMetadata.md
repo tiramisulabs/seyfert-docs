@@ -17,4 +17,4 @@ type CommandMetadata<T>: T extends readonly [infer first, ...(infer rest)] ? fir
 
 ## Source
 
-[seyfert/src/commands/applications/shared.ts:22](https://github.com/potoland/potocuit/blob/e332d7a/src/commands/applications/shared.ts#L22)
+[seyfert/src/commands/applications/shared.ts:25](https://github.com/potoland/potocuit/blob/fe122a1/src/commands/applications/shared.ts#L25)

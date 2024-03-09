@@ -15,4 +15,4 @@ type PassFunction: () => void;
 
 ## Source
 
-[seyfert/src/commands/applications/shared.ts:7](https://github.com/potoland/potocuit/blob/e332d7a/src/commands/applications/shared.ts#L7)
+[seyfert/src/commands/applications/shared.ts:7](https://github.com/potoland/potocuit/blob/fe122a1/src/commands/applications/shared.ts#L7)

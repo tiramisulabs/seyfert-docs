@@ -35,7 +35,7 @@ Creates a new Button instance.
 
 #### Source
 
-[seyfert/src/builders/Button.ts:30](https://github.com/potoland/potocuit/blob/e332d7a/src/builders/Button.ts#L30)
+[seyfert/src/builders/Button.ts:30](https://github.com/potoland/potocuit/blob/fe122a1/src/builders/Button.ts#L30)
 
 ## Properties
 
@@ -48,7 +48,7 @@ Creates a new Button instance.
 ### run()
 
 ```ts
-run(func: ComponentCallback<ButtonInteraction>): Omit<Button<Type>, "setURL">
+run(func: ComponentCallback<ButtonInteraction>): Button<Type>
 ```
 
 Sets the callback function to be executed when the button is interacted with.
@@ -61,20 +61,20 @@ Sets the callback function to be executed when the button is interacted with.
 
 #### Returns
 
-`Omit`\<[`Button`](/api/classes/button/)\<`Type`\>, `"setURL"`\>
+[`Button`](/api/classes/button/)\<`Type`\>
 
 The modified Button instance.
 
 #### Source
 
-[seyfert/src/builders/Button.ts:100](https://github.com/potoland/potocuit/blob/e332d7a/src/builders/Button.ts#L100)
+[seyfert/src/builders/Button.ts:98](https://github.com/potoland/potocuit/blob/fe122a1/src/builders/Button.ts#L98)
 
 ***
 
 ### setCustomId()
 
 ```ts
-setCustomId(id: string): Omit<Button<Type>, "setURL">
+setCustomId(id: string): Button<Type>
 ```
 
 Sets the custom ID for the button.
@@ -87,13 +87,13 @@ Sets the custom ID for the button.
 
 #### Returns
 
-`Omit`\<[`Button`](/api/classes/button/)\<`Type`\>, `"setURL"`\>
+[`Button`](/api/classes/button/)\<`Type`\>
 
 The modified Button instance.
 
 #### Source
 
-[seyfert/src/builders/Button.ts:39](https://github.com/potoland/potocuit/blob/e332d7a/src/builders/Button.ts#L39)
+[seyfert/src/builders/Button.ts:39](https://github.com/potoland/potocuit/blob/fe122a1/src/builders/Button.ts#L39)
 
 ***
 
@@ -119,7 +119,7 @@ The modified Button instance.
 
 #### Source
 
-[seyfert/src/builders/Button.ts:83](https://github.com/potoland/potocuit/blob/e332d7a/src/builders/Button.ts#L83)
+[seyfert/src/builders/Button.ts:83](https://github.com/potoland/potocuit/blob/fe122a1/src/builders/Button.ts#L83)
 
 ***
 
@@ -145,7 +145,7 @@ The modified Button instance.
 
 #### Source
 
-[seyfert/src/builders/Button.ts:71](https://github.com/potoland/potocuit/blob/e332d7a/src/builders/Button.ts#L71)
+[seyfert/src/builders/Button.ts:71](https://github.com/potoland/potocuit/blob/fe122a1/src/builders/Button.ts#L71)
 
 ***
 
@@ -171,58 +171,36 @@ The modified Button instance.
 
 #### Source
 
-[seyfert/src/builders/Button.ts:61](https://github.com/potoland/potocuit/blob/e332d7a/src/builders/Button.ts#L61)
+[seyfert/src/builders/Button.ts:61](https://github.com/potoland/potocuit/blob/fe122a1/src/builders/Button.ts#L61)
 
 ***
 
 ### setStyle()
 
-#### setStyle(style)
-
 ```ts
-setStyle(style: Link): Omit<Button<Type>, "run" | "setCustomId">
+setStyle(style: ButtonStyle): Button<Type>
 ```
 
-##### Parameters
+#### Parameters
 
 | Parameter | Type |
 | :------ | :------ |
-| `style` | `Link` |
+| `style` | `ButtonStyle` |
 
-##### Returns
+#### Returns
 
-`Omit`\<[`Button`](/api/classes/button/)\<`Type`\>, `"run"` \| `"setCustomId"`\>
+[`Button`](/api/classes/button/)\<`Type`\>
 
-##### Source
+#### Source
 
-[seyfert/src/builders/Button.ts:88](https://github.com/potoland/potocuit/blob/e332d7a/src/builders/Button.ts#L88)
-
-#### setStyle(style)
-
-```ts
-setStyle(style: ButtonStylesForID): Omit<Button<Type>, "setURL">
-```
-
-##### Parameters
-
-| Parameter | Type |
-| :------ | :------ |
-| `style` | [`ButtonStylesForID`](/api/type-aliases/buttonstylesforid/) |
-
-##### Returns
-
-`Omit`\<[`Button`](/api/classes/button/)\<`Type`\>, `"setURL"`\>
-
-##### Source
-
-[seyfert/src/builders/Button.ts:89](https://github.com/potoland/potocuit/blob/e332d7a/src/builders/Button.ts#L89)
+[seyfert/src/builders/Button.ts:88](https://github.com/potoland/potocuit/blob/fe122a1/src/builders/Button.ts#L88)
 
 ***
 
 ### setURL()
 
 ```ts
-setURL(url: string): Omit<Button<Type>, "run" | "setCustomId">
+setURL(url: string): Button<Type>
 ```
 
 Sets the URL for the button.
@@ -235,13 +213,13 @@ Sets the URL for the button.
 
 #### Returns
 
-`Omit`\<[`Button`](/api/classes/button/)\<`Type`\>, `"run"` \| `"setCustomId"`\>
+[`Button`](/api/classes/button/)\<`Type`\>
 
 The modified Button instance.
 
 #### Source
 
-[seyfert/src/builders/Button.ts:50](https://github.com/potoland/potocuit/blob/e332d7a/src/builders/Button.ts#L50)
+[seyfert/src/builders/Button.ts:50](https://github.com/potoland/potocuit/blob/fe122a1/src/builders/Button.ts#L50)
 
 ***
 
@@ -261,4 +239,4 @@ The JSON representation of the Button instance.
 
 #### Source
 
-[seyfert/src/builders/Button.ts:109](https://github.com/potoland/potocuit/blob/e332d7a/src/builders/Button.ts#L109)
+[seyfert/src/builders/Button.ts:107](https://github.com/potoland/potocuit/blob/fe122a1/src/builders/Button.ts#L107)

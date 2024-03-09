@@ -17,4 +17,4 @@ type OptionResolvedWithValue: MakeRequired<Pick<OptionResolved, "name" | "value"
 
 ## Source
 
-[seyfert/src/commands/optionresolver.ts:193](https://github.com/potoland/potocuit/blob/e332d7a/src/commands/optionresolver.ts#L193)
+[seyfert/src/commands/optionresolver.ts:192](https://github.com/potoland/potocuit/blob/fe122a1/src/commands/optionresolver.ts#L192)

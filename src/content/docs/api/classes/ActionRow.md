@@ -49,7 +49,7 @@ const actionRow = new ActionRow<Button>({ components: [buttonRawJSON] });
 
 #### Source
 
-[seyfert/src/builders/ActionRow.ts:26](https://github.com/potoland/potocuit/blob/e332d7a/src/builders/ActionRow.ts#L26)
+[seyfert/src/builders/ActionRow.ts:25](https://github.com/potoland/potocuit/blob/fe122a1/src/builders/ActionRow.ts#L25)
 
 ## Properties
 
@@ -90,7 +90,7 @@ actionRow.addComponents([buttonComponent1, buttonComponent2]);
 
 #### Source
 
-[seyfert/src/builders/ActionRow.ts:42](https://github.com/potoland/potocuit/blob/e332d7a/src/builders/ActionRow.ts#L42)
+[seyfert/src/builders/ActionRow.ts:41](https://github.com/potoland/potocuit/blob/fe122a1/src/builders/ActionRow.ts#L41)
 
 ***
 
@@ -122,7 +122,7 @@ actionRow.setComponents([buttonComponent1, buttonComponent2]);
 
 #### Source
 
-[seyfert/src/builders/ActionRow.ts:54](https://github.com/potoland/potocuit/blob/e332d7a/src/builders/ActionRow.ts#L54)
+[seyfert/src/builders/ActionRow.ts:53](https://github.com/potoland/potocuit/blob/fe122a1/src/builders/ActionRow.ts#L53)
 
 ***
 
@@ -146,4 +146,4 @@ The JSON representation of the Action Row.
 
 #### Source
 
-[seyfert/src/builders/ActionRow.ts:63](https://github.com/potoland/potocuit/blob/e332d7a/src/builders/ActionRow.ts#L63)
+[seyfert/src/builders/ActionRow.ts:62](https://github.com/potoland/potocuit/blob/fe122a1/src/builders/ActionRow.ts#L62)

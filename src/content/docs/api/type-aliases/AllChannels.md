@@ -23,4 +23,4 @@ type AllChannels:
 
 ## Source
 
-[seyfert/src/structures/channels.ts:509](https://github.com/potoland/potocuit/blob/e332d7a/src/structures/channels.ts#L509)
+[seyfert/src/structures/channels.ts:540](https://github.com/potoland/potocuit/blob/fe122a1/src/structures/channels.ts#L540)

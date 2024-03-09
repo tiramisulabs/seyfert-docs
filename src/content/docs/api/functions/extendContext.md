@@ -53,4 +53,4 @@ const customContext = extendContext((interaction) => {
 
 ## Source
 
-[seyfert/src/index.ts:93](https://github.com/potoland/potocuit/blob/e332d7a/src/index.ts#L93)
+[seyfert/src/index.ts:97](https://github.com/potoland/potocuit/blob/fe122a1/src/index.ts#L97)

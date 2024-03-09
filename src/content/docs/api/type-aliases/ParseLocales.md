@@ -17,4 +17,4 @@ type ParseLocales<T>: T;
 
 ## Source
 
-[seyfert/src/langs/router.ts:53](https://github.com/potoland/potocuit/blob/e332d7a/src/langs/router.ts#L53)
+[seyfert/src/langs/router.ts:53](https://github.com/potoland/potocuit/blob/fe122a1/src/langs/router.ts#L53)

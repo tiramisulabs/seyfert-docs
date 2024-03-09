@@ -17,4 +17,4 @@ const OverwrittenMimeTypes: Object;
 
 ## Source
 
-[seyfert/src/api/utils/constants.ts:45](https://github.com/potoland/potocuit/blob/e332d7a/src/api/utils/constants.ts#L45)
+[seyfert/src/api/utils/constants.ts:10](https://github.com/potoland/potocuit/blob/fe122a1/src/api/utils/constants.ts#L10)

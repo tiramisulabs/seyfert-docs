@@ -20,4 +20,4 @@ type AllGuildChannels:
 
 ## Source
 
-[seyfert/src/structures/channels.ts:495](https://github.com/potoland/potocuit/blob/e332d7a/src/structures/channels.ts#L495)
+[seyfert/src/structures/channels.ts:526](https://github.com/potoland/potocuit/blob/fe122a1/src/structures/channels.ts#L526)

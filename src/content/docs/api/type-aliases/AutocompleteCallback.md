@@ -21,4 +21,4 @@ type AutocompleteCallback: (interaction: AutocompleteInteraction) => any;
 
 ## Source
 
-[seyfert/src/commands/applications/chat.ts:63](https://github.com/potoland/potocuit/blob/e332d7a/src/commands/applications/chat.ts#L63)
+[seyfert/src/commands/applications/chat.ts:64](https://github.com/potoland/potocuit/blob/fe122a1/src/commands/applications/chat.ts#L64)

@@ -9,10 +9,10 @@ title: "OptionResolved"
 
 | Property | Type |
 | :------ | :------ |
-| `attachment?` | `APIAttachment` |
+| `attachment?` | [`Attachment`](/api/classes/attachment/) |
 | `channel?` | [`AllChannels`](/api/type-aliases/allchannels/) |
 | `focused?` | `boolean` |
-| `member?` | [`InteractionGuildMember`](/api/classes/interactionguildmember/) |
+| `member?` | [`GuildMember`](/api/classes/guildmember/) \| [`InteractionGuildMember`](/api/classes/interactionguildmember/) |
 | `name` | `string` |
 | `options?` | [`OptionResolved`](/api/interfaces/optionresolved/)[] |
 | `role?` | [`GuildRole`](/api/classes/guildrole/) |

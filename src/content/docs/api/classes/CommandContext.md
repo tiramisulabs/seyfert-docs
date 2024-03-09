@@ -5,6 +5,10 @@ prev: false
 title: "CommandContext"
 ---
 
+## Extends
+
+- [`ExtendContext`](/api/interfaces/extendcontext/)
+
 ## Type parameters
 
 | Type parameter | Value |
@@ -12,18 +16,14 @@ title: "CommandContext"
 | `T` extends [`OptionsRecord`](/api/type-aliases/optionsrecord/) | `Object` |
 | `M` extends keyof [`RegisteredMiddlewares`](/api/interfaces/registeredmiddlewares/) | `never` |
 
-## Implements
-
-- [`ExtendContext`](/api/interfaces/extendcontext/)
-
 ## Constructors
 
-### new CommandContext(client, interaction, resolver, shardId)
+### new CommandContext(client, data, resolver, shardId)
 
 ```ts
 new CommandContext<T, M>(
    client: UsingClient, 
-   interaction: ChatInputCommandInteraction<boolean>, 
+   data: Message | ChatInputCommandInteraction<boolean>, 
    resolver: OptionResolver, 
 shardId: number): CommandContext<T, M>
 ```
@@ -33,7 +33,7 @@ shardId: number): CommandContext<T, M>
 | Parameter | Type |
 | :------ | :------ |
 | `client` | [`UsingClient`](/api/interfaces/usingclient/) |
-| `interaction` | [`ChatInputCommandInteraction`](/api/classes/chatinputcommandinteraction/)\<`boolean`\> |
+| `data` | [`Message`](/api/classes/message/) \| [`ChatInputCommandInteraction`](/api/classes/chatinputcommandinteraction/)\<`boolean`\> |
 | `resolver` | [`OptionResolver`](/api/classes/optionresolver/) |
 | `shardId` | `number` |
 
@@ -41,9 +41,13 @@ shardId: number): CommandContext<T, M>
 
 [`CommandContext`](/api/classes/commandcontext/)\<`T`, `M`\>
 
+#### Inherited from
+
+`ExtendContext.constructor`
+
 #### Source
 
-[seyfert/src/commands/applications/chatcontext.ts:16](https://github.com/potoland/potocuit/blob/e332d7a/src/commands/applications/chatcontext.ts#L16)
+[seyfert/src/commands/applications/chatcontext.ts:34](https://github.com/potoland/potocuit/blob/fe122a1/src/commands/applications/chatcontext.ts#L34)
 
 ## Properties
 
@@ -51,7 +55,9 @@ shardId: number): CommandContext<T, M>
 | :------ | :------ | :------ |
 | `client` | `readonly` | [`UsingClient`](/api/interfaces/usingclient/) |
 | `globalMetadata` | `public` | [`GlobalMetadata`](/api/interfaces/globalmetadata/) |
-| `interaction` | `readonly` | [`ChatInputCommandInteraction`](/api/classes/chatinputcommandinteraction/)\<`boolean`\> |
+| `interaction` | `public` | [`ChatInputCommandInteraction`](/api/classes/chatinputcommandinteraction/)\<`boolean`\> |
+| `message` | `public` | `undefined` |
+| `messageResponse?` | `public` | `null` \| [`Message`](/api/classes/message/) |
 | `metadata` | `public` | [`CommandMetadata`](/api/type-aliases/commandmetadata/)\<`UnionToTuple`\<`M`, []\>\> |
 | `options` | `public` | [`ContextOptions`](/api/type-aliases/contextoptions/)\<`T`\> |
 | `resolver` | `public` | [`OptionResolver`](/api/classes/optionresolver/) |
@@ -71,7 +77,39 @@ get author(): User
 
 #### Source
 
-[seyfert/src/commands/applications/chatcontext.ts:63](https://github.com/potoland/potocuit/blob/e332d7a/src/commands/applications/chatcontext.ts#L63)
+[seyfert/src/commands/applications/chatcontext.ts:161](https://github.com/potoland/potocuit/blob/fe122a1/src/commands/applications/chatcontext.ts#L161)
+
+***
+
+### channelId
+
+```ts
+get channelId(): string
+```
+
+#### Returns
+
+`string`
+
+#### Source
+
+[seyfert/src/commands/applications/chatcontext.ts:157](https://github.com/potoland/potocuit/blob/fe122a1/src/commands/applications/chatcontext.ts#L157)
+
+***
+
+### guildId
+
+```ts
+get guildId(): undefined | string
+```
+
+#### Returns
+
+`undefined` \| `string`
+
+#### Source
+
+[seyfert/src/commands/applications/chatcontext.ts:153](https://github.com/potoland/potocuit/blob/fe122a1/src/commands/applications/chatcontext.ts#L153)
 
 ***
 
@@ -87,7 +125,7 @@ get member(): undefined | InteractionGuildMember
 
 #### Source
 
-[seyfert/src/commands/applications/chatcontext.ts:67](https://github.com/potoland/potocuit/blob/e332d7a/src/commands/applications/chatcontext.ts#L67)
+[seyfert/src/commands/applications/chatcontext.ts:165](https://github.com/potoland/potocuit/blob/fe122a1/src/commands/applications/chatcontext.ts#L165)
 
 ***
 
@@ -103,7 +141,7 @@ get proxy(): APIRoutes
 
 #### Source
 
-[seyfert/src/commands/applications/chatcontext.ts:27](https://github.com/potoland/potocuit/blob/e332d7a/src/commands/applications/chatcontext.ts#L27)
+[seyfert/src/commands/applications/chatcontext.ts:51](https://github.com/potoland/potocuit/blob/fe122a1/src/commands/applications/chatcontext.ts#L51)
 
 ***
 
@@ -115,18 +153,62 @@ get t(): __InternalParseLocale<DefaultLocale> & Object
 
 #### Returns
 
-`__InternalParseLocale`\<[`DefaultLocale`](/api/interfaces/defaultlocale/)\> & `Object`
+[`__InternalParseLocale`](/api/type-aliases/internalparselocale/)\<[`DefaultLocale`](/api/interfaces/defaultlocale/)\> & `Object`
 
 #### Source
 
-[seyfert/src/commands/applications/chatcontext.ts:31](https://github.com/potoland/potocuit/blob/e332d7a/src/commands/applications/chatcontext.ts#L31)
+[seyfert/src/commands/applications/chatcontext.ts:55](https://github.com/potoland/potocuit/blob/fe122a1/src/commands/applications/chatcontext.ts#L55)
 
 ## Methods
+
+### channel()
+
+#### channel(mode)
+
+```ts
+channel(mode?: "rest" | "flow"): Promise<AllChannels>
+```
+
+##### Parameters
+
+| Parameter | Type |
+| :------ | :------ |
+| `mode`? | `"rest"` \| `"flow"` |
+
+##### Returns
+
+`Promise`\<[`AllChannels`](/api/type-aliases/allchannels/)\>
+
+##### Source
+
+[seyfert/src/commands/applications/chatcontext.ts:101](https://github.com/potoland/potocuit/blob/fe122a1/src/commands/applications/chatcontext.ts#L101)
+
+#### channel(mode)
+
+```ts
+channel(mode?: "cache"): ReturnCache<AllChannels>
+```
+
+##### Parameters
+
+| Parameter | Type |
+| :------ | :------ |
+| `mode`? | `"cache"` |
+
+##### Returns
+
+[`ReturnCache`](/api/type-aliases/returncache/)\<[`AllChannels`](/api/type-aliases/allchannels/)\>
+
+##### Source
+
+[seyfert/src/commands/applications/chatcontext.ts:102](https://github.com/potoland/potocuit/blob/fe122a1/src/commands/applications/chatcontext.ts#L102)
+
+***
 
 ### deferReply()
 
 ```ts
-deferReply(ephemeral: boolean): Promise<void>
+deferReply(ephemeral: boolean): Promise<void | Message>
 ```
 
 #### Parameters
@@ -137,11 +219,11 @@ deferReply(ephemeral: boolean): Promise<void>
 
 #### Returns
 
-`Promise`\<`void`\>
+`Promise`\<`void` \| [`Message`](/api/classes/message/)\>
 
 #### Source
 
-[seyfert/src/commands/applications/chatcontext.ts:43](https://github.com/potoland/potocuit/blob/e332d7a/src/commands/applications/chatcontext.ts#L43)
+[seyfert/src/commands/applications/chatcontext.ts:67](https://github.com/potoland/potocuit/blob/fe122a1/src/commands/applications/chatcontext.ts#L67)
 
 ***
 
@@ -157,14 +239,14 @@ deleteResponse(): Promise<void>
 
 #### Source
 
-[seyfert/src/commands/applications/chatcontext.ts:51](https://github.com/potoland/potocuit/blob/e332d7a/src/commands/applications/chatcontext.ts#L51)
+[seyfert/src/commands/applications/chatcontext.ts:80](https://github.com/potoland/potocuit/blob/fe122a1/src/commands/applications/chatcontext.ts#L80)
 
 ***
 
 ### editOrReply()
 
 ```ts
-editOrReply(body: Omit<RESTPatchAPIWebhookWithTokenMessageJSONBody, "components" | "embeds"> & ResolverProps | Omit<APIInteractionResponseCallbackData, "components" | "embeds"> & ResolverProps): Promise<void>
+editOrReply(body: Omit<RESTPatchAPIWebhookWithTokenMessageJSONBody, "components" | "embeds"> & ResolverProps | Omit<APIInteractionResponseCallbackData, "components" | "embeds"> & ResolverProps): Promise<void | Message>
 ```
 
 #### Parameters
@@ -175,11 +257,11 @@ editOrReply(body: Omit<RESTPatchAPIWebhookWithTokenMessageJSONBody, "components"
 
 #### Returns
 
-`Promise`\<`void`\>
+`Promise`\<`void` \| [`Message`](/api/classes/message/)\>
 
 #### Source
 
-[seyfert/src/commands/applications/chatcontext.ts:55](https://github.com/potoland/potocuit/blob/e332d7a/src/commands/applications/chatcontext.ts#L55)
+[seyfert/src/commands/applications/chatcontext.ts:85](https://github.com/potoland/potocuit/blob/fe122a1/src/commands/applications/chatcontext.ts#L85)
 
 ***
 
@@ -201,7 +283,7 @@ editResponse(body: Omit<RESTPatchAPIWebhookWithTokenMessageJSONBody, "components
 
 #### Source
 
-[seyfert/src/commands/applications/chatcontext.ts:47](https://github.com/potoland/potocuit/blob/e332d7a/src/commands/applications/chatcontext.ts#L47)
+[seyfert/src/commands/applications/chatcontext.ts:75](https://github.com/potoland/potocuit/blob/fe122a1/src/commands/applications/chatcontext.ts#L75)
 
 ***
 
@@ -217,36 +299,166 @@ fetchResponse(): Promise<undefined | WebhookMessage>
 
 #### Source
 
-[seyfert/src/commands/applications/chatcontext.ts:59](https://github.com/potoland/potocuit/blob/e332d7a/src/commands/applications/chatcontext.ts#L59)
+[seyfert/src/commands/applications/chatcontext.ts:93](https://github.com/potoland/potocuit/blob/fe122a1/src/commands/applications/chatcontext.ts#L93)
 
 ***
 
-### modal()
+### guild()
+
+#### guild(mode)
 
 ```ts
-modal(body: ModalCreateBodyRequest): Promise<void>
+guild(mode?: "rest" | "flow"): Promise<undefined | Guild<"cached" | "api">>
 ```
 
-#### Parameters
+##### Parameters
 
 | Parameter | Type |
 | :------ | :------ |
-| `body` | `ModalCreateBodyRequest` |
+| `mode`? | `"rest"` \| `"flow"` |
+
+##### Returns
+
+`Promise`\<`undefined` \| [`Guild`](/api/classes/guild/)\<`"cached"` \| `"api"`\>\>
+
+##### Source
+
+[seyfert/src/commands/applications/chatcontext.ts:133](https://github.com/potoland/potocuit/blob/fe122a1/src/commands/applications/chatcontext.ts#L133)
+
+#### guild(mode)
+
+```ts
+guild(mode?: "cache"): ReturnCache<undefined | Guild<"cached">>
+```
+
+##### Parameters
+
+| Parameter | Type |
+| :------ | :------ |
+| `mode`? | `"cache"` |
+
+##### Returns
+
+[`ReturnCache`](/api/type-aliases/returncache/)\<`undefined` \| [`Guild`](/api/classes/guild/)\<`"cached"`\>\>
+
+##### Source
+
+[seyfert/src/commands/applications/chatcontext.ts:134](https://github.com/potoland/potocuit/blob/fe122a1/src/commands/applications/chatcontext.ts#L134)
+
+***
+
+### isChat()
+
+```ts
+isChat(): this is CommandContext<Object, never>
+```
 
 #### Returns
 
-`Promise`\<`void`\>
+`this is CommandContext<Object, never>`
 
 #### Source
 
-[seyfert/src/commands/applications/chatcontext.ts:39](https://github.com/potoland/potocuit/blob/e332d7a/src/commands/applications/chatcontext.ts#L39)
+[seyfert/src/commands/applications/chatcontext.ts:173](https://github.com/potoland/potocuit/blob/fe122a1/src/commands/applications/chatcontext.ts#L173)
+
+***
+
+### isMenu()
+
+```ts
+isMenu(): this is MenuCommandContext<any, never>
+```
+
+#### Returns
+
+`this is MenuCommandContext<any, never>`
+
+#### Source
+
+[seyfert/src/commands/applications/chatcontext.ts:177](https://github.com/potoland/potocuit/blob/fe122a1/src/commands/applications/chatcontext.ts#L177)
+
+***
+
+### isMenuMessage()
+
+```ts
+isMenuMessage(): this is MenuCommandContext<MessageCommandInteraction<boolean>, never>
+```
+
+#### Returns
+
+`this is MenuCommandContext<MessageCommandInteraction<boolean>, never>`
+
+#### Source
+
+[seyfert/src/commands/applications/chatcontext.ts:185](https://github.com/potoland/potocuit/blob/fe122a1/src/commands/applications/chatcontext.ts#L185)
+
+***
+
+### isMenuUser()
+
+```ts
+isMenuUser(): this is MenuCommandContext<UserCommandInteraction<boolean>, never>
+```
+
+#### Returns
+
+`this is MenuCommandContext<UserCommandInteraction<boolean>, never>`
+
+#### Source
+
+[seyfert/src/commands/applications/chatcontext.ts:181](https://github.com/potoland/potocuit/blob/fe122a1/src/commands/applications/chatcontext.ts#L181)
+
+***
+
+### me()
+
+#### me(mode)
+
+```ts
+me(mode?: "rest" | "flow"): Promise<GuildMember>
+```
+
+##### Parameters
+
+| Parameter | Type |
+| :------ | :------ |
+| `mode`? | `"rest"` \| `"flow"` |
+
+##### Returns
+
+`Promise`\<[`GuildMember`](/api/classes/guildmember/)\>
+
+##### Source
+
+[seyfert/src/commands/applications/chatcontext.ts:117](https://github.com/potoland/potocuit/blob/fe122a1/src/commands/applications/chatcontext.ts#L117)
+
+#### me(mode)
+
+```ts
+me(mode?: "cache"): ReturnCache<undefined | GuildMember>
+```
+
+##### Parameters
+
+| Parameter | Type |
+| :------ | :------ |
+| `mode`? | `"cache"` |
+
+##### Returns
+
+[`ReturnCache`](/api/type-aliases/returncache/)\<`undefined` \| [`GuildMember`](/api/classes/guildmember/)\>
+
+##### Source
+
+[seyfert/src/commands/applications/chatcontext.ts:118](https://github.com/potoland/potocuit/blob/fe122a1/src/commands/applications/chatcontext.ts#L118)
 
 ***
 
 ### write()
 
 ```ts
-write(body: Omit<APIInteractionResponseCallbackData, "components" | "embeds"> & ResolverProps): Promise<void>
+write(body: Omit<APIInteractionResponseCallbackData, "components" | "embeds"> & ResolverProps): Promise<void | Message>
 ```
 
 #### Parameters
@@ -257,8 +469,8 @@ write(body: Omit<APIInteractionResponseCallbackData, "components" | "embeds"> & 
 
 #### Returns
 
-`Promise`\<`void`\>
+`Promise`\<`void` \| [`Message`](/api/classes/message/)\>
 
 #### Source
 
-[seyfert/src/commands/applications/chatcontext.ts:35](https://github.com/potoland/potocuit/blob/e332d7a/src/commands/applications/chatcontext.ts#L35)
+[seyfert/src/commands/applications/chatcontext.ts:59](https://github.com/potoland/potocuit/blob/fe122a1/src/commands/applications/chatcontext.ts#L59)

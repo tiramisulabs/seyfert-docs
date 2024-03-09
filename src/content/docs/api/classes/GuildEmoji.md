@@ -38,7 +38,7 @@ new GuildEmoji(
 
 #### Source
 
-[seyfert/src/structures/GuildEmoji.ts:16](https://github.com/potoland/potocuit/blob/e332d7a/src/structures/GuildEmoji.ts#L16)
+[seyfert/src/structures/GuildEmoji.ts:16](https://github.com/potoland/potocuit/blob/fe122a1/src/structures/GuildEmoji.ts#L16)
 
 ## Properties
 
@@ -71,7 +71,7 @@ createdAt gets the creation Date instace of the current object.
 
 #### Source
 
-[seyfert/src/structures/extra/DiscordBase.ts:27](https://github.com/potoland/potocuit/blob/e332d7a/src/structures/extra/DiscordBase.ts#L27)
+[seyfert/src/structures/extra/DiscordBase.ts:27](https://github.com/potoland/potocuit/blob/fe122a1/src/structures/extra/DiscordBase.ts#L27)
 
 ***
 
@@ -89,7 +89,7 @@ Create a timestamp for the current object.
 
 #### Source
 
-[seyfert/src/structures/extra/DiscordBase.ts:20](https://github.com/potoland/potocuit/blob/e332d7a/src/structures/extra/DiscordBase.ts#L20)
+[seyfert/src/structures/extra/DiscordBase.ts:20](https://github.com/potoland/potocuit/blob/fe122a1/src/structures/extra/DiscordBase.ts#L20)
 
 ## Methods
 
@@ -111,7 +111,7 @@ delete(reason?: string): Promise<void>
 
 #### Source
 
-[seyfert/src/structures/GuildEmoji.ts:33](https://github.com/potoland/potocuit/blob/e332d7a/src/structures/GuildEmoji.ts#L33)
+[seyfert/src/structures/GuildEmoji.ts:33](https://github.com/potoland/potocuit/blob/fe122a1/src/structures/GuildEmoji.ts#L33)
 
 ***
 
@@ -134,7 +134,7 @@ edit(body: RESTPatchAPIChannelJSONBody, reason?: string): Promise<GuildEmoji>
 
 #### Source
 
-[seyfert/src/structures/GuildEmoji.ts:29](https://github.com/potoland/potocuit/blob/e332d7a/src/structures/GuildEmoji.ts#L29)
+[seyfert/src/structures/GuildEmoji.ts:29](https://github.com/potoland/potocuit/blob/fe122a1/src/structures/GuildEmoji.ts#L29)
 
 ***
 
@@ -156,7 +156,7 @@ fetch(force: boolean): Promise<GuildEmoji>
 
 #### Source
 
-[seyfert/src/structures/GuildEmoji.ts:37](https://github.com/potoland/potocuit/blob/e332d7a/src/structures/GuildEmoji.ts#L37)
+[seyfert/src/structures/GuildEmoji.ts:37](https://github.com/potoland/potocuit/blob/fe122a1/src/structures/GuildEmoji.ts#L37)
 
 ***
 
@@ -178,7 +178,7 @@ guild(force: boolean): undefined | Promise<Guild<"cached"> | Guild<"api">>
 
 #### Source
 
-[seyfert/src/structures/GuildEmoji.ts:24](https://github.com/potoland/potocuit/blob/e332d7a/src/structures/GuildEmoji.ts#L24)
+[seyfert/src/structures/GuildEmoji.ts:24](https://github.com/potoland/potocuit/blob/fe122a1/src/structures/GuildEmoji.ts#L24)
 
 ***
 
@@ -200,7 +200,7 @@ toJSON(): Object
 
 #### Source
 
-[seyfert/src/structures/GuildEmoji.ts:49](https://github.com/potoland/potocuit/blob/e332d7a/src/structures/GuildEmoji.ts#L49)
+[seyfert/src/structures/GuildEmoji.ts:49](https://github.com/potoland/potocuit/blob/fe122a1/src/structures/GuildEmoji.ts#L49)
 
 ***
 
@@ -216,7 +216,7 @@ toString(): string
 
 #### Source
 
-[seyfert/src/structures/GuildEmoji.ts:45](https://github.com/potoland/potocuit/blob/e332d7a/src/structures/GuildEmoji.ts#L45)
+[seyfert/src/structures/GuildEmoji.ts:45](https://github.com/potoland/potocuit/blob/fe122a1/src/structures/GuildEmoji.ts#L45)
 
 ***
 
@@ -238,7 +238,7 @@ url(options?: BaseImageURLOptions): string
 
 #### Source
 
-[seyfert/src/structures/GuildEmoji.ts:41](https://github.com/potoland/potocuit/blob/e332d7a/src/structures/GuildEmoji.ts#L41)
+[seyfert/src/structures/GuildEmoji.ts:41](https://github.com/potoland/potocuit/blob/fe122a1/src/structures/GuildEmoji.ts#L41)
 
 ***
 
@@ -269,4 +269,4 @@ static methods(__namedParameters:     Object): Object
 
 #### Source
 
-[seyfert/src/structures/GuildEmoji.ts:57](https://github.com/potoland/potocuit/blob/e332d7a/src/structures/GuildEmoji.ts#L57)
+[seyfert/src/structures/GuildEmoji.ts:57](https://github.com/potoland/potocuit/blob/fe122a1/src/structures/GuildEmoji.ts#L57)

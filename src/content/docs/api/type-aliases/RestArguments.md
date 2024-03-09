@@ -20,4 +20,4 @@ type RestArguments<M, B, Q, F>: M extends ProxyRequestMethod.Get ? Q extends nev
 
 ## Source
 
-[seyfert/src/api/REST.ts:531](https://github.com/potoland/potocuit/blob/e332d7a/src/api/REST.ts#L531)
+[seyfert/src/api/api.ts:396](https://github.com/potoland/potocuit/blob/fe122a1/src/api/api.ts#L396)

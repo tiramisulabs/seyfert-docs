@@ -15,7 +15,7 @@ Creates an event with the specified data and run function.
 
 | Type parameter |
 | :------ |
-| `E` extends `ClientNameEvents` |
+| `E` extends [`ClientNameEvents`](/api/type-aliases/clientnameevents/) |
 
 ## Parameters
 
@@ -25,7 +25,7 @@ Creates an event with the specified data and run function.
 | `data.data` | `Object` | - |
 | `data.data.name` | `E` | - |
 | `data.data.once`? | `boolean` | - |
-| `data.run` | (...`args`: `EventContext`\<`Object`\>) => `any` | - |
+| `data.run` | (...`args`: [`EventContext`](/api/type-aliases/eventcontext/)\<`Object`\>) => `any` | - |
 
 ## Returns
 
@@ -38,7 +38,7 @@ The created event.
 | `data` | `Object` |
 | `data.name` | `E` |
 | `data.once` | `boolean` |
-| `run` | (...`args`: `EventContext`\<`Object`\>) => `any` |
+| `run` | (...`args`: [`EventContext`](/api/type-aliases/eventcontext/)\<`Object`\>) => `any` |
 
 ## Example
 
@@ -53,4 +53,4 @@ const myEvent = createEvent({
 
 ## Source
 
-[seyfert/src/index.ts:39](https://github.com/potoland/potocuit/blob/e332d7a/src/index.ts#L39)
+[seyfert/src/index.ts:43](https://github.com/potoland/potocuit/blob/fe122a1/src/index.ts#L43)

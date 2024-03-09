@@ -5,12 +5,11 @@ prev: false
 title: "RequestHeaders"
 ---
 
-Possible headers for an API call
-
 ## Properties
 
 | Property | Type |
 | :------ | :------ |
 | `Authorization?` | `string` |
+| `Content-Type?` | `string` |
 | `User-Agent` | `string` |
 | `X-Audit-Log-Reason?` | `string` |

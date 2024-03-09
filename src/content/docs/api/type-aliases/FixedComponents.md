@@ -17,4 +17,4 @@ type FixedComponents<T>: T extends Button ? ButtonLink | ButtonID : T;
 
 ## Source
 
-[seyfert/src/builders/types.ts:21](https://github.com/potoland/potocuit/blob/e332d7a/src/builders/types.ts#L21)
+[seyfert/src/builders/types.ts:21](https://github.com/potoland/potocuit/blob/fe122a1/src/builders/types.ts#L21)

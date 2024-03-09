@@ -53,7 +53,7 @@ new LimitedCollection<K, V>(options: Partial<LimitedCollectionOptions>): Limited
 
 #### Source
 
-[seyfert/src/collection.ts:228](https://github.com/potoland/potocuit/blob/e332d7a/src/collection.ts#L228)
+[seyfert/src/collection.ts:228](https://github.com/potoland/potocuit/blob/fe122a1/src/collection.ts#L228)
 
 ## Properties
 
@@ -90,7 +90,7 @@ The element that is closest to expiration, or `undefined` if the collection is e
 
 #### Source
 
-[seyfert/src/collection.ts:347](https://github.com/potoland/potocuit/blob/e332d7a/src/collection.ts#L347)
+[seyfert/src/collection.ts:347](https://github.com/potoland/potocuit/blob/fe122a1/src/collection.ts#L347)
 
 ***
 
@@ -119,7 +119,7 @@ The number of elements in the collection.
 
 #### Source
 
-[seyfert/src/collection.ts:373](https://github.com/potoland/potocuit/blob/e332d7a/src/collection.ts#L373)
+[seyfert/src/collection.ts:373](https://github.com/potoland/potocuit/blob/fe122a1/src/collection.ts#L373)
 
 ## Methods
 
@@ -154,7 +154,7 @@ console.log(collection.delete(2)); // Output: false
 
 #### Source
 
-[seyfert/src/collection.ts:330](https://github.com/potoland/potocuit/blob/e332d7a/src/collection.ts#L330)
+[seyfert/src/collection.ts:330](https://github.com/potoland/potocuit/blob/fe122a1/src/collection.ts#L330)
 
 ***
 
@@ -189,7 +189,7 @@ console.log(value); // Output: 'one'
 
 #### Source
 
-[seyfert/src/collection.ts:294](https://github.com/potoland/potocuit/blob/e332d7a/src/collection.ts#L294)
+[seyfert/src/collection.ts:294](https://github.com/potoland/potocuit/blob/fe122a1/src/collection.ts#L294)
 
 ***
 
@@ -224,7 +224,7 @@ console.log(collection.has(2)); // Output: false
 
 #### Source
 
-[seyfert/src/collection.ts:316](https://github.com/potoland/potocuit/blob/e332d7a/src/collection.ts#L316)
+[seyfert/src/collection.ts:316](https://github.com/potoland/potocuit/blob/fe122a1/src/collection.ts#L316)
 
 ***
 
@@ -259,7 +259,7 @@ console.log(rawData); // Output: { value: 'one', expire: -1, expireOn: -1 }
 
 #### Source
 
-[seyfert/src/collection.ts:280](https://github.com/potoland/potocuit/blob/e332d7a/src/collection.ts#L280)
+[seyfert/src/collection.ts:280](https://github.com/potoland/potocuit/blob/fe122a1/src/collection.ts#L280)
 
 ***
 
@@ -301,4 +301,4 @@ console.log(collection.get(1)); // Output: undefined
 
 #### Source
 
-[seyfert/src/collection.ts:247](https://github.com/potoland/potocuit/blob/e332d7a/src/collection.ts#L247)
+[seyfert/src/collection.ts:247](https://github.com/potoland/potocuit/blob/fe122a1/src/collection.ts#L247)

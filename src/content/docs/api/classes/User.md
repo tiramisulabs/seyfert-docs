@@ -34,7 +34,7 @@ new User(client: BaseClient, data: APIUser): User
 
 #### Source
 
-[seyfert/src/structures/extra/DiscordBase.ts:7](https://github.com/potoland/potocuit/blob/e332d7a/src/structures/extra/DiscordBase.ts#L7)
+[seyfert/src/structures/extra/DiscordBase.ts:7](https://github.com/potoland/potocuit/blob/fe122a1/src/structures/extra/DiscordBase.ts#L7)
 
 ## Properties
 
@@ -75,7 +75,7 @@ createdAt gets the creation Date instace of the current object.
 
 #### Source
 
-[seyfert/src/structures/extra/DiscordBase.ts:27](https://github.com/potoland/potocuit/blob/e332d7a/src/structures/extra/DiscordBase.ts#L27)
+[seyfert/src/structures/extra/DiscordBase.ts:27](https://github.com/potoland/potocuit/blob/fe122a1/src/structures/extra/DiscordBase.ts#L27)
 
 ***
 
@@ -93,7 +93,7 @@ Create a timestamp for the current object.
 
 #### Source
 
-[seyfert/src/structures/extra/DiscordBase.ts:20](https://github.com/potoland/potocuit/blob/e332d7a/src/structures/extra/DiscordBase.ts#L20)
+[seyfert/src/structures/extra/DiscordBase.ts:20](https://github.com/potoland/potocuit/blob/fe122a1/src/structures/extra/DiscordBase.ts#L20)
 
 ***
 
@@ -109,7 +109,7 @@ get name(): string
 
 #### Source
 
-[seyfert/src/structures/User.ts:12](https://github.com/potoland/potocuit/blob/e332d7a/src/structures/User.ts#L12)
+[seyfert/src/structures/User.ts:12](https://github.com/potoland/potocuit/blob/fe122a1/src/structures/User.ts#L12)
 
 ***
 
@@ -125,7 +125,7 @@ get tag(): string
 
 #### Source
 
-[seyfert/src/structures/User.ts:8](https://github.com/potoland/potocuit/blob/e332d7a/src/structures/User.ts#L8)
+[seyfert/src/structures/User.ts:8](https://github.com/potoland/potocuit/blob/fe122a1/src/structures/User.ts#L8)
 
 ## Methods
 
@@ -147,7 +147,7 @@ avatarURL(options?: ImageURLOptions): string
 
 #### Source
 
-[seyfert/src/structures/User.ts:34](https://github.com/potoland/potocuit/blob/e332d7a/src/structures/User.ts#L34)
+[seyfert/src/structures/User.ts:34](https://github.com/potoland/potocuit/blob/fe122a1/src/structures/User.ts#L34)
 
 ***
 
@@ -171,7 +171,7 @@ Open a DM with the user
 
 #### Source
 
-[seyfert/src/structures/User.ts:26](https://github.com/potoland/potocuit/blob/e332d7a/src/structures/User.ts#L26)
+[seyfert/src/structures/User.ts:26](https://github.com/potoland/potocuit/blob/fe122a1/src/structures/User.ts#L26)
 
 ***
 
@@ -195,7 +195,23 @@ Fetch user
 
 #### Source
 
-[seyfert/src/structures/User.ts:19](https://github.com/potoland/potocuit/blob/e332d7a/src/structures/User.ts#L19)
+[seyfert/src/structures/User.ts:19](https://github.com/potoland/potocuit/blob/fe122a1/src/structures/User.ts#L19)
+
+***
+
+### presence()
+
+```ts
+presence(): ReturnCache<undefined | Omit<GatewayPresenceUpdate, "user"> & Object & Object>
+```
+
+#### Returns
+
+[`ReturnCache`](/api/type-aliases/returncache/)\<`undefined` \| `Omit`\<`GatewayPresenceUpdate`, `"user"`\> & `Object` & `Object`\>
+
+#### Source
+
+[seyfert/src/structures/User.ts:41](https://github.com/potoland/potocuit/blob/fe122a1/src/structures/User.ts#L41)
 
 ***
 
@@ -211,7 +227,7 @@ toString(): string
 
 #### Source
 
-[seyfert/src/structures/User.ts:41](https://github.com/potoland/potocuit/blob/e332d7a/src/structures/User.ts#L41)
+[seyfert/src/structures/User.ts:45](https://github.com/potoland/potocuit/blob/fe122a1/src/structures/User.ts#L45)
 
 ***
 
@@ -233,4 +249,4 @@ write(body: Omit<RESTPostAPIChannelMessageJSONBody, "components" | "embeds"> & R
 
 #### Source
 
-[seyfert/src/structures/User.ts:30](https://github.com/potoland/potocuit/blob/e332d7a/src/structures/User.ts#L30)
+[seyfert/src/structures/User.ts:30](https://github.com/potoland/potocuit/blob/fe122a1/src/structures/User.ts#L30)

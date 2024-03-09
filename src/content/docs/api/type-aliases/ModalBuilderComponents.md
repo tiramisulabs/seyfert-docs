@@ -11,4 +11,4 @@ type ModalBuilderComponents: TextInput;
 
 ## Source
 
-[seyfert/src/builders/types.ts:19](https://github.com/potoland/potocuit/blob/e332d7a/src/builders/types.ts#L19)
+[seyfert/src/builders/types.ts:19](https://github.com/potoland/potocuit/blob/fe122a1/src/builders/types.ts#L19)

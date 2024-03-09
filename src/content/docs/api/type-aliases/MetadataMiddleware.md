@@ -17,4 +17,4 @@ type MetadataMiddleware<T>: Parameters<Parameters<T>[0]["next"]>[0];
 
 ## Source
 
-[seyfert/src/commands/applications/shared.ts:21](https://github.com/potoland/potocuit/blob/e332d7a/src/commands/applications/shared.ts#L21)
+[seyfert/src/commands/applications/shared.ts:24](https://github.com/potoland/potocuit/blob/fe122a1/src/commands/applications/shared.ts#L24)
