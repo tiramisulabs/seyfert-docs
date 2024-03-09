@@ -4,11 +4,11 @@ title: Listening discord events
 
 :::note
 
-This part is only for gateway applications, so if you bot is a http application-only you can skip this.
+This section is only necessary for gateway applications, so if your bot is build in http application-only you can skip this section.
 
 :::
 
-First of all you must tell seyfert where your events will be by updating your config file.
+First of all, you must tell seyfert where your events will be created by updating your config file.
 
 ```ts {11} title="seyfert.config.js" showLineNumbers
 // @ts-check
@@ -26,7 +26,7 @@ module.exports = config.bot({
 });
 ```
 
-Then you can create a listener by exporting `createEvent` from a file inside the `events` folder, let's see an example:
+Then you can create a listener by exporting `createEvent` function in file inside the `events` folder. Let's see an example of how create a ready event:
 
 ```ts title="src/events/botReady.ts" showLineNumbers
 import { createEvent } from "seyfert";
@@ -52,4 +52,4 @@ export default createEvent({
 })
 ```
 
-And that's it, you can create as many events as you want. You can check the list of events [here](SOONTM).
+And that's all, you can create as many events as you want. For further information you can check the list of all gateway events [here](SOONTM).

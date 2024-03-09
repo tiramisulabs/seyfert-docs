@@ -38,7 +38,7 @@ export default class PingCommand extends Command {
 }
 ```
 
-To test if your command works correctly, you must first publish it on Discord after making minor changes to your main file:
+To test if your command works correctly, you can first publish it on Discord after making minor changes to your main file:
 
 ```ts {5-8} title="src/index.ts" showLineNumbers
 import { Client } from 'seyfert';
@@ -48,7 +48,7 @@ const client = new Client();
 client.start().then(() => client.uploadCommands());
 ```
 
-Pretty simple, right? But sometimes commands are not just about receiving a request and responding to it, you also have to think about what the user wants, that's where the `options` come in, let's make the response of this command something private.
+Pretty simple, isn't it? But sometimes commands are not just about receiving a request and responding to it, you also have to think about what the user wants, that's where the `options` come in, let's make the response of this command something private.
 
 :::tip
 
