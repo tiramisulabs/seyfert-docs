@@ -1,0 +1,30 @@
+---
+editUrl: false
+next: false
+prev: false
+title: "ComponentFilterCallback"
+---
+
+```ts
+type ComponentFilterCallback<T>: (interaction: T) => any;
+```
+
+## Type parameters
+
+| Type parameter | Value |
+| :------ | :------ |
+| `T` | [`ComponentInteraction`](/api/classes/componentinteraction/) |
+
+## Parameters
+
+| Parameter | Type |
+| :------ | :------ |
+| `interaction` | `T` |
+
+## Returns
+
+`any`
+
+## Source
+
+[seyfert/src/builders/types.ts:11](https://github.com/potoland/potocuit/blob/e332d7a/src/builders/types.ts#L11)

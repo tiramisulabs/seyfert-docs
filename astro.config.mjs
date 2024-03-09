@@ -1,9 +1,10 @@
 // @ts-check
-import { defineConfig } from 'astro/config';
-import starlight from '@astrojs/starlight';
-import starlightTypeDoc, { typeDocSidebarGroup } from './src/libs/startlight-typedoc';
 import react from '@astrojs/react';
-import { pluginLineNumbers } from '@expressive-code/plugin-line-numbers'
+import starlight from '@astrojs/starlight';
+import { pluginLineNumbers } from '@expressive-code/plugin-line-numbers';
+import { defineConfig } from 'astro/config';
+import sidebar from './sidebar.items.mjs';
+import starlightTypeDoc from './src/libs/startlight-typedoc';
 
 import tailwind from "@astrojs/tailwind";
 
@@ -41,31 +42,7 @@ export default defineConfig({
     social: {
       github: 'https://github.com/withastro/starlight'
     },
-    sidebar: [{
-      label: 'Guide',
-      items: [
-        {
-          label: 'Introduction',
-          link: '/',
-        },
-        {
-          label: 'Getting Started',
-          collapsed: true,
-          autogenerate: {
-            directory: '/guides',
-          }
-        },
-        {
-          label: "Commands",
-          collapsed: true,
-          autogenerate: {
-            directory: "/commands",
-          }
-        }
-      ]
-    },
-      typeDocSidebarGroup
-    ]
+    sidebar,
   }), react(), tailwind({
     applyBaseStyles: false,
     nesting: true
