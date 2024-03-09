@@ -3,12 +3,11 @@ title: Music Library
 ---
 import { Tabs, TabItem } from '@astrojs/starlight/components'
 
-In Seyfert, there is the possibility to play music through a library named [kazagumo](https://npmjs.com/package/kazagumo).
+In Seyfert, we can play music using a external library called [kazagumo](https://npmjs.com/package/kazagumo).
 
 ### Installation
 
-First, `kazagumo` will obviously be installed, and this other dependency `shoukaku`.
-Both are necessary to be able to play music.
+First of all, we have to install `kazagumo` and `shoukaku`. Both dependencies are extremely necessary to move forward within this guide.
 
 ```sh title="Dependencies..." copy showLineNumbers=false
 pnpm add kazagumo shoukaku
@@ -18,10 +17,10 @@ pnpm add kazagumo shoukaku
 
 :::caution
 
-In this part, we are going to assume that you read the [Understanding declare module](guide/declare-module) section 
+To be able to move forward within this guide it is highly recommended to read the [Understanding declare module](guide/declare-module) for a better understanding of what we are doing.
 :::
 
-To see all the kazagumo options or events, see the official [example bot](https://www.npmjs.com/package/kazagumo#example-bot)
+For further information about the different options and events of kazagumo see the official [bot example](https://www.npmjs.com/package/kazagumo#example-bot)
 
 <Tabs>
 <TabItem label="index.ts">
