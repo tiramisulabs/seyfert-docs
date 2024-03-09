@@ -6,6 +6,8 @@ dist/
 # dependencies
 node_modules/
 
+src/content/docs/api/**
+
 # logs
 npm-debug.log*
 yarn-debug.log*

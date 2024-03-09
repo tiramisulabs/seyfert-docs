@@ -33,6 +33,10 @@ export default defineConfig({
         uiFontFamily: "JetBrains Mono Variable",
       }
     },
+    favicon: '/icon.svg',
+    logo: {
+      src: './public/icon.svg'
+    },
     title: 'Seyfert',
     customCss: [
       './src/tailwind.css',
@@ -40,7 +44,8 @@ export default defineConfig({
       '@fontsource-variable/open-sans/wght.css',
     ],
     social: {
-      github: 'https://github.com/withastro/starlight'
+      github: 'https://github.com/tiramisulabs/seyfert',
+      discord: 'https://discord.com/invite/XNw2RZFzaP'
     },
     sidebar,
   }), react(), tailwind({
