@@ -1,54 +1,46 @@
-# Starlight Starter Kit: Basics
+<div align='center'>
 
-[![Built with Starlight](https://astro.badg.es/v2/built-with-starlight/tiny.svg)](https://starlight.astro.build)
+  # **Seyfert**
 
+  <img src="./public/icon.svg" alt="seyfert" width="200px" />
+
+  **Discord.js and Sapphire are deprecated, use Seyfert instead**
+
+  [![License](https://img.shields.io/npm/l/seyfert?style=flat-square&logo=apache&color=white)](https://github.com/tiramisulabs/seyfert/blob/main/LICENSE)
+  [![Version](https://img.shields.io/npm/v/seyfert?color=%23ff0000&logo=npm&style=flat-square)](https://www.npmjs.com/package/seyfert)
+  [![Discord](https://img.shields.io/discord/1003825077969764412?color=%23406da2&label=support&logo=discord&style=flat-square)](https://discord.com/invite/XNw2RZFzaP)
+
+</div>
+
+# FAQ
+## So, what is `seyfert`?
+Seyfert is the ultimate Discord framework! We make easy to interact with the Discord API, big cache control, scalable code and a pretty dev experience.
+
+## Why I should use it?
+There is a lot of reasons to use Seyfert, but we cannot put them all in here so there is a few of them!
+
+- **RAM Saver**
+- **Latest features**
+- **Dev experience**
+- **24/6 support (Sunday is for going to church)**
+- **Written from Scratch**
+- **Type-safe**
+- **And many more!!**
+
+
+## Installation
+> [!NOTE]
+> You **NEED** Node.js 18>= for this to work, also we recomended Node.js 20 LTS and Bun latest
+```sh
+pnpm add seyfert
 ```
-npm create astro@latest -- --template starlight
-```
 
-[![Open in StackBlitz](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/github/withastro/starlight/tree/main/examples/basics)
-[![Open with CodeSandbox](https://assets.codesandbox.io/github/button-edit-lime.svg)](https://codesandbox.io/p/sandbox/github/withastro/starlight/tree/main/examples/basics)
-[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2Fwithastro%2Fstarlight%2Ftree%2Fmain%2Fexamples%2Fbasics&project-name=my-starlight-docs&repository-name=my-starlight-docs)
+> You may use your preferred package manager, for this example I am using PNPM since is more efficient.
 
-> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
+# Useful links
 
-## 🚀 Project Structure
-
-Inside of your Astro + Starlight project, you'll see the following folders and files:
-
-```
-.
-├── public/
-├── src/
-│   ├── assets/
-│   ├── content/
-│   │   ├── docs/
-│   │   └── config.ts
-│   └── env.d.ts
-├── astro.config.mjs
-├── package.json
-└── tsconfig.json
-```
-
-Starlight looks for `.md` or `.mdx` files in the `src/content/docs/` directory. Each file is exposed as a route based on its file name.
-
-Images can be added to `src/assets/` and embedded in Markdown with a relative link.
-
-Static assets, like favicons, can be placed in the `public/` directory.
-
-## 🧞 Commands
-
-All commands are run from the root of the project, from a terminal:
-
-| Command                   | Action                                           |
-| :------------------------ | :----------------------------------------------- |
-| `npm install`             | Installs dependencies                            |
-| `npm run dev`             | Starts local dev server at `localhost:4321`      |
-| `npm run build`           | Build your production site to `./dist/`          |
-| `npm run preview`         | Preview your build locally, before deploying     |
-| `npm run astro ...`       | Run CLI commands like `astro add`, `astro check` |
-| `npm run astro -- --help` | Get help using the Astro CLI                     |
-
-## 👀 Want to learn more?
-
-Check out [Starlight’s docs](https://starlight.astro.build/), read [the Astro documentation](https://docs.astro.build), or jump into the [Astro Discord server](https://astro.build/chat).
+- [GitHub Repository](https://github.com/tiramisulabs/seyfert)
+- [Discord server](https://discord.com/invite/XNw2RZFzaP)
+- [npm - core](https://www.npmjs.com/package/seyfert)
+- [Website](https://seyfert.dev)
+- [Documentation](https://docs.seyfert.dev)
