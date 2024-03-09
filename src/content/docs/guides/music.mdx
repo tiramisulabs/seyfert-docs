@@ -28,7 +28,7 @@ To see all the kazagumo options or events, see the official [example bot](https:
 ```ts title="index.ts" showLineNumbers
 import { Client } from "seyfert";
 import { Kazagumo } from "kazagumo";
-import { type NodeOption, SeyfertConnector } from "shoukaku";
+import { type NodeOption, Connectors } from "shoukaku";
 
 const client = new Client();
 const nodes: NodeOption[] = [
@@ -47,7 +47,7 @@ client.kazagumo = new Kazagumo(
 		send: (guildId, payload) =>
 			client.gateway.send(client.gateway.calculeShardId(guildId), payload)
 	},
-	new SeyfertConnector(client),
+	new Connectors.Seyfert(client),
 	nodes
 );
 
