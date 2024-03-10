@@ -92,16 +92,16 @@ export default class PlayCommand extends Command {
 		const { options, client, guildId, channelId, member, author } = ctx;
 		const { query } = options;
 
-		if (!guildId || !member || !client.cache.voiceStates) return;
+		if (!guildId || !member) return;
 
-		const voice = await client.cache.voiceStates.get(member.id);
+		const voice = member.voice();
 		if (!voice)
 			return ctx.write({
 				content: "You need to be in a voice channel to play music.",
 				flags: MessageFlags.Ephemeral
 			});
 
-		const botVoice = await client.cache.voiceStates.get(client.me.id);
+		const botVoice = ctx.me("cache")?.voice();
 		if (botVoice && botVoice.channel_id !== voice.channel_id)
 			return ctx.write({
 				content: "You need to be in the same voice channel as me.",

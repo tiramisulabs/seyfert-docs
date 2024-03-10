@@ -8,7 +8,7 @@ import {
 
 ### Typescript settings
 
-To make Seyfert work as intended you must update your `tsconfig.json` file and add `emitDecoratorMedatada` and `experimentalDecorators`:
+To make Seyfert work as intended you must update your `tsconfig.json` file and add `emitDecoratorMedatada` and `experimentalDecorators` to be able to use decorators:
 
 ```json {"Adding this to your own tsconfig is enough":5-7} title="tsconfig.json" copy
 {
@@ -17,7 +17,7 @@ To make Seyfert work as intended you must update your `tsconfig.json` file and a
         "module": "commonjs",
 
         "emitDecoratorMetadata": true,
-        "experimentalDecorator": true,
+        "experimentalDecorators": true,
         "outDir": "./dist"
     }
 }
@@ -46,8 +46,8 @@ In these first steps, the options that are shared by both types of applications 
 
 ### Configuration
 
-Once `tsconfig.json` has been modified, we still have a few steps to go before we can run the application, in this case you need to tell seyfert your project structure:
-so you need to create a file called `seyfert.config.js` in the root of your project and add the following code:
+Once `tsconfig.json` has been modified, we still have a few steps to go before we can run the application. In this case you need to tell seyfert your project's structure:
+so is necessary to create a file called `seyfert.config.js` in the root folder of your project and add the following code:
 
 <Tabs>
     <TabItem label="Gateway">
@@ -86,7 +86,7 @@ module.exports = config.http({
     </TabItem>
 </Tabs>
 
-And let's create the index file in the `src` folder and add the following code:
+And let's create the main file called `index` in the `src` folder and add the following code:
 
 <Tabs>
     <TabItem label="Gateway">
@@ -111,7 +111,7 @@ client.start();
     </TabItem>
 </Tabs>
 
-So after complete this steps your project structure should look like this:
+So after complete these steps, your project structure should look like this:
 
 <FileTree>
 

@@ -22,7 +22,7 @@ declare module 'seyfert' {
 
 ## Middlewares
 
-In order for you to be able to use your middleware everywhere, it is again necessary to tell typescript what they are and how they are made up. Export all middlewares in your code and pass it to seyfert:
+In order for you to be able to use your middlewares everywhere, it is again necessary to tell typescript what they are and how they are made up. Export all the middlewares in your code and pass them to seyfert:
 ```ts copy
 import type * as allMiddlewares from './middlewares'
 
@@ -30,7 +30,7 @@ declare module 'seyfert' {
   interface RegisteredMiddlewares extends ParseMiddlewares<typeof allMiddlewares> { }
 }
 ```
-This is the same as above, but applies to global middlewares, those that are executed in every command even without specifying it.
+This is the same as above, but applies to global middlewares, those that are executed in every command even without specifying them.
 
 ```ts copy
 import type * as allMiddlewares from './middlewares/globals'
@@ -48,7 +48,7 @@ It is highly recommended to use `.ts`, `.js` files for your translations, so you
 :::
 
 :::warning
-If you use json for this (not recommended), you must add `../` to the path in your `seyfert.config.js` because typescript ignores jsons that are not imported manually.
+If you use json for this (not recommended), you must add `../` to the path in your `seyfert.config.js` as typescript ignores json files that are not imported manually.
 :::
 
 ```ts copy
@@ -65,7 +65,7 @@ declare module 'seyfert' {
 
 ## Internal Options
 
-Since seyfert accepts different ways of operating, it becomes more complicated to keep the types true to reality. Because of that there are `InternalOptions` an interface that expects properties to transform the seyfert types to something more complete.
+Since seyfert accepts different ways of operating, it becomes more complicated to keep the types true to reality. Because of that there are `InternalOptions`, an interface that expects properties to transform the seyfert types to something more complete.
 
 ```ts copy
 declare module 'seyfert' {
@@ -77,7 +77,7 @@ declare module 'seyfert' {
 ```
 
 ### withPrefix
-Setting this property to `true` tells seyfert that the context can have either message or interaction and both will be optional, by default `.interaction` always be part of the context.
+Setting this property to `true` tells seyfert that the context can have either message or interaction and both will be optional, by default `.interaction` is always part of the context.
 
 ### asyncCache
-Setting this property to `true` tells seyfert whether the cache will return a promise or not, by default seyfert uses MemoryAdapter a ram cache which does not return a promise, but RedisAdapter does.
+Setting this property to `true` tells seyfert whether the cache will return a promise or not, by default seyfert uses `MemoryAdapter` a RAM cache which does not return a promise, but `RedisAdapter` does.
