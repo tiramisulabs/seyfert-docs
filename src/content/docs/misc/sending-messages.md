@@ -110,7 +110,7 @@ import {
 	StringSelectMenu,
 	ButtonStyle,
 	StringSelectOption
-} from "seyfert"
+} from "seyfert";
 
 export default class HelloWorldCommand extends Command {
 	async run(ctx: CommandContext) {
@@ -127,12 +127,12 @@ export default class HelloWorldCommand extends Command {
 
 
 		const buttonRow = new ActionRow()
-		.setComponents(button) //attaching button component to the actionrow
+		.addComponents(button) //attaching button component to the actionrow
 
 		const menuRow = new ActionRow()
-		.setComponents(menu) //ataching the stringselectmenu component to the actionrow
+		.addComponents(menu) //attaching the stringselectmenu component to the actionrow
 
-        ctx.write({ content: "Hello World 👋", components: [buttonRow, menuRow] })
+        ctx.write({ content: "Hello World 👋", components: [buttonRow, menuRow] });
     }
 }
 ```
