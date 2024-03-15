@@ -62,6 +62,16 @@ export default [{
 					link: '/commands/command-class'
 				}
 			]
+		},
+		{
+			label: 'Miscellaneous',
+			collapsed: true,
+			items: [
+				{
+					label: 'Sending Messages',
+					link: '/misc/sending-messages'
+				}
+			]
 		}
 	]
 },
