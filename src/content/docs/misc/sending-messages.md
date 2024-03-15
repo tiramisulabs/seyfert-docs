@@ -16,8 +16,6 @@ import {
 	name: "helloworld",
 	description: "Send a basic hello world message."
 })
-
-
 export default class HelloWorldCommand extends Command {
 	async run(ctx: CommandContext) {}
 }
