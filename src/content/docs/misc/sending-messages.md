@@ -62,7 +62,10 @@ Here is an example of how to send that message without replying a command:
 ```ts title="src/commands/helloworld.ts" showLineNumbers
 export default class HelloWorldCommand extends Command {
 	async run(ctx: CommandContext) {
-        ctx.client.messages.write("channelId", { content: "Hello World 👋" })
+
+		const { channelId } = ctx; //we are getting the channelId from the context
+
+        ctx.client.messages.write(channelId, { content: "Hello World 👋" })
     }
 }
 ```
