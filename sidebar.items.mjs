@@ -30,10 +30,6 @@ export default [{
 				{
 					label: 'Understanding declare module',
 					link: '/guides/declare-module'
-				},
-				{
-					label: 'Music library',
-					link: '/guides/music'
 				}
 			]
 		},
@@ -70,6 +66,10 @@ export default [{
 				{
 					label: 'Sending Messages',
 					link: '/misc/sending-messages'
+				},
+				{
+					label: 'Music library',
+					link: '/misc/music'
 				}
 			]
 		}
