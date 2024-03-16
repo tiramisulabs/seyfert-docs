@@ -80,7 +80,7 @@ export default class HelloWorldCommand extends Command {
 
 Discord adds the possibility to send embeded messages within a channel. 
 
-To send those embeded messages with Seyfert we will have to build up the embed with the Embed builder. For further information about the cusomization of the embeded message you can check the [Embed builder]('api/classes/embed') within this docs.
+To send those embeded messages with Seyfert we will have to build up the embed with the Embed builder. For further information about the cusomization of the embeded message you can check the [Embed builder](/api/classes/embed) within this docs.
 
 Here is an example of how to send an embed with a custom title and description.
 
@@ -102,11 +102,11 @@ export default class HelloWorldCommand extends Command {
 
 ## Sending components attached to the message
 
-Discord includes the possibility to send components attached to the message within an `ActionRow`. Those components can be [`Buttons`]('api/classes/button') or [`SelectMenus`]('api/classes/selectmenu/').
+Discord includes the possibility to send components attached to the message within an `ActionRow`. Those components can be [`Buttons`](/api/classes/button) or [`SelectMenus`](/api/classes/selectmenu/).
 
-The components are stored into an [`ActionRow`]('api/classes/actionrow') which can contain up to 5 diffrent buttons and only one select menu and can't contain inside another `ActionRow`.
+The components are stored into an [`ActionRow`](/api/classes/actionrow) which can contain up to 5 diffrent buttons and only one select menu and can't contain inside another `ActionRow`.
 
-In this example we are going to send two actions rows within the message. Each row is going to have a button and a [string select menu]('api/classes/stringselectmenu') attached respectively.
+In this example we are going to send two actions rows within the message. Each row is going to have a button and a [string select menu](/api/classes/stringselectmenu) attached respectively.
 
 ```ts title="src/commands/helloworld.ts" showLineNumbers
 
