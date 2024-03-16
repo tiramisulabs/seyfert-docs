@@ -23,13 +23,21 @@ export default class HelloWorldCommand extends Command {
 
 Having set up our basic `Hello World` command we are ready to send our first message using `CommandContext.write()` function.
 
-```ts title="src/commands/helloworld.ts" showLineNumbers
+```ts title="src/commands/helloworld.ts" ins={10-12} showLineNumbers
+import {
+	Command,
+	Declare
+} from "seyfert";
+
+@Declare({
+	name: "helloworld",
+	description: "Send a basic hello world message."
+})
 export default class HelloWorldCommand extends Command {
-	async run(ctx: CommandContext) {
+    async run(ctx: CommandContext) {
         ctx.write({ content: "Hello World 👋" })
     }
 }
-```
 
 The `CommandContext.write()` function will respond to the command.
 
