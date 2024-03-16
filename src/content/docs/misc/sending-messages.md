@@ -23,7 +23,7 @@ export default class HelloWorldCommand extends Command {
 
 Having set up our basic `Hello World` command we are ready to send our first message using `CommandContext.write()` function.
 
-```ts title="src/commands/helloworld.ts" showLineNumbers
+```ts title="src/commands/helloworld.ts" ins={12} showLineNumbers
 import {
 	Command,
 	Declare
