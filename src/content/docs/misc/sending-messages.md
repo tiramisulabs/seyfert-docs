@@ -23,7 +23,7 @@ export default class HelloWorldCommand extends Command {
 
 Having set up our basic `Hello World` command we are ready to send our first message using `CommandContext.write()` function.
 
-```ts title="src/commands/helloworld.ts" ins={10-12} showLineNumbers
+```ts title="src/commands/helloworld.ts" showLineNumbers
 import {
 	Command,
 	Declare
@@ -44,7 +44,7 @@ The `CommandContext.write()` function will respond to the command.
 
 ## EditOrReply
 
-But, what about responding to the command or editing it's reply instead of of sending only messages where the command was triggered?
+But, what about responding to the command or editing it's reply instead of replying to the command where it was triggered?
 
 We can use `CommandContext.editOrReply()` function. This function is used to reply the command or, if the response has been sent, edit it. 
 
