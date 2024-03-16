@@ -44,7 +44,7 @@ The `CommandContext.write()` function will respond to the command.
 
 ## EditOrReply
 
-But, what about responding to the command or editing it's reply instead of replying to the command where it was triggered?
+But, what about responding to the command or editing it's reply instead of simply replying to it?
 
 We can use `CommandContext.editOrReply()` function. This function is used to reply the command or, if the response has been sent, edit it. 
 
