@@ -38,6 +38,7 @@ export default class HelloWorldCommand extends Command {
         ctx.write({ content: "Hello World 👋" })
     }
 }
+```
 
 The `CommandContext.write()` function will respond to the command.
 
