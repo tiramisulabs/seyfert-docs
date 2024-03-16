@@ -35,7 +35,7 @@ import {
 })
 export default class HelloWorldCommand extends Command {
     async run(ctx: CommandContext) {
-        ctx.write({ content: "Hello World 👋" })
+        ctx.write({ content: "Hello World 👋" });
     }
 }
 ```
@@ -52,10 +52,10 @@ This function is very useful if we want to develop a command which responds to t
 
 Here is an example of how implement this function. 
 
-```ts title="src/commands/helloworld.ts" showLineNumbers
+```ts title="src/commands/helloworld.ts" {3} showLineNumbers
 export default class HelloWorldCommand extends Command {
 	async run(ctx: CommandContext) {
-        ctx.editOrReply({ content: "Hello World 👋" }) //if we respond to the command before executing this function the response will be edited instead of sent.
+        ctx.editOrReply({ content: "Hello World 👋" }); //if we respond to the command before executing this function the response will be edited instead of sent.
     }
 }
 ```
@@ -68,10 +68,10 @@ Here we are. To send a simple message to a specific channel we need to retrive i
 
 Here is an example of how to send that message without replying a command:
 
-```ts title="src/commands/helloworld.ts" showLineNumbers
+```ts title="src/commands/helloworld.ts" {3} showLineNumbers
 export default class HelloWorldCommand extends Command {
     async run(ctx: CommandContext) {
-        ctx.client.messages.write(ctx.channelId, { content: "Hello World 👋" })
+        ctx.client.messages.write(ctx.channelId, { content: "Hello World 👋" });
     }
 }
 ```
@@ -84,7 +84,7 @@ To send those embeded messages with Seyfert we will have to build up the embed w
 
 Here is an example of how to send an embed with a custom title and description.
 
-```ts title="src/commands/helloworld.ts" showLineNumbers
+```ts title="src/commands/helloworld.ts" {1, 6-10} showLineNumbers
 
 import { Embed } from "seyfert"
 
@@ -95,7 +95,7 @@ export default class HelloWorldCommand extends Command {
 		.setTitle("My Awesome Embed")
 		.setDescription("Hello World 👋")
 
-        ctx.write({ embeds: [embed] })
+        ctx.write({ embeds: [embed] });
     }
 }
 ```
@@ -108,7 +108,7 @@ The components are stored into an [`ActionRow`](/api/classes/actionrow) which ca
 
 In this example we are going to send two actions rows within the message. Each row is going to have a button and a [string select menu](/api/classes/stringselectmenu) attached respectively.
 
-```ts title="src/commands/helloworld.ts" showLineNumbers
+```ts title="src/commands/helloworld.ts" {"1":1-7} {"2": 12-15, 18-20, 23-24, 26-27} {"3":29} showLineNumbers
 
 import { 
 	ActionRow,
@@ -138,7 +138,7 @@ export default class HelloWorldCommand extends Command {
 		const menuRow = new ActionRow()
 		.addComponents(menu) //attaching the stringselectmenu component to the actionrow
 
-        ctx.write({ content: "Hello World 👋", components: [buttonRow, menuRow] });
+    	ctx.write({ content: "Hello World 👋", components: [buttonRow, menuRow] });
     }
 }
 ```
