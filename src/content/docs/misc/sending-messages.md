@@ -113,7 +113,7 @@ The components are stored into an [`ActionRow`](/api/classes/actionrow) which ca
  
 In this example we are going to send two actions rows within the message. Each row is going to have a button and a [string select menu](/api/classes/stringselectmenu) attached respectively.
  
-```ts title="src/commands/helloworld.ts" ins={1-7} {"1. Build a message component": 12-16, 18-21, 23-25, 26-28} ins={30} showLineNumbers
+```ts title="src/commands/helloworld.ts" ins={1-7} {"1. Build button": 12-19} {"2. Build selectmenu": 21-29} ins={31} showLineNumbers
 import { 
 	ActionRow,
 	Button, 
@@ -131,19 +131,20 @@ export default class HelloWorldCommand extends Command {
 		.setLabel("Hello World")
 		.setStyle(ButtonStyle.Primary)
  
+		const buttonRow = new ActionRow()
+		.addComponents(button)
  
+
 		const menu = new StringSelectMenu()
 		.setCustomId("select-helloworld")
-		.addOption(new StringSelectOption().setLabel("Hello").setValue("option_1"))
- 
- 
-		const buttonRow = new ActionRow()
-		.addComponents(button) //attaching button component to the actionrow
- 
+		.addOption(
+			new StringSelectOption().setLabel("Hello").setValue("option_1")
+		)
+
 		const menuRow = new ActionRow()
-		.addComponents(menu) //attaching the stringselectmenu component to the actionrow
+		.addComponents(menu) 
  
-    	ctx.write({ content: "Hello World 👋", components: [buttonRow, menuRow] });
-    }
+    ctx.write({ content: "Hello World 👋", components: [buttonRow, menuRow] });
+  }
 }
 ```
