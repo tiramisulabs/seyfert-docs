@@ -8,7 +8,7 @@ We have touching on the basics of creating a command, but what if we want to cre
 
 ## Creating a Sub-Command
 
-To create a sub-command, we need to create a new class that extends `SubCommand` and implement the `execute` method. We then need to add the sub-command to the parent command.
+To create a sub-command, we need to create a new class that extends `SubCommand` and implement the `run` method. We then need to add the sub-command to the parent command.
 
 It's suppose you have the following directory structure:
 
@@ -36,7 +36,7 @@ import { type CommandContext, Declare, SubCommand } from "seyfert";
 	description: "create a new something"
 })
 export class AddCommand extends SubCommand {
-	execute(ctx: CommandContext) {
+	run(ctx: CommandContext) {
 		// some logic there
 
 		ctx.reply({
@@ -55,7 +55,7 @@ import { type CommandContext, Declare, SubCommand } from "seyfert";
 	description: "delete something"
 })
 export class DeleteCommand extends SubCommand {
-	execute(ctx: CommandContext) {
+	run(ctx: CommandContext) {
 		// some logic here
 
 		ctx.reply({
