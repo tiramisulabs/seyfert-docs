@@ -26,45 +26,6 @@ It's suppose you have the following directory structure:
 </FileTree>
 
 <Tabs>
-	<TabItem label='create.command.ts' icon="seti:typescript">
-	
-```ts copy
-import { type CommandContext, Declare, SubCommand } from "seyfert";
-
-@Declare({
-	name: "create",
-	description: "create a new something"
-})
-export class AddCommand extends SubCommand {
-	run(ctx: CommandContext) {
-		// some logic there
-
-		ctx.reply({
-			content: "create command executed"
-		});
-	}
-}
-```
-</TabItem>
-<TabItem label='delete.command.ts' icon="seti:typescript">
-```ts copy
-import { type CommandContext, Declare, SubCommand } from "seyfert";
-
-@Declare({
-	name: "delete",
-	description: "delete something"
-})
-export class DeleteCommand extends SubCommand {
-	run(ctx: CommandContext) {
-		// some logic here
-
-		ctx.reply({
-			content: "delete command executed"
-		});
-	}
-}
-```
-	</TabItem>
 	<TabItem label='parent.ts' icon="seti:typescript">
 
 :::tip
@@ -86,6 +47,45 @@ import { DeleteCommand } from "./delete.command";
 @Options([AddCommand, DeleteCommand])
 export default class AccountCommand extends Command {}
 
+```
+	</TabItem>
+	<TabItem label='create.command.ts' icon="seti:typescript">
+	
+```ts copy
+import { type CommandContext, Declare, SubCommand } from "seyfert";
+
+@Declare({
+	name: "create",
+	description: "create a new something"
+})
+export class CreateCommand extends SubCommand {
+	run(ctx: CommandContext) {
+		// some logic there
+
+		ctx.write({
+			content: "create command executed"
+		});
+	}
+}
+```
+</TabItem>
+<TabItem label='delete.command.ts' icon="seti:typescript">
+```ts copy
+import { type CommandContext, Declare, SubCommand } from "seyfert";
+
+@Declare({
+	name: "delete",
+	description: "delete something"
+})
+export class DeleteCommand extends SubCommand {
+	run(ctx: CommandContext) {
+		// some logic here
+
+		ctx.write({
+			content: "delete command executed"
+		});
+	}
+}
 ```
 	</TabItem>
 </Tabs>
