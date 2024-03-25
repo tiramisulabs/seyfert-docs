@@ -44,7 +44,8 @@ import { DeleteCommand } from "./delete.command";
 	name: "account",
 	description: "account command"
 })
-@Options([AddCommand, DeleteCommand]) // If the sub-commands are in the same directory can use  @Autoload()
+// Being in the same folder with @AutoLoad() you can save this
+@Options([AddCommand, DeleteCommand])
 export default class AccountCommand extends Command {}
 
 ```
