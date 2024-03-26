@@ -31,13 +31,14 @@ It's suppose you have the following directory structure:
 :::tip
 
 With this file structure you can use `@Autoload()` and seyfert will add the commands for you.
+But make sure you export by default the sub-commands.
 
 :::
 
 
 	```ts copy
 import { type CommandContext, Declare, Command, Options } from "seyfert";
-import { AddCommand } from "./create.command";
+import { CreateCommand } from "./create.command";
 import { DeleteCommand } from "./delete.command";
 
 @Declare({
