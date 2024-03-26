@@ -13,7 +13,7 @@ In Seyfert, commands are the main structure of any discord bot project, although
 Let's start by declaring the first command of the application
 
 :::caution
-If you are getting any type error here, see [declaring module](/guides/declare-modules)
+If you are getting any type error in the code, see [Declaring module](/guides/declare-module)
 :::
 
 ```ts title="src/commands/ping.ts" showLineNumbers
@@ -56,7 +56,7 @@ Learn more about command options [here](/commands/options)
 
 ## Using options
 
-```ts {4-5,9-13,19,22-24} title="src/commands/ping.ts" showLineNumbers
+```ts {4-5,10-14,20,23-25} title="src/commands/ping.ts" showLineNumbers
 import {
   Command,
   Declare,
@@ -64,6 +64,7 @@ import {
   createBooleanOption,
   type CommandContext
 } from 'seyfert';
+import { MessageFlags } from 'discord-api-types/v10';
 
 const options = {
   hide: createBooleanOption({
@@ -82,7 +83,7 @@ export default class PingCommand extends Command {
     const hide = ctx.options.hide ?? false;
     const flags = +hide && MessageFlags.Ephemeral;
 
-		// average latency between shards
+    // average latency between shards
     const ping = ctx.client.gateway.latency;
 
     await ctx.write({
@@ -94,11 +95,14 @@ export default class PingCommand extends Command {
 }
 ```
 
+:::tip
+Moreover, categories can be created within folders to organize commands orderly.
+:::
 
 <FileTree>
 - src
 	- commands
-		- **ping.ts**
+		- **ping.ts** 
 	- index.ts
 - package.json
 - seyfert.config.js
