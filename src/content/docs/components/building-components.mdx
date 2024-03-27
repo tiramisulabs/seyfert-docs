@@ -119,6 +119,8 @@ const channelRow = new ActionRow().setComponents(channelMenu);
 const mentionableMenu = new MentionableSelectMenu()
 .setCustomId('mentionable-menu')
 .setPlaceholder('Select a mentionable')
+//mentionable id's (role or user)
+.setDefaultMentionables('123456789', '987654321')
 
 const mentionableRow = new ActionRow().setComponents(mentionableMenu);
 
