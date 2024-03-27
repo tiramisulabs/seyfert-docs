@@ -2,8 +2,6 @@
 title: Building components
 ---
 
-import { TabItem, Tabs } from '@astrojs/starlight/components'
-
 Having sent the component within a channel it's about time you want to handle the interaction from the component.
 
 First of all we are going to create a file inside the directory that we have set at the start of our project for the components.
@@ -87,9 +85,9 @@ export class HelloWorldButton extends ComponentCommand {
         return interaction.customId === 'hello-world';
     }
 
-    run(interaction: ButtonInteraction){
+    async run(interaction: ButtonInteraction){
 
-        return interaction.write({ content: 'Hello World 👋', flags: MessageFlags.Ephemeral })
+        return await interaction.write({ content: 'Hello World 👋', flags: MessageFlags.Ephemeral })
 
     }
 }
