@@ -60,6 +60,20 @@ export default [{
 			]
 		},
 		{
+			label: 'Components',
+			collapsed: true,
+			items: [
+				{
+					label: 'Introduction',
+					link: '/components/introduction'
+				},
+				{
+					label: 'Building components',
+					link: '/components/building-components'
+				}
+			]
+		},
+		{
 			label: 'Miscellaneous',
 			collapsed: true,
 			items: [
