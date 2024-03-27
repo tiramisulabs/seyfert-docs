@@ -68,8 +68,12 @@ export default [{
 					link: '/components/introduction'
 				},
 				{
-					label: 'Building components',
+					label: 'Building Components',
 					link: '/components/building-components'
+				},
+				{
+					label: 'Handling Components',
+					link: '/components/handling-components'
 				}
 			]
 		},

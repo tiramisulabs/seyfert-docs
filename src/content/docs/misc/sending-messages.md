@@ -109,7 +109,7 @@ export default class HelloWorldCommand extends Command {
  
 Discord includes the possibility to send components attached to the message within an `ActionRow`. Those components can be [`Buttons`](/api/classes/button) or [`SelectMenus`](/api/classes/selectmenu/).
  
-The components are stored into an [`ActionRow`](/api/classes/actionrow) which can contain up to 5 diffrent buttons and only one select menu and can't contain inside another `ActionRow`.
+The components are stored into an [`ActionRow`](/api/classes/actionrow) which can contain up to 5 diffrent buttons and only one select menu and can't contain inside another ActionRow.
  
 In this example we are going to send two actions rows within the message. Each row is going to have a button and a [string select menu](/api/classes/stringselectmenu) attached respectively.
  
