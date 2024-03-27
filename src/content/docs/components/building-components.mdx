@@ -26,12 +26,14 @@ const row = new ActionRow()
 
 ```
 
-## Building each type of component
+## Building each component
 
 Now we are going to build each type of component and set it within an ActionRow:
 
 <Tabs>
 <TabItem label="button.ts">
+
+### Buttons
 
 An ActionRow shouldn't contain more than 5 buttons.
 
@@ -50,5 +52,74 @@ const row = new ActionRow()
 .setComponents(button)
 
 ```
+</TabItem>
+<TabItem label="menu.ts">
+
+### Select Menu
+
+An ActionRow shouldn't contain more than one select menu.
+
+They are diffrent types of select menus: [`StringSelectMenu`](/api/classes/stringselectmenu), [`UserSelectMenu`](/api/classes/userselectmenu), [`RoleSelectMenu`](/api/classes/roleselectmenu), [`ChannelSelectMenu`](/api/classes/channelselectmenu) and [`MentionableSelectMenu`](/api/classes/mentionableselectmenu). 
+
+We are going to make diffrent action rows for each select menu. 
+
+
+```ts {"String select menu": 9-18} {"User select menu": 20-27} {"Role select menu": 29-36} {"Channel select menu": 38-45} {"Mentionable select menu": 47-52} showLineNumbers copy
+
+import {
+    ActionRow,
+    StringSelectMenu,
+    UserSelectMenu,
+    RoleSelectMenu,
+    ChannelSelectMenu,
+    MentionableSelectMenu
+} from 'seyfert';
+
+const stringMenu = new StringSelectMenu()
+.setCustomId('string-menu')
+.setPlaceholder('Select an string option')
+.setOptions(
+    { label: 'Option 1', value: '1' },
+    { label: 'Option 2', value: '2' }
+)
+
+const stringRow = new ActionRow().setComponents(stringMenu);
+
+
+const userMenu = new UserSelectMenu()
+.setCustomId('user-menu')
+.setPlaceholder('Select an user')
+//user id's
+.setDefaultUsers('123456789', '987654321')
+
+const userRow = new ActionRow().setComponents(userMenu);
+
+
+const roleMenu = new RoleSelectMenu()
+.setCustomId('role-menu')
+.setPlaceholder('Select a role')
+//role id's
+.setDefaultRoles('123456789', '987654321')
+
+const roleRow = new ActionRow().setComponents(roleMenu);
+
+
+const channelMenu = new ChannelSelectMenu()
+.setCustomId('channel-menu')
+.setPlaceholder('Select a channel')
+//channel id's
+.setDefaultChannels('123456789', '987654321')
+
+const channelRow = new ActionRow().setComponents(channelMenu);
+
+
+const mentionableMenu = new MentionableSelectMenu()
+.setCustomId('mentionable-menu')
+.setPlaceholder('Select a mentionable')
+
+const mentionableRow = new ActionRow().setComponents(mentionableMenu);
+
+```
+
 </TabItem>
 </Tabs>
