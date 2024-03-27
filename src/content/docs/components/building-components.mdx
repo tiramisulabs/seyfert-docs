@@ -51,7 +51,7 @@ const button = new Button()
 .setStyle(ButtonStyle.Primary)
 .setLabel('First Button')
 
-const row = new ActionRow()
+const row = new ActionRow<Button>()
 .setComponents(button)
 
 ```
@@ -86,7 +86,7 @@ const stringMenu = new StringSelectMenu()
     { label: 'Option 2', value: '2' }
 )
 
-const stringRow = new ActionRow().setComponents(stringMenu);
+const stringRow = new ActionRow<StringSelectMenu>().setComponents(stringMenu);
 
 
 const userMenu = new UserSelectMenu()
@@ -95,7 +95,7 @@ const userMenu = new UserSelectMenu()
 //user id's
 .setDefaultUsers('123456789', '987654321')
 
-const userRow = new ActionRow().setComponents(userMenu);
+const userRow = new ActionRow<UserSelectMenu>().setComponents(userMenu);
 
 
 const roleMenu = new RoleSelectMenu()
@@ -104,7 +104,7 @@ const roleMenu = new RoleSelectMenu()
 //role id's
 .setDefaultRoles('123456789', '987654321')
 
-const roleRow = new ActionRow().setComponents(roleMenu);
+const roleRow = new ActionRow<RoleSelectMenu>().setComponents(roleMenu);
 
 
 const channelMenu = new ChannelSelectMenu()
@@ -113,7 +113,7 @@ const channelMenu = new ChannelSelectMenu()
 //channel id's
 .setDefaultChannels('123456789', '987654321')
 
-const channelRow = new ActionRow().setComponents(channelMenu);
+const channelRow = new ActionRow<ChannelSelectMenu>().setComponents(channelMenu);
 
 
 const mentionableMenu = new MentionableSelectMenu()
@@ -122,7 +122,7 @@ const mentionableMenu = new MentionableSelectMenu()
 //mentionable id's (role or user)
 .setDefaultMentionables('123456789', '987654321')
 
-const mentionableRow = new ActionRow().setComponents(mentionableMenu);
+const mentionableRow = new ActionRow<MentionableSelectMenu>().setComponents(mentionableMenu);
 
 ```
 
@@ -152,7 +152,7 @@ const input = new TextInput()
 .setStyle(TextInputStyle.Short)
 .setLength({ min: 10, max: 30 })
 
-const row = new ActionRow().setComponents(input);
+const row = new ActionRow<TextInput>().setComponents(input);
 
 ```
 </TabItem>
