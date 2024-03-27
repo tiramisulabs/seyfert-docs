@@ -72,6 +72,7 @@ We are going to make diffrent action rows for each select menu.
 import {
     ActionRow,
     StringSelectMenu,
+    StringSelectOption
     UserSelectMenu,
     RoleSelectMenu,
     ChannelSelectMenu,
@@ -83,7 +84,7 @@ const stringMenu = new StringSelectMenu()
 .setPlaceholder('Select an string option')
 .setOptions(
     { label: 'Option 1', value: '1' },
-    { label: 'Option 2', value: '2' }
+    new StringSelectOption().setLabel('Option 2').setValue('2')
 )
 
 const stringRow = new ActionRow<StringSelectMenu>().setComponents(stringMenu);
