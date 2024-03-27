@@ -44,8 +44,11 @@ import {
     Button
 } from 'seyfert';
 
+import { ButtonStyle } from 'discord-api-types';
+
 const button = new Button()
 .setCustomId('first-button')
+.setStyle(ButtonStyle.Primary)
 .setLabel('First Button')
 
 const row = new ActionRow()
@@ -121,5 +124,34 @@ const mentionableRow = new ActionRow().setComponents(mentionableMenu);
 
 ```
 
+</TabItem>
+
+<TabItem label="input.ts">
+
+### TextInputs
+
+An ActionRow shouldn't contain more than one text input.
+
+A text input is a component that is unique in modals and can't only be attached within action rows in a modal.
+
+```ts showLineNumbers copy
+
+import {
+    ActionRow,
+    TextInput
+} from 'seyfert';
+
+import { TextInputStyle } from 'discord-api-types';
+
+const input = new TextInput()
+.setCustomId('textinput')
+.setLabel('My Name')
+.setPlaceholder('Enter text')
+.setStyle(TextInputStyle.Short)
+.setLength({ min: 10, max: 30 })
+
+const row = new ActionRow().setComponents(input);
+
+```
 </TabItem>
 </Tabs>
