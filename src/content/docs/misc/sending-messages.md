@@ -131,7 +131,7 @@ export default class HelloWorldCommand extends Command {
 		.setLabel("Hello World")
 		.setStyle(ButtonStyle.Primary)
  
-		const buttonRow = new ActionRow()
+		const buttonRow = new ActionRow<Button>()
 		.addComponents(button)
  
 
@@ -141,7 +141,7 @@ export default class HelloWorldCommand extends Command {
 			new StringSelectOption().setLabel("Hello").setValue("option_1")
 		)
 
-		const menuRow = new ActionRow()
+		const menuRow = new ActionRow<StringSelectMenu>()
 		.addComponents(menu) 
  
     ctx.write({ content: "Hello World 👋", components: [buttonRow, menuRow] });
