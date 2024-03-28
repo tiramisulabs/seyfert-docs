@@ -216,7 +216,7 @@ export class HelloWorldCommand extends Command {
     );
 
     const collector = message.createComponentCollector({
-      filter: (i) => i.user.id === ctx.author.id,
+      filter: (i) => i.user.id === ctx.author.id && i.isButton(),
       onStop(reason, refresh) {
         //this will refresh the collector everytime it stops by timeout
         if (reason === 'idle') return refresh();
@@ -225,7 +225,7 @@ export class HelloWorldCommand extends Command {
     });
 
     collector.run('hello', async (i) => {
-      if (i.isButton()) return await i.write({ content: 'Hello World 👋' });
+      return await i.write({ content: 'Hello World 👋' });
     });
   }
 }
