@@ -4,7 +4,7 @@ title: Collectors
 
 Now that you have learned how to handle components in a static way, you could have asked yourself how I get more context about what had happened before sending the component. 
 
-Seyfert includes `components message collectors` which are an easy way to handle does interactions received from an specific message and make you able to get more context about what had happened before sending the component.
+Seyfert includes `message components collectors` which are an easy way to handle does interactions received from an specific message and make you able to get more context about what had happened before sending the component.
 
 :::note
 
@@ -229,4 +229,41 @@ export class HelloWorldCommand extends Command {
     });
   }
 }
+```
+
+## Handling Modals with collectors
+
+As modals aren't message components there is not possibility to create a `message components collector` but Seyfert introduces the possiblity to create it by using the `run` method within the modal builder which expects a callback that will handle the interactions. 
+
+Here is an example using the `run` within the modal builder:
+
+```ts showLineNumbers copy
+import {
+  Modal,
+  Command,
+  Declare,
+  type ModalSubmitInteraction,
+  type CommandContext
+} from 'seyfert';
+
+@Declare({
+  name: 'hello',
+  description: 'I will send you a hello world message'
+})
+export class HelloWorldCommand extends Command {
+  async run(ctx: CommandContext) {
+    const modal = new Modal()
+      .setCustomId('hello')
+      .setTitle('Hello')
+      .run(this.handleModal);
+
+    await ctx.interaction.modal(modal);
+  }
+
+  async handleModal(i: ModalSubmitInteraction) {
+    return await i.write({ content: 'Hello World 👋' });
+  }
+}
+
+
 ```
