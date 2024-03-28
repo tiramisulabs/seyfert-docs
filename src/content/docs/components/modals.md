@@ -21,19 +21,19 @@ const nameInput = new TextInput()
 .setStyle(TextInputStyle.Short)
 .setLabel('Name')
 
-const row1 = new ActionRow<TextInput>().setComponents(nameInput);
+const row1 = new ActionRow<TextInput>().setComponents([nameInput]);
 
 const ageInput = new TextInput()
 .setCustomId('age')
 .setStyle(TextInputStyle.Short)
 .setLabel('Age')
 
-const row2 = new ActionRow<TextInput>().setComponents(ageInput);
+const row2 = new ActionRow<TextInput>().setComponents([ageInput]);
 
 const modal = new Modal()
 .setCustomId('mymodal')
 .setTitle('My Modal')
-.setComponents(row1, row2)
+.setComponents([row1, row2])
 
 ```
 
