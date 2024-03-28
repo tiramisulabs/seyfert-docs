@@ -148,3 +148,8 @@ export default class HelloWorldCommand extends Command {
   }
 }
 ```
+
+:::note
+
+For further information about components see the [components guide](../components/introduction).
+:::

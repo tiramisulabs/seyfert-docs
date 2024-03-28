@@ -6,6 +6,11 @@ Now that you have learned how to handle components in a static way, you could ha
 
 Seyfert includes `message collectors` which are an easy way to handle does interactions received from an specific message and make you able to get more context about what had happened before sending the component.
 
+:::note
+
+If the process where you created the component collector is killed the collector will stop and the interactions of the message won't be handled.
+:::
+
 ## Building collectors
 
 Collectors are built using [`createComponentCollector`](/api/classes/basemessage#createcomponentcollector) method in a message, which is inherited by [`BaseMessage`](/api/classes/basemessage). This method returns an object representing a collector.
