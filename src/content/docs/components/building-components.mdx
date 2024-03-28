@@ -44,7 +44,7 @@ import {
     Button
 } from 'seyfert';
 
-import { ButtonStyle } from 'discord-api-types';
+import { ButtonStyle } from 'discord-api-types/v10';
 
 const button = new Button()
 .setCustomId('first-button')
@@ -83,7 +83,7 @@ const stringMenu = new StringSelectMenu()
 .setCustomId('string-menu')
 .setPlaceholder('Select an string option')
 .setOptions(
-    { label: 'Option 1', value: '1' },
+    new StringSelectOption().setLabel('Option 1').setValue('1'),
     new StringSelectOption().setLabel('Option 2').setValue('2')
 )
 
@@ -121,7 +121,7 @@ const mentionableMenu = new MentionableSelectMenu()
 .setCustomId('mentionable-menu')
 .setPlaceholder('Select a mentionable')
 //mentionable id's (role or user)
-.setDefaultMentionables('123456789', '987654321')
+.setDefaultMentionables({ type: 'User', id: '123456789' }, { type: 'Role', id: '987654321' })
 
 const mentionableRow = new ActionRow<MentionableSelectMenu>().setComponents(mentionableMenu);
 
