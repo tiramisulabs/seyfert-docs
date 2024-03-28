@@ -26,21 +26,18 @@ Now we want the handler to handle only the interactions created by the `HelloWor
 
 To filter the interactions we are using a function inherited by the `ComponentCommand` class in which we have to return a boolean.
 
-```ts ins={9-13} showLineNumbers copy
+```ts ins={6-10} showLineNumbers copy
 
-import {
-    ComponentCommand,
-    type ComponentContext
-} from 'seyfert';
+import { ComponentCommand, type ComponentContext } from 'seyfert';
 
 export class HelloWorldButton extends ComponentCommand {
-    componentType = 'Button' as const;
+  componentType = 'Button' as const;
 
-    filter(ctx: ComponentContext<typeof this.componentType>){
-        //we are checking if the customId of the interaction is the same that the one set in my button
+  filter(ctx: ComponentContext<typeof this.componentType>) {
+    //we are checking if the customId of the interaction is the same that the one set in my button
 
-        return ctx.customId === 'hello-world';
-    }
+    return ctx.customId === 'hello-world';
+  }
 }
 ```
 
@@ -48,31 +45,27 @@ export class HelloWorldButton extends ComponentCommand {
 
 If the filter function success and returns `true` the handler will execute a `run` function with your code logic.
 
-```ts ins={21-24} showLineNumbers copy
+```ts ins={14-19} showLineNumbers copy
 
-import {
-    ComponentCommand,
-    type ComponentContext
-} from 'seyfert';
+import { ComponentCommand, type ComponentContext } from 'seyfert';
 
-import {
-    MessageFlags
-} from 'discord-api-types/v10';
-
+import { MessageFlags } from 'discord-api-types/v10';
 
 export class HelloWorldButton extends ComponentCommand {
-    componentType = 'Button' as const;
+  componentType = 'Button' as const;
 
-    //this can be a promise too.
+  //this can be a promise too.
 
-    filter(ctx: ComponentContext<typeof this.componentType>){
+  filter(ctx: ComponentContext<typeof this.componentType>) {
+    return ctx.customId === 'hello-world';
+  }
 
-        return ctx.customId === 'hello-world';
-    }
-
-    async run(ctx: ComponentContext<typeof this.componentType>){
-
-        return await ctx.write({ content: 'Hello World 👋', flags: MessageFlags.Ephemeral })
-    }
+  async run(ctx: ComponentContext<typeof this.componentType>) {
+    return await ctx.write({
+      content: 'Hello World 👋',
+      flags: MessageFlags.Ephemeral
+    });
+  }
 }
+
 ```

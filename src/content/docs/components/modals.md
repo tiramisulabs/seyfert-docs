@@ -8,32 +8,29 @@ Here is an example of how to create a modal with two text inputs:
 
 ```ts showLineNumbers copy
 
-import {
-    Modal,
-    TextInput,
-    ActionRow
-} from 'seyfert'
+import { Modal, TextInput, ActionRow } from 'seyfert';
 
-import { TextInputStyle } from 'discord-api-types/v10'
+import { TextInputStyle } from 'discord-api-types/v10';
 
 const nameInput = new TextInput()
-.setCustomId('name')
-.setStyle(TextInputStyle.Short)
-.setLabel('Name')
+  .setCustomId('name')
+  .setStyle(TextInputStyle.Short)
+  .setLabel('Name');
 
 const row1 = new ActionRow<TextInput>().setComponents([nameInput]);
 
 const ageInput = new TextInput()
-.setCustomId('age')
-.setStyle(TextInputStyle.Short)
-.setLabel('Age')
+  .setCustomId('age')
+  .setStyle(TextInputStyle.Short)
+  .setLabel('Age');
 
 const row2 = new ActionRow<TextInput>().setComponents([ageInput]);
 
 const modal = new Modal()
-.setCustomId('mymodal')
-.setTitle('My Modal')
-.setComponents([row1, row2])
+  .setCustomId('mymodal')
+  .setTitle('My Modal')
+  .setComponents([row1, row2]);
+
 
 ```
 
@@ -43,26 +40,24 @@ To handle modals, as they aren't components, Seyfert provides `ModalCommmand` cl
 
 ```ts showLineNumbers copy
 
-import { 
-    ModalCommand ,
-    type ModalSubmitInteraction
-} from 'seyfert';
+import { ModalCommand, type ModalSubmitInteraction } from 'seyfert';
 
 export class MyModal extends ModalCommand {
+  filter(interaction: ModalSubmitInteraction) {
+    return interaction.customId === 'mymodal';
+  }
 
-    filter(interaction: ModalSubmitInteraction){
-        return interaction.customId === 'mymodal'
-    }
+  async run(interaction: ModalSubmitInteraction) {
+    //we are getting the textinput values by passing their custom id's in the getInputValue method.
 
-    async run(interaction: ModalSubmitInteraction){
+    const name = interaction.getInputValue('name', true);
 
-        //we are getting the textinput values by passing their custom id's in the getInputValue method.
+    const age = interaction.getInputValue('age', true);
 
-        const name = interaction.getInputValue('name', true);
-
-        const age = interaction.getInputValue('age', true);
-
-        return await interaction.write({ content: `You are ${name} and have ${age} years` })
-
-    }
+    return await interaction.write({
+      content: `You are ${name} and have ${age} years`
+    });
+  }
 }
+
+```
