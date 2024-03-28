@@ -60,6 +60,32 @@ export default [{
 			]
 		},
 		{
+			label: 'Components',
+			collapsed: true,
+			items: [
+				{
+					label: 'Introduction',
+					link: '/components/introduction'
+				},
+				{
+					label: 'Building Components',
+					link: '/components/building-components'
+				},
+				{
+					label: 'Handling Components',
+					link: '/components/handling-components'
+				},
+				{
+					label: 'Modals',
+					link: '/components/modals'
+				},
+				{
+					label: 'Collectors',
+					link: '/components/collectors'
+				}
+			]
+		},
+		{
 			label: 'Miscellaneous',
 			collapsed: true,
 			items: [
