@@ -4,7 +4,7 @@ title: Collectors
 
 Now that you have learned how to handle components in a static way, you could have asked yourself how I get more context about what had happened before sending the component. 
 
-Seyfert includes `message collectors` which are an easy way to handle does interactions received from an specific message and make you able to get more context about what had happened before sending the component.
+Seyfert includes `components message collectors` which are an easy way to handle does interactions received from an specific message and make you able to get more context about what had happened before sending the component.
 
 :::note
 
@@ -123,6 +123,8 @@ This will limit the use of the button to only the one which run the command.
 
 But seyfert implements just a simply `filter` option when creating the collector which expects a callback that returns a boolean.
 
+We are going to implement the filter for filtering the user who ran the interaction and filter the interaction only for button interactions.
+
 ```ts ins={33} showLineNumbers copy
 
 import {
@@ -157,11 +159,11 @@ export class HelloWorldCommand extends Command {
     );
 
     const collector = message.createComponentCollector({
-      filter: (i) => i.user.id === ctx.author.id
+      filter: (i) => i.user.id === ctx.author.id && i.isButton()
     });
 
     collector.run('hello', async (i) => {
-      if (i.isButton()) return await i.write({ content: 'Hello World 👋' });
+      return await i.write({ content: 'Hello World 👋' });
     });
   }
 }
@@ -175,11 +177,11 @@ A collector could stop this mean the collector won't be collecting more interact
 
 The callback will take two parameters:
 
-* `reason`. A string which indicates the reason of why the collector has stopped. The most common is `timeout` if we added a timeout to our collector. You can set the reason when you manually stop the collector within the `collector.stop()` function.
+* `reason`. A string which indicates the reason of why the collector has stopped. The most common is `timeout` or `idle` if we added the timeout or idle property to our collector. You can set the reason when you manually stop the collector within the `collector.stop()` function.
 
 * `refresh`. A function which you can execute to refresh the collector, making it collecting interactions as it did before.
 
-Here is an example of how we add a timeout to the collector of 1000ms and then everytime it enters into `onStop` callback we refresh it.
+Here is an example of how we add an idle to the collector of 1000ms and then everytime it enters into `onStop` callback we refresh it.
 
 ```ts ins={34-38} showLineNumbers copy
 import {
@@ -217,9 +219,9 @@ export class HelloWorldCommand extends Command {
       filter: (i) => i.user.id === ctx.author.id,
       onStop(reason, refresh) {
         //this will refresh the collector everytime it stops by timeout
-        if (reason === 'timeout') return refresh();
+        if (reason === 'idle') return refresh();
       },
-      timeout: 1e3 //1000ms
+      idle: 1e3 //1000ms
     });
 
     collector.run('hello', async (i) => {
