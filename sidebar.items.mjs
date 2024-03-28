@@ -78,6 +78,10 @@ export default [{
 				{
 					label: 'Using Modals',
 					link: '/components/modals'
+				},
+				{
+					label: 'Collectors',
+					link: '/components/collectors'
 				}
 			]
 		},
