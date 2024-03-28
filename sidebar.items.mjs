@@ -76,7 +76,7 @@ export default [{
 					link: '/components/handling-components'
 				},
 				{
-					label: 'Using Modals',
+					label: 'Modals',
 					link: '/components/modals'
 				},
 				{

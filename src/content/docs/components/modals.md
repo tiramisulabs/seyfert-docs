@@ -1,5 +1,5 @@
 ---
-title: Using Mmodals
+title: Modals
 ---
 
 Modals can also be created in Seyfert. They are created with a builder like other componets and then [`TextInput`](/api/classes/textinput) components inside an [`ActionRow`](/api/classes/actionrow) are attached to it.
