@@ -7,22 +7,53 @@ import {
 } from '@astrojs/starlight/components'
 
 ### Typescript settings
-
+ 
 To make Seyfert work as intended you must update your `tsconfig.json` file and add `emitDecoratorMedatada` and `experimentalDecorators` to be able to use decorators:
 
-```json {"Adding this to your own tsconfig is enough":5-7} title="tsconfig.json" copy
+<Tabs>
+    <TabItem label ="tsconfig.json">
+    ```json {"Adding this to your own tsconfig is enough":3-5} title="tsconfig.json" copy
 {
     "compilerOptions": {
-        "target": "esnext",
-        "module": "commonjs",
 
         "emitDecoratorMetadata": true,
         "experimentalDecorators": true,
-        "outDir": "./dist",
-        "skipLibCheck": true
     }
 }
+``` 
+    </TabItem>
+    <TabItem label="we use">
+    ```json title="tsconfig.json" copy
+{
+  "compilerOptions": {
+      "module": "CommonJS",
+      "target": "ESNext",
+      "moduleResolution": "node",
+      "strict": true,
+      "esModuleInterop": true,
+      "experimentalDecorators": true,
+      "emitDecoratorMetadata": true,
+      "preserveConstEnums": true,
+      "noImplicitAny": true,
+      "strictNullChecks": true,
+      "strictFunctionTypes": true,
+      "noImplicitThis": true,
+      "noUnusedLocals": true,
+      "noUnusedParameters": true,
+      "noImplicitReturns": true,
+      "skipLibCheck": true,
+      "noErrorTruncation": true,
+      "outDir": "./dist",
+      "rootDir": "./src",
+      "baseUrl": ".",
+      "stripInternal": true,
+  },
+  "exclude": ["node_modules"],
+  "include": ["src/**/*"]
+}
 ```
+    </TabItem>
+</Tabs>
 
 ### Selecting Your Bot Type.
 
@@ -57,7 +88,7 @@ so is necessary to create a file called `seyfert.config.js` in the root folder o
 const { config } = require('seyfert');
 
 module.exports = config.bot({
-    token: process.env.BOT_TOKEN,
+    token: process.env.BOT_TOKEN ?? "",
     intents: ["Guilds"],
     locations: {
         base: "src",    
@@ -73,7 +104,7 @@ module.exports = config.bot({
 const { config } = require('seyfert');
 
 module.exports = config.http({
-    token: process.env.BOT_TOKEN,
+    token: process.env.BOT_TOKEN ?? "",
     applicationId: process.env.BOT_APP_ID,
     port: 3000, // by default is 8080
     publicKey: procces.env.BOT_PUBLIC_KEY,
@@ -119,9 +150,8 @@ So after complete these steps, your project structure should look like this:
 - src
   - commands/
   - index.ts
-- .env
-- package.json
 - seyfert.config.js
+- package.json
 - tsconfig.json
 
 </FileTree>
