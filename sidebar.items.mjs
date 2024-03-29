@@ -1,4 +1,4 @@
-import { typeDocSidebarGroup } from './src/libs/startlight-typedoc';
+import { typeDocSidebarGroup } from './src/lib/startlight-typedoc';
 
 export default [{
 	label: 'Guide',
