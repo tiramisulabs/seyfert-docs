@@ -8,7 +8,7 @@ We have touching on the basics of creating a command, but what if we want to cre
 
 ## Creating a Sub-Command
 
-To create a sub-command, we need to create a new class that extends `SubCommand` and implement the `execute` method. We then need to add the sub-command to the parent command.
+To create a sub-command, we need to create a new class that extends `SubCommand` and implement the `run` method. We then need to add the sub-command to the parent command.
 
 It's suppose you have the following directory structure:
 
@@ -26,6 +26,31 @@ It's suppose you have the following directory structure:
 </FileTree>
 
 <Tabs>
+	<TabItem label='parent.ts' icon="seti:typescript">
+
+:::tip
+
+With this file structure you can use `@Autoload()` and seyfert will add the commands for you.
+But make sure you export by default the sub-commands.
+
+:::
+
+
+	```ts copy
+import { type CommandContext, Declare, Command, Options } from "seyfert";
+import { CreateCommand } from "./create.command";
+import { DeleteCommand } from "./delete.command";
+
+@Declare({
+	name: "account",
+	description: "account command"
+})
+// Being in the same folder with @AutoLoad() you can save this
+@Options([AddCommand, DeleteCommand])
+export default class AccountCommand extends Command {}
+
+```
+	</TabItem>
 	<TabItem label='create.command.ts' icon="seti:typescript">
 	
 ```ts copy
@@ -35,19 +60,19 @@ import { type CommandContext, Declare, SubCommand } from "seyfert";
 	name: "create",
 	description: "create a new something"
 })
-export class AddCommand extends SubCommand {
-	execute(ctx: CommandContext) {
+export class CreateCommand extends SubCommand {
+	run(ctx: CommandContext) {
 		// some logic there
 
-		ctx.reply({
+		ctx.write({
 			content: "create command executed"
 		});
 	}
 }
 ```
-	</TabItem>
-	<TabItem label='delete.command.ts' icon="seti:typescript">
-	```ts copy
+</TabItem>
+<TabItem label='delete.command.ts' icon="seti:typescript">
+```ts copy
 import { type CommandContext, Declare, SubCommand } from "seyfert";
 
 @Declare({
@@ -55,37 +80,14 @@ import { type CommandContext, Declare, SubCommand } from "seyfert";
 	description: "delete something"
 })
 export class DeleteCommand extends SubCommand {
-	execute(ctx: CommandContext) {
+	run(ctx: CommandContext) {
 		// some logic here
 
-		ctx.reply({
+		ctx.write({
 			content: "delete command executed"
 		});
 	}
 }
-```
-	</TabItem>
-	<TabItem label='parent.ts' icon="seti:typescript">
-
-:::tip
-
-With this file structure you can use `@Autoload()` and seyfert will add the commands for you.
-
-:::
-
-
-	```ts copy
-import { type CommandContext, Declare, Command, Options } from "seyfert";
-import { AddCommand } from "./create.command";
-import { DeleteCommand } from "./delete.command";
-
-@Declare({
-	name: "account",
-	description: "account command"
-})
-@Options([AddCommand, DeleteCommand])
-export default class AccountCommand extends Command {}
-
 ```
 	</TabItem>
 </Tabs>

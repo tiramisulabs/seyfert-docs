@@ -15,7 +15,7 @@ First of all, you must tell seyfert where your events will be created by updatin
 const { config } = require('seyfert');
 
 module.exports = config.bot({
-  token: process.env.BOT_TOKEN,
+  token: process.env.BOT_TOKEN ?? "",
   intents: ["Guilds"],
   locations: {
     base: "src",
@@ -33,8 +33,8 @@ import { createEvent } from "seyfert";
 
 export default createEvent({
   data: { once: true, name: "botReady" },
-  async run(user, client, shard) {
-    client.logger.info(`${user.username} is ready on shard #${shard}`);
+  async run(user, client) {
+    client.logger.info(`${user.username} is ready`);
   }
 })
 ```
@@ -52,4 +52,4 @@ export default createEvent({
 })
 ```
 
-And that's all, you can create as many events as you want. For further information you can check the list of all gateway events [here](SOONTM).
+And that's all, you can create as many events as you want. For further information you can check the list of all gateway events [here](/api/type-aliases/clientnameevents).
