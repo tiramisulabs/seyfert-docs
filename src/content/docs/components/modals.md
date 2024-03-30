@@ -42,7 +42,7 @@ To handle modals, as they aren't components, Seyfert provides `ModalCommmand` cl
 
 import { ModalCommand, type ModalSubmitInteraction } from 'seyfert';
 
-export class MyModal extends ModalCommand {
+export default class MyModal extends ModalCommand {
   filter(interaction: ModalSubmitInteraction) {
     return interaction.customId === 'mymodal';
   }

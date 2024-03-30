@@ -33,7 +33,7 @@ import { ButtonStyle } from 'discord-api-types/v10';
   name: 'hello',
   description: 'I will send you a hello world message'
 })
-export class HelloWorldCommand extends Command {
+export default class HelloWorldCommand extends Command {
   async run(ctx: CommandContext) {
     const button = new Button()
       .setCustomId('hello')
@@ -78,7 +78,7 @@ import { ButtonStyle } from 'discord-api-types/v10';
   name: 'hello',
   description: 'I will send you a hello world message'
 })
-export class HelloWorldCommand extends Command {
+export default class HelloWorldCommand extends Command {
   async run(ctx: CommandContext) {
     const button = new Button()
       .setCustomId('hello')
@@ -141,7 +141,7 @@ import { ButtonStyle } from 'discord-api-types/v10';
   name: 'hello',
   description: 'I will send you a hello world message'
 })
-export class HelloWorldCommand extends Command {
+export default class HelloWorldCommand extends Command {
   async run(ctx: CommandContext) {
     const button = new Button()
       .setCustomId('hello')
@@ -198,7 +198,7 @@ import { ButtonStyle } from 'discord-api-types/v10';
   name: 'hello',
   description: 'I will send you a hello world message'
 })
-export class HelloWorldCommand extends Command {
+export default class HelloWorldCommand extends Command {
   async run(ctx: CommandContext) {
     const button = new Button()
       .setCustomId('hello')
@@ -250,7 +250,7 @@ import {
   name: 'hello',
   description: 'I will send you a hello world message'
 })
-export class HelloWorldCommand extends Command {
+export default class HelloWorldCommand extends Command {
   async run(ctx: CommandContext) {
     const modal = new Modal()
       .setCustomId('hello')
