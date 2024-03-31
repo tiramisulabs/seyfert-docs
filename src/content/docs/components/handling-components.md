@@ -15,7 +15,7 @@ In this example I have created a component to reply `Hello World` to the interac
 
 import { ComponentCommand } from 'seyfert';
 
-export class HelloWorldButton extends ComponentCommand {
+export default class HelloWorldButton extends ComponentCommand {
     componentType = 'Button' as const;
 }
 ```
@@ -30,7 +30,7 @@ To filter the interactions we are using a function inherited by the `ComponentCo
 
 import { ComponentCommand, type ComponentContext } from 'seyfert';
 
-export class HelloWorldButton extends ComponentCommand {
+export default class HelloWorldButton extends ComponentCommand {
   componentType = 'Button' as const;
 
   filter(ctx: ComponentContext<typeof this.componentType>) {
@@ -51,7 +51,7 @@ import { ComponentCommand, type ComponentContext } from 'seyfert';
 
 import { MessageFlags } from 'discord-api-types/v10';
 
-export class HelloWorldButton extends ComponentCommand {
+export default class HelloWorldButton extends ComponentCommand {
   componentType = 'Button' as const;
 
   //this can be a promise too.
