@@ -59,7 +59,7 @@ export default [{
 				},
 				{
 					label: 'Prefix Commands',
-					link: '/misc/prefix-commands'
+					link: '/commands/prefix-commands'
 				},
 			]
 		},
