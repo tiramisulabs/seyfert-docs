@@ -1,10 +1,10 @@
 ---
-title: Start from example
+title: Empezar desde un ejemplo
 sidebar:
-    label: Start from example
+  label: Empezar desde un ejemplo
 ---
 
-You can check our examples to see the Seyfert in action.
+Puede consultar nuestros ejemplos para ver a Seyfert en acción.
 
 :::caution
 
