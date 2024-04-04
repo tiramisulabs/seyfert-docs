@@ -176,8 +176,7 @@ export default class CrosspostCommand extends Command {
     async run(ctx: CommandContext<typeof options>){
         await ctx.deferReply()
         const { id } = ctx.options;
-        const message = await ctx.client.messages.fetch(id, ctx.channelId);
-        await message.crosspost();
+        await ctx.client.messages.crosspost(id, ctx.channelId);
         return await ctx.editOrReply({ content: 'I have cross posted your announcement.'});
     }
 };
