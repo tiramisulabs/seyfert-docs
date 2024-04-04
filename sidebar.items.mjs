@@ -56,7 +56,11 @@ export default [{
 				{
 					label: 'Extending Commands',
 					link: '/commands/command-class'
-				}
+				},
+				{
+					label: 'Prefix Commands',
+					link: '/misc/prefix-commands'
+				},
 			]
 		},
 		{
@@ -92,10 +96,6 @@ export default [{
 				{
 					label: 'Sending Messages',
 					link: '/misc/sending-messages'
-				},
-				{
-					label: 'Prefix Commands',
-					link: '/misc/prefix-commands'
 				},
 				{
 					label: 'Music library',
