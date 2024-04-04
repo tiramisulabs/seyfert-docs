@@ -94,6 +94,10 @@ export default [{
 					link: '/misc/sending-messages'
 				},
 				{
+					label: 'Prefix Commands',
+					link: '/misc/prefix-commands'
+				},
+				{
 					label: 'Music library',
 					link: '/misc/music'
 				}
