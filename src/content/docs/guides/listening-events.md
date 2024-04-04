@@ -8,7 +8,7 @@ This section is only necessary for gateway applications, so if your bot is build
 
 :::
 
-First of all, you must tell seyfert where your events will be created by updating your config file.
+First of all, you must tell Seyfert where your events will be created by updating your config file.
 
 ```ts {11} title="seyfert.config.js" showLineNumbers
 // @ts-check

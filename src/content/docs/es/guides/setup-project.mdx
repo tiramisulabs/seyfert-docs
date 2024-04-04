@@ -1,18 +1,18 @@
 ---
-title: Setup Seyfert Project
+title: Configuración de Seyfert
 ---
 
 import {
     FileTree, TabItem, Tabs
 } from '@astrojs/starlight/components'
 
-### Typescript settings
+### Configuración de Typescript
  
-To make Seyfert work as intended you must update your `tsconfig.json` file and add `emitDecoratorMedatada` and `experimentalDecorators` to be able to use decorators:
+Para que Seyfert funcione correctamente debes actualizar tu archivo `tsconfig.json` y añadir `emitDecoratorMedatada` y `experimentalDecorators` para poder utilizar decoradores:
 
 <Tabs>
     <TabItem label ="tsconfig.json">
-    ```json {"Adding this to your own tsconfig is enough":3-5} title="tsconfig.json" copy
+    ```json {"Basta con añadir lo siguiente a su tsconfig":3-5} title="tsconfig.json" copy
 {
     "compilerOptions": {
 
@@ -22,7 +22,7 @@ To make Seyfert work as intended you must update your `tsconfig.json` file and a
 }
 ``` 
     </TabItem>
-    <TabItem label="we use">
+    <TabItem label="ejemplo">
     ```json title="tsconfig.json" copy
 {
   "compilerOptions": {
@@ -55,31 +55,31 @@ To make Seyfert work as intended you must update your `tsconfig.json` file and a
     </TabItem>
 </Tabs>
 
-### Selecting Your Bot Type.
+### Seleccionar el tipo de bot
 
-Currently, Seyfert supports two types of applications: one based on the Discord gateway, which is the most commonly used, and another based on the Discord HTTP interaction system, which is less frequently used. It is important to understand the differences between these two types in order to choose the appropriate application for your needs.
+Actualmente, Seyfert soporta dos tipos de aplicaciones: una basada en la gateway de Discord, que es la más utilizada, y otra basada en el sistema de interacción Discord HTTP, que se utiliza con menos frecuencia. Es importante entender las diferencias entre estos dos tipos para elegir la aplicación adecuada a sus necesidades.
 
-:::caution[Read this]
+:::caution[Importante]
 
-In these first steps, the options that are shared by both types of applications are shown. Later on, they will be separated.
+En estos primeros pasos, se muestran las opciones que comparten ambos tipos de aplicaciones. Más adelante, se separarán.
 
 :::
 
 <Tabs>
     <TabItem label="Gateway">
-        - Gateway client receive all events from discord like messageCreate, interactionCreate, guildCreate, ready...
-        - The events that the client receive depends of the client intents.
+        - El cliente Gateway recibe todos los eventos de Discord como messageCreate, interactionCreate, guildCreate, ready...
+        - Los eventos que recibe el cliente dependen de los intents del cliente.
     </TabItem>
     <TabItem label="HTTP">
-        - Unlike gateway, don't receive events.
-        - Only execute commands with http request from discord.
+        - A diferencia del gateway, no recibe eventos.
+        - Solo ejecuta comandos con petición http desde Discord.
     </TabItem>
 </Tabs>
 
-### Configuration
+### Configuración
 
-Once `tsconfig.json` has been modified, we still have a few steps to go before we can run the application. In this case you need to tell Seyfert your project's structure:
-so is necessary to create a file called `seyfert.config.js` in the root folder of your project and add the following code:
+Una vez modificado el `tsconfig.json`, aún nos quedan algunos pasos antes de poder ejecutar la aplicación. En este caso es necesario indicarle a Seyfert la estructura del proyecto:
+Para ello es necesario crear un fichero llamado `seyfert.config.js` en la carpeta raíz de tu proyecto y añadir el siguiente código:
 
 <Tabs>
     <TabItem label="Gateway">
@@ -92,7 +92,7 @@ module.exports = config.bot({
     intents: ["Guilds"],
     locations: {
         base: "src",    
-        output: "dist", //If you are using bun, set "src" instead
+        output: "dist", // Si utiliza bun, defina "src" en su lugar
         commands: "commands"
     }
 });
@@ -110,7 +110,7 @@ module.exports = config.http({
     publicKey: process.env.BOT_PUBLIC_KEY,
     locations: {
         base: "src",
-        output: "dist", //If you are using bun, set "src" instead
+        output: "dist", // Si utiliza bun, defina "src" en su lugar
         commands: "commands"
     }
 });
@@ -118,7 +118,7 @@ module.exports = config.http({
     </TabItem>
 </Tabs>
 
-And let's create the main file called `index` in the `src` folder and add the following code:
+Y vamos a crear el archivo principal llamado `index.ts` dentro de la carpeta `src` y añadir el siguiente código:
 
 <Tabs>
     <TabItem label="Gateway">
@@ -127,7 +127,7 @@ import { Client } from 'seyfert';
 
 const client = new Client();
 
-// This will start the connection with the gateway and load commands, events, components and langs
+// Esto iniciará la conexión con la gateway de Discord y cargará comandos, eventos, componentes y langs
 client.start();
 ```
     </TabItem>
@@ -137,13 +137,13 @@ import { HttpClient } from 'seyfert';
 
 const client = new HttpClient();
 
-// This will start listening to `https://yourweb.xyz/interactions` and load commands, components and langs
+// Esto empezará a escuchar `https://yourweb.xyz/interactions` y cargará comandos, componentes y langs
 client.start();
 ```
     </TabItem>
 </Tabs>
 
-So after complete these steps, your project structure should look like this:
+Una vez completado los pasos, la estructura de su proyecto debe tener este aspecto:
 
 <FileTree>
 

@@ -8,7 +8,7 @@ This technique is called module augmentation, learn more in [typescript document
 
 :::
 
-Due to the versatility of seyfert, it can be confusing to understand exactly how to include content in the project, so seyfert includes different interfaces for the developer to use when defining their own rules.
+Due to the versatility of seyfert, it can be confusing to understand exactly how to include content in the project, so Seyfert includes different interfaces for the developer to use when defining their own rules.
 ## Clients
 
 Seyfert includes several types of client to create the instance of a bot, this can create confusion when calling the client anywhere in your code, so you can specify to typescript which one you are using:
@@ -65,7 +65,7 @@ declare module 'seyfert' {
 
 ## Internal Options
 
-Since seyfert accepts different ways of operating, it becomes more complicated to keep the types true to reality. Because of that there are `InternalOptions`, an interface that expects properties to transform the seyfert types to something more complete.
+Since Seyfert accepts different ways of operating, it becomes more complicated to keep the types true to reality. Because of that there are `InternalOptions`, an interface that expects properties to transform the Seyfert types to something more complete.
 
 ```ts copy
 declare module 'seyfert' {
@@ -77,7 +77,7 @@ declare module 'seyfert' {
 ```
 
 ### withPrefix
-Setting this property to `true` tells seyfert that the context can have either message or interaction and both will be optional, by default `.interaction` is always part of the context.
+Setting this property to `true` tells Seyfert that the context can have either message or interaction and both will be optional, by default `.interaction` is always part of the context.
 
 ### asyncCache
-Setting this property to `true` tells seyfert whether the cache will return a promise or not, by default seyfert uses `MemoryAdapter` a RAM cache which does not return a promise, but `RedisAdapter` does.
+Setting this property to `true` tells Seyfert whether the cache will return a promise or not, by default Seyfert uses `MemoryAdapter` a RAM cache which does not return a promise, but `RedisAdapter` does.

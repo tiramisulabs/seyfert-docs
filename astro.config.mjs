@@ -15,12 +15,12 @@ export default defineConfig({
       locales: {
         // src/content/docs/
         root: {
-          label: 'English 🇺🇸',
+          label: 'English',
           lang: 'en',
         },
         // src/content/docs/es/
         es: {
-          label: 'Español 🇲🇽',
+          label: 'Español',
         },
       },
       plugins: [
