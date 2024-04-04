@@ -80,8 +80,7 @@ const options = {
 export default class PingCommand extends Command {
 
   async run(ctx: CommandContext<typeof options>) {
-    const hide = ctx.options.hide ?? false;
-    const flags = +hide && MessageFlags.Ephemeral;
+    const flags = ctx.options.hide ? MessageFlags.Ephemeral : 0;
 
     // average latency between shards
     const ping = ctx.client.gateway.latency;

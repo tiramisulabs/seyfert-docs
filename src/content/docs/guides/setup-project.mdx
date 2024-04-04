@@ -107,7 +107,7 @@ module.exports = config.http({
     token: process.env.BOT_TOKEN ?? "",
     applicationId: process.env.BOT_APP_ID,
     port: 3000, // by default is 8080
-    publicKey: procces.env.BOT_PUBLIC_KEY,
+    publicKey: process.env.BOT_PUBLIC_KEY,
     locations: {
         base: "src",
         output: "dist", //If you are using bun, set "src" instead
@@ -152,6 +152,7 @@ So after complete these steps, your project structure should look like this:
   - index.ts
 - seyfert.config.js
 - package.json
+- .env
 - tsconfig.json
 
 </FileTree>
