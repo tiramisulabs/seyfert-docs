@@ -10,7 +10,7 @@ Not only does seyfert handle application commands but also `prefix commands`. Th
 
 Here is an example in which we are going to set multiple prefixes for all the commands.
 
-```ts showLineNumbers copy ins={4-9}
+```ts showLineNumbers copy ins={4-9} wrap
 
 import { Client } from 'seyfert';
 
@@ -70,7 +70,7 @@ By default when you use `write` or `editOrReply` function it will only send a me
 
 Here is a detailed example about how it will looks your client with all the modifications mentioned in this guide:
 
-```ts showLineNumbers copy ins={9}
+```ts showLineNumbers copy ins={9} wrap
 
 import { Client } from 'seyfert';
 
@@ -89,6 +89,13 @@ const client = new Client({
 ## Prefix commands options
 
 Like `application commands` you can set options for `prefix commands`. The only think you will have to do it's to declare them as you do in `application commands`. They are parsed with a regex that indicates options will be splited when they are followed by `-`. You can replace the parser with your own setting the `argsParser` suboption inside `commands` options in client options. This is a callback whose params are `content`, the content of the message, and `command`, the command which was run.
+
+Here is a brief template which shows how options work in prefix commands.
+
+```txt hideLineNumbers title="Prefix Command Template"
+!command -option option_value -option2 option2_value
+```
+
 
 Here is a simple example of how we make the previous command but instead of cross posting the current command cross posing another message, fetching it by its id.
 
@@ -115,9 +122,7 @@ const options = {
 @Options(options);
 export default class CrosspostCommand extends Command {
     async run(ctx: CommandContext<typeof options>){
-        const { id } = ctx.options;
-        const message = await ctx.client.messages.fetch(id, ctx.channelId);
-        await message.crosspost();
+        await ctx.client.messages.crosspost(ctx.options.id, ctx.channelId);
         return await ctx.write({ content: 'I have cross posted your announcement.'});
     }
 };
@@ -133,7 +138,7 @@ Here is an example of how we modify the client options and how to make the respo
 <Tabs>
 <TabItem label='index.ts'>
 
-```ts showLineNumbers copy ins={10}
+```ts showLineNumbers copy ins={10} wrap
 
 import { Client } from 'seyfert';
 
@@ -174,9 +179,8 @@ const options = {
 @Options(options);
 export default class CrosspostCommand extends Command {
     async run(ctx: CommandContext<typeof options>){
-        await ctx.deferReply()
-        const { id } = ctx.options;
-        await ctx.client.messages.crosspost(id, ctx.channelId);
+        await ctx.deferReply();
+        await ctx.client.messages.crosspost(ctx.options.id, ctx.channelId);
         return await ctx.editOrReply({ content: 'I have cross posted your announcement.'});
     }
 };
