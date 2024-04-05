@@ -10,6 +10,9 @@ import tailwind from "@astrojs/tailwind";
 // https://astro.build/config
 export default defineConfig({
   integrations: [starlight({
+    editLink: {
+      baseUrl: 'https://github.com/tiramisulabs/seyfert-docs/edit/main/'
+    },
     plugins: [starlightTypeDoc({
       entryPoints: ['./seyfert/src/index.ts'],
       tsconfig: './seyfert/tsconfig.json',

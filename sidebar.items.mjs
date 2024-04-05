@@ -96,6 +96,10 @@ export default [{
 				{
 					label: 'Music library',
 					link: '/misc/music'
+				},
+				{
+					label: 'API Access',
+					link: '/misc/api-access'
 				}
 			]
 		}
