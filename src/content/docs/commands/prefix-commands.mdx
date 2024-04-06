@@ -28,9 +28,9 @@ const client = new Client({
 
 ## Handling prefix commands
 
-Now that we have set up our prefixes for the commands it's high time we want to make them run. 
+Having set up our prefixes for the commands it's about time we want to make them run. 
 
-And for your luck, is the same that if we handle application commands. The only difference is that we receive an optional [`Message`](/api/classes/message) property inside [`CommandContext`](/api/classes/commandcontext).
+And for your luck, the handling works as application commands. The only difference is that we receive an optional [`Message`](/api/classes/message) property inside [`CommandContext`](/api/classes/commandcontext).
 
 To make this property appear in our CommandContext the only thing we shall do is declaring seyfert module and set the `withPrefix` property inside [`InternalOptions`](/api/interfaces/internaloptions) into true. You can see this [detailed example](/guides/declare-module#internal-options). 
 
@@ -66,7 +66,7 @@ Seyfert supports subcommands within prefix commands.
 
 ## Replying to prefix commands
 
-By default when you use `write` or `editOrReply` function it will only send a message to the channel where the command was fired. To the command being replied you have to set `reply` suboption inside `command` option in the client options. This option is a callback which first parameter is the [`CommandContext`](/api/classes/commandcontext) and expects a boolean to be returned, if is `true` it will reply to the command, if not it will just send a message. 
+By default when you use `write` or `editOrReply` function it will only send a message to the channel where the command was fired. To make the command being replied you have to set `reply` suboption inside `command` option in the client options. This option is a callback which first parameter is the [`CommandContext`](/api/classes/commandcontext) and expects a boolean to be returned, if is `true` it will reply to the command, if not it will just send a message. 
 
 Here is a detailed example about how it will looks your client with all the modifications mentioned in this guide:
 
@@ -88,7 +88,7 @@ const client = new Client({
 
 ## Prefix commands options
 
-Like `application commands` you can set options for `prefix commands`. The only think you will have to do it's to declare them as you do in `application commands`. They are parsed with a regex that indicates options will be splited when they are followed by `-`. You can replace the parser with your own setting the `argsParser` suboption inside `commands` options in client options. This is a callback whose params are `content`, the content of the message, and `command`, the command which was run.
+Like `application commands` you can set options for `prefix commands`. The only think you will have to do it's to declare them as you do in `application commands`. They are parsed with a regex that indicates options will be splited when they are followed by `-`. You can replace the parser with your own parser in the `argsParser` suboption inside `commands` options in client options. This is a callback whose params are `content`, the content of the message, and `command`, the command which was run and expects an object whose keys are the options and values the values of the options.
 
 Here is a brief template which shows how options work in prefix commands.
 
@@ -97,7 +97,7 @@ Here is a brief template which shows how options work in prefix commands.
 ```
 
 
-Here is a simple example of how we make the previous command but instead of cross posting the current command cross posing another message, fetching it by its id.
+Here you can see how we make the previous command but instead of cross posting the current command cross posing another message, fetching it by its id that will be given to us in the options.
 
 ```ts showLineNumbers copy
 import { 
@@ -130,9 +130,9 @@ export default class CrosspostCommand extends Command {
 
 ## Defering the reply with prefix commands
 
-As in `application commands` you can defer reply the response of the command. By default if you use `CommandContext.deferReply()` function it will make the response to be deferred showing a `Loading ...` message. If we want it to be custom we will have to take another look into `commands` option in client options as we have to create a callback for `deferReplyResponse` which expects the content you will sent in the defer to be returned.
+As in `application commands` you can defer reply the response of the command. By default if you use `CommandContext.deferReply()` function it will make the response to be deferred showing a `Loading ...` message. If we want it to be custom we will have to take another look into `commands` option in client options as we have to create a callback for `deferReplyResponse` which expects the content you will send in the defer to be returned.
 
-Here is an example of how we modify the client options and how to make the response of the command to be deferred using the previous example.
+Here is an example of how we modify the client options and how we make the response of the command to be deferred using the previous example.
 
 
 <Tabs>
