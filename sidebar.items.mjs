@@ -56,7 +56,11 @@ export default [{
 				{
 					label: 'Extending Commands',
 					link: '/commands/command-class'
-				}
+				},
+				{
+					label: 'Prefix Commands',
+					link: '/commands/prefix-commands'
+				},
 			]
 		},
 		{
