@@ -27,7 +27,7 @@ import {
   type CommandContext
 } from 'seyfert';
 
-import { ButtonStyle } from 'discord-api-types/v10';
+import { ButtonStyle } from 'seyfert/types';
 
 @Declare({
   name: 'hello',
@@ -72,7 +72,7 @@ import {
   type CommandContext
 } from 'seyfert';
 
-import { ButtonStyle } from 'discord-api-types/v10';
+import { ButtonStyle } from 'seyfert/types';
 
 @Declare({
   name: 'hello',
@@ -135,7 +135,7 @@ import {
   type CommandContext
 } from 'seyfert';
 
-import { ButtonStyle } from 'discord-api-types/v10';
+import { ButtonStyle } from 'seyfert/types';
 
 @Declare({
   name: 'hello',
@@ -192,7 +192,7 @@ import {
   type CommandContext
 } from 'seyfert';
 
-import { ButtonStyle } from 'discord-api-types/v10';
+import { ButtonStyle } from 'seyfert/types';
 
 @Declare({
   name: 'hello',

@@ -68,7 +68,7 @@ If the filter function success and returns `true` the handler will execute a `ru
 
 import { ComponentCommand, type ComponentContext } from 'seyfert';
 
-import { MessageFlags } from 'discord-api-types/v10';
+import { MessageFlags } from 'seyfert/types';
 
 export default class HelloWorldButton extends ComponentCommand {
   componentType = 'Button' as const;
