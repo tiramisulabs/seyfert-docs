@@ -41,7 +41,7 @@ An ActionRow shouldn't contain more than 5 buttons.
 
 import { ActionRow, Button } from 'seyfert';
 
-import { ButtonStyle } from 'discord-api-types/v10';
+import { ButtonStyle } from 'seyfert/types';
 
 const button = new Button()
   .setCustomId('first-button')
@@ -140,7 +140,7 @@ A text input is a component that is unique in modals and can't only be attached 
 
 import { ActionRow, TextInput } from 'seyfert';
 
-import { TextInputStyle } from 'discord-api-types/v10';
+import { TextInputStyle } from 'seyfert/types';
 
 const input = new TextInput()
   .setCustomId('textinput')

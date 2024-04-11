@@ -94,14 +94,14 @@ Each function takes the following parameters:
 })
 ```
 ### createChannelOption
-```ts {1-5,7,10-13} 
+```ts {2-4,7,10-13} 
 @Options({
   channel: createChannelOption({
     description: 'This is a channel option',
   })
 });
 
-import { ChannelTypes } from 'seyfert/lib/common';
+import { ChannelTypes } from 'seyfert/types';
 
 @Options({
   channelTypes: createChannelOption({
@@ -157,7 +157,7 @@ import { ChannelTypes } from 'seyfert/lib/common';
 ```
 ## Using the `value` callback
 
-```ts 
+```ts ins={1} {6-9}
 import { OKFunction } from 'seyfert';
 
 @Options({
