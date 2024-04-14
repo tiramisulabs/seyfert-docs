@@ -1,5 +1,5 @@
 ---
-title: Extendiendo el Comando
+title: Extendiendo Comandos
 ---
 
 La clase de comando es la que proporciona todas las utilidades dentro de un comando y lo prepara para recibir todos los metadatos del comando.

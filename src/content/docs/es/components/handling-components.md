@@ -1,5 +1,5 @@
 ---
-title: Manipulación de componentes
+title: Manejando Componentes
 ---
 
 Habiendo enviado el componente dentro de un canal, es momento de manejar la interacción del componente.
