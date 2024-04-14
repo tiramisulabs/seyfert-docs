@@ -2,36 +2,35 @@
 title: Collectors
 ---
 
-Now that you have learned how to handle components in a static way, you could have asked yourself how I get more context about what had happened before sending the component. 
+Ahora que has aprendido a manejar componentes de manera estática, podrías haberte preguntado cómo obtener más contexto sobre lo que sucedió antes de enviar el componente.
 
-Seyfert includes `message components collectors` which are an easy way to handle does interactions received from an specific message and make you able to get more context about what had happened before sending the component.
+Seyfert incluye `colectores de componentes de mensajes`, que son una manera fácil de manejar esas interacciones recibidas de un mensaje específico y te permiten obtener más contexto sobre lo que sucedió antes de enviar el componente.
 
 :::note
 
-If the process where you created the component collector is killed the collector will stop and the interactions of the message won't be handled.
+Si el proceso donde creaste el colector de componentes se detiene, el colector dejará de funcionar y las interacciones del mensaje no serán manejadas.
 :::
 
-## Building collectors
+## Construcción de colectores
 
-Collectors are built using [`createComponentCollector`](/api/classes/basemessage#createcomponentcollector) method in a message, which is inherited by [`BaseMessage`](/api/classes/basemessage). This method returns an object representing a collector.
+Los colectores se construyen utilizando el método [`createComponentCollector`](/api/classes/basemessage#createcomponentcollector) en un mensaje, el cual es heredado por [`BaseMessage`](/api/classes/basemessage). Este método devuelve un objeto que representa un colector.
 
-Here is an example of how to build a simple collector after sending a message with one button attached to it in a `hello world` command.
+Aquí tienes un ejemplo de cómo construir un colector simple después de enviar un mensaje con un botón adjunto en un comando de `hola mundo`.
 
-```ts showLineNumbers copy
-
+```ts ins={30} showLineNumbers copy
 import {
   Button,
   ActionRow,
   Command,
   Declare,
-  type CommandContext
+  type CommandContext,
 } from 'seyfert';
 
 import { ButtonStyle } from 'discord-api-types/v10';
 
 @Declare({
   name: 'hello',
-  description: 'I will send you a hello world message'
+  description: 'I will send you a hello world message',
 })
 export default class HelloWorldCommand extends Command {
   async run(ctx: CommandContext) {
@@ -42,11 +41,11 @@ export default class HelloWorldCommand extends Command {
 
     const row = new ActionRow<Button>().setComponents([button]);
 
-    // get the message by setting fetchReply to true
+    // Para obtener el mensaje al que se le adjunta un botón, puedes configurar la fetchReply en "true".
     const message = await ctx.write(
       {
         content: 'You want a hello world. Click the button below.',
-        components: [row]
+        components: [row],
       },
       true
     );
@@ -56,27 +55,25 @@ export default class HelloWorldCommand extends Command {
 }
 ```
 
-## Handling interactions within a collector
+## Manejo de interacciones dentro de un colector
+Una vez creado el colector a partir de un mensaje, vamos a manejar la interacción del botón con la función `run` del colector.
 
-Having created a collector from a message we are going to handle the interaction of the button with the `run` function of the collector.
-
-Here is an example:
+Aquí tienes un ejemplo:
 
 ```ts ins={35-37} showLineNumbers copy
-
 import {
   Button,
   ActionRow,
   Command,
   Declare,
-  type CommandContext
+  type CommandContext,
 } from 'seyfert';
 
 import { ButtonStyle } from 'discord-api-types/v10';
 
 @Declare({
   name: 'hello',
-  description: 'I will send you a hello world message'
+  description: 'I will send you a hello world message',
 })
 export default class HelloWorldCommand extends Command {
   async run(ctx: CommandContext) {
@@ -90,56 +87,51 @@ export default class HelloWorldCommand extends Command {
     const message = await ctx.write(
       {
         content: 'You want a hello world. Click the button below.',
-        components: [row]
+        components: [row],
       },
       true
     );
 
     const collector = message.createComponentCollector();
 
-    // we are putting the custom id we have set into the button in the first param of the function.
+    // estamos colocando el ID personalizado que hemos establecido en el botón como primer parámetro de la función.
     collector.run('hello', async (i) => {
       if (i.isButton()) return await i.write({ content: 'Hello World 👋' });
     });
   }
 }
-
 ```
 
-## Filtering interactions
+## Filtrando interacciones
+Podrías haber pensado en filtrar la interacción recibida en la función run para limitar, por ejemplo, al usuario que está interactuando con el botón.
 
-You might have thought about filtering the interaction received in the run function for limiting, for example the user who is interacting with the button. 
+Habrías añadido una condición dentro de la función run de esta manera:
 
-You would have added a condition inside the run function like this:
-
-```ts 
-
+```ts
 if (i.user.id === ctx.author.id)
   return i.write({ content: 'Do not touch the button' });
-
 ```
 
-This will limit the use of the button to only the one which run the command. 
+Esto limitará el uso del botón solo al usuario que ejecutó el comando.
 
-But Seyfert implements just a simply `filter` option when creating the collector which expects a callback that returns a boolean.
+Pero Seyfert implementa simplemente una opción de `filter` al crear el colector, que espera una función de retorno que devuelva un booleano.
 
-We are going to implement the filter for filtering the user who ran the interaction and filter the interaction only for button interactions.
+Vamos a implementar el filtro para filtrar al usuario que ejecutó la interacción y filtrar la interacción solo para las interacciones de botón.
 
 ```ts ins={33} showLineNumbers copy
-
 import {
   Button,
   ActionRow,
   Command,
   Declare,
-  type CommandContext
+  type CommandContext,
 } from 'seyfert';
 
 import { ButtonStyle } from 'discord-api-types/v10';
 
 @Declare({
   name: 'hello',
-  description: 'I will send you a hello world message'
+  description: 'I will send you a hello world message',
 })
 export default class HelloWorldCommand extends Command {
   async run(ctx: CommandContext) {
@@ -153,13 +145,13 @@ export default class HelloWorldCommand extends Command {
     const message = await ctx.write(
       {
         content: 'You want a hello world. Click the button below.',
-        components: [row]
+        components: [row],
       },
       true
     );
 
     const collector = message.createComponentCollector({
-      filter: (i) => i.user.id === ctx.author.id && i.isButton()
+      filter: (i) => i.user.id === ctx.author.id && i.isButton(),
     });
 
     collector.run('hello', async (i) => {
@@ -167,21 +159,19 @@ export default class HelloWorldCommand extends Command {
     });
   }
 }
-
-
 ```
 
-## Handling collector onStop
+## Manejo del evento onStop del colector
 
-A collector could stop this mean the collector won't be collecting more interactions of the message. To handle the stop we have to pass a callback into `onStop` option when creating the collector.
+Un colector podría detenerse, lo que significa que no recogerá más interacciones del mensaje. Para manejar la detención, debemos pasar una función de retorno a la opción `onStop` al crear el colector.
 
-The callback will take two parameters:
+La función de retorno tomará dos parámetros:
 
-* `reason`. A string which indicates the reason of why the collector has stopped. The most common is `timeout` or `idle` if we added the timeout or idle property to our collector. You can set the reason when you manually stop the collector within the `collector.stop()` function.
+- `reason`. Un texto que indica la razón por la cual el colector se ha detenido. Lo más común es `timeout` o `idle` si hemos agregado la propiedad de tiempo de espera o inactividad a nuestro colector. Puedes establecer la razón cuando detienes manualmente el colector dentro de la función `collector.stop()`.
 
-* `refresh`. A function which you can execute to refresh the collector, making it collecting interactions as it did before.
+- `refresh`. Una función que puedes ejecutar para refrescar el colector, haciendo que vuelva a recoger interacciones como lo hacía antes.
 
-Here is an example of how we add an idle to the collector of 1000ms and then everytime it enters into `onStop` callback we refresh it.
+Aquí tienes un ejemplo de cómo añadimos un tiempo de inactividad al colector de 1000ms y luego, cada vez que entra en la función de retorno `onStop`, lo refrescamos.
 
 ```ts ins={34-38} showLineNumbers copy
 import {
@@ -189,14 +179,14 @@ import {
   ActionRow,
   Command,
   Declare,
-  type CommandContext
+  type CommandContext,
 } from 'seyfert';
 
 import { ButtonStyle } from 'discord-api-types/v10';
 
 @Declare({
   name: 'hello',
-  description: 'I will send you a hello world message'
+  description: 'I will send you a hello world message',
 })
 export default class HelloWorldCommand extends Command {
   async run(ctx: CommandContext) {
@@ -210,7 +200,7 @@ export default class HelloWorldCommand extends Command {
     const message = await ctx.write(
       {
         content: 'You want a hello world. Click the button below.',
-        components: [row]
+        components: [row],
       },
       true
     );
@@ -221,7 +211,7 @@ export default class HelloWorldCommand extends Command {
         //this will refresh the collector everytime it stops by timeout
         if (reason === 'idle') return refresh();
       },
-      idle: 1e3 //1000ms
+      idle: 1e3, //1000ms
     });
 
     collector.run('hello', async (i) => {
@@ -231,11 +221,11 @@ export default class HelloWorldCommand extends Command {
 }
 ```
 
-## Handling Modals with collectors
+## Manejo de Modales con colectores
 
-As modals aren't message components there is not possibility to create a `message components collector` but Seyfert introduces the possiblity to create it by using the `run` method within the modal builder which expects a callback that will handle the interactions. 
+Dado que los modales no son componentes de mensajes, no es posible crear un `colector de componentes de mensajes`, pero Seyfert introduce la posibilidad de crearlo utilizando el método `run` dentro del constructor de modales, que espera una función de retorno que manejará las interacciones.
 
-Here is an example using the `run` within the modal builder:
+Aquí tienes un ejemplo utilizando `run` dentro del constructor de modales:
 
 ```ts showLineNumbers copy
 import {
@@ -243,12 +233,12 @@ import {
   Command,
   Declare,
   type ModalSubmitInteraction,
-  type CommandContext
+  type CommandContext,
 } from 'seyfert';
 
 @Declare({
   name: 'hello',
-  description: 'I will send you a hello world message'
+  description: 'I will send you a hello world message',
 })
 export default class HelloWorldCommand extends Command {
   async run(ctx: CommandContext) {
@@ -264,6 +254,4 @@ export default class HelloWorldCommand extends Command {
     return await i.write({ content: 'Hello World 👋' });
   }
 }
-
-
 ```

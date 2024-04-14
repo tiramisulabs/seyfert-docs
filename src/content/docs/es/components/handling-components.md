@@ -1,15 +1,14 @@
 ---
-title: Building components
+title: Manipulación de componentes
 ---
 
-Having sent the component within a channel it's about time you want to handle the interaction from the component.
+Habiendo enviado el componente dentro de un canal, es momento de manejar la interacción del componente.
 
-First of all we are going to create a file inside the directory that we have set at the start of our project for the components.
+Primero vamos a crear un archivo dentro del directorio que hemos establecido al inicio de nuestro proyecto para los componentes.
 
-Then we are going to create a class which extends [`ComponentCommand`](/api/classes/componentcommand), something like we do with simple commands, and then we are going to set the type of the component we want to handle (`Buttons` or anytype of `SelectMenu`)
+Luego vamos a crear una clase que extienda de [`ComponentCommand`](/api/classes/componentcommand), algo similar a lo que hacemos con comandos simples, y después vamos a establecer el tipo de componente que queremos manejar (`Buttons` o cualquier tipo de `SelectMenu`).
 
-
-In this example I have created a component to reply `Hello World` to the interaction. I have set the customId of the button to `hello-world`.
+En este ejemplo, he creado un componente para responder `Hello World` a la interacción. He establecido el customId del botón como `hello-world`.
 
 ```ts showLineNumbers copy
 
@@ -20,11 +19,11 @@ export default class HelloWorldButton extends ComponentCommand {
 }
 ```
 
-## Filtering component interactions
+## Filtrando interacciones de componentes
 
-Now we want the handler to handle only the interactions created by the `HelloWorld` button so we will use the customId we have to set in all the components.
+Ahora queremos que el manejador solo maneje las interacciones creadas por el botón `HelloWorld`, por lo que usaremos el customId que debemos establecer en todos los componentes.
 
-To filter the interactions we are using a function inherited by the `ComponentCommand` class in which we have to return a boolean.
+Para filtrar las interacciones, estamos utilizando una función heredada por la clase `ComponentCommand` en la que debemos devolver un booleano.
 
 ```ts ins={6-10} showLineNumbers copy
 
@@ -34,16 +33,16 @@ export default class HelloWorldButton extends ComponentCommand {
   componentType = 'Button' as const;
 
   filter(ctx: ComponentContext<typeof this.componentType>) {
-    //we are checking if the customId of the interaction is the same that the one set in my button
+    // estamos verificando si el customId de la interacción es el mismo que el establecido en el botón.
 
     return ctx.customId === 'hello-world';
   }
 }
 ```
 
-## Running the component handler
+## Ejecutando el manejador de componentes
 
-If the filter function success and returns `true` the handler will execute a `run` function with your code logic.
+Si la función de filtro tiene éxito y devuelve `true`, el manejador ejecutará una función `run` con la lógica de tu código.
 
 ```ts ins={14-19} showLineNumbers copy
 
@@ -54,7 +53,7 @@ import { MessageFlags } from 'discord-api-types/v10';
 export default class HelloWorldButton extends ComponentCommand {
   componentType = 'Button' as const;
 
-  //this can be a promise too.
+  // esto también puede ser una promesa.
 
   filter(ctx: ComponentContext<typeof this.componentType>) {
     return ctx.customId === 'hello-world';

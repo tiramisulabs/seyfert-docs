@@ -1,10 +1,9 @@
 ---
 title: Modals
 ---
+En Seyfert también se pueden crear modals. Se crean con un constructor como otros componentes y luego se adjuntan componentes [`TextInput`](/api/classes/textinput) dentro de un [`ActionRow`](/api/classes/actionrow).
 
-Modals can also be created in Seyfert. They are created with a builder like other components do and then [`TextInput`](/api/classes/textinput) components, inside an [`ActionRow`](/api/classes/actionrow), are attached to it.
-
-Here is an example of how to create a modal with two text inputs:
+Aquí tienes un ejemplo de cómo crear un modal con dos campos de texto:
 
 ```ts showLineNumbers copy
 
@@ -34,9 +33,9 @@ const modal = new Modal()
 
 ```
 
-## Handling Modals
+## Manejo de los Modals
 
-To handle modals, as they aren't components, Seyfert provides `ModalCommmand` class which has the same logic as the `ComponentCommand` class.
+Para manejar modales, dado que no son componentes, Seyfert ofrece la clase `ModalCommand` que tiene la misma lógica que la clase `ComponentCommand`.
 
 ```ts showLineNumbers copy
 
@@ -48,7 +47,7 @@ export default class MyModal extends ModalCommand {
   }
 
   async run(interaction: ModalSubmitInteraction) {
-    //we are getting the textinput values by passing their custom id's in the getInputValue method.
+    // estamos obteniendo los valores de los campos de texto pasando sus ID personalizados en el método `getInputValue`.
 
     const name = interaction.getInputValue('name', true);
 

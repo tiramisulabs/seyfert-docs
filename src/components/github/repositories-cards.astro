@@ -9,27 +9,66 @@ const datas = await Promise.all(
     return res.json();
   })
 );
+
+const formatDate = (date: string, lang = 'en-US') => {
+  return Intl.DateTimeFormat(lang, {
+    month: 'short',
+    day: '2-digit',
+    year: 'numeric',
+  }).format(new Date(date));
+};
+const { lang } = Astro.props;
 ---
 
-<body class="border-10 justify-center">
-  <ul class="list-none p-0">
-    {
-      datas.map((data) => (
-        <li class="card bg-zinc-200 dark:bg-zinc-800 rounded-lg mb-5">
-          <a class="block no-underline" href={data.html_url}>
-            <div class="flex justify-center"></div>
-            <h4
-              class="card__title text-xl text-center dark:text-white"
-              style="margin-top: 5px;"
-            >
-              {data.full_name}
-            </h4>
-            <p class="card__txt text-center text-[#7F8AFF] dark:text-[#7F8AFF]">
-              {data.description}
-            </p>
-          </a>
-        </li>
-      ))
-    }
-  </ul>
-</body>
+{
+  datas.map((data) => (
+    <a
+      href={data.html_url}
+      target="_blank"
+      class="group gap-3 flex items-center border rounded-lg hover:bg-black/5 hover:dark:bg-white/10 border-black/15 dark:border-white/20 transition-colors duration-300 ease-in-out no-underline p-4 mt-4 mb-4"
+    >
+      <div class="w-full group-hover:text-black group-hover:dark:text-white blend">
+        <div class="flex flex-wrap items-center gap-2">
+          <div class="text-sm font-mono uppercase no-underline text-[#7F8AFF] dark:text-[#7F8AFF]">
+            {formatDate(data.created_at, lang)}
+          </div>
+        </div>
+        <div class="font-semibold mt-3 text-black dark:text-white">
+          {data.full_name}
+        </div>
+
+        <div class="text-sm line-clamp-2 text-[#7F8AFF] dark:text-[#7F8AFF]">
+          {data.description}
+        </div>
+        <div class="flex flex-wrap mt-2 gap-1 no-underline list-none text-start">
+          <li class="text-xs bg-black/5 dark:bg-white/10 text-black/50 dark:text-white/50 rounded-lg px-2 py-1">
+            {data.language}
+          </li>
+        </div>
+      </div>
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        width="20"
+        height="20"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke-width="2.5"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        class="stroke-current group-hover:stroke-black group-hover:dark:stroke-white"
+      >
+        <line
+          x1="5"
+          y1="12"
+          x2="19"
+          y2="12"
+          class="scale-x-0 group-hover:scale-x-100 translate-x-4 group-hover:translate-x-1 transition-all duration-300 ease-in-out"
+        />
+        <polyline
+          points="12 5 19 12 12 19"
+          class="translate-x-0 group-hover:translate-x-1 transition-all duration-300 ease-in-out"
+        />
+      </svg>
+    </a>
+  ))
+}

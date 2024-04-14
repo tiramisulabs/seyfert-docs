@@ -13,7 +13,7 @@ export default [
         collapsed: true,
         items: [
           {
-            label: 'Setup Seyfert project',
+            label: 'Setup seyfert project',
             link: '/guides/setup-project',
           },
           {
@@ -58,6 +58,10 @@ export default [
             label: 'Extending Commands',
             link: '/commands/command-class',
           },
+          {
+            label: 'Prefix Commands',
+            link: '/commands/prefix-commands',
+          },
         ],
       },
       {
@@ -97,6 +101,10 @@ export default [
           {
             label: 'Music library',
             link: '/misc/music',
+          },
+          {
+            label: 'API Access',
+            link: '/misc/api-access',
           },
         ],
       },

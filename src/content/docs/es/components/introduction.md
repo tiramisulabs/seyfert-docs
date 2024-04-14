@@ -1,19 +1,18 @@
 ---
-title: Introduction towards components.
+title: Introducción a los componentes
 ---
 
+Los componentes de mensajes son elementos que se adjuntan en los mensajes con los cuales los usuarios pueden interactuar. Estos componentes incluyen: [`Buttons`](/api/classes/button), [`SelectMenus`](/api/classes/selectmenu) y [`TextInputs`](/api/classes/textinput).
 
-Message components are components attached in messsages which the user could interact with them. Those components are: [`Buttons`](/api/classes/button), [`SelectMenus`](/api/classes/selectmenu) and [`TextInputs`](/api/classes/textinput).
+En esta guía vamos a cubrir:
 
-In this guide we are going to cover:
+* Creación de cada tipo de componente.
 
-* Creation of each type of component.
+* Manejo de sus interacciones de manera estática.
 
-* Handling their interactions in a static way.
+* Uso de colectores.
 
-* Using collectors.
+:::info
 
-:::info 
-
-We are also being covering [`Modals`](/api/classes/modal). Althrough they aren't components at all, as they aren't attached within a message, they could be handled as the other ones in the same way.
+También vamos a tratar los [`Modals`](/api/classes/modal). Aunque técnicamente no son componentes, ya que no se adjuntan dentro de un mensaje, pueden ser manejados de la misma manera que los otros componentes.
 :::
