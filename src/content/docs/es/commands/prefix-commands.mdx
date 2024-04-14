@@ -1,0 +1,189 @@
+---
+title: Comandos de Prefijo
+---
+
+import { TabItem, Tabs } from '@astrojs/starlight/components'
+
+## Configuración de prefijos
+
+Seyfert no solo maneja comandos de aplicación, sino también `comandos de prefijo`. No están habilitados por defecto, pero puedes habilitarlos configurando una opción dentro de [`ClientOptions`](/api/interfaces/ClientOptions). Tenemos acceso a la opción `command` donde podemos especificar una subopción llamada `prefix`. Esta opción espera un callback que devuelve un array de posibles prefijos para ese comando. Como el callback devuelve un [`Message`](/api/classes/message) es bastante simple manejar diferentes prefijos por servidor.
+
+Aquí tienes un ejemplo en el que vamos a configurar múltiples prefijos para todos los comandos.
+
+```ts showLineNumbers copy ins={4-9} wrap
+
+import { Client } from 'seyfert';
+
+const client = new Client({
+    commands: {
+        prefix: (msg) => {
+            // aquí puedes manejar los prefijos que quieras considerar dependiendo de los datos del mensaje.
+            return ['!', '?', '.']
+        }
+    }
+});
+
+```
+
+
+## Manejo de comandos de prefijo
+
+Habiendo configurado nuestros prefijos para los comandos, es hora de hacerlos funcionar.
+
+Y por suerte, el manejo funciona como los comandos de aplicación. La única diferencia es que recibimos una propiedad opcional [`Message`](/api/classes/message) dentro de [`CommandContext`](/api/classes/commandcontext).
+
+Para que esta propiedad aparezca en nuestro CommandContext lo único que debemos hacer es declarar el módulo de Seyfert y configurar la propiedad `withPrefix` dentro de [`InternalOptions`](/api/interfaces/internaloptions) en verdadero. Puedes ver este [ejemplo detallado](/guides/declare-module#internal-options). 
+
+
+En este ejemplo vamos a crear un comando que `republica` el mensaje que fue enviado en un canal de anuncios.
+
+```ts showLineNumbers copy
+import { 
+    Command,
+    CommandContext,
+    Declare
+} from 'seyfert';
+
+@Declare({
+    name: 'crosspost',
+    description: 'Republicar un mensaje de anuncio.'
+});
+export default class CrosspostCommand extends Command {
+    async run(ctx: CommandContext){
+        if(ctx.message) await ctx.message.crosspost();
+        return await ctx.write({ content: 'He republicado tu anuncio.'});
+    }
+};
+```
+
+:::note
+Actualmente, no hay soporte para aplicaciones que usen tanto `comandos de prefijo` como `comandos de aplicación` para seleccionar qué comandos son de un tipo específico. Todos los comandos se consideran como comandos de aplicación y comandos de prefijo.
+:::
+
+:::note
+Seyfert soporta subcomandos dentro de los comandos de prefijo.
+:::
+
+## Respondiendo a comandos de prefijo
+
+Por defecto, cuando usas la función `write` o `editOrReply`, solo enviará un mensaje al canal donde se disparó el comando. Para hacer que el comando sea respondido tienes que configurar la subopción `reply` dentro de la opción `command` en las opciones del cliente. Esta opción es un callback cuyo primer parámetro es el [`CommandContext`](/api/classes/commandcontext) y espera que se devuelva un booleano, si es `true` responderá al comando, si no, solo enviará un mensaje.
+
+Aquí tienes un ejemplo detallado de cómo se verá tu cliente con todas las modificaciones mencionadas en esta guía:
+
+```ts showLineNumbers copy ins={9} wrap
+
+import { Client } from 'seyfert';
+
+const client = new Client({
+    commands: {
+        prefix: (msg) => {
+            //aquí puedes manejar los prefijos que quieras considerar dependiendo de los datos del mensaje.
+            return ['!', '?', '.']
+        },
+        reply: (ctx) => true
+    }
+});
+
+```
+
+## Opciones de comandos de prefijo
+
+Como con los `comandos de aplicación`, puedes configurar opciones para los `comandos de prefijo`. Lo único que tendrás que hacer es declararlas como lo haces en los comandos de aplicación. Se analizan con un regex que indica que las opciones se dividirán cuando sean seguidas por `-`. Puedes reemplazar el analizador con tu propio analizador en la subopción `argsParser` dentro de las opciones de `commands` en las opciones del cliente. Este es un callback cuyos parámetros son `content`, el contenido del mensaje, y `command`, el comando que se ejecutó y espera un objeto cuyas claves son las opciones y los valores son los valores de las opciones.
+
+Aquí tienes una breve plantilla que muestra cómo funcionan las opciones en los comandos de prefijo.
+
+```txt hideLineNumbers title="Plantilla de Comando de Prefijo"
+!command -option valor_opción -option2 valor_opción2
+```
+
+
+Aquí puedes ver cómo hacemos el comando anterior pero en lugar de republicar el mensaje actual republicamos otro mensaje, obteniéndolo por su id que se nos dará en las opciones.
+
+```ts showLineNumbers copy
+import { 
+    Command,
+    CommandContext,
+    Declare,
+    Options,
+    createStringOption
+} from 'seyfert';
+
+const options = {
+    id: createStringOption({
+        description: 'El id del mensaje que vamos a republicar',
+        required: true
+    })
+};
+
+@Declare({
+    name: 'crosspost',
+    description: 'Republicar un mensaje de anuncio.'
+});
+@Options(options);
+export default class CrosspostCommand extends Command {
+    async run(ctx: CommandContext<typeof options>){
+        await ctx.client.messages.crosspost(ctx.options.id, ctx.channelId);
+        return await ctx.write({ content: 'He republicado tu anuncio.'});
+    }
+};
+```
+
+## Diferir la respuesta con comandos de prefijo
+
+Como en los `comandos de aplicación`, puedes diferir la respuesta del comando. Por defecto, si usas la función `CommandContext.deferReply()` hará que la respuesta sea diferida mostrando un mensaje `Cargando...`. Si queremos que sea personalizado tendremos que revisar nuevamente la opción `commands` en las opciones del cliente, ya que tenemos que crear un callback para `deferReplyResponse` que espera que se devuelva el contenido que enviarás en el diferimiento.
+
+Aquí hay un ejemplo de cómo modificamos las opciones del cliente y cómo hacemos que la respuesta del comando sea diferida usando el ejemplo anterior.
+
+<Tabs>
+<TabItem label='index.ts'>
+
+```ts showLineNumbers copy ins={10} wrap
+
+import { Client } from 'seyfert';
+
+const client = new Client({
+    commands: {
+        prefix: (msg) => {
+            //aquí puedes manejar los prefijos que quieras considerar dependiendo de los datos del mensaje.
+            return ['!', '?', '.']
+        },
+        reply: (ctx) => true,
+        deferReplyResponse: (ctx) => ({ content: 'Por favor espera, procesando tu solicitud...' })
+    }
+});
+
+```
+</TabItem>
+<TabItem label='command.ts'>
+
+```ts showLineNumbers copy
+import { 
+    Command,
+    CommandContext,
+    Declare,
+    Options,
+    createStringOption
+} from 'seyfert';
+
+const options = {
+    id: createStringOption({
+        description: 'El id del mensaje que vamos a republicar',
+        required: true
+    })
+};
+
+@Declare({
+    name: 'crosspost',
+    description: 'Republicar un mensaje de anuncio.'
+});
+@Options(options);
+export default class CrosspostCommand extends Command {
+    async run(ctx: CommandContext<typeof options>){
+        await ctx.deferReply();
+        await ctx.client.messages.crosspost(ctx.options.id, ctx.channelId);
+        return await ctx.write({ content: 'He republicado tu anuncio.'});
+    }
+};
+```
+</TabItem>
+</Tabs>
