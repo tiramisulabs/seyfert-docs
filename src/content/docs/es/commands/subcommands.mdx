@@ -1,0 +1,104 @@
+---
+title: Sub-Zero (SubComandos)
+---
+
+import { FileTree, Tabs, TabItem } from '@astrojs/starlight/components'
+
+Hemos tocado los conceptos básicos de la creación de un comando, pero ¿qué pasa si queremos crear un comando que tenga subcomandos? Por ejemplo, queremos crear un comando que tenga un subcomando `create` y otro `delete`. Aquí es donde entran en juego los subcomandos.
+
+## Creando un Subcomando
+
+Para crear un subcomando, necesitamos crear una nueva clase que extienda de `SubCommand` e implementar el método `run`. Luego, necesitamos agregar el subcomando al comando principal.
+
+Supongamos que tienes la siguiente estructura de directorios:
+
+<FileTree>
+- src
+ - commands
+	- account
+	 	- create.command.ts
+	 	- delete.command.ts
+	 	- parent.ts
+ - index.ts
+- seyfert.config.js
+- package.json
+- tsconfig.json
+</FileTree>
+
+<Tabs>
+	<TabItem label='parent.ts' icon="seti:typescript">
+
+:::tip
+
+Con esta estructura de archivos, puedes usar `@Autoload()` y Seyfert añadirá los comandos por ti.
+Pero asegúrate de exportar por defecto los subcomandos.
+
+:::
+
+
+```ts copy
+import { type CommandContext, Declare, Command, Options } from "seyfert";
+import { CreateCommand } from "./create.command";
+import { DeleteCommand } from "./delete.command";
+
+@Declare({
+	name: "account",
+	description: "account command"
+})
+// Being in the same folder with @AutoLoad() you can save this
+@Options([AddCommand, DeleteCommand])
+export default class AccountCommand extends Command {}
+
+```
+	</TabItem>
+	<TabItem label='create.command.ts' icon="seti:typescript">
+	
+```ts copy
+import { type CommandContext, Declare, SubCommand } from "seyfert";
+
+@Declare({
+	name: "create",
+	description: "create a new something"
+})
+export class CreateCommand extends SubCommand {
+	run(ctx: CommandContext) {
+		// some logic there
+
+		ctx.write({
+			content: "create command executed"
+		});
+	}
+}
+```
+</TabItem>
+<TabItem label='delete.command.ts' icon="seti:typescript">
+```ts copy
+import { type CommandContext, Declare, SubCommand } from "seyfert";
+
+@Declare({
+	name: "delete",
+	description: "delete something"
+})
+export class DeleteCommand extends SubCommand {
+	run(ctx: CommandContext) {
+		// some logic here
+
+		ctx.write({
+			content: "delete command executed"
+		});
+	}
+}
+```
+	</TabItem>
+</Tabs>
+
+
+
+
+
+
+En el ejemplo anterior, hemos creado un subcomando `create` y otro `delete`. Luego agregamos los subcomandos al comando principal utilizando el decorador `@Options`.
+
+:::note
+Observa que básicamente tratamos el subcomando como una opción del comando principal. (de hecho, así es como Discord también trata los subcomandos)
+:::

@@ -1,0 +1,158 @@
+---
+title: Haciendo Componentes
+---
+
+import { TabItem, Tabs } from '@astrojs/starlight/components'
+
+Los componentes se construyen con un constructor, que es una clase JavaScript, que lo representa. Dentro de este constructor se puede personalizar el componente como su texto o su color.
+
+Hay diferentes tipos de constructores de componentes con diferente personalización, pero todos tienen una propiedad común: el Id personalizado. Un identificador único que se utiliza para manejar las interacciones del componente.
+
+## ActionRow
+
+Todos los constructores se envían dentro de una [`ActionRow`](/api/classes/actionrow). Cada mensaje puede contener un máximo de 5 acciones fila.
+
+Así es como creamos un ActionRow básico:
+
+```ts {"Establece todos los componentes dentro de este ActionRow": 4-5} {"Añadir componentes al ActionRow": 6-7} showLineNumbers copy
+
+import { ActionRow } from 'seyfert';
+
+const row = new ActionRow()
+
+  .setComponents([])
+
+  .addComponents();
+
+```
+
+## Construcción de cada componente
+
+Ahora vamos a construir cada tipo de componente y establecerlo dentro de un ActionRow:
+
+<Tabs>
+<TabItem label="button.ts">
+
+### Buttons
+
+Una ActionRow no debe contener más de 5 botones.
+
+```ts showLineNumbers copy
+
+import { ActionRow, Button } from 'seyfert';
+
+import { ButtonStyle } from 'discord-api-types/v10';
+
+const button = new Button()
+  .setCustomId('first-button')
+  .setStyle(ButtonStyle.Primary)
+  .setLabel('First Button');
+
+const row = new ActionRow<Button>().setComponents([button]);
+
+```
+</TabItem>
+<TabItem label="menu.ts">
+
+### Select Menu
+
+Una ActionRow no debe contener más de un select menu.
+
+Hay diferentes tipos de Select Menu: [`StringSelectMenu`](/api/classes/stringselectmenu), [`UserSelectMenu`](/api/classes/userselectmenu), [`RoleSelectMenu`](/api/classes/roleselectmenu), [`ChannelSelectMenu`](/api/classes/channelselectmenu) y [`MentionableSelectMenu`](/api/classes/mentionableselectmenu).
+
+Vamos a hacer diferentes ActionRows para cada select menu.
+
+
+```ts {"String select menu": 10-19} {"User select menu": 20-27} {"Role select menu": 28-35} {"Channel select menu": 36-45} {"Mentionable select menu": 46-58} showLineNumbers copy
+
+import {
+  ActionRow,
+  StringSelectMenu,
+  StringSelectOption,
+  UserSelectMenu,
+  RoleSelectMenu,
+  ChannelSelectMenu,
+  MentionableSelectMenu
+} from 'seyfert';
+
+const stringMenu = new StringSelectMenu()
+  .setCustomId('string-menu')
+  .setPlaceholder('Select an string option')
+  .setOptions(
+    new StringSelectOption().setLabel('Option 1').setValue('1'),
+    new StringSelectOption().setLabel('Option 2').setValue('2')
+  );
+
+const stringRow = new ActionRow<StringSelectMenu>().setComponents([stringMenu]);
+
+const userMenu = new UserSelectMenu()
+  .setCustomId('user-menu')
+  .setPlaceholder('Select an user')
+  //user id's
+  .setDefaultUsers('123456789', '987654321');
+
+const userRow = new ActionRow<UserSelectMenu>().setComponents([userMenu]);
+
+const roleMenu = new RoleSelectMenu()
+  .setCustomId('role-menu')
+  .setPlaceholder('Select a role')
+  //role id's
+  .setDefaultRoles('123456789', '987654321');
+
+const roleRow = new ActionRow<RoleSelectMenu>().setComponents([roleMenu]);
+
+const channelMenu = new ChannelSelectMenu()
+  .setCustomId('channel-menu')
+  .setPlaceholder('Select a channel')
+  //channel id's
+  .setDefaultChannels('123456789', '987654321');
+
+const channelRow = new ActionRow<ChannelSelectMenu>().setComponents([
+  channelMenu
+]);
+
+const mentionableMenu = new MentionableSelectMenu()
+  .setCustomId('mentionable-menu')
+  .setPlaceholder('Select a mentionable')
+  //mentionable id's (role or user)
+  .setDefaultMentionables(
+    { type: 'User', id: '123456789' },
+    { type: 'Role', id: '987654321' }
+  );
+
+const mentionableRow = new ActionRow<MentionableSelectMenu>().setComponents([
+  mentionableMenu
+]);
+
+```
+
+</TabItem>
+
+<TabItem label="input.ts">
+
+### TextInputs
+
+Una ActionRow no debe contener más de una entrada de texto.
+
+Una entrada de texto es un componente único en los modales y no sólo puede adjuntarse dentro de las líneas de acción de un modal.
+
+```ts showLineNumbers copy
+
+import { ActionRow, TextInput } from 'seyfert';
+
+import { TextInputStyle } from 'discord-api-types/v10';
+
+const input = new TextInput()
+  .setCustomId('textinput')
+  .setLabel('My Name')
+  .setPlaceholder('Enter text')
+  .setStyle(TextInputStyle.Short)
+  .setLength({ min: 10, max: 30 });
+
+const row = new ActionRow<TextInput>().setComponents([input]);
+
+```
+</TabItem>
+</Tabs>
+
+Después de crear los componentes tendrá que enviar el ActionRow al campo de componentes. [Ver más abajo](/misc/sending-messages#sending-components-attached-to-the-message).
