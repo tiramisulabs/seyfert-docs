@@ -1,24 +1,24 @@
 ---
-title: Extending Command
+title: Extendiendo el Comando
 ---
 
-The command class is the one that provides all the utilities inside a command and prepares it to receive all the command metadata.
+La clase de comando es la que proporciona todas las utilidades dentro de un comando y lo prepara para recibir todos los metadatos del comando.
 
-## Handling errors
+## Manejo de errores
 
-Within Seyfert, there are different types of errors, depending on how critical the problem is.
+Dentro de Seyfert, hay diferentes tipos de errores, dependiendo de cuán crítico sea el problema.
 
-### Run throw error
+### Error de ejecución
 
-```ts 
+```ts
 import { Command, type CommandContext } from "seyfert";
 
 export class HandlingErrors extends Command {
   async run(context: CommandContext) {
-    throw new Error("Error, ehm, lol player detected");
+    throw new Error("Error, ehm, jugador de lol detectado");
   }
 
-  // This will reply with the error message above "Error, ehm, lol player detected"
+  // Esto responderá con el mensaje de error anterior "Error, ehm, jugador de lol detectado"
   async onRunError(context: CommandContext, error: unknown) {
     context.client.logger.fatal(error);
     await context.editOrReply({
@@ -26,10 +26,9 @@ export class HandlingErrors extends Command {
     });
   }
 }
+```
 
-```	
-
-### Options throw error
+### Error en opciones
 
 ```ts 
 import {
@@ -42,15 +41,15 @@ import {
 
 @Options({
   url: createStringOption({
-    description: 'how to be a gamer',
+    description: 'cómo ser un gamer',
     value(data, ok: OKFunction<URL>, fail) {
         if (isUrl(data.value)) return ok(new URL(data.value));
-        fail('expected a valid url');
+        fail('se esperaba una URL válida');
     }
   })
 })
 export class HandlingErrors extends Command {
-  // url: expected a valid url
+  // url: se esperaba una URL válida
   async onOptionsError(
     context: CommandContext,
     metadata: OnOptionsReturnObject
@@ -63,20 +62,19 @@ export class HandlingErrors extends Command {
     });
   }
 }
-
 ```
 
-### Middleware return stop
+### Detención por middleware
 
-When a middleware returns a stop, Seyfert issues this error and stops the progress of the command to be handled.
+Cuando un middleware retorna una detención, Seyfert emite este error y detiene el progreso del comando para ser manejado.
 
 :::note
-Learn more about middleware utilities [here](#)
+Aprende más sobre las utilidades de middleware [aquí](#)
 :::
 
 ```ts 
 export default createMiddleware(({ context, next, stop, pass }) => {
-  if (!Devs.includes(context.author.id)) return stop("User is not a developer");
+  if (!Devs.includes(context.author.id)) return stop("El usuario no es desarrollador");
   next();
 });
 ```
@@ -88,10 +86,9 @@ import { Command, Middlewares, type CommandContext } from "seyfert";
 export class HandlingErrors extends Command {
   async onMiddlewaresError(context: CommandContext, error: Error) {
     await context.editOrReply({
-			//User is not a developer
+			//El usuario no es desarrollador
       content: error.message
     });
   }
 }
-
 ```

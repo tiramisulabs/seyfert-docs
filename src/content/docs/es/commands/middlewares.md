@@ -1,42 +1,40 @@
 ---
-title: Command Middlewares
+title: Middlewares de Comando
 ---
 
-On Seyfert middleware are functions that are called before the command is executed. You can use them to do verifications, logging, etc.
+En Seyfert, los middlewares son funciones que se llaman antes de que se ejecute el comando. Puedes usarlos para realizar verificaciones, registrar información, etc.
 
-Let's create a basic middleware that logs the command that is being executed.
+Vamos a crear un middleware básico que registre el comando que se está ejecutando.
 
-## Creating a middleware
+## Creando un middleware
 
 ```ts title="logger.middleware.ts" wrap copy
 import { createMiddleware } from "seyfert";
 
-// The generic type tells the middleware what information it will pass to the command
+// El tipo genérico le dice al middleware qué información pasará al comando
 export const loggerMiddleware = createMiddleware<void>(
   (middle) => {
-    // Log the command
+    // Registrar el comando
     console.log(
-      `${middle.context.author.username} (${middle.context.author.id}) ran /(${middle.context.resolver.fullCommandName}`
+      `${middle.context.author.username} (${middle.context.author.id}) ejecutó /(${middle.context.resolver.fullCommandName}`
     );
 
-    // Pass to the next middleware
+    // Pasar al siguiente middleware
     middle.next();
   }
 );
 ```
 
-
-Now let's register the middle on Seyfert [extending the client](guides/declare-module) but first we should create a command to export all our middleware
+Ahora vamos a registrar el middleware en Seyfert [extendiendo el cliente](guides/declare-module), pero primero debemos crear un comando para exportar todos nuestros middlewares
 
 ```ts title="middlewares.ts" wrap copy
 import { loggerMiddleware } from "./path/to/logger.middleware";
 
 export const middlewares = {
-    // The key is the name of the middleware which will be used to reference it on the command
+    // La clave es el nombre del middleware que se usará para referenciarlo en el comando
     logger: loggerMiddleware
 }
 ```
-
 
 ```ts title="index.ts" ins={2,7-9,15-16} copy
 import { ParseLocales, Client, ParseMiddlewares, ParseClient } from "seyfert";
@@ -44,7 +42,7 @@ import { middlewares } from "./path/to/middlewares";
 
 const client = new Client();
 
-// Register the middlewares
+// Registrar los middlewares
 client.setServices({
   middlewares: middlewares
 });
@@ -52,22 +50,22 @@ client.setServices({
 declare module "seyfert" {
   interface UsingClient extends ParseClient<Client<true>> {}
 
-  // Register the middlewares on Seyfert types
+  // Registrar los middlewares en los tipos de Seyfert
   interface RegisteredMiddlewares
     extends ParseMiddlewares<typeof middlewares> {}
 }
 ```
 
-Now we can use the `logger` middleware on any command.
+Ahora podemos usar el middleware `logger` en cualquier comando.
 
 ```ts title="ping.command.ts" copy
 import { Middlewares, Declare, Command } from "seyfert";
 
 @Declare({
 	name: "ping",
-	description: "Ping the bot"
+	description: "Haz ping al bot"
 })
-// Note we are using the name "logger" to reference the middleware
+// Nota que estamos usando el nombre "logger" para referenciar al middleware
 @Middlewares(["logger"])
 export default class PingCommand extends Command {
     async run(ctx: CommandContext) {
@@ -76,93 +74,92 @@ export default class PingCommand extends Command {
 }
 ```
 
-Now every time the `ping` command is executed, the logger middleware will log the command.
+Ahora cada vez que se ejecute el comando `ping`, el middleware logger registrará el comando.
 
 :::note
-Middlewares are executed in the order they are added.
+Los middlewares se ejecutan en el orden en que se agregan.
 :::
 
-## Stop middleware
+## Middleware de parada
 
-As we said you can use middlewares to do verifications, and you can stop the execution of the command if the verification fails.
+Como dijimos, puedes usar middlewares para hacer verificaciones, y puedes detener la ejecución del comando si la verificación falla.
 
-Let's take a look adding some logic to the logger middleware.
+Vamos a ver agregando algo de lógica al middleware de registro.
 
 ```ts title="logger.middleware.ts" ins={8-10} copy wrap
 import { createMiddleware } from "seyfert";
 
 export const loggerMiddleware = createMiddleware<void>((middle) => {
-  // Log the command
+  // Registrar el comando
   console.log(
-    `${middle.context.author.username} (${middle.context.author.id}) ran /(${middle.context.resolver.fullCommandName}`
+    `${middle.context.author.username} (${middle.context.author.id}) ejecutó /(${middle.context.resolver.fullCommandName}`
   );
 
-  // Check if the command is being executed in a guild
+  // Verificar si el comando se está ejecutando en un servidor
   if (middle.context.interaction.channel?.type === ChannelType.DM) {
-    middle.stop("This command can only be used in a guild.");
+    middle.stop("Este comando solo se puede usar en un servidor.");
   }
 
-  // Pass to the next middleware if the command is being executed in a guild
+  // Pasar al siguiente middleware si el comando se está ejecutando en un servidor
   middle.next();
 });
 ```
 
-Now every time the `ping` command is executed in a DM, the logger middleware will stop the execution of the command and send the error message to the handler. Learn how to handle errors [here](commands/command-class#middleware-return-stop).
+Ahora cada vez que el comando `ping` se ejecute en un DM, el middleware de registro detendrá la ejecución del comando y enviará el mensaje de error al manejador. Aprende cómo manejar errores [aquí](commands/command-class#middleware-return-stop).
 
 :::note
-Notice you can join to the interaction data by using `middle.context.interaction`
+Observa que puedes unirte a los datos de interacción usando `middle.context.interaction`
 :::
 
-On the other hand we could skip the interaction (ignore the interaction and literally do nothing) by using `middle.pass()`
+Por otro lado, podríamos ignorar la interacción (ignorar la interacción y literalmente no hacer nada) usando `middle.pass()`
 
 ```ts title="logger.middleware.ts" ins={9} copy
 import { createMiddleware } from "seyfert";
 
 export const loggerMiddleware = createMiddleware<void>((middle) => {
-  // Log the command
+  // Registrar el comando
   console.log(
-    `${middle.context.author.username} (${middle.context.author.id}) ran /(${middle.context.resolver.fullCommandName}`
+    `${middle.context.author.username} (${middle.context.author.id}) ejecutó /(${middle.context.resolver.fullCommandName}`
   );
 
-  // Ignore the interaction if it's a DM
+  // Ignorar la interacción si es un DM
   if (middle.context.interaction.channel?.type === ChannelType.DM) {
     middle.pass();
   }
 
-  // Pass to the next middleware if the command is being executed in a guild
+  // Pasar al siguiente middleware si el comando se está ejecutando en un servidor
   middle.next();
 });
-
 ```
 
-## Passing data
+## Pasando datos
 
-The last thing we can do with middlewares is to pass data to the command. This can be useful to avoid repeating the same code in multiple commands for example fetching data from the database.
+Lo último que podemos hacer con middlewares es pasar datos al comando. Esto puede ser útil para evitar repetir el mismo código en múltiples comandos, por ejemplo, obteniendo datos de la base de datos.
 
-We will continue with the logger middleware and pass some data to the command.
+Continuaremos con el middleware de registro y pasaremos algunos datos al comando.
 
 ```ts title="logger.middleware.ts" copy
 import { createMiddleware } from "seyfert";
 
-// This interface will be used to let the middleware know what type of data it will pass to the command
+// Esta interfaz se usará para que el middleware sepa qué tipo de datos pasará al comando
 interface LoggerData {
     time: number;
 }
 
 export const loggerMiddleware = createMiddleware<LoggerData>((middle) => {
-    // Log the command
-    console.log(`${middle.context.author.username} (${middle.context.author.id}) ran /(${middle.context.resolver.fullCommandName}`);
+    // Registrar el comando
+    console.log(`${middle.context.author.username} (${middle.context.author.id}) ejecutó /(${middle.context.resolver.fullCommandName}`);
 
-    // Pass the data to the command
+    // Pasar los datos al comando
     middle.next({ time: Date.now() });
 });
 ```
 
-Now let's modify the `ping` command to receive the data.
+Ahora modifiquemos el comando `ping` para recibir los datos.
 
 :::note
 
-If you want to pass data from more than one middleware you can use the `|` operator, for example `CommandContext<never, "logger" | "otherMiddleware">`
+Si quieres pasar datos de más de un middleware, puedes usar el operador `|`, por ejemplo `CommandContext<never, "logger" | "otherMiddleware">`
 
 :::
 
@@ -171,7 +168,7 @@ import { Middlewares, Declare, Command } from "seyfert";
 
 @Declare({
     name: "ping",
-    description: "Ping the bot"
+    description: "Haz ping al bot"
 })
 @Middlewares(["logger"])
 export default class PingCommand extends Command {
@@ -184,4 +181,3 @@ export default class PingCommand extends Command {
     }
 }
 ```
-
