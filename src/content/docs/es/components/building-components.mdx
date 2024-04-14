@@ -1,20 +1,20 @@
 ---
-title: Building components
+title: Haciendo Componentes
 ---
 
 import { TabItem, Tabs } from '@astrojs/starlight/components'
 
-Components are built with a builder, which is a JavaScript class, which represents it. Within this builder you can customize the component such it's text or it's color.
+Los componentes se construyen con un constructor, que es una clase JavaScript, que lo representa. Dentro de este constructor se puede personalizar el componente como su texto o su color.
 
-There are diffrent types of components' builders with diffrent customization but all have a common property: the custom Id. A unique identifier which is used for handling the interactions of the component.
+Hay diferentes tipos de constructores de componentes con diferente personalización, pero todos tienen una propiedad común: el Id personalizado. Un identificador único que se utiliza para manejar las interacciones del componente.
 
 ## ActionRow
 
-All the builders are sent within an [`ActionRow`](/api/classes/actionrow). Each message can contain a maxium of 5 actions row.
+Todos los constructores se envían dentro de una [`ActionRow`](/api/classes/actionrow). Cada mensaje puede contener un máximo de 5 acciones fila.
 
-Here is how we create a basic ActionRow:
+Así es como creamos un ActionRow básico:
 
-```ts {"Set all the components within this ActionRow": 4-5} {"Add components to the ActionRow": 6-7} showLineNumbers copy
+```ts {"Establece todos los componentes dentro de este ActionRow": 4-5} {"Añadir componentes al ActionRow": 6-7} showLineNumbers copy
 
 import { ActionRow } from 'seyfert';
 
@@ -26,16 +26,16 @@ const row = new ActionRow()
 
 ```
 
-## Building each component
+## Construcción de cada componente
 
-Now we are going to build each type of component and set it within an ActionRow:
+Ahora vamos a construir cada tipo de componente y establecerlo dentro de un ActionRow:
 
 <Tabs>
 <TabItem label="button.ts">
 
 ### Buttons
 
-An ActionRow shouldn't contain more than 5 buttons.
+Una ActionRow no debe contener más de 5 botones.
 
 ```ts showLineNumbers copy
 
@@ -56,11 +56,11 @@ const row = new ActionRow<Button>().setComponents([button]);
 
 ### Select Menu
 
-An ActionRow shouldn't contain more than one select menu.
+Una ActionRow no debe contener más de un select menu.
 
-They are diffrent types of select menus: [`StringSelectMenu`](/api/classes/stringselectmenu), [`UserSelectMenu`](/api/classes/userselectmenu), [`RoleSelectMenu`](/api/classes/roleselectmenu), [`ChannelSelectMenu`](/api/classes/channelselectmenu) and [`MentionableSelectMenu`](/api/classes/mentionableselectmenu). 
+Hay diferentes tipos de Select Menu: [`StringSelectMenu`](/api/classes/stringselectmenu), [`UserSelectMenu`](/api/classes/userselectmenu), [`RoleSelectMenu`](/api/classes/roleselectmenu), [`ChannelSelectMenu`](/api/classes/channelselectmenu) y [`MentionableSelectMenu`](/api/classes/mentionableselectmenu).
 
-We are going to make diffrent action rows for each select menu. 
+Vamos a hacer diferentes ActionRows para cada select menu.
 
 
 ```ts {"String select menu": 10-19} {"User select menu": 20-27} {"Role select menu": 28-35} {"Channel select menu": 36-45} {"Mentionable select menu": 46-58} showLineNumbers copy
@@ -132,9 +132,9 @@ const mentionableRow = new ActionRow<MentionableSelectMenu>().setComponents([
 
 ### TextInputs
 
-An ActionRow shouldn't contain more than one text input.
+Una ActionRow no debe contener más de una entrada de texto.
 
-A text input is a component that is unique in modals and can't only be attached within action rows in a modal.
+Una entrada de texto es un componente único en los modales y no sólo puede adjuntarse dentro de las líneas de acción de un modal.
 
 ```ts showLineNumbers copy
 
@@ -155,4 +155,4 @@ const row = new ActionRow<TextInput>().setComponents([input]);
 </TabItem>
 </Tabs>
 
-After creating the components you will have to send the ActionRow into the components field. [See below](/misc/sending-messages#sending-components-attached-to-the-message).
+Después de crear los componentes tendrá que enviar el ActionRow al campo de componentes. [Ver más abajo](/misc/sending-messages#sending-components-attached-to-the-message).

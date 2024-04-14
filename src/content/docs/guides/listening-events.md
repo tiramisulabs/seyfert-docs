@@ -1,5 +1,5 @@
 ---
-title: Listening discord events
+title: Listening Discord events
 ---
 
 :::note

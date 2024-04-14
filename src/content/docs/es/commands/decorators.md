@@ -1,52 +1,53 @@
 ---
-title: Command Decorators
+title: Decoradores para el Comando
 ---
 
-Take a loot at the differente decorators that Seyfert provides to create commands.
+Echa un vistazo a los diferentes decoradores que Seyfert proporciona para crear comandos.
 
 ## `@Declare()` [API](/api/functions/declare)
 
-This decorator is used to declare a command. It is used to define the command name, the command description, and the command options.
-
-- **name**: The name of the slash command.
-- **description**: The description of the slash command.
-- **dm**: If the command can be used in DMs.
-- **guildId**: guildsIds where the command can be published.
+Este decorador se utiliza para declarar un comando. Se utiliza para definir el nombre del comando, la descripción del comando y las opciones del comando.
+- **name**: El nombre del comando barra.
+- **description**: La descripción del comando barra.
+- **dm**: Si el comando puede ser usado en DMs.
+- **guildId**: Ids de servidores donde se puede publicar el comando.
 
 
 ## ``@Options()`` [API](/api/functions/options)
 
 :::tip
 
-You can learn more about it [here](./options).
+Puede obtener más información al respecto [aquí](./options).
 
 :::
 
-This decorator simplifies the setup of slash commands by using an option object. Seyfert provides a range of user-friendly decorators designed to make defining command options straightforward.
+Este decorador simplifica la configuración de comandos de barra utilizando un objeto de opción. 
+Seyfert proporciona una serie de decoradores fáciles de usar diseñados para que la definición de opciones de comandos sea sencilla.
 
 
 ## ``@Middlewares()`` [API](/api/functions/middlewares)
 
-Seyfert offers an advanced middleware system that is fully typed and incredibly powerful. This system takes in a list of middlewares, which are functions that run before a command is executed.
+Seyfert ofrece un avanzado sistema de middlewares totalmente typeados e increíblemente potente. 
+Este sistema recibe una lista de middlewares, que son funciones que se ejecutan antes de que se ejecute un comando.
 
-You can learn how to create middlewares and use them [here](./middlewares).
+Puedes aprender a crear middlewares y utilizarlos [aquí](./middlewares).
 
-# Sub-command related decorators
+# Decoradores relacionados con subcomandos
 
 :::tip
 
-We have a dedicated section for sub-commands, you can find it [here](./subcommands).
+Tenemos una sección dedicada a los subcomandos, puedes encontrarla [aquí](./subcomandos).
 
 :::
 
-## `@Groups()` and `@Group()`
+## `@Groups()` y `@Group()`
 
-Seyfert handles all aspects of the commands for you, including the command group system that discord exposes.
+Seyfert se encarga de todos los aspectos de los comandos por ti, incluido el sistema de grupos de comandos que expone Discord.
 
-`@Groups()` is the decorator to tell a parent command what groups it will have and handle.
+`@Groups()` es el decorador para indicar a un comando padre qué grupos tendrá y manejará.
 
-`@Group()` is the decorator to tell a subcommand (child command) what group it belongs to.
+`@Group()` es el decorador para indicar a un subcomando (comando hijo) a qué grupo pertenece.
 
 ## `@AutoLoad` [API](/api/functions/autoload)
 
-This decorator is used to automatically load all the sub-command files in the directory where `parent` is located.
+Este decorador se utiliza para cargar automáticamente todos los archivos de subcomandos en el directorio donde se encuentra `parent`.

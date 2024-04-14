@@ -161,8 +161,8 @@ const arr = [
               class:list={[
                 entry.attrs.class,
                 entry.isCurrent
-                  ? 'text-[#7F8AFF] bg-[#424549]/80 font-semibold'
-                  : 'text-white',
+                  ? 'text-[#7F8AFF] bg-zinc-200 dark:bg-zinc-900 font-semibold'
+                  : 'text-black dark:text-white',
               ]}
               {...entry.attrs}
             >
@@ -196,8 +196,8 @@ const arr = [
               class:list={[
                 entry.attrs.class,
                 entry.isCurrent
-                  ? 'text-[#7F8AFF] bg-[#424549]/80 font-semibold'
-                  : 'text-white',
+                  ? 'text-[#7F8AFF] bg-zinc-200 dark:bg-zinc-900 font-semibold'
+                  : 'text-black dark:text-white',
               ]}
               {...entry.attrs}
             >
@@ -306,14 +306,14 @@ const arr = [
 
   a:hover,
   a:focus {
-    color: var(--sl-color-white);
+    color: var(--sl-color-text-accent);
   }
 
   [aria-current='page'],
   [aria-current='page']:hover,
   [aria-current='page']:focus {
     font-weight: 600;
-    color: var(--sl-color-text-invert);
+    color: var(--sl-color-text-accent);
     background-color: var(--sl-color-text-accent);
   }
 

@@ -1,12 +1,12 @@
 ---
-title: Command Options
+title: Opciones de un Comando
 ---
 
-Each function takes the following parameters:
-- **description**: The description of the option.
-- **required**?: If the option is required.
-- **value**?: Callback where you can filter the value sent by discord before it reaches the main command. [How to use here](#using-the-value-callback)
-## Type Options
+Cada función recibe los siguientes parámetros:
+- **description**: La descripción de la opción.
+- **required**: Si la opción es obligatoria.
+- **value**? Callback donde se puede filtrar el valor enviado por Discord antes de que llegue al comando principal. [Cómo usar aquí](#using-the-value-callback)
+## Tipos de opciones
 
 ### createStringOption
 ```ts 
@@ -155,7 +155,7 @@ import { ChannelTypes } from 'seyfert/lib/common';
   })
 });
 ```
-## Using the `value` callback
+## Usando el callback de `value`
 
 ```ts 
 import { OKFunction } from 'seyfert';
@@ -171,4 +171,4 @@ import { OKFunction } from 'seyfert';
 });
 ```
 
-A briefly example was given in [Creating your first command](/guides/first-command#using-options)
+En [Crear su primer comando](/es/guides/first-command#using-options) se ofrece un breve ejemplo.

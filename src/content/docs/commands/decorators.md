@@ -41,7 +41,7 @@ We have a dedicated section for sub-commands, you can find it [here](./subcomman
 
 ## `@Groups()` and `@Group()`
 
-Seyfert handles all aspects of the commands for you, including the command group system that discord exposes.
+Seyfert handles all aspects of the commands for you, including the command group system that Discord exposes.
 
 `@Groups()` is the decorator to tell a parent command what groups it will have and handle.
 

@@ -1,0 +1,35 @@
+---
+const links = [
+  'https://api.github.com/repos/FabrizioCoder/LuxannaRewrite',
+  'https://api.github.com/repos/DanielXMoore/civet-discord',
+];
+const datas = await Promise.all(
+  links.map(async (link) => {
+    const res = await fetch(link);
+    return res.json();
+  })
+);
+---
+
+<body class="border-10 justify-center">
+  <ul class="list-none p-0">
+    {
+      datas.map((data) => (
+        <li class="card bg-zinc-200 dark:bg-zinc-800 rounded-lg mb-5">
+          <a class="block no-underline" href={data.html_url}>
+            <div class="flex justify-center"></div>
+            <h4
+              class="card__title text-xl text-center dark:text-white"
+              style="margin-top: 5px;"
+            >
+              {data.full_name}
+            </h4>
+            <p class="card__txt text-center text-[#7F8AFF] dark:text-[#7F8AFF]">
+              {data.description}
+            </p>
+          </a>
+        </li>
+      ))
+    }
+  </ul>
+</body>

@@ -5,7 +5,7 @@ title: Command Options
 Each function takes the following parameters:
 - **description**: The description of the option.
 - **required**?: If the option is required.
-- **value**?: Callback where you can filter the value sent by discord before it reaches the main command. [How to use here](#using-the-value-callback)
+- **value**?: Callback where you can filter the value sent by Discord before it reaches the main command. [How to use here](#using-the-value-callback)
 ## Type Options
 
 ### createStringOption
