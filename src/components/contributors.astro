@@ -1,14 +1,14 @@
 ---
-import { Image } from "astro:assets";
+import { Image } from 'astro:assets';
 
 const response = await fetch(
-    "https://api.github.com/repos/tiramisulabs/seyfert-docs/contributors?per_page=15",
-    {
-        cache: "force-cache",
-    },
+  'https://api.github.com/repos/tiramisulabs/seyfert-docs/contributors?per_page=15',
+  {
+    cache: 'force-cache',
+  }
 );
 const data = await response.json();
-
+const { label } = Astro.props;
 ---
 
 <div
@@ -24,7 +24,7 @@ const data = await response.json();
           class="rounded-full w-16 h-16"
         />
         <p class="text-sm font-bold my-1">{contributor.login}</p>
-        <span class="text-xs">Contributions: {contributor.contributions}</span>
+        <span class="text-xs">{label}: {contributor.contributions}</span>
       </div>
     ))
   }
