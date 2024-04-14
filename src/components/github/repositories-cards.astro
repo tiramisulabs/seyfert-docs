@@ -29,7 +29,7 @@ const { lang } = Astro.props;
     >
       <div class="w-full group-hover:text-black group-hover:dark:text-white blend">
         <div class="flex flex-wrap items-center gap-2">
-          <div class="text-sm font-mono uppercase no-underline text-[#364bff] dark:text-[#364bff]">
+          <div class="text-sm font-mono uppercase no-underline text-[#364bff] dark:text-[#b3c7ff]">
             {formatDate(data.created_at, lang)}
           </div>
         </div>
@@ -37,7 +37,7 @@ const { lang } = Astro.props;
           {data.full_name}
         </div>
 
-        <div class="text-sm line-clamp-2 text-[#364bff] dark:text-[#364bff]">
+        <div class="text-sm line-clamp-2 text-[#364bff] dark:text-[#b3c7ff]">
           {data.description}
         </div>
         <div class="flex flex-wrap mt-2 gap-1 no-underline list-none text-start">
