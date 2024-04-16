@@ -38,10 +38,8 @@ Now we are going to build each type of component and set it within an ActionRow:
 An ActionRow shouldn't contain more than 5 buttons.
 
 ```ts showLineNumbers copy
-
 import { ActionRow, Button } from 'seyfert';
-
-import { ButtonStyle } from 'seyfert/types';
+import { ButtonStyle } from 'seyfert/lib/types';
 
 const button = new Button()
   .setCustomId('first-button')
@@ -140,7 +138,7 @@ A text input is a component that is unique in modals and can't only be attached 
 
 import { ActionRow, TextInput } from 'seyfert';
 
-import { TextInputStyle } from 'seyfert/types';
+import { TextInputStyle } from 'seyfert/lib/types';
 
 const input = new TextInput()
   .setCustomId('textinput')
