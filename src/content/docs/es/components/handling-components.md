@@ -48,7 +48,7 @@ Si la función de filtro tiene éxito y devuelve `true`, el manejador ejecutará
 
 import { ComponentCommand, type ComponentContext } from 'seyfert';
 
-import { MessageFlags } from 'discord-api-types/v10';
+import { MessageFlags } from 'seyfert/lib/types';
 
 export default class HelloWorldButton extends ComponentCommand {
   componentType = 'Button' as const;

@@ -9,7 +9,7 @@ Aquí tienes un ejemplo de cómo crear un modal con dos campos de texto:
 
 import { Modal, TextInput, ActionRow } from 'seyfert';
 
-import { TextInputStyle } from 'discord-api-types/v10';
+import { TextInputStyle } from 'seyfert/lib/types';
 
 const nameInput = new TextInput()
   .setCustomId('name')

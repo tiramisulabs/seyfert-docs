@@ -38,10 +38,8 @@ Ahora vamos a construir cada tipo de componente y establecerlo dentro de un Acti
 Una ActionRow no debe contener más de 5 botones.
 
 ```ts showLineNumbers copy
-
 import { ActionRow, Button } from 'seyfert';
-
-import { ButtonStyle } from 'discord-api-types/v10';
+import { ButtonStyle } from 'seyfert/lib/types';
 
 const button = new Button()
   .setCustomId('first-button')
@@ -140,7 +138,7 @@ Una entrada de texto es un componente único en los modales y no sólo puede adj
 
 import { ActionRow, TextInput } from 'seyfert';
 
-import { TextInputStyle } from 'discord-api-types/v10';
+import { TextInputStyle } from 'seyfert/lib/types';
 
 const input = new TextInput()
   .setCustomId('textinput')

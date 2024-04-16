@@ -101,7 +101,7 @@ Each function takes the following parameters:
   })
 });
 
-import { ChannelTypes } from 'seyfert/types';
+import { ChannelTypes } from 'seyfert/lib/types';
 
 @Options({
   channelTypes: createChannelOption({

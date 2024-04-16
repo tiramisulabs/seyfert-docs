@@ -10,7 +10,7 @@ Here is an example of how to create a modal with two text inputs:
 
 import { Modal, TextInput, ActionRow } from 'seyfert';
 
-import { TextInputStyle } from 'seyfert/types';
+import { TextInputStyle } from 'seyfert/lib/types';
 
 const nameInput = new TextInput()
   .setCustomId('name')

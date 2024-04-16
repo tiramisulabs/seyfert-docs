@@ -64,7 +64,7 @@ import {
   createBooleanOption,
   type CommandContext
 } from 'seyfert';
-import { MessageFlags } from 'seyfert/types';
+import { MessageFlags } from 'seyfert/lib/types';
 
 const options = {
   hide: createBooleanOption({
@@ -80,7 +80,7 @@ const options = {
 export default class PingCommand extends Command {
 
   async run(ctx: CommandContext<typeof options>) {
-    const flags = ctx.options.hide ? MessageFlags.Ephemeral : 0;
+    const flags = ctx.options.hide ? MessageFlags.Ephemeral : undefined;
 
     // average latency between shards
     const ping = ctx.client.gateway.latency;
