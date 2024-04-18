@@ -151,6 +151,9 @@ function getSidebarGroupFromReflections(
                         collapsed: true,
                         directory,
                     },
+                    translations: {
+                        es: translations[group.title as keyof typeof translations] ?? group.title,
+                    },
                 }
             })
             .filter((item): item is SidebarGroup => item !== undefined),
@@ -247,12 +250,14 @@ type SidebarGroup =
         }
         collapsed?: boolean
         label: string
+        translations?: Record<string, string>
     }
 
 interface SidebarManualGroup {
     collapsed?: boolean
     items: (LinkItem | SidebarGroup)[]
     label: string
+    translations?: Record<string, string>
 }
 
 interface LinkItem {
@@ -263,3 +268,12 @@ interface LinkItem {
 type AsideType = 'caution' | 'danger' | 'note' | 'tip'
 
 type StarlightUserConfigSidebar = Parameters<StarlightPlugin['hooks']['setup']>[0]['config']['sidebar']
+
+const translations = {
+    Enumerations: 'Enumeraciones',
+    Classes: 'Clases',
+    Interfaces: 'Interfaces',
+    'Type Aliases': 'Tipos de Alias',
+    'Variables': 'Variables',
+    'Functions': 'Funciones',
+}
