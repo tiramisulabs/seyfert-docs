@@ -20,23 +20,5 @@ const context = extendContext((interaction) => {
 const client = new Client({ context });
 ```
 
-As you may notice the properties you want to be added in the CommandContext are not typed. To do that we have to declare the module as we did previously. 
-
-We have to edit the `ExtendContext` interface within Seyfert module which expects to receive the data to add. 
-
-```ts showLineNumbers copy wrap ins={11-14}
-
-import { Client, extendContext } from 'seyfert';
-
-const context = extendContext((interaction) => {
-    return {
-        myCoolProp: 'seyfert>>'
-    }
-})
-
-const client = new Client({ context });
-
-declare module 'seyfert' {
-    //we are using ReturnType which gives us the typeof the whatever the function context returns.
-    interface ExtendContext extends ReturnType<typeof context>;
-}
+:::note
+Although you have extended the context, the properties you have added aren't typed in the CommandContext. To make them typed you will have to declare Seyfert module. See the [declare module guide](/guides/declare-module) for further information.
