@@ -181,6 +181,13 @@ export default [
             },
             link: '/misc/api-access',
           },
+          {
+            label: 'Extending CommandContext',
+            translations: {
+              es: 'Extendiendo el CommandContext'
+            },
+            link: '/misc/extendcontext'
+          }
         ],
       },
     ],

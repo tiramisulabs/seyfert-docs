@@ -61,8 +61,22 @@ declare module 'seyfert' {
 
 ## Extends Context
 
+As you may notice when you are extending the CommandContext, the properties you want to be extended or added in are not typed. To do that we have to declare Seyfert's module.
 
+We have to edit the `ExtendContext` interface within Seyfert module which expects to receive the data to add. 
 
+```ts showLineNumbers copy wrap ins={11-14}
+
+declare module 'seyfert' {
+    //we are using ReturnType which gives us the typeof the whatever the function context returns.
+    interface ExtendContext extends ReturnType<typeof context>;
+}
+
+```
+:::note 
+
+The context variable in the example above is the one we are using to extend the context. For further information see [extending context guide](/misc/extendcontext).
+::: 
 ## Internal Options
 
 Since seyfert accepts different ways of operating, it becomes more complicated to keep the types true to reality. Because of that there are `InternalOptions`, an interface that expects properties to transform the seyfert types to something more complete.
