@@ -101,8 +101,8 @@ export default class PlayCommand extends Command {
 				flags: MessageFlags.Ephemeral
 			});
 
-		const botVoice = ctx.me("cache")?.voice();
-		if (botVoice && botVoice.channel_id !== voice.channel_id)
+		const botVoice = ctx.me()?.voice();
+		if (botVoice && botVoice.channelId !== voice.channelId)
 			return ctx.write({
 				content: "You need to be in the same voice channel as me.",
 				flags: MessageFlags.Ephemeral
@@ -111,7 +111,7 @@ export default class PlayCommand extends Command {
 		const player = await client.kazagumo.createPlayer({
 			guildId: guildId,
 			textId: channelId,
-			voiceId: voice.channel_id,
+			voiceId: voice.channelId,
 			volume: 100
 		});
 
