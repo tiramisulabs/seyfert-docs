@@ -176,7 +176,7 @@ import { Middlewares, Declare, Command } from "seyfert";
 @Middlewares(["logger"])
 export default class PingCommand extends Command {
     async run(ctx: CommandContext<never, "logger">) {
-        const time = ctx.middleware.metadata.logger.time;
+        const time = ctx.metadata.logger.time;
         console.log(time);
         await ctx.reply({
             content: `Pong! Time: ${data.time}`,
