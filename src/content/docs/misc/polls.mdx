@@ -76,7 +76,7 @@ export default createEvent({
     data: { name: 'messageUpdate' },
     //This is [oldMessage, newMessage]
     //But in this example we only need newMessage
-    run: async ([, newMessage]) => {
+    run: ([, newMessage]) => {
         if (newMessage.poll?.results) {
             console.log(`The poll with the id: ${newMessage.id} is ended`)
         }
