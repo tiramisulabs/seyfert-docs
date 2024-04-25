@@ -65,6 +65,27 @@ export default createEvent({
 </TabItem>
 </Tabs>
 
+### Ending Event
+
+> The way to check when a poll is ended is using the `messageUpdate` event.
+
+Here is a quick example that will edit the message when a poll is completed:
+
+```ts title='messageUpdate.ts' showLineNumbers
+export default createEvent({
+    data: { name: 'messageUpdate' },
+    //This is [oldMessage, newMessage]
+    //But in this example we only need newMessage
+    run: async ([, newMessage]) => {
+        if (newMessage.poll?.results) {
+            newMessage.edit({
+                content: 'The poll has ended!',
+            });
+        }
+    },
+});
+```
+
 ### Commands
 
 > Quick examples of **how to create a poll** and **how to end it**.
@@ -146,7 +167,7 @@ const options = {
     //The poll duration in hours.
     //Example: 1, 2, 5...
     hours: createNumberOption({
-        description: "The duration of the poll."
+        description: 'The duration of the poll.'
     }),
 };
 
@@ -180,7 +201,7 @@ export default class StartPoll extends SubCommand {
                 answers.map((text) => ({ 
                     text,
                     //You can add emojis too!
-                    emoji: "🐐"
+                    emoji: '🐐'
                 }))
             )
             .setDuration(hours);
