@@ -77,7 +77,7 @@ export default createEvent({
     //This is [oldMessage, newMessage]
     //But in this example we only need newMessage
     run: ([, newMessage]) => {
-        if (newMessage.poll?.results) {
+        if (newMessage.poll?.results?.isFinalized) {
             console.log(`The poll with the id: ${newMessage.id} is ended`)
         }
     },
