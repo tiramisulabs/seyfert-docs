@@ -187,6 +187,13 @@ export default [
               es: 'Extendiendo el CommandContext'
             },
             link: '/misc/extendcontext'
+          },
+          {
+            label: 'Creating Polls',
+            translations: {
+              es: 'Creando Encuestas'
+            },
+            link: '/misc/polls'
           }
         ],
       },
