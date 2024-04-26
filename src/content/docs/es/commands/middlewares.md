@@ -86,7 +86,7 @@ Como dijimos, puedes usar middlewares para hacer verificaciones, y puedes detene
 
 Vamos a ver agregando algo de lógica al middleware de registro.
 
-```ts title="logger.middleware.ts" ins={8-10} copy wrap
+```ts title="logger.middleware.ts" ins={10-12} copy wrap
 import { createMiddleware } from "seyfert";
 
 export const loggerMiddleware = createMiddleware<void>((middle) => {
@@ -113,7 +113,7 @@ Observa que puedes unirte a los datos de interacción usando `middle.context.int
 
 Por otro lado, podríamos ignorar la interacción (ignorar la interacción y literalmente no hacer nada) usando `middle.pass()`
 
-```ts title="logger.middleware.ts" ins={9} copy
+```ts title="logger.middleware.ts" ins={11} copy
 import { createMiddleware } from "seyfert";
 
 export const loggerMiddleware = createMiddleware<void>((middle) => {

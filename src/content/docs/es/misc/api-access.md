@@ -61,7 +61,7 @@ El objeto proxy es la capa que está debajo de los **Shorters** y se encarga de 
 
 ¿Hay algo que no esté soportado en Seyfert? Entonces accédalo directamente, vamos a crear un hilo directamente con la API de Discord:
 
-```ts wrap copy {10-15}
+```ts wrap copy {10-18}
 import { createEvent } from 'seyfert';
 
 export default createEvent({

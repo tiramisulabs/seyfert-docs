@@ -61,7 +61,7 @@ The proxy object is the layer below the shorters, it is in charge of creating a 
 
 Is there anything that is not supported in seyfert? Then access it directly, let's create a thread directly with the discord api:
 
-```ts wrap copy {10-15}
+```ts wrap copy {10-18}
 import { createEvent } from 'seyfert';
 
 export default createEvent({

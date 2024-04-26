@@ -93,5 +93,18 @@ export class HandlingErrors extends Command {
     });
   }
 }
-
 ```
+### Ignoring commands
+
+If you want to ignore one specific type of command and prevent it from executing you can set the `ignore` option to the type of command you want to ignore.
+
+```ts wrap showLineNumbers ins={7}
+import { Command, Declare, IgnoreCommand } from 'seyfert';
+
+// this command will only works with prefix commands as it ignores slash ones.
+@Declare({
+  name: 'mycommand',
+  description: 'It is only my command'
+  ignore: IgnoreCommand.Slash
+})
+export default class MyCommand extends Command {}; 
