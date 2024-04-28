@@ -19,6 +19,7 @@ interface Group {
 
 export type SidebarEntry = Link | Group;
 
+
 export function flattenSidebar(sidebar: SidebarEntry[]): Link[] {
     return sidebar.flatMap((entry) =>
         entry.type === "group" ? flattenSidebar(entry.entries) : entry,
