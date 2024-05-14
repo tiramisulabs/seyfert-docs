@@ -22,7 +22,6 @@ const sidebarDefaultOptions = {
 const starlightTypeDocSidebarGroupLabel = Symbol('StarlightTypeDocSidebarGroupLabel')
 
 export function getSidebarGroupPlaceholder(): SidebarGroup {
-    console.log(starlightTypeDocSidebarGroupLabel.toString())
     return {
         items: [],
         label: starlightTypeDocSidebarGroupLabel.toString(),
@@ -40,7 +39,6 @@ export function getSidebarFromReflections(
     }
 
     const sidebarGroup = getSidebarGroupFromReflections(options, reflections, baseOutputDirectory, baseOutputDirectory)
-    console.log("sidebarGroup", sidebarGroup)
     function replaceSidebarGroupPlaceholder(group: SidebarManualGroup): SidebarGroup {
         if (group.label === starlightTypeDocSidebarGroupLabel.toString()) {
             return sidebarGroup
@@ -83,8 +81,6 @@ function getSidebarGroupFromPackageReflections(
             child.name,
         )
     })
-
-    console.log(options.label, sidebarDefaultOptions.label)
 
     return {
         label: options.label ?? sidebarDefaultOptions.label,

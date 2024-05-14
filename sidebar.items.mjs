@@ -3,9 +3,9 @@ import { typeDocSidebarGroup } from './src/lib/startlight-typedoc';
 export default [
   {
     label: 'Guide',
-	translations: {
-		es: 'Guía',
-	},
+    translations: {
+      es: 'Guía',
+    },
     items: [
       {
         label: 'Introduction',
@@ -194,6 +194,13 @@ export default [
               es: 'Creando Encuestas'
             },
             link: '/misc/polls'
+          },
+          {
+            label: 'Cloudfare Workers',
+            translations: {
+              es: 'Cloudfare Workers'
+            },
+            link: '/misc/cloudfare-workers'
           }
         ],
       },
