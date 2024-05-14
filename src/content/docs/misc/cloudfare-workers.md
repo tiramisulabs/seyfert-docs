@@ -1,7 +1,7 @@
 ---
 title: Using Cloudfare Worker
 ---
-Seyfert supports cloudfare workers ¡YAY! you can setup it by configuring `seyfert.config.js` with `config.http` [see more info here](http://localhost:4321/guides/setup-project)
+Seyfert supports cloudfare workers ¡YAY! you can setup it by configuring `seyfert.config.js` with `config.http` [see more info here](guides/setup-project)
 
 :::note
 
