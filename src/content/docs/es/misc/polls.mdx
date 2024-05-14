@@ -1,51 +1,50 @@
 ---
-title: Creating Polls
+title: Creando Encuestas
 ---
 import { TabItem, Tabs, FileTree } from '@astrojs/starlight/components'
 
-In Seyfert, the ability to create `polls` is just around the corner!<br/>
-This section will show the **basic creation of polls, events and examples**.
+En Seyfert, la capacidad de crear `encuestas` está a la vuelta de la esquina!<br/>
+Esta sección mostrará la **creación básica de encuestas, eventos y ejemplos**.
 
 :::note
 
-In order to receive `poll events`, new intents are required.
+Para recibir los `eventos de encuestas`, se necesitan nuevos intents.
 :::
 
 <Tabs>
 <TabItem label='Gateway Intents'>
 
-> This is an extended section of the [configuration file](/guides/setup-project#configuration).
+> Esta es una sección ampliada del [archivo de configuración](/guides/setup-project#configuration).
 
 ```js title='seyfert.config.js' showLineNumbers
 module.exports = config.bot({
-   //... other options
+   //... otras opciones
    intents: ['GuildMessagePolls', 'DirectMessagePolls'],
 });
 ```
 </TabItem>
 </Tabs>
 
-### Receiving Events
+### Recepción de eventos
 
-> Currently there are 2 events for polls: `messagePollVoteAdd` and `messagePollVoteRemove`.
+> Actualmente hay 2 eventos para las encuestas: `messagePollVoteAdd` y `messagePollVoteRemove`.
 
 :::caution
 
-If you do not have the **specified intents** the bot will not be able to receive `poll events`.
+Si no tienes los **intents especificados** el bot no podrá recibir los `eventos de encuestas`.
 :::
 
 :::note
 
-This goes together with the [event creation](/guides/listening-events) section.
+Esto va unido a la sección [creación de eventos](/guides/listening-events).
 :::
-
 <Tabs>
 <TabItem label='events/addVote.ts'>
 ```ts title='addVote.ts' showLineNumbers
 export default createEvent({
     data: { name: 'messagePollVoteAdd' },
     run: (data) => {
-        //You can do whatever you want with the data
+        // Puedes hacer lo que quieras con los datos
         console.log(`The user: ${data.userId} added a vote to the poll: ${data.messageId}`);
     },
 });
@@ -57,7 +56,7 @@ export default createEvent({
 export default createEvent({
     data: { name: 'messagePollVoteRemove' },
     run: (data) => {
-        //You can do whatever you want with the data
+        // Puedes hacer lo que quieras con los datos
         console.log(`The user: ${data.userId} removed a vote to the poll: ${data.messageId}`);
     },
 });
@@ -65,17 +64,17 @@ export default createEvent({
 </TabItem>
 </Tabs>
 
-### Ending Event
+### Fin del evento
 
-> The way to check when a poll is ended is using the `messageUpdate` event.
+> La forma de comprobar cuándo finaliza una encuesta es utilizando el evento `messageUpdate`.
 
-Here is a quick example that will edit the message when a poll is completed:
+He aquí un ejemplo rápido que editará el mensaje cuando se complete una encuesta:
 
 ```ts title='messageUpdate.ts' showLineNumbers
 export default createEvent({
     data: { name: 'messageUpdate' },
-    //This is [oldMessage, newMessage]
-    //But in this example we only need newMessage
+    // Esto es [oldMessage, newMessage]
+    // Pero en este ejemplo sólo necesitamos newMessage
     run: ([, newMessage]) => {
         if (newMessage.poll?.results?.isFinalized) {
             console.log(`The poll with the id: ${newMessage.id} is ended`)
@@ -84,24 +83,24 @@ export default createEvent({
 });
 ```
 
-### Commands
+### Comandos
 
-> Quick examples of **how to create a poll** and **how to end it**.
+> Ejemplos rápidos de **cómo crear una encuesta** y **cómo finalizarla**.
 
 :::caution
 
-The data to obtain from the polls seems to be unstable.<br/>
-Consider reading the [official documentation](https://discord.com/developers/docs/resources/poll#poll-results-object) to learn more.
+Los datos a obtener de las encuestas parecen ser inestables.<br/>
+Considere la posibilidad de leer la [documentación oficial](https://discord.com/developers/docs/resources/poll#poll-results-object) para obtener más información.
 
-Proceed with caution.
+Proceda con precaución.
 :::
 
 :::note
 
-This goes together with the [Commands](/commands/options) section.
+Esto va junto con la sección [Comandos](/commands/options).
 :::
 
-It’s suppose you have the following directory structure:
+Supongamos que tienes la siguiente estructura de directorios:
 
 <FileTree>
 - src
@@ -152,18 +151,18 @@ const options = {
     answers: createStringOption({
         description: 'Poll answers separated by commas.',
         required: true,
-        //This can be improved, but is a quick example
+        // Esto se puede mejorar, pero es un ejemplo rápido
         value: ({ value }, ok: OKFunction<string[] | null>) => {
-            //This is to have more options in the poll
-            //Example: ganyu, supremacy
+            // Esto es para tener más opciones en la encuesta
+            // Ejemplo: ganyu, supremacía
             const answers = value.split(', ');
             if (!answers.length) return ok(null);
             
             return ok(answers);
         },
     }),
-    //The poll duration in hours.
-    //Example: 1, 2, 5...
+    // La duración de la encuesta en horas.
+    // Ejemplo: 1, 2, 5...
     hours: createNumberOption({
         description: 'The duration of the poll.'
     }),
@@ -188,17 +187,16 @@ export default class StartPoll extends SubCommand {
 
         const hours = options.hours ?? 1;
 
-        //We have a new Builder! 
-        //PollBuilder will make easier for us to create Polls.
+        // Tenemos un nuevo constructor para las encuestas.
+        // PollBuilder hace que sea más fácil crear encuestas.
         const newPoll = new PollBuilder()
             .allowMultiselect(true)
             .setQuestion({ text: question })
             .setAnswers(
-                //The poll answers                
-                //With a maximum of 10 answers
+                // Las respuestas tienen un máximo de 10              
                 answers.map((text) => ({ 
                     text,
-                    //You can add emojis too!
+                    // También puedes añadir emojis
                     emoji: '🐐'
                 }))
             )
@@ -258,5 +256,5 @@ export default class EndPoll extends SubCommand {
 
 :::tip
 
-You can learn more about the [PollBuilder](/api/classes/pollbuilder/).
+Puede obtener más información sobre [PollBuilder](/api/classes/pollbuilder/).
 :::
