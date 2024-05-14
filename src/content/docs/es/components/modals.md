@@ -53,7 +53,7 @@ export default class MyModal extends ModalCommand {
 
     const age = interaction.getInputValue('age', true);
 
-    return await interaction.write({
+    return interaction.write({
       content: `You are ${name} and have ${age} years`
     });
   }

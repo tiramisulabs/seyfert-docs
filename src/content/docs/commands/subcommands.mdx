@@ -42,8 +42,8 @@ import { CreateCommand } from "./create.command";
 import { DeleteCommand } from "./delete.command";
 
 @Declare({
-	name: "account",
-	description: "account command"
+		name: "account",
+		description: "account command"
 })
 // Being in the same folder with @AutoLoad() you can save this
 @Options([CreateCommand, DeleteCommand])
@@ -64,7 +64,7 @@ export class CreateCommand extends SubCommand {
 	run(ctx: CommandContext) {
 		// some logic there
 
-		ctx.write({
+		return ctx.write({
 			content: "create command executed"
 		});
 	}
@@ -83,7 +83,7 @@ export class DeleteCommand extends SubCommand {
 	run(ctx: CommandContext) {
 		// some logic here
 
-		ctx.write({
+		return ctx.write({
 			content: "delete command executed"
 		});
 	}

@@ -35,7 +35,7 @@ import {
 })
 export default class HelloWorldCommand extends Command {
     async run(ctx: CommandContext) {
-        ctx.write({ content: "Hello World 👋" });
+        return ctx.write({ content: "Hello World 👋" });
     }
 }
 ```
@@ -55,11 +55,11 @@ Here is an example of how implement this function.
 ```ts title="src/commands/helloworld.ts" ins={3,7} showLineNumbers
 export default class HelloWorldCommand extends Command {
 	async run(ctx: CommandContext) {
-				ctx.deferReply();
+				await ctx.deferReply();
 
 			 // do something that takes time and is boring
 
-        ctx.editOrReply({ content: "I made things" });
+        await ctx.editOrReply({ content: "I made things" });
     }
 }
 ```
@@ -75,7 +75,7 @@ Here is an example of how to send that message without replying a command:
 ```ts title="src/commands/helloworld.ts" ins={3} showLineNumbers
 export default class HelloWorldCommand extends Command {
     async run(ctx: CommandContext) {
-        ctx.client.messages.write(ctx.channelId, { content: "Hello World 👋" });
+        return ctx.client.messages.write(ctx.channelId, { content: "Hello World 👋" });
     }
 }
 ```
@@ -97,10 +97,10 @@ export default class HelloWorldCommand extends Command {
  
 
 		const embed = new Embed()
-		.setTitle("My Awesome Embed")
-		.setDescription("Hello World 👋")
+			.setTitle("My Awesome Embed")
+			.setDescription("Hello World 👋")
  
-    ctx.write({ embeds: [embed] });
+    return ctx.write({ embeds: [embed] });
   }
 }
 ```
@@ -127,24 +127,24 @@ export default class HelloWorldCommand extends Command {
  
 
 		const button = new Button()
-		.setCustomId("helloworld")
-		.setLabel("Hello World")
-		.setStyle(ButtonStyle.Primary)
+			.setCustomId("helloworld")
+			.setLabel("Hello World")
+			.setStyle(ButtonStyle.Primary)
  
 		const buttonRow = new ActionRow<Button>()
-		.addComponents(button)
+			.addComponents(button)
  
 
 		const menu = new StringSelectMenu()
-		.setCustomId("select-helloworld")
-		.addOption(
-			new StringSelectOption().setLabel("Hello").setValue("option_1")
-		)
+			.setCustomId("select-helloworld")
+			.addOption(
+				new StringSelectOption().setLabel("Hello").setValue("option_1")
+			)
 
 		const menuRow = new ActionRow<StringSelectMenu>()
-		.addComponents(menu) 
+			.addComponents(menu) 
  
-    ctx.write({ content: "Hello World 👋", components: [buttonRow, menuRow] });
+    return ctx.write({ content: "Hello World 👋", components: [buttonRow, menuRow] });
   }
 }
 ```

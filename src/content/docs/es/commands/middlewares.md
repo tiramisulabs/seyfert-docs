@@ -97,7 +97,7 @@ export const loggerMiddleware = createMiddleware<void>((middle) => {
 
   // Verificar si el comando se está ejecutando en un servidor
   if (middle.context.interaction.channel?.type === ChannelType.DM) {
-    middle.stop("Este comando solo se puede usar en un servidor.");
+    return middle.stop("Este comando solo se puede usar en un servidor.");
   }
 
   // Pasar al siguiente middleware si el comando se está ejecutando en un servidor
@@ -124,7 +124,7 @@ export const loggerMiddleware = createMiddleware<void>((middle) => {
 
   // Ignorar la interacción si es un DM
   if (middle.context.interaction.channel?.type === ChannelType.DM) {
-    middle.pass();
+    return middle.pass();
   }
 
   // Pasar al siguiente middleware si el comando se está ejecutando en un servidor

@@ -99,7 +99,7 @@ export const loggerMiddleware = createMiddleware<void>((middle) => {
 
   // Check if the command is being executed in a guild
   if (middle.context.interaction.channel?.type === ChannelType.DM) {
-    middle.stop("This command can only be used in a guild.");
+    return middle.stop("This command can only be used in a guild.");
   }
 
   // Pass to the next middleware if the command is being executed in a guild
@@ -126,7 +126,7 @@ export const loggerMiddleware = createMiddleware<void>((middle) => {
 
   // Ignore the interaction if it's a DM
   if (middle.context.interaction.channel?.type === ChannelType.DM) {
-    middle.pass();
+    return middle.pass();
   }
 
   // Pass to the next middleware if the command is being executed in a guild

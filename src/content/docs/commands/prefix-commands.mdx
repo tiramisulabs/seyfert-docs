@@ -51,7 +51,7 @@ import {
 export default class CrosspostCommand extends Command {
     async run(ctx: CommandContext){
         if(ctx.message) await ctx.message.crosspost();
-        return await ctx.write({ content: 'I have cross posted your announcement.'});
+        return ctx.write({ content: 'I have cross posted your announcement.'});
     }
 };
 ```
@@ -123,7 +123,7 @@ const options = {
 export default class CrosspostCommand extends Command {
     async run(ctx: CommandContext<typeof options>){
         await ctx.client.messages.crosspost(ctx.options.id, ctx.channelId);
-        return await ctx.write({ content: 'I have cross posted your announcement.'});
+        return ctx.write({ content: 'I have cross posted your announcement.'});
     }
 };
 ```
@@ -181,7 +181,7 @@ export default class CrosspostCommand extends Command {
     async run(ctx: CommandContext<typeof options>){
         await ctx.deferReply();
         await ctx.client.messages.crosspost(ctx.options.id, ctx.channelId);
-        return await ctx.editOrReply({ content: 'I have cross posted your announcement.'});
+        return ctx.editOrReply({ content: 'I have cross posted your announcement.'});
     }
 };
 ```

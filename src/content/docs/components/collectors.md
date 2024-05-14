@@ -99,7 +99,7 @@ export default class HelloWorldCommand extends Command {
 
     // we are putting the custom id we have set into the button in the first param of the function.
     collector.run('hello', async (i) => {
-      if (i.isButton()) return await i.write({ content: 'Hello World 👋' });
+      if (i.isButton()) return i.write({ content: 'Hello World 👋' });
     });
   }
 }
@@ -163,7 +163,7 @@ export default class HelloWorldCommand extends Command {
     });
 
     collector.run('hello', async (i) => {
-      return await i.write({ content: 'Hello World 👋' });
+      return i.write({ content: 'Hello World 👋' });
     });
   }
 }
@@ -225,7 +225,7 @@ export default class HelloWorldCommand extends Command {
     });
 
     collector.run('hello', async (i) => {
-      return await i.write({ content: 'Hello World 👋' });
+      return i.write({ content: 'Hello World 👋' });
     });
   }
 }
@@ -261,7 +261,7 @@ export default class HelloWorldCommand extends Command {
   }
 
   async handleModal(i: ModalSubmitInteraction) {
-    return await i.write({ content: 'Hello World 👋' });
+    return i.write({ content: 'Hello World 👋' });
   }
 }
 

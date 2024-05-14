@@ -60,7 +60,7 @@ export default class HelloWorldButton extends ComponentCommand {
   }
 
   async run(ctx: ComponentContext<typeof this.componentType>) {
-    return await ctx.write({
+    return ctx.write({
       content: 'Hello World 👋',
       flags: MessageFlags.Ephemeral
     });

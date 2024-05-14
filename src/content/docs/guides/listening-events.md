@@ -33,7 +33,7 @@ import { createEvent } from "seyfert";
 
 export default createEvent({
   data: { once: true, name: "botReady" },
-  async run(user, client) {
+  run(user, client) {
     client.logger.info(`${user.username} is ready`);
   }
 })
@@ -47,6 +47,7 @@ import { createEvent } from "seyfert";
 export default createEvent({
   data: { name: "guildDelete" },
   run(unguild, client) {
+    if (unguild.unavailable) return;
     client.logger.info(`I have been kicked out of: ${unguild.id}`);
   }
 })

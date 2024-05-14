@@ -4,32 +4,32 @@ title: Enviando Mensajes
 
 La característica básica de los Bots de Discord es enviar mensajes en todo Discord. Y en Seyfert puedes enviarlos de la manera más fácil.
 
-Primero que nada, tenemos que configurar un comando básico de `Hello World`.
+Primero que nada, tenemos que configurar un comando básico de `Hola mundo`.
 
 ```ts title="src/commands/helloworld.ts" showLineNumbers
 import { Command, Declare } from 'seyfert';
 
 @Declare({
   name: 'helloworld',
-  description: 'Envía un mensaje básico de hello world.',
+  description: 'Envía un mensaje básico de hola mundo.',
 })
 export default class HelloWorldCommand extends Command {
   async run(ctx: CommandContext) {}
 }
 ```
 
-Habiendo configurado nuestro comando básico de `Hello World`, estamos listos para enviar nuestro primer mensaje usando la función `CommandContext.write()`.
+Habiendo configurado nuestro comando básico de `Hola mundo`, estamos listos para enviar nuestro primer mensaje usando la función `CommandContext.write()`.
 
 ```ts title="src/commands/helloworld.ts" ins={12} showLineNumbers
 import { Command, Declare } from 'seyfert';
 
 @Declare({
   name: 'helloworld',
-  description: 'Envía un mensaje básico de hello world.',
+  description: 'Envía un mensaje básico de hola mundo.',
 })
 export default class HelloWorldCommand extends Command {
   async run(ctx: CommandContext) {
-    ctx.write({ content: 'Hello World 👋' });
+    return ctx.write({ content: 'Hola mundo 👋' });
   }
 }
 ```
@@ -49,11 +49,11 @@ Aquí hay un ejemplo de cómo implementar esta función.
 ```ts title="src/commands/helloworld.ts" ins={3,7} showLineNumbers
 export default class HelloWorldCommand extends Command {
   async run(ctx: CommandContext) {
-    ctx.deferReply();
+    await ctx.deferReply();
 
     // hacer algo que toma tiempo y es aburrido
 
-    ctx.editOrReply({ content: 'Hice cosas' });
+    await ctx.editOrReply({ content: 'Hice cosas' });
   }
 }
 ```
@@ -69,7 +69,7 @@ Aquí hay un ejemplo de cómo enviar ese mensaje sin responder a un comando:
 ```ts title="src/commands/helloworld.ts" ins={3} showLineNumbers
 export default class HelloWorldCommand extends Command {
   async run(ctx: CommandContext) {
-    ctx.client.messages.write(ctx.channelId, { content: 'Hello World 👋' });
+    return ctx.client.messages.write(ctx.channelId, { content: 'Hola mundo 👋' });
   }
 }
 ```
@@ -91,7 +91,7 @@ export default class HelloWorldCommand extends Command {
 
     const embed = new Embed()
       .setTitle('Mi Embed Asombroso')
-      .setDescription('Hello World 👋');
+      .setDescription('Hola mundo 👋');
 
     ctx.write({ embeds: [embed] });
   }
@@ -121,7 +121,7 @@ export default class HelloWorldCommand extends Command {
 
     const button = new Button()
       .setCustomId('helloworld')
-      .setLabel('Hello World')
+      .setLabel('Hola mundo')
       .setStyle(ButtonStyle.Primary);
 
     const buttonRow = new ActionRow<Button>().addComponents(button);
@@ -136,7 +136,7 @@ export default class HelloWorldCommand extends Command {
 
     const menuRow = new ActionRow<StringSelectMenu>().addComponents(menu);
 
-    ctx.write({ content: 'Hello World 👋', components: [buttonRow, menuRow] });
+    ctx.write({ content: 'Hola mundo 👋', components: [buttonRow, menuRow] });
   }
 }
 ```

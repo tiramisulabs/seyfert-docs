@@ -21,7 +21,7 @@ Each function takes the following parameters:
     autocomplete: (interaction) => {
       const select = ['bugs', 'actions', 'random'];
       const focus = interaction.getInput();
-      interaction.respond(
+      return interaction.respond(
         select
           .filter((ch) => ch.includes(focus))
           .map((ch) => ({ name: ch, value: ch }))
@@ -50,7 +50,7 @@ Each function takes the following parameters:
 
       const focus = interaction.getInput();
 
-      interaction.respond(
+      return interaction.respond(
         select
           .filter((ch) => ch.includes(`${focus}`))
           .map((ch) => ({ name: ch, value: parseInt(ch) }))
@@ -80,7 +80,7 @@ Each function takes the following parameters:
 
       const focus = interaction.getInput();
 
-      interaction.respond(
+      return interaction.respond(
         select
           .filter((ch) => ch.includes(`${focus}`))
           .map((ch) => ({ name: ch, value: parseInt(ch) }))
