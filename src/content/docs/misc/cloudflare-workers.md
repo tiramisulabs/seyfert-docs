@@ -1,11 +1,11 @@
 ---
-title: Using Cloudfare Workers
+title: Using Cloudflare Workers
 ---
-Seyfert supports cloudfare workers, you can setup it by configuring `seyfert.config.js` with `config.http` [see more info here](/guides/setup-project)
+Seyfert supports Cloudflare Workers, you can setup it by configuring `seyfert.config.js` with `config.http` [see more info here](/guides/setup-project)
 
 :::note
 
-Since Cloudfare Workers doesn't support fs, using it with seyfert can be a little tricky because you will need to import each command/language/component
+Since Cloudflare Workers doesn't support fs, using it with seyfert can be a little tricky because you will need to import each command/language/component
 and load it manually
 
 :::
@@ -75,4 +75,4 @@ export default {
 }
 ```
 
-and we are ready to use seyfert with cloudfare workers.
+and we are ready to use seyfert with Cloudflare Workers.
