@@ -196,11 +196,11 @@ export default [
             link: '/misc/polls'
           },
           {
-            label: 'Cloudfare Workers',
+            label: 'Cloudflare Workers',
             translations: {
-              es: 'Cloudfare Workers'
+              es: 'Cloudflare Workers'
             },
-            link: '/misc/cloudfare-workers'
+            link: '/misc/cloudflare-workers'
           }
         ],
       },
