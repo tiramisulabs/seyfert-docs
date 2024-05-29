@@ -43,18 +43,20 @@ To handle modals, as they aren't components, Seyfert provides `ModalCommmand` cl
 import { ModalCommand, type ModalSubmitInteraction } from 'seyfert';
 
 export default class MyModal extends ModalCommand {
-  filter(interaction: ModalSubmitInteraction) {
-    return interaction.customId === 'mymodal';
+  filter(context: ModalContext) {
+    return context.customId === 'mymodal';
   }
 
-  async run(interaction: ModalSubmitInteraction) {
+  async run(context: ModalContext) {
+    const interaction = context.interaction;
+    
     //we are getting the textinput values by passing their custom id's in the getInputValue method.
 
     const name = interaction.getInputValue('name', true);
 
     const age = interaction.getInputValue('age', true);
 
-    return interaction.write({
+    return context.write({
       content: `You are ${name} and have ${age} years`
     });
   }
