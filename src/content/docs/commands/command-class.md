@@ -37,7 +37,8 @@ import {
   createStringOption,
   Options,
   type CommandContext,
-  type OnOptionsReturnObject
+  type OnOptionsReturnObject,
+  type OKFunction
 } from "seyfert";
 
 @Options({
