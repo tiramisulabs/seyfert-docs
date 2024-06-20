@@ -1,14 +1,17 @@
 ---
 const links = [
-  'https://api.github.com/repos/FabrizioCoder/LuxannaRewrite',
-  'https://api.github.com/repos/OpenWaifu-Project/HirakuShinzou',
-  'https://api.github.com/repos/Ganyu-Studios/stelle-music',
-  'https://api.github.com/repos/KonkonBot/Seifato',
+  'https://ungh.cc/repos/better-seyfert/ssbt'
+  'https://ungh.cc/repos/FabrizioCoder/LuxannaRewrite',
+  'https://ungh.cc/repos/OpenWaifu-Project/HirakuShinzou',
+  'https://ungh.cc/repos/repos/Ganyu-Studios/stelle-music',
+  'https://ungh.cc/repos/repos/KonkonBot/Seifato',
 ];
 const datas = await Promise.all(
   links.map(async (link) => {
     const res = await fetch(link);
-    return res.json();
+    const { repo } = await res.json();
+
+    return repo
   })
 );
 
