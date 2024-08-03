@@ -1,5 +1,3 @@
-import { typeDocSidebarGroup } from './src/lib/startlight-typedoc';
-
 export default [
   {
     label: 'Guide',
@@ -26,35 +24,32 @@ export default [
             translations: {
               es: 'Configuración de Seyfert',
             },
-            link: '/guides/setup-project',
-          },
-          {
-            label: 'Start from example',
-            translations: {
-              es: 'Empezar desde un ejemplo',
-            },
-            link: '/guides/start-from-example',
+            link: '/getting-started/setup-project',
           },
           {
             label: 'First Command',
             translations: {
               es: 'Creando tu primer comando',
             },
-            link: '/guides/first-command',
+            link: '/getting-started/first-command',
           },
           {
             label: 'Listening discord events',
             translations: {
               es: 'Escuchando los eventos de Discord',
             },
-            link: '/guides/listening-events',
+            link: '/getting-started/listening-events',
+          },
+          {
+            label: 'Language support',
+            link: '/getting-started/languages',
           },
           {
             label: 'Understanding declare module',
             translations: {
               es: 'Entendiendo declare module',
             },
-            link: '/guides/declare-module',
+            link: '/getting-started/declare-module',
           },
         ],
       },
@@ -66,18 +61,18 @@ export default [
         collapsed: true,
         items: [
           {
-            label: 'Command Options',
-            translations: {
-              es: 'Opciones de un Comando',
-            },
-            link: '/commands/options',
-          },
-          {
             label: 'Command Decorators',
             translations: {
               es: 'Decoradores para el Comando',
             },
             link: '/commands/decorators',
+          },
+          {
+            label: 'Command Options',
+            translations: {
+              es: 'Opciones de un Comando',
+            },
+            link: '/commands/options',
           },
           {
             label: 'Command Middlewares',
@@ -87,18 +82,18 @@ export default [
             link: '/commands/middlewares',
           },
           {
-            label: 'Sub-Zero (Sub Commands)',
+            label: 'Sub Commands',
             translations: {
-              es: 'Sub-Zero (Sub Comandos)',
+              es: 'Sub Comandos',
             },
             link: '/commands/subcommands',
           },
           {
-            label: 'Extending Commands',
+            label: 'Handling errors',
             translations: {
-              es: 'Extendiendo Comandos',
+              es: 'Manejando errores',
             },
-            link: '/commands/command-class',
+            link: '/commands/handling-errors',
           },
           {
             label: 'Prefix Commands',
@@ -106,6 +101,13 @@ export default [
               es: 'Comandos de prefijo',
             },
             link: '/commands/prefix-commands',
+          },
+          {
+            label: 'Extending CommandContext',
+            translations: {
+              es: 'Extendiendo el CommandContext'
+            },
+            link: '/commands/extend-commandcontext'
           },
         ],
       },
@@ -116,13 +118,6 @@ export default [
         },
         collapsed: true,
         items: [
-          {
-            label: 'Introduction',
-            translations: {
-              es: 'Introducción',
-            },
-            link: '/components/introduction',
-          },
           {
             label: 'Building Components',
             translations: {
@@ -154,57 +149,51 @@ export default [
         ],
       },
       {
-        label: 'Miscellaneous',
+        label: 'Recipes',
         translations: {
-          es: 'Misceláneos',
+          es: 'Recetas'
         },
         collapsed: true,
         items: [
           {
-            label: 'Sending Messages',
+            label: 'Playing audio',
             translations: {
-              es: 'Enviando Mensajes',
+              es: 'Reproduciendo audio'
             },
-            link: '/misc/sending-messages',
-          },
-          {
-            label: 'Music library',
-            translations: {
-              es: 'Librería de música',
-            },
-            link: '/misc/music',
-          },
-          {
-            label: 'API Access',
-            translations: {
-              es: 'Acceso a la API',
-            },
-            link: '/misc/api-access',
-          },
-          {
-            label: 'Extending CommandContext',
-            translations: {
-              es: 'Extendiendo el CommandContext'
-            },
-            link: '/misc/extendcontext'
-          },
-          {
-            label: 'Creating Polls',
-            translations: {
-              es: 'Creando Encuestas'
-            },
-            link: '/misc/polls'
+            link: '/recipes/music'
           },
           {
             label: 'Cloudflare Workers',
             translations: {
               es: 'Cloudflare Workers'
             },
-            link: '/misc/cloudflare-workers'
-          }
+            link: '/recipes/cloudflare-workers'
+          },
+          {
+            label: 'Creating Polls',
+            translations: {
+              es: 'Creando Encuestas'
+            },
+            link: '/recipes/polls'
+          },
+        ]
+      },
+      {
+        label: 'Tips and Tricks',
+        translations: {
+          es: 'Consejos y Trucos',
+        },
+        collapsed: true,
+        items: [
+          {
+            label: 'API Access',
+            translations: {
+              es: 'Acceso a la API',
+            },
+            link: '/tips-and-tricks/api-access',
+          },
         ],
       },
     ],
   },
-  typeDocSidebarGroup,
 ];

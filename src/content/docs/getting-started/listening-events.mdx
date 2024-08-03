@@ -2,13 +2,17 @@
 title: Listening discord events
 ---
 
+import { FileTree } from '@astrojs/starlight/components'
+
 :::note
 
 This section is only necessary for gateway applications, so if your bot is build in http application-only you can skip this section.
 
 :::
 
-First of all, you must tell seyfert where your events will be created by updating your config file.
+## Updating seyfert config
+
+Before start this chapter we need to update `seyfert.config.js` to tell seyfert where will be our events file.
 
 ```ts {11} title="seyfert.config.js" showLineNumbers
 // @ts-check
@@ -21,12 +25,16 @@ module.exports = config.bot({
     base: "src",
     output: "dist",
     commands: "commands",
-    events: "events"
+    events: "events" // - src/events will be our events directory
   }
 });
 ```
 
-Then you can create a listener by exporting `createEvent` function into a file inside the `events` folder. Let's see an example of how create a ready event:
+## Listening Event
+
+Each event file needs to export default the `createEvent` function in order to seyfert can load them
+
+Let's listen the `botReady` event as first example
 
 ```ts title="src/events/botReady.ts" showLineNumbers
 import { createEvent } from "seyfert";
@@ -38,6 +46,7 @@ export default createEvent({
   }
 })
 ```
+
 
 Let's check another example with `guildDelete` event:
 
@@ -53,4 +62,18 @@ export default createEvent({
 })
 ```
 
-And that's all, you can create as many events as you want. For further information you can check the list of all gateway events [here](/api/type-aliases/clientnameevents).
+Below is the current file tree of the project if you have followed the previous steps.
+
+<FileTree>
+- src
+	- commands
+		- ping.ts
+	- events
+		- **botReady.ts**
+		- **guildDelete.ts**
+	- index.ts
+- package.json
+- seyfert.config.js
+- .env
+- tsconfig.json
+</FileTree>

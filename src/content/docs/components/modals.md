@@ -2,7 +2,7 @@
 title: Modals
 ---
 
-Modals can also be created in Seyfert. They are created with a builder like other components do and then [`TextInput`](/api/classes/textinput) components, inside an [`ActionRow`](/api/classes/actionrow), are attached to it.
+Modals can also be created in Seyfert. They are created with a builder like other components do and then `TextInput` components, inside an `ActionRow`, are attached to it.
 
 Here is an example of how to create a modal with two text inputs:
 

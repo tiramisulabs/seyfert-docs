@@ -31,9 +31,7 @@ const row = new ActionRow()
 Now we are going to build each type of component and set it within an ActionRow:
 
 <Tabs>
-<TabItem label="button.ts">
-
-### Buttons
+<TabItem label="Buttons">
 
 An ActionRow shouldn't contain more than 5 buttons.
 
@@ -50,9 +48,7 @@ const row = new ActionRow<Button>().setComponents([button]);
 
 ```
 </TabItem>
-<TabItem label="menu.ts">
-
-### Select Menu
+<TabItem label="Select Menus">
 
 An ActionRow shouldn't contain more than one select menu.
 
@@ -126,31 +122,34 @@ const mentionableRow = new ActionRow<MentionableSelectMenu>().setComponents([
 
 </TabItem>
 
-<TabItem label="input.ts">
-
-### TextInputs
-
-An ActionRow shouldn't contain more than one text input.
-
-A text input is a component that is unique in modals and can't only be attached within action rows in a modal.
-
-```ts showLineNumbers copy
-
-import { ActionRow, TextInput } from 'seyfert';
-
-import { TextInputStyle } from 'seyfert/lib/types';
-
-const input = new TextInput()
-  .setCustomId('textinput')
-  .setLabel('My Name')
-  .setPlaceholder('Enter text')
-  .setStyle(TextInputStyle.Short)
-  .setLength({ min: 10, max: 30 });
-
-const row = new ActionRow<TextInput>().setComponents([input]);
-
-```
-</TabItem>
 </Tabs>
 
-After creating the components you will have to send the ActionRow into the components field. [See below](/misc/sending-messages#sending-components-attached-to-the-message).
+## Sending the components
+
+After creating the components you will have to send the ActionRow into the components field. You can check example below:
+
+```ts {13-16,20} showLineNumbers copy
+import { Declare, Command, type CommandContext, ActionRow, Button, ButtonStyle } from 'seyfert';
+
+@Declare({
+  name: 'ping',
+  description: 'Show the ping with discord'
+})
+export default class PingCommand extends Command {
+
+	async run(ctx: CommandContext) {
+		// average latency between shards
+    const ping = ctx.client.gateway.latency;
+
+    const row = new ActionRow()
+      .setComponents([
+        new Button().setCustomId('pingbtn').setLabel(`Ping: ${ping}`).setStyle(ButtonStyle.Primary)
+      ])
+
+    await ctx.write({
+      content: `The ping is \`${ping}\``,
+      components: [row]
+    });
+  }
+}
+```

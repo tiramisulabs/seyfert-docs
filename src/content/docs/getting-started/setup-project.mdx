@@ -6,7 +6,22 @@ import {
     FileTree, TabItem, Tabs
 } from '@astrojs/starlight/components'
 
-### Typescript settings
+## Prerequisites
+
+In order to use Seyfert, you need to have the following prerequisites installed:
+
+- NodeJS installed (18 or higher)
+- TypeScript installed (4.9 or higher)
+- npm installed (or similar NodeJS package manager)
+
+### Install seyfert
+
+```bash copy title="Installing seyfert..."
+pnpm add seyfert
+```
+
+
+## Typescript settings
  
 To make Seyfert work as intended you must update your `tsconfig.json` file and add `emitDecoratorMetadata` and `experimentalDecorators` to be able to use decorators:
 
@@ -22,7 +37,7 @@ To make Seyfert work as intended you must update your `tsconfig.json` file and a
 }
 ``` 
     </TabItem>
-    <TabItem label="we use">
+    <TabItem label="tsconfig.json (example)">
     ```json title="tsconfig.json" copy
 {
       "compilerOptions": {
@@ -55,20 +70,14 @@ To make Seyfert work as intended you must update your `tsconfig.json` file and a
     </TabItem>
 </Tabs>
 
-### Selecting Your Bot Type.
+## Selecting Your Bot Type.
 
 Currently, Seyfert supports two types of applications: one based on the Discord gateway, which is the most commonly used, and another based on the Discord HTTP interaction system, which is less frequently used. It is important to understand the differences between these two types in order to choose the appropriate application for your needs.
 
-:::caution[Read this]
-
-In these first steps, the options that are shared by both types of applications are shown. Later on, they will be separated.
-
-:::
-
 <Tabs>
     <TabItem label="Gateway">
-        - Gateway client receive all events from discord like messageCreate, interactionCreate, guildCreate, ready...
-        - The events that the client receive depends of the client intents.
+        - Gateway client receive all events from discord like messageCreate, interactionCreate, guildCreate, ready, etc.
+        - The events which client can receive depends of the client intents.
     </TabItem>
     <TabItem label="HTTP">
         - Unlike gateway, don't receive events.
@@ -78,7 +87,7 @@ In these first steps, the options that are shared by both types of applications 
 
 ### Configuration
 
-Once `tsconfig.json` has been modified, we still have a few steps to go before we can run the application. In this case you need to tell seyfert your project's structure:
+Once `tsconfig.json` has been modified, we still have a few steps to go before we can run our bot. In this case you need to tell seyfert your project's structure:
 so is necessary to create a file called `seyfert.config.js` in the root folder of your project and add the following code:
 
 <Tabs>
@@ -93,7 +102,6 @@ module.exports = config.bot({
     locations: {
         base: "src",    
         output: "dist", //If you are using bun, set "src" instead
-        commands: "commands"
     }
 });
 ```
@@ -111,7 +119,6 @@ module.exports = config.http({
     locations: {
         base: "src",
         output: "dist", //If you are using bun, set "src" instead
-        commands: "commands"
     }
 });
 ```
@@ -122,33 +129,46 @@ And let's create the main file called `index` in the `src` folder and add the fo
 
 <Tabs>
     <TabItem label="Gateway">
-```ts {5-8} title="src/index.ts" copy wrap
-import { Client } from 'seyfert';
+```ts title="src/index.ts" copy wrap
+import { Client, ParseClient } from "seyfert";
 
 const client = new Client();
 
 // This will start the connection with the gateway and load commands, events, components and langs
 client.start();
+
+declare module 'seyfert' {
+  interface UsingClient extends ParseClient<Client<true>> { }
+}
 ```
     </TabItem>
     <TabItem label="HTTP">
-```ts {5-8} title="src/index.ts" copy wrap
-import { HttpClient } from 'seyfert';
+```ts title="src/index.ts" copy wrap
+import { HttpClient, ParseClient } from "seyfert";
 
 const client = new HttpClient();
 
 // This will start listening to `https://yourweb.xyz/interactions` and load commands, components and langs
 client.start();
+
+declare module 'seyfert' {
+  interface UsingClient extends ParseClient<HttpClient> { }
+}
 ```
     </TabItem>
 </Tabs>
+
+:::note
+
+the `declare module 'seyfert'` is necessary to tell typescript which client we are using. You should read more in [Understaind declare module](/getting-started/declare-module)
+
+:::
 
 So after complete these steps, your project structure should look like this:
 
 <FileTree>
 
 - src
-  - commands/
   - index.ts
 - seyfert.config.js
 - package.json

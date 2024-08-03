@@ -2,7 +2,9 @@
 title: Command Options
 ---
 
-Each function takes the following parameters:
+In this page we list all the options functions that you can use to create options for your commands, a briefly example how to setup commands was given in [Creating your first command](/guides/first-command#using-options)
+
+In general each function takes the following parameters, then some functions have specific parameters:
 - **description**: The description of the option.
 - **required**?: If the option is required.
 - **value**?: Callback where you can filter the value sent by discord before it reaches the main command. [How to use here](#using-the-value-callback)
@@ -170,5 +172,3 @@ import { OKFunction } from 'seyfert';
   })
 });
 ```
-
-A briefly example was given in [Creating your first command](/guides/first-command#using-options)

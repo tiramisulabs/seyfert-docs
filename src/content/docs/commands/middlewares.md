@@ -110,7 +110,7 @@ export const loggerMiddleware = createMiddleware<void>((middle) => {
 Now every time the `ping` command is executed in a DM, the logger middleware will stop the execution of the command and send the error message to the handler. Learn how to handle errors [here](commands/command-class#middleware-return-stop).
 
 :::note
-Notice you can join to the interaction data by using `middle.context.interaction`
+Notice you can access to the interaction data using `middle.context.interaction`
 :::
 
 On the other hand we could skip the interaction (ignore the interaction and literally do nothing) by using `middle.pass()`

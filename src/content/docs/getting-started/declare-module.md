@@ -20,45 +20,6 @@ declare module 'seyfert' {
 } 
 ```
 
-## Middlewares
-
-In order for you to be able to use your middlewares everywhere, it is again necessary to tell typescript what they are and how they are made up. Export all the middlewares in your code and pass them to seyfert:
-```ts copy
-import type * as allMiddlewares from './middlewares'
-
-declare module 'seyfert' {
-  interface RegisteredMiddlewares extends ParseMiddlewares<typeof allMiddlewares> { }
-}
-```
-This is the same as above, but applies to global middlewares, those that are executed in every command even without specifying them.
-
-```ts copy
-import type * as allMiddlewares from './middlewares/globals'
-
-declare module 'seyfert' {
-  interface GlobalMetadata extends ParseMiddlewares<typeof globalMiddlewares> { }
-} 
-```
-## Languages
-
-In the Seyfert language system, the default language is prioritized, including the typing provided by typescript.
-
-:::info
-It is highly recommended to use `.ts`, `.js` files for your translations, so you can include functions inside them and autocomplete!
-:::
-
-:::warning
-If you use json for this (not recommended), you must add `../` to the path in your `seyfert.config.js` as typescript ignores json files that are not imported manually.
-:::
-
-```ts copy
-import type * as defaultLang from './langs/en'
-
-declare module 'seyfert' {
-  interface DefaultLocale extends ParseLocales<typeof defaultLang> { }   
-} 
-```
-
 ## Extends Context
 
 As you may notice when you are extending the CommandContext, the properties you want to be extended or added in are not typed. To do that we have to declare Seyfert's module.

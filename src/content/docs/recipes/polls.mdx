@@ -34,11 +34,6 @@ module.exports = config.bot({
 If you do not have the **specified intents** the bot will not be able to receive `poll events`.
 :::
 
-:::note
-
-This goes together with the [event creation](/guides/listening-events) section.
-:::
-
 <Tabs>
 <TabItem label='events/addVote.ts'>
 ```ts title='addVote.ts' showLineNumbers
@@ -258,5 +253,5 @@ export default class EndPoll extends SubCommand {
 
 :::tip
 
-You can learn more about the [PollBuilder](/api/classes/pollbuilder/).
+You can learn more about the [PollBuilder](https://github.com/tiramisulabs/seyfert/blob/449be8ea3840fb31a36b1df84ef1b352fe350702/src/builders/Poll.ts#L6).
 :::

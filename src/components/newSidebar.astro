@@ -1,0 +1,31 @@
+---
+import type { Props } from "@astrojs/starlight/props";
+import seyfertIcon from "../../public/icon.svg";
+import { Image } from "astro:assets";
+import SidebarList from "./sidebarList.astro";
+
+const { sidebar, hasSidebar } = Astro.props;
+---
+
+<aside
+    class={"sidebar-pane fixed top-0 left-0 z-20 h-screen ease-in-out duration-300 w-80 hidden md:block"}
+>
+    <div class="h-full flex flex-col px-8 py-5 overflow-y-auto">
+        <button
+            class="px-0 transition-transform ease-in-out duration-300 mb-1 pb-2 bg-transparent text-center border-b border-gray-300 dark:border-[#2e2e32]"
+        >
+            <a class="flex items-center gap-2 cursor-pointer font-bold">
+                <Image src={seyfertIcon} alt="Seyfert" class="w-8 h-8" />
+                Seyfert
+            </a>
+        </button>
+
+        <SidebarList sublist={sidebar} first />
+    </div>
+</aside>
+
+<style>
+    .sidebar-pane {
+        background-color: var(--sl-color-bg-sidebar);
+    }
+</style>

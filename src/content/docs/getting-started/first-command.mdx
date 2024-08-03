@@ -6,13 +6,30 @@ sidebar:
 
 import { FileTree } from '@astrojs/starlight/components'
 
-In Seyfert, commands are the main structure of any discord bot project, although Discord support for them is quite poor, utilities have been developed for creating them.
+## Updating seyfert config
 
-Let's start by declaring the first command of the application
+Before start this chapter we need to update `seyfert.config.js` to tell seyfert where will be our commands file.
 
-:::caution
-If you are getting any type error in the code, see [Declaring module](/guides/declare-module)
-:::
+```ts {10} title="seyfert.config.js" showLineNumbers
+// @ts-check
+const { config } = require('seyfert');
+
+module.exports = config.bot({
+  token: process.env.BOT_TOKEN ?? "",
+  intents: ["Guilds"],
+  locations: {
+    base: "src",
+    output: "dist",
+    commands: "commands" // - src/commands will be our commands directory
+  }
+});
+```
+
+## Declaring commands
+
+Each command file needs to export default the command class in order to seyfert can load it.
+
+For this example we'll setup `ping` command, let's start by declaring the ping command class as shown below.
 
 ```ts title="src/commands/ping.ts" showLineNumbers
 import { Declare, Command, type CommandContext } from 'seyfert';
@@ -36,15 +53,17 @@ export default class PingCommand extends Command {
 
 To test if your command works correctly, you must first publish it on Discord after making minor changes to your main file:
 
-```ts {5-8} title="src/index.ts" showLineNumbers
-import { Client } from 'seyfert';
+```ts {5-5} title="src/index.ts" showLineNumbers
+import { Client, ParseClient } from "seyfert";
 
 const client = new Client();
 
 client.start().then(() => client.uploadCommands());
+
+// here goes the declare module made in the previous step
 ```
 
-Pretty simple, isn't it? But sometimes commands are not just about receiving a request and responding to it, you also have to think about what the user wants, that's where the `options` come in, let's make the response of this command something private.
+Pretty simple, isn't it? But sometimes commands are not just about receiving a request and responding to it, you also have to think about what the user wants, that's where the `options` come in, let's add an option to hide the response.
 
 :::tip
 
@@ -54,7 +73,7 @@ Learn more about command options [here](/commands/options)
 
 ## Using options
 
-```ts {4-5,10-14,20,23-25} title="src/commands/ping.ts" showLineNumbers
+```ts {4-5,10-14,20,23-24} title="src/commands/ping.ts" showLineNumbers
 import {
   Command,
   Declare,
@@ -92,9 +111,7 @@ export default class PingCommand extends Command {
 }
 ```
 
-:::tip
-Moreover, categories can be created within folders to organize commands orderly.
-:::
+Below is how the file tree should looks like after adding the command.
 
 <FileTree>
 - src
@@ -103,5 +120,6 @@ Moreover, categories can be created within folders to organize commands orderly.
 	- index.ts
 - package.json
 - seyfert.config.js
+- .env
 - tsconfig.json
 </FileTree>

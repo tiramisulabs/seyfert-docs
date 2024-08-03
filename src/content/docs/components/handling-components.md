@@ -2,6 +2,8 @@
 title: Building components
 ---
 
+## Updating seyfert config
+
 Having sent the component within a channel it's about time you want to handle the interaction from the component.
 
 To handle them we have to tell seyfert where will be the components located in our project. We have to do this within our seyfert config file.

@@ -2,15 +2,13 @@
 title: Extending Command
 ---
 
-The command class is the one that provides all the utilities inside a command and prepares it to receive all the command metadata.
-
-## Handling errors
-
-Within Seyfert, there are different types of errors, depending on how critical the problem is.
+With seyfert you can handle errors in a organized way and you can handle errors in different ways depending on the error.
 
 ### Run throw error
 
-```ts 
+This is the most common error and it is thrown when throw an error in the `run` method.
+
+```ts {5}
 import { Command, type CommandContext } from "seyfert";
 
 export class HandlingErrors extends Command {
@@ -31,7 +29,9 @@ export class HandlingErrors extends Command {
 
 ### Options throw error
 
-```ts 
+This error is thrown when an option fails in the `value` method.
+
+```ts {15}
 import {
   Command,
   createStringOption,
@@ -46,7 +46,7 @@ import {
     description: 'how to be a gamer',
     value(data, ok: OKFunction<URL>, fail) {
         if (isUrl(data.value)) return ok(new URL(data.value));
-        fail('expected a valid url');
+        fail('expected a valid url'); // This will fire the onOptionsError method
     }
   })
 })
@@ -71,11 +71,7 @@ export class HandlingErrors extends Command {
 
 When a middleware returns a stop, seyfert issues this error and stops the progress of the command to be handled.
 
-:::note
-Learn more about middleware utilities [here](#)
-:::
-
-```ts 
+```ts {2}
 export default createMiddleware(({ context, next, stop, pass }) => {
   if (!Devs.includes(context.author.id)) return stop("User is not a developer");
   next();
@@ -96,3 +92,9 @@ export class HandlingErrors extends Command {
 }
 
 ```
+
+:::note
+
+Although Seyfert offers a way to handle errors, you can handle them in a way that suits you best (we recommend the way we showed you lol).
+
+:::

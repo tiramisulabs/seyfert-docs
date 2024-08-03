@@ -4,7 +4,6 @@ import starlight from '@astrojs/starlight';
 import { pluginLineNumbers } from '@expressive-code/plugin-line-numbers';
 import { defineConfig } from 'astro/config';
 import sidebar from './sidebar.items.mjs';
-import starlightTypeDoc from './src/lib/startlight-typedoc';
 import tailwind from '@astrojs/tailwind';
 
 // https://astro.build/config
@@ -26,21 +25,7 @@ export default defineConfig({
       editLink: {
         baseUrl: 'https://github.com/tiramisulabs/seyfert-docs/edit/main/',
       },
-      plugins: [
-        starlightTypeDoc({
-          entryPoints: ['./seyfert/src/index.ts'],
-          tsconfig: './seyfert/tsconfig.json',
-          typeDoc: {
-            useCodeBlocks: true,
-            parametersFormat: 'table',
-            propertiesFormat: 'table',
-            enumMembersFormat: 'table',
-            typeDeclarationFormat: 'table',
-            indexFormat: 'table',
-            expandParameters: true,
-          },
-        }),
-      ],
+      plugins: [],
       expressiveCode: {
         plugins: [pluginLineNumbers()],
         styleOverrides: {
@@ -54,9 +39,8 @@ export default defineConfig({
       },
       title: 'Seyfert',
       customCss: [
-        './src/tailwind.css',
+        './src/custom.css',
         '@fontsource-variable/jetbrains-mono/wght.css',
-        '@fontsource-variable/open-sans/wght.css',
         '@fontsource-variable/inter/wght.css',
       ],
       social: {
@@ -65,7 +49,11 @@ export default defineConfig({
       },
       sidebar,
       components: {
-        Sidebar: './src/components/customSidebar.astro',
+        Sidebar: './src/components/newSidebar.astro',
+        PageFrame: './src/components/pageFrame.astro',
+        PageTitle: './src/components/pageTitle.astro',
+        Header: './src/components/header.astro',
+        MobileTableOfContents: './src/components/mobileTableOfContents.astro',
       },
     }),
     react(),

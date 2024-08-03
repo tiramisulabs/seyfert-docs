@@ -2,14 +2,7 @@
 title: Collectors
 ---
 
-Now that you have learned how to handle components in a static way, you could have asked yourself how I get more context about what had happened before sending the component. 
-
-Seyfert includes `message components collectors` which are an easy way to handle does interactions received from an specific message and make you able to get more context about what had happened before sending the component.
-
-:::note
-
-If the process where you created the component collector is killed the collector will stop and the interactions of the message won't be handled.
-:::
+Collectors are a way to handle interactions from components for a specific time, for example, 10 seconds. So if for some reason the the `node.js process` closes and then you start it again the collector won't collect new interactions.
 
 ## Building collectors
 
@@ -237,7 +230,7 @@ As modals aren't message components there is not possibility to create a `messag
 
 Here is an example using the `run` within the modal builder:
 
-```ts showLineNumbers copy
+```ts {18} showLineNumbers copy wrap
 import {
   Modal,
   Command,
@@ -255,7 +248,7 @@ export default class HelloWorldCommand extends Command {
     const modal = new Modal()
       .setCustomId('hello')
       .setTitle('Hello')
-      .run(this.handleModal);
+      .run(this.handleModal); // .run() expects a callback which will handle the interaction
 
     await ctx.interaction.modal(modal);
   }
