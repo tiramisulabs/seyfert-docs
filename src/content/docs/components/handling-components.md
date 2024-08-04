@@ -1,5 +1,5 @@
 ---
-title: Building components
+title: Handling components
 ---
 
 ## Updating seyfert config

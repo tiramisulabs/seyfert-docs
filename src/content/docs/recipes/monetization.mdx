@@ -1,0 +1,118 @@
+---
+title: Monetization
+---
+import { TabItem, Tabs, FileTree } from '@astrojs/starlight/components'
+
+With Seyfert you can now control the latest Discord monetization features.
+
+This section will show the basic creation of **premium buttons, events and commands**.
+
+### Entitlements
+
+Entitlements in Discord represent that a user or guild has access to a premium offering in your application, with this you can know if a user is subscribed to your application and give him the benefits you want.
+
+### Receiving Events
+
+Currently there are 3 events for entitlements: 
+
+> ##### ``entitlementCreate(entitlement: Entitlement)``
+> Emitted whenever an entitlement is created.
+
+> ##### ``entitlementDelete(entitlement: Entitlement)``
+> Emitted whenever an entitlement is deleted. Entitlements are not deleted when they expire. This is only triggered when Discord issues a refund or deletes the entitlement manually.
+
+> ##### ``entitlementUpdate(oldEntitlement: EntitlementnewEntitlement: Entitlement)``
+> Emitted whenever an entitlement is updated - i.e. when a user's subscription renews.
+
+<Tabs>
+<TabItem label='entitlementCreate.ts'>
+```ts title='events/entitlementCreate.ts' showLineNumbers
+export default createEvent({
+    data: { name: 'entitlementCreate' },
+    async run(entitlement, client) {
+        const subscribedUser = await client.users.fetch(entitlement.userId);
+        client.messages.write('LOG_CHANNEL_ID', {
+            content: `${subscribedUser.globalName} (${subscribedUser.id}) has been subscribed to ${entitlement.skuId}`,
+        });
+    },
+});
+```
+</TabItem>
+
+<TabItem label='entitlementDelete.ts'>
+```ts title='events/entitlementDelete.ts' showLineNumbers
+export default createEvent({
+    data: { name: 'entitlementDelete' },
+    run(entitlement) {
+        client.messages.write('LOG_CHANNEL_ID', {
+            content: `Refund or subscription deleted (${entitlement.skuId}) [${entitlement.type}]`,
+        });
+    },
+});
+```
+</TabItem>
+
+<TabItem label='entitlementUpdate.ts'>
+```ts title='events/entitlementUpdate.ts' showLineNumbers
+export default createEvent({
+    data: { name: 'entitlementUpdate' },
+    async run: (oldEntitlement, newEntitlement) => {
+        const subscribedUser = await client.users.fetch(newEntitlement.userId);
+        client.messages.write('LOG_CHANNEL_ID', {
+            content: `Subscription (${newEntitlement.skuId}) renewed by ${subscribedUser.globalName}`,
+        });
+    },
+});
+```
+</TabItem>
+</Tabs>
+
+### Premium Button
+
+Now you can create a **Button** that redirects to any item in your store, such as a subscription, consumable, etc.
+
+This type of button does not need a CustomID or Label, but it does need a SkuID, which you can get from your store menu at https://discord.com/developers/applications/{APP_ID}/skus
+
+```ts showLineNumbers
+import { Button } from 'seyfert';
+import { ButtonStyle } from 'seyfert/lib/types';
+
+new Button()
+.setSKUId('STORE_ITEM_SKU_ID')
+.setSyle(ButtonStyle.Premium)
+```
+
+### Commands / Interactions
+
+In each **Interaction** you can also get all the active entitlements, with them you can detect if the user has any subscriptions, consumables, etc.
+
+Example:
+```ts title='commands/premium.ts' showLineNumbers
+import { Declare, Command, type CommandContext, ActionRow, Button } from 'seyfert';
+import { ButtonStyle } from 'seyfert/lib/types';
+
+@Declare({
+  name: 'premium',
+  description: 'Premium command',
+})
+export class PremiumCommand extends Command  {
+  run(ctx: CommandContext) {
+    const allEntitlements = ctx.interaction.entitlements;
+    const isPremium = allEntitlements.some(ent => ent.userId === ctx.author.id);
+
+    const row = new ActionRow()
+    .setComponents(
+        new Button()
+        .setSkuId('STORE_ITEM_SKU_ID')
+        .setSyle(ButtonStyle.Premium)
+    );
+
+    if (!isPremium) return ctx.editOrReply({ 
+        content: 'Click to subscribe and get access to the command!',
+        components: [row] 
+    });
+
+    // Premium code
+  }
+}
+```
