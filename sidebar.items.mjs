@@ -112,9 +112,9 @@ export default [
         ],
       },
       {
-        label: 'Components and Utilities',
+        label: 'Components and Interactions',
         translations: {
-          es: 'Componentes y Utilidades',
+          es: 'Componentes e Interacciones',
         },
         collapsed: true,
         items: [
