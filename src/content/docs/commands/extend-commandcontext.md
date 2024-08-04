@@ -4,7 +4,7 @@ title: Extending CommandContext
 
 You may have encountered a situation when you want to receive custom data within Seyfert `CommandContext`.
 
-This is possible within Seyfert all you need to do is setting the `context` option when defining Seyfert's client, which expects the data you want to add to the context to be returned in the first parameter callback of a function predefined by Seyfert called `extendContext`.
+This is possible in Seyfert all you need to do is setting the `context` option when defining Seyfert's client, which expects the data you want to add to the context to be returned in the first parameter callback of a function predefined by Seyfert called `extendContext`.
 
 ```ts showLineNumbers copy wrap
 import { Client, extendContext } from 'seyfert';

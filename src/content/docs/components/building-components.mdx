@@ -4,7 +4,7 @@ title: Building components
 
 import { TabItem, Tabs } from '@astrojs/starlight/components'
 
-Components are built with a builder, which is a JavaScript class, which represents it. Within this builder you can customize the component such it's text or it's color.
+Components are built with a builder, which is a JavaScript class, which represents it. Within this builder you can customize the component so it's either text or color.
 
 There are diffrent types of components' builders with diffrent customization but all have a common property: the custom Id. A unique identifier which is used for handling the interactions of the component.
 
@@ -52,7 +52,7 @@ const row = new ActionRow<Button>().setComponents([button]);
 
 An ActionRow shouldn't contain more than one select menu.
 
-They are diffrent types of select menus: [`StringSelectMenu`](/api/classes/stringselectmenu), [`UserSelectMenu`](/api/classes/userselectmenu), [`RoleSelectMenu`](/api/classes/roleselectmenu), [`ChannelSelectMenu`](/api/classes/channelselectmenu) and [`MentionableSelectMenu`](/api/classes/mentionableselectmenu). 
+There are diffrent types of select menus: [`StringSelectMenu`](/api/classes/stringselectmenu), [`UserSelectMenu`](/api/classes/userselectmenu), [`RoleSelectMenu`](/api/classes/roleselectmenu), [`ChannelSelectMenu`](/api/classes/channelselectmenu) and [`MentionableSelectMenu`](/api/classes/mentionableselectmenu). 
 
 We are going to make diffrent action rows for each select menu. 
 
@@ -126,7 +126,7 @@ const mentionableRow = new ActionRow<MentionableSelectMenu>().setComponents([
 
 ## Sending the components
 
-After creating the components you will have to send the ActionRow into the components field. You can check example below:
+After creating the components you have to send the ActionRow into the components field. You can check example below:
 
 ```ts {13-16,20} showLineNumbers copy
 import { Declare, Command, type CommandContext, ActionRow, Button, ButtonStyle } from 'seyfert';

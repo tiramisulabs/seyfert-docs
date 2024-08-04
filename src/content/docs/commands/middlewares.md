@@ -2,16 +2,16 @@
 title: Command Middlewares
 ---
 
-On Seyfert middleware are functions that are called before the command is executed. You can use them to do verifications, logging, etc.
+In Seyfert middleware are functions that are called before the command is executed. You can use them to do verifications, logging, etc.
 
-Let's create a basic middleware that logs the command that is being executed.
+Let's create a basic middleware that logs in the command that is being executed.
 
 ## Creating a middleware
 
 ```ts title="logger.middleware.ts" wrap copy
 import { createMiddleware } from "seyfert";
 
-// The generic type tells the middleware what information it will pass to the command
+// The generic type tells the middleware what information it'll pass to the command
 export const loggerMiddleware = createMiddleware<void>(
   (middle) => {
     // Log the command
@@ -26,7 +26,7 @@ export const loggerMiddleware = createMiddleware<void>(
 ```
 
 
-Now let's register the middle on seyfert [extending the client](guides/declare-module) but first we should create a command to export all our middleware
+Now let's register the middlewares on seyfert [extending the client](guides/declare-module) but first we should create a command to export all our middleware
 
 ```ts title="middlewares.ts" wrap copy
 import { loggerMiddleware } from "./path/to/logger.middleware";
@@ -76,15 +76,15 @@ export default class PingCommand extends Command {
 }
 ```
 
-Now every time the `ping` command is executed, the logger middleware will log the command.
+Now every time the `ping` command is executed, the logger middleware will log forward the command.
 
 :::note
-Middlewares are executed in the order they are added.
+Middlewares are executed in the order in which they are added.
 :::
 
 ## Stop middleware
 
-As we said you can use middlewares to do verifications, and you can stop the execution of the command if the verification fails.
+As we had said you can use middlewares to do verifications, and you can stop the execution of the command if the verification fails.
 
 Let's take a look adding some logic to the logger middleware.
 
@@ -139,12 +139,12 @@ export const loggerMiddleware = createMiddleware<void>((middle) => {
 
 The last thing we can do with middlewares is to pass data to the command. This can be useful to avoid repeating the same code in multiple commands for example fetching data from the database.
 
-We will continue with the logger middleware and pass some data to the command.
+We'll continue with the logger middleware and pass some data to the command.
 
 ```ts title="logger.middleware.ts" copy
 import { createMiddleware } from "seyfert";
 
-// This interface will be used to let the middleware know what type of data it will pass to the command
+// This interface is used to let the middleware know what type of data to pass to the command
 interface LoggerData {
     time: number;
 }

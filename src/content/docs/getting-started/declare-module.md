@@ -8,10 +8,10 @@ This technique is called module augmentation, learn more in [typescript document
 
 :::
 
-Due to the versatility of seyfert, it can be confusing to understand exactly how to include content in the project, so seyfert includes different interfaces for the developer to use when defining their own rules.
+Due to the versatility of seyfert, it can get confusing understanding exactly how to include content in the project, so seyfert includes various interfaces for the developer to use when defining their own rules.
 ## Clients
 
-Seyfert includes several types of client to create the instance of a bot, this can create confusion when calling the client anywhere in your code, so you can specify to typescript which one you are using:
+Seyfert includes several types of client to create the instance of a bot, this might create confusion when calling the client anywhere in your code, so you may specify to typescript which one you are using:
 ```ts copy
 declare module 'seyfert' {
   interface UsingClient extends ParseClient<Client<true>> { }
@@ -22,9 +22,9 @@ declare module 'seyfert' {
 
 ## Extends Context
 
-As you may notice when you are extending the CommandContext, the properties you want to be extended or added in are not typed. To do that we have to declare Seyfert's module.
+As you may notice when you are extending the CommandContext, the properties you want to be either extended or added in are not typed. To do that we ought to declare Seyfert's module.
 
-We have to edit the `ExtendContext` interface within Seyfert module which expects to receive the data to add. 
+We have to edit the `ExtendContext` interface within Seyfert's module which expects to receive the data to add.
 
 ```ts showLineNumbers copy wrap ins={11-14}
 
@@ -40,7 +40,7 @@ The context variable in the example above is the one we are using to extend the 
 ::: 
 ## Internal Options
 
-Since seyfert accepts different ways of operating, it becomes more complicated to keep the types true to reality. Because of that there are `InternalOptions`, an interface that expects properties to transform the seyfert types to something more complete.
+Since seyfert accepts different ways of operating, it becomes more complicated to keep the types true to reality. Because of that there is `InternalOptions`, an interface that expects properties to transform the seyfert types to something more complete.
 
 ```ts copy
 declare module 'seyfert' {
@@ -55,4 +55,4 @@ declare module 'seyfert' {
 Setting this property to `true` tells seyfert that the context can have either message or interaction and both will be optional, by default `.interaction` is always part of the context.
 
 ### asyncCache
-Setting this property to `true` tells seyfert whether the cache will return a promise or not, by default seyfert uses `MemoryAdapter` a RAM cache which does not return a promise, but `RedisAdapter` does.
+Setting this property to `true` tells seyfert whether the cache will return a promise, by default seyfert uses `MemoryAdapter` a RAM cache which does not return a promise, but `RedisAdapter` does.

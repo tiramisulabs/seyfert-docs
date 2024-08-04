@@ -5,18 +5,18 @@ Seyfert supports Cloudflare Workers, you can setup it by configuring `seyfert.co
 
 :::note
 
-Since Cloudflare Workers doesn't support fs, using it with seyfert can be a little tricky because you will need to import each command/language/component
+Since Cloudflare Workers doesn't support fs, using it with seyfert might be a little tricky as you may have to import each command/language/component
 and load it manually
 
 :::
 
 :::danger
 
-You must need to set `compilerOptions.module` to `ESNext` in your `tsconfig.json` since cf workers only supports ESM
+You must set `compilerOptions.module` to `ESNext` in your `tsconfig.json` since cf workers only supports ESM
 
 :::
 
-and your `index.ts` should follow the next example:
+and your `index.ts` shall follow the following example:
 
 ```ts copy
 import '../seyfert.config.js'; // ye, importing our seyfert.config.js
@@ -39,7 +39,7 @@ export default {
 }
 ```
 
-and in the same when we load `components` and `langs`
+and the same when we load both `components` and `langs`
 
 ```ts copy
 import '../seyfert.config.js'; // ye, importing our seyfert.config.js
@@ -75,4 +75,4 @@ export default {
 }
 ```
 
-and we are ready to use seyfert with Cloudflare Workers.
+and then onwards we can use seyfert with Cloudflare Workers.

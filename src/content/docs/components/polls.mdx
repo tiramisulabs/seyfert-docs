@@ -4,11 +4,11 @@ title: Creating Polls
 import { TabItem, Tabs, FileTree } from '@astrojs/starlight/components'
 
 In Seyfert, the ability to create `polls` is just around the corner!<br/>
-This section will show the **basic creation of polls, events and examples**.
+This section shows the **basic creation of polls, events and examples**.
 
 :::note
 
-In order to receive `poll events`, new intents are required.
+In order to receive `poll events`, some new intents are required.
 :::
 
 <Tabs>
@@ -62,9 +62,9 @@ export default createEvent({
 
 ### Ending Event
 
-> The way to check when a poll is ended is using the `messageUpdate` event.
+> The way to check when a poll is ended is to use the `messageUpdate` event.
 
-Here is a quick example that will edit the message when a poll is completed:
+Here is a quick example that edits the message when a poll is completed:
 
 ```ts title='messageUpdate.ts' showLineNumbers
 export default createEvent({
@@ -73,7 +73,7 @@ export default createEvent({
     //But in this example we only need newMessage
     run: ([, newMessage]) => {
         if (newMessage.poll?.results?.isFinalized) {
-            console.log(`The poll with the id: ${newMessage.id} is ended`)
+            console.log(`The poll with the id: ${newMessage.id}'s ended`)
         }
     },
 });
@@ -81,7 +81,7 @@ export default createEvent({
 
 ### Commands
 
-> Quick examples of **how to create a poll** and **how to end it**.
+> Quick examples on **how to create a poll** and **how to end it**.
 
 :::caution
 
@@ -225,7 +225,7 @@ import { MessageFlags } from 'seyfert/lib/types';
 
 const options = {
     message: createStringOption({
-        description: 'The message id of the poll',
+        description: 'The poll's message id',
         required: true,
     }),
 };

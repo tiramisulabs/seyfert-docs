@@ -6,7 +6,7 @@ title: Shorters and Proxy
 
 Shorters are a simple combination of the seyfert methods and the discord api, in seyfert they are intended for easy user access to the methods of all discord objects without having to instantiate their representative class or if it does not exist. Saving a lot of resources in unnecessary data accesses.
 
-Suppose we have a welcome system, in its database, it already has access to the id of the channel where to send its message, then why should it look for that channel in the cache? why should it get data it doesn't need just to send a message? That's where shorteners come in.
+Suppose we have a welcome system, in its database, it already has access to the id of the channel whereto send its message, then why should it look for that channel in the cache? why should it get data? doesn't it need to simply send a message? That's where shorters come in.
 
 ```ts copy ins={11-13}
 import { createEvent } from 'seyfert';
@@ -25,7 +25,7 @@ export default createEvent({
 	},
 });
 ```
-This applies to all seyfert, the methods in the classes that represent discord objects are just an extra layer of the shorteners for easy access, for example, by default seyfert does not add cache properties to the objects, but they bring facilities to access them.
+This applies to all seyfert, the methods in the classes that represent discord objects are just an extra layer of the shorters for easy access, for example, by default seyfert does not add cache properties to the objects, but brings amenities to access them.
 
 ```ts copy wrap {11-12}
 import { createEvent } from 'seyfert';
@@ -38,7 +38,7 @@ export default createEvent({
 		const channelId = db.get(member.guildId);
 		if (!channelId) return;
 
-		// this is a fetch request to cache (force if you want direct api fetch)
+		// this is a fetch request to cache (force it if you want a direct api fetch)
 		const guild = await member.guild();
 
 		await client.messages.write(channelId, {
@@ -83,4 +83,4 @@ export default createEvent({
 	},
 });
 ```
-Proxy has access to all types of the discord api, so it will always be a way to stay ahead even within the development versions.
+Proxy has access to all types of the discord api, so it'll be always a way to stay ahead even within the development versions.

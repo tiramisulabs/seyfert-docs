@@ -8,11 +8,11 @@ import {
 
 ## Prerequisites
 
-In order to use Seyfert, you need to have the following prerequisites installed:
+In order to use Seyfert, you must have installed:
 
 - NodeJS installed (18 or higher)
 - TypeScript installed (4.9 or higher)
-- npm installed (or similar NodeJS package manager)
+- npm installed (or a package manager alike)
 
 ### Install seyfert
 
@@ -23,7 +23,7 @@ pnpm add seyfert
 
 ## Typescript settings
  
-To make Seyfert work as intended you must update your `tsconfig.json` file and add `emitDecoratorMetadata` and `experimentalDecorators` to be able to use decorators:
+To make Seyfert work as intended you must update your `tsconfig.json` file and add `emitDecoratorMetadata` and `experimentalDecorators` in order to be able to use decorators:
 
 <Tabs>
     <TabItem label ="tsconfig.json">
@@ -72,23 +72,23 @@ To make Seyfert work as intended you must update your `tsconfig.json` file and a
 
 ## Selecting Your Bot Type.
 
-Currently, Seyfert supports two types of applications: one based on the Discord gateway, which is the most commonly used, and another based on the Discord HTTP interaction system, which is less frequently used. It is important to understand the differences between these two types in order to choose the appropriate application for your needs.
+Currently, Seyfert supports two types of applications: one based on the Discord gateway, and one based on the Discord HTTP interaction system, the former being used the most. It is key to understand the differences between these two types in order to choose whichever application for your needs.
 
 <Tabs>
     <TabItem label="Gateway">
-        - Gateway client receive all events from discord like messageCreate, interactionCreate, guildCreate, ready, etc.
-        - The events which client can receive depends of the client intents.
+        - The Gateway client receives all events from discord like messageCreate, interactionCreate, guildCreate, ready, etc.
+        - The events that the client receives depend on the client intents.
     </TabItem>
     <TabItem label="HTTP">
-        - Unlike gateway, don't receive events.
-        - Only execute commands with http request from discord.
+        - Unlike gateway, does not receive events.
+        - Only executes commands with an http request from discord.
     </TabItem>
 </Tabs>
 
 ### Configuration
 
-Once `tsconfig.json` has been modified, we still have a few steps to go before we can run our bot. In this case you need to tell seyfert your project's structure:
-so is necessary to create a file called `seyfert.config.js` in the root folder of your project and add the following code:
+Once `tsconfig.json` has been modified, we still have a few steps to follow before we can run our bot. In this case, you must tell your project's structure to seyfert:
+so create a file called `seyfert.config.js` in the root folder of your project and add the following code:
 
 <Tabs>
     <TabItem label="Gateway">
@@ -160,11 +160,11 @@ declare module 'seyfert' {
 
 :::note
 
-the `declare module 'seyfert'` is necessary to tell typescript which client we are using. You should read more in [Understaind declare module](/getting-started/declare-module)
+the `declare module 'seyfert'` is necessary to tell typescript which client we are using. [Understaind declare module](/getting-started/declare-module)
 
 :::
 
-So after complete these steps, your project structure should look like this:
+So after finishing these steps, your project structure should look like this:
 
 <FileTree>
 

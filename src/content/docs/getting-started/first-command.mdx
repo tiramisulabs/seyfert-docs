@@ -8,7 +8,7 @@ import { FileTree } from '@astrojs/starlight/components'
 
 ## Updating seyfert config
 
-Before start this chapter we need to update `seyfert.config.js` to tell seyfert where will be our commands file.
+Before starting this chapter we shall update `seyfert.config.js` in order to tell seyfert where our commands file will be.
 
 ```ts {10} title="seyfert.config.js" showLineNumbers
 // @ts-check
@@ -27,7 +27,7 @@ module.exports = config.bot({
 
 ## Declaring commands
 
-Each command file needs to export default the command class in order to seyfert can load it.
+Each command file needs to export by default the command class so seyfert is able to load it.
 
 For this example we'll setup `ping` command, let's start by declaring the ping command class as shown below.
 
@@ -51,7 +51,7 @@ export default class PingCommand extends Command {
 }
 ```
 
-To test if your command works correctly, you must first publish it on Discord after making minor changes to your main file:
+To test whether your command works, you must publish it on Discord before making minor changes to your main file:
 
 ```ts {5-5} title="src/index.ts" showLineNumbers
 import { Client, ParseClient } from "seyfert";
@@ -63,7 +63,7 @@ client.start().then(() => client.uploadCommands());
 // here goes the declare module made in the previous step
 ```
 
-Pretty simple, isn't it? But sometimes commands are not just about receiving a request and responding to it, you also have to think about what the user wants, that's where the `options` come in, let's add an option to hide the response.
+Pretty simple, isn't it? But sometimes commands are not just about receiving a request and responding it, you also have to think about what the user wants, that's where the `options` come in, let's add an option to hide the response.
 
 :::tip
 
@@ -111,7 +111,7 @@ export default class PingCommand extends Command {
 }
 ```
 
-Below is how the file tree should looks like after adding the command.
+Below is how the file tree should look like after adding the command.
 
 <FileTree>
 - src

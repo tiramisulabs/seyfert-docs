@@ -10,7 +10,7 @@ Seyfert has a i18n built-in feature that allows you to create language files and
 
 ## Updating seyfert config
 
-Before start this chapter we need to update `seyfert.config.js` to tell seyfert where will be our languages file.
+Before starting this chapter we could update `seyfert.config.js` to tell seyfert where our languages file will be.
 
 ```ts {12} title="seyfert.config.js" showLineNumbers
 // @ts-check
@@ -31,24 +31,24 @@ module.exports = config.bot({
 
 ## Creating a language file
 
-Each language file needs to export default a object containing the translations for the language.
+Each language file shall export by default an object containing the translations for the language.
 
 ```ts title="languages/en.ts" showLineNumbers wrap
 export default {
   hello: "Each key value pair will be the translation for the key",
   foo: {
-    bar: "You can nest objects to create a more complex language file",
-    baz: () => `You can also use functions to pass variables to the translation and add some logic`,
+    bar: "You may nest objects to create a more complex language file",
+    baz: () => `You may also use functions to pass variables to the translation and add some logic`,
     ping: ({ ping }: { ping: number }) => `The ping is ${ping}`
   },
   qux: [
-    "You can also use arrays to create a list of translations",
+    "You may also use arrays to create a list of translations",
     "This is the second item in the list"
   ].join("\n")
 }
 ```
 
-You can create as many language files as you want, seyfert will load them and will be available to use in your bot.
+You can create as many language files as you want, seyfert will load them and they will be available to use in your bot.
 
 ```ts title="languages/es.ts" showLineNumbers wrap
 import English from "./en";
@@ -69,17 +69,17 @@ export default {
 
 :::note
 
-Each key should return a string or a function that returns a string.
+Each key should return either a string or a function that returns a string.
 
 :::
 
 :::note
 
-The name of the file will be the language code that you will use to get the language translations.
+The name of the file will be the language code, that you will use to get the language translations.
 
 :::
 
-Next we need to do some updates to the `declare module` on index file:
+Next we must do some updates to the `declare module` on index file:
 
 ```ts {1,12} title="src/index.ts" copy
 import type English from './languages/en';
@@ -108,7 +108,7 @@ After doing this, you can use the language in your commands, events, components,
 
 ## Using translations in your commands
 
-Let's see an example with our `ping` command by adding an option to respond in specific language
+Let's see an example with our `ping` command by adding an option to respond in a specific language
 
 ```ts {35, 41} title="src/commands/ping.ts" showLineNumbers
 import {
@@ -159,7 +159,7 @@ export default class PingCommand extends Command {
 }
 ```
 
-Below is the current file tree of the project if you have followed the previous steps.
+Below is the current file tree of the project if you did follow the previous steps.
 
 <FileTree>
 - src

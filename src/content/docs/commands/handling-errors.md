@@ -16,7 +16,7 @@ export class HandlingErrors extends Command {
     throw new Error("Error, ehm, lol player detected");
   }
 
-  // This will reply with the error message above "Error, ehm, lol player detected"
+  // This replies with the error message above "Error, ehm, lol player detected"
   async onRunError(context: CommandContext, error: unknown) {
     context.client.logger.fatal(error);
     await context.editOrReply({
@@ -69,7 +69,7 @@ export class HandlingErrors extends Command {
 
 ### Middleware return stop
 
-When a middleware returns a stop, seyfert issues this error and stops the progress of the command to be handled.
+When a middleware returns a stop, seyfert issues this error and stops the progress on the command being handled.
 
 ```ts {2}
 export default createMiddleware(({ context, next, stop, pass }) => {

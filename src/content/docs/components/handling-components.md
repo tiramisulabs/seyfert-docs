@@ -25,9 +25,9 @@ module.exports = config.bot({
 });
 ```
 
-First of all we are going to create a file inside the directory we have set for the components.
+First of all we are going to create a file inside the directory which is set for the components.
 
-Then we are going to create a class which extends [`ComponentCommand`](/api/classes/componentcommand), something like we do with simple commands, and then we are going to set the type of the component we want to handle (`Buttons` or anytype of `SelectMenu`)
+Then we are going to create a class that extends [`ComponentCommand`](/api/classes/componentcommand), something like what we do with commands, and then we are going to set the type of the component we want to handle (`Buttons` or whichever type of `SelectMenu`)
 
 
 In this example I have created a component to reply `Hello World` to the interaction. I have set the customId of the button to `hello-world`.
@@ -64,7 +64,7 @@ export default class HelloWorldButton extends ComponentCommand {
 
 ## Running the component handler
 
-If the filter function success and returns `true` the handler will execute a `run` function with your code logic.
+If the filter function success and returns `true` the handler will then execute a `run` function with your code logic.
 
 ```ts ins={14-19} showLineNumbers copy
 

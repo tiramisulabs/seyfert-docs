@@ -50,14 +50,14 @@ export default class MyModal extends ModalCommand {
   async run(context: ModalContext) {
     const interaction = context.interaction;
     
-    //we are getting the textinput values by passing their custom id's in the getInputValue method.
+    //we are getting the textinput values by passing their custom ids in the getInputValue method.
 
     const name = interaction.getInputValue('name', true);
 
     const age = interaction.getInputValue('age', true);
 
     return context.write({
-      content: `You are ${name} and have ${age} years`
+      content: `You are ${name} and you have ${age} years`
     });
   }
 }

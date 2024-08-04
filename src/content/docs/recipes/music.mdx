@@ -7,7 +7,7 @@ Seyfert doesn't have support for playing audio, but we can use an external libra
 
 ### Installation
 
-First of all, we have to install `kazagumo` and `shoukaku`. Both dependencies are extremely necessary to move forward within this guide.
+First of all, we have to install `kazagumo` and `shoukaku`. Both dependencies are extremely necessary when moving forward within this guide.
 
 ```sh title="Dependencies..." copy showLineNumbers=false
 pnpm add kazagumo shoukaku
@@ -50,7 +50,7 @@ client.kazagumo = new Kazagumo(
 	nodes
 );
 
-//To see if the node is connected
+//To see whether the node is connected
 client.kazagumo.shoukaku.on("ready", (name) =>
 	console.log(`Lavalink ${name}: Ready!`)
 );
@@ -97,14 +97,14 @@ export default class PlayCommand extends Command {
 		const voice = member.voice();
 		if (!voice)
 			return ctx.write({
-				content: "You need to be in a voice channel to play music.",
+				content: "You must be in a voice channel to play music.",
 				flags: MessageFlags.Ephemeral
 			});
 
 		const botVoice = ctx.me()?.voice();
 		if (botVoice && botVoice.channelId !== voice.channelId)
 			return ctx.write({
-				content: "You need to be in the same voice channel as me.",
+				content: "You must be in the same voice channel as me.",
 				flags: MessageFlags.Ephemeral
 			});
 
