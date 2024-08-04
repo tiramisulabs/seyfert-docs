@@ -20,7 +20,7 @@ export default [
         collapsed: true,
         items: [
           {
-            label: 'Setup seyfert project',
+            label: 'Setup Project',
             translations: {
               es: 'Configuración de Seyfert',
             },
@@ -29,19 +29,22 @@ export default [
           {
             label: 'First Command',
             translations: {
-              es: 'Creando tu primer comando',
+              es: 'Primer Comando',
             },
             link: '/getting-started/first-command',
           },
           {
-            label: 'Listening discord events',
+            label: 'Listening Events',
             translations: {
-              es: 'Escuchando los eventos de Discord',
+              es: 'Recibiendo Eventos',
             },
             link: '/getting-started/listening-events',
           },
           {
-            label: 'Language support',
+            label: 'Language Management',
+            translations: {
+              es: 'Gestión de idiomas'
+            },
             link: '/getting-started/languages',
           },
           {
@@ -61,24 +64,21 @@ export default [
         collapsed: true,
         items: [
           {
-            label: 'Command Decorators',
+            label: 'Decorators',
             translations: {
-              es: 'Decoradores para el Comando',
+              es: 'Decoradores',
             },
             link: '/commands/decorators',
           },
           {
-            label: 'Command Options',
+            label: 'Options',
             translations: {
-              es: 'Opciones de un Comando',
+              es: 'Opciones',
             },
             link: '/commands/options',
           },
           {
-            label: 'Command Middlewares',
-            translations: {
-              es: 'Middlewares de Comandos',
-            },
+            label: 'Middlewares',
             link: '/commands/middlewares',
           },
           {
@@ -89,7 +89,7 @@ export default [
             link: '/commands/subcommands',
           },
           {
-            label: 'Handling errors',
+            label: 'Handling Errors',
             translations: {
               es: 'Manejando errores',
             },
@@ -112,9 +112,9 @@ export default [
         ],
       },
       {
-        label: 'Components',
+        label: 'Components and Interactions',
         translations: {
-          es: 'Componentes',
+          es: 'Componentes e Interacciones',
         },
         collapsed: true,
         items: [
@@ -146,19 +146,30 @@ export default [
             },
             link: '/components/collectors',
           },
+          {
+            label: 'Polls',
+            translations: {
+              es: 'Encuestas'
+            },
+            link: '/components/polls'
+          },
         ],
       },
       {
         label: 'Recipes',
-        translations: {
-          es: 'Recetas'
-        },
         collapsed: true,
         items: [
           {
+            label: 'Monetization',
+            translations: {
+              es: 'Monetizacion'
+            },
+            link: '/recipes/monetization'
+          },
+          {
             label: 'Playing audio',
             translations: {
-              es: 'Reproduciendo audio'
+              es: 'Reproducir audio'
             },
             link: '/recipes/music'
           },
@@ -170,29 +181,13 @@ export default [
             link: '/recipes/cloudflare-workers'
           },
           {
-            label: 'Creating Polls',
-            translations: {
-              es: 'Creando Encuestas'
-            },
-            link: '/recipes/polls'
-          },
-        ]
-      },
-      {
-        label: 'Tips and Tricks',
-        translations: {
-          es: 'Consejos y Trucos',
-        },
-        collapsed: true,
-        items: [
-          {
             label: 'API Access',
             translations: {
               es: 'Acceso a la API',
             },
-            link: '/tips-and-tricks/api-access',
+            link: '/recipes/api-access',
           },
-        ],
+        ]
       },
     ],
   },

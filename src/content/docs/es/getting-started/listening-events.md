@@ -1,5 +1,5 @@
 ---
-title: Escuchando los eventos de Discord
+title: Escuchando Eventos
 ---
 
 :::note
