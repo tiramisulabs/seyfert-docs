@@ -187,6 +187,13 @@ export default [
             },
             link: '/recipes/api-access',
           },
+          {
+            label: 'Transformers',
+            translations: {
+              es: 'Transformers'
+            },
+            link: '/recipes/transformers'
+          }
         ]
       },
     ],
