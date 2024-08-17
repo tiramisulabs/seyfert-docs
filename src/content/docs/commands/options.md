@@ -101,7 +101,7 @@ In general each function takes the following parameters, then some functions hav
   channel: createChannelOption({
     description: 'This is a channel option',
   })
-});
+})
 
 import { ChannelTypes } from 'seyfert/lib/types';
 
@@ -110,7 +110,7 @@ import { ChannelTypes } from 'seyfert/lib/types';
     description: 'This is a limited channel option',
     channel_types: [ChannelTypes.GuildVoice]
   })
-});
+})
 ```
 ### createBooleanOption
 ```ts {2-5} 
@@ -119,7 +119,7 @@ import { ChannelTypes } from 'seyfert/lib/types';
     description: 'This is a boolean option',
     required: true
   })
-});
+})
 ```
 ### createUserOption
 ```ts {2-5} 
@@ -128,7 +128,7 @@ import { ChannelTypes } from 'seyfert/lib/types';
     description: 'This is a user option',
     required: true
   })
-});
+})
 ```
 ### createRoleOption
 ```ts {2-5} 
@@ -137,7 +137,7 @@ import { ChannelTypes } from 'seyfert/lib/types';
     description: 'This is a role option',
     required: true
   })
-});
+})
 ```
 ### createMentionableOption
 ```ts {2-5} 
@@ -146,7 +146,7 @@ import { ChannelTypes } from 'seyfert/lib/types';
     description: 'This is a mentionable option',
     required: true
   })
-});
+})
 ```
 ### createAttachmentOption
 ```ts {2-5} 
@@ -155,7 +155,7 @@ import { ChannelTypes } from 'seyfert/lib/types';
     description: 'This is a attachment option',
     required: true
   })
-});
+})
 ```
 ## Using the `value` callback
 
@@ -170,5 +170,5 @@ import { OKFunction } from 'seyfert';
         fail('expected a valid url');
     }
   })
-});
+})
 ```

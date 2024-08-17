@@ -47,7 +47,7 @@ import {
 @Declare({
     name: 'crosspost',
     description: 'Republicar un mensaje de anuncio.'
-});
+})
 export default class CrosspostCommand extends Command {
     async run(ctx: CommandContext){
         if(ctx.message) await ctx.message.crosspost();
@@ -118,8 +118,8 @@ const options = {
 @Declare({
     name: 'crosspost',
     description: 'Republicar un mensaje de anuncio.'
-});
-@Options(options);
+})
+@Options(options)
 export default class CrosspostCommand extends Command {
     async run(ctx: CommandContext<typeof options>){
         await ctx.client.messages.crosspost(ctx.options.id, ctx.channelId);
@@ -175,8 +175,8 @@ const options = {
 @Declare({
     name: 'crosspost',
     description: 'Republicar un mensaje de anuncio.'
-});
-@Options(options);
+})
+@Options(options)
 export default class CrosspostCommand extends Command {
     async run(ctx: CommandContext<typeof options>){
         await ctx.deferReply();

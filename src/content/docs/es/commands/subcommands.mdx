@@ -37,7 +37,7 @@ Pero asegúrate de exportar por defecto los subcomandos.
 
 
 ```ts copy
-import { type CommandContext, Declare, Command, Options } from "seyfert";
+import { Declare, Command, Options } from "seyfert";
 import { CreateCommand } from "./create.command";
 import { DeleteCommand } from "./delete.command";
 
@@ -46,7 +46,7 @@ import { DeleteCommand } from "./delete.command";
 	description: "account command"
 })
 // Being in the same folder with @AutoLoad() you can save this
-@Options([AddCommand, DeleteCommand])
+@Options([CreateCommand, DeleteCommand])
 export default class AccountCommand extends Command {}
 
 ```

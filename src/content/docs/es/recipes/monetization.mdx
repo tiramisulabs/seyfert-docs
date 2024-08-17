@@ -27,7 +27,7 @@ Actualmente hay 3 eventos para los entitlements:
 > ##### ``entitlementDelete(entitlement: Entitlement)``
 > Se emite cada vez que se elimina un entitlement. Los entitlements no se eliminan cuando expiran. Esto solo se activa cuando Discord emite un reembolso o el desarrollador elimina el entitlement manualmente.
 
-> ##### ``entitlementUpdate(oldEntitlement: EntitlementnewEntitlement: Entitlement)``
+> ##### ``entitlementUpdate(entitlement: Entitlement)``
 > Se emite cada vez que se actualiza un entitlement, por ejemplo, cuando se renueva la suscripción de un usuario.
 
 <Tabs>
@@ -49,7 +49,7 @@ export default createEvent({
 ```ts title='events/entitlementDelete.ts' showLineNumbers
 export default createEvent({
     data: { name: 'entitlementDelete' },
-    run(entitlement) {
+    run(entitlement, client) {
         client.messages.write('LOG_CHANNEL_ID', {
             content: `Reembolso o suscripción eliminada (${entitlement.skuId}) [${entitlement.type}]`,
         });
@@ -62,7 +62,7 @@ export default createEvent({
 ```ts title='events/entitlementUpdate.ts' showLineNumbers
 export default createEvent({
     data: { name: 'entitlementUpdate' },
-    async run: (oldEntitlement, newEntitlement) => {
+    async run: (entitlement, client) => {
         const subscribedUser = await client.users.fetch(newEntitlement.userId);
         client.messages.write('LOG_CHANNEL_ID', {
             content: `Suscripción (${newEntitlement.skuId}) renovada por ${subscribedUser.globalName}`,
