@@ -99,7 +99,7 @@ Cada función recibe los siguientes parámetros:
   channel: createChannelOption({
     description: 'This is a channel option',
   })
-});
+})
 
 import { ChannelTypes } from 'seyfert/lib/common';
 
@@ -108,7 +108,7 @@ import { ChannelTypes } from 'seyfert/lib/common';
     description: 'This is a limited channel option',
     channel_types: [ChannelTypes.GuildVoice]
   })
-});
+})
 ```
 ### createBooleanOption
 ```ts {2-5} 
@@ -117,7 +117,7 @@ import { ChannelTypes } from 'seyfert/lib/common';
     description: 'This is a boolean option',
     required: true
   })
-});
+})
 ```
 ### createUserOption
 ```ts {2-5} 
@@ -126,7 +126,7 @@ import { ChannelTypes } from 'seyfert/lib/common';
     description: 'This is a user option',
     required: true
   })
-});
+})
 ```
 ### createRoleOption
 ```ts {2-5} 
@@ -135,7 +135,7 @@ import { ChannelTypes } from 'seyfert/lib/common';
     description: 'This is a role option',
     required: true
   })
-});
+})
 ```
 ### createMentionableOption
 ```ts {2-5} 
@@ -144,7 +144,7 @@ import { ChannelTypes } from 'seyfert/lib/common';
     description: 'This is a mentionable option',
     required: true
   })
-});
+})
 ```
 ### createAttachmentOption
 ```ts {2-5} 
@@ -153,7 +153,7 @@ import { ChannelTypes } from 'seyfert/lib/common';
     description: 'This is a attachment option',
     required: true
   })
-});
+})
 ```
 ## Usando el callback de `value`
 
@@ -168,7 +168,7 @@ import { OKFunction } from 'seyfert';
         fail('expected a valid url');
     }
   })
-});
+})
 ```
 
 En [Crear su primer comando](/es/guides/first-command#using-options) se ofrece un breve ejemplo.

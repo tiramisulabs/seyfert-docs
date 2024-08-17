@@ -47,7 +47,7 @@ import { createEvent } from "seyfert";
 export default createEvent({
   data: { name: "guildDelete" },
   run(unGuild, client) {
-    if (unguild.unavailable) return;
+    if (unGuild.unavailable) return;
     client.logger.info(`He sido expulsado de: ${unGuild.id}`);
   }
 })

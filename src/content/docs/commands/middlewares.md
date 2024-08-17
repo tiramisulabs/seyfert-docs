@@ -61,7 +61,7 @@ declare module "seyfert" {
 Now we can use the `logger` middleware on any command.
 
 ```ts title="ping.command.ts" copy
-import { Middlewares, Declare, Command } from "seyfert";
+import { Middlewares, Declare, Command, type CommandContext } from "seyfert";
 
 @Declare({
 	name: "ping",
@@ -90,6 +90,7 @@ Let's take a look adding some logic to the logger middleware.
 
 ```ts title="logger.middleware.ts" ins={8-10} copy wrap
 import { createMiddleware } from "seyfert";
+import { ChannelTypes } from 'seyfert/lib/types';
 
 export const loggerMiddleware = createMiddleware<void>((middle) => {
   // Log the command
@@ -117,6 +118,7 @@ On the other hand we could skip the interaction (ignore the interaction and lite
 
 ```ts title="logger.middleware.ts" ins={9} copy
 import { createMiddleware } from "seyfert";
+import { ChannelTypes } from 'seyfert/lib/types';
 
 export const loggerMiddleware = createMiddleware<void>((middle) => {
   // Log the command
@@ -132,7 +134,6 @@ export const loggerMiddleware = createMiddleware<void>((middle) => {
   // Pass to the next middleware if the command is being executed in a guild
   middle.next();
 });
-
 ```
 
 ## Passing data
@@ -167,7 +168,7 @@ If you want to pass data from more than one middleware you can use the `|` opera
 :::
 
 ```ts title="ping.command.ts" ins={10-11} copy
-import { Middlewares, Declare, Command } from "seyfert";
+import { Middlewares, Declare, Command, type CommandContext } from "seyfert";
 
 @Declare({
     name: "ping",
@@ -179,9 +180,10 @@ export default class PingCommand extends Command {
         const time = ctx.metadata.logger.time;
         console.log(time);
         await ctx.reply({
-            content: `Pong! Time: ${data.time}`,
+            content: `Pong! Time: ${time}`,
         });
     }
 }
+
 ```
 
