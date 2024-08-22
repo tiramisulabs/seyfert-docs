@@ -23,7 +23,7 @@ npm add seyfert
 Also you might want to install the github version for the latest changes:
     
 ```bash copy title="Installing seyfert from github..."
-npm add github:seyfert/seyfert
+npm add github:tiramisulabs/seyfert
 ```
 
 
@@ -149,13 +149,29 @@ declare module 'seyfert' {
 ```
     </TabItem>
     <TabItem label="HTTP">
+
+In order to use the http client, you must install `uws-adapter`.
+
+:::note
+
+We have another adapter `generic-adapter` but we recommend using `uws-adapter` for most cases except for [cloudflare workers](/recipes/cloudflare-workers)
+
+:::
+
+```bash copy
+npm add @slipher/uws-adapter
+```
+
 ```ts title="src/index.ts" copy wrap
 import { HttpClient, ParseClient } from "seyfert";
+import { UwsAdapter } from '@slipher/uws-adapter';
 
 const client = new HttpClient();
+const adapter = new UwsAdapter(client);
 
 // This will start listening to `https://yourweb.xyz/interactions` and load commands, components and langs
 client.start();
+adapter.start();
 
 declare module 'seyfert' {
   interface UsingClient extends ParseClient<HttpClient> { }

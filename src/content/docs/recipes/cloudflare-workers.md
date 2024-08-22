@@ -16,25 +16,35 @@ You must set `compilerOptions.module` to `ESNext` in your `tsconfig.json` since 
 
 :::
 
+First of all you will need to install an adapter for seyfert, you can do it by running:
+
+```bash copy
+npm add @slipher/generic-adapter
+```
+
 and your `index.ts` shall follow the following example:
 
 ```ts copy
 import '../seyfert.config.js'; // ye, importing our seyfert.config.js
 import { HttpClient } from 'seyfert';
+import { GenericAdapter } from '@slipher/generic-adapter';
 
 import Ping from './commands/ping.js';
 
 const client = new HttpClient();
+const adapter = new GenericAdapter(client);
 
 client.start()
   .then(async () => {
     // we need to load commands manually
-    await client.commands!.load('', client, [Ping]);
+    await client.commands!.set('', client, [Ping]);
   });
+
+adapter.start();
 
 export default {
   fetch(req: Request) {
-    return client.fetch(req);
+    return adapter.fetch(req);
   }
 }
 ```
@@ -59,18 +69,20 @@ const client = new HttpClient();
 client.start()
   .then(async () => {
     // we need to load commands manually
-    await client.commands!.load('', client, [Ping]);
+    await client.commands!.set('', client, [Ping]);
 
     // load languages
-    await client.langs!.load('', [{ name: 'en', file: EnLang}]);
+    await client.langs!.set('', [{ name: 'en', file: EnLang}]);
 
     // load components
-    await client.components!.load('', client, [ButtonC]);
+    await client.components!.set('', client, [ButtonC]);
   });
+
+adapter.start();
 
 export default {
   fetch(req: Request) {
-    return client.fetch(req);
+    return adapter.fetch(req);
   }
 }
 ```
