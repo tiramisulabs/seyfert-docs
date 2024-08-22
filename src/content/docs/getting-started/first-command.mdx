@@ -54,7 +54,8 @@ export default class PingCommand extends Command {
   </TabItem>
   <TabItem label="http">
 ```ts title="src/commands/ping.ts" showLineNumbers
-import { Declare, Command, snowflakeToTimestamp, type CommandContext } from 'seyfert';
+import { Declare, Command, type CommandContext } from 'seyfert';
+import { snowflakeToTimestamp } from 'seyfert/lib/common';
 
 @Declare({
 	name: 'ping',
