@@ -4,7 +4,7 @@ sidebar:
     label: First Command
 ---
 
-import { FileTree } from '@astrojs/starlight/components'
+import { FileTree, Tabs, TabItem } from '@astrojs/starlight/components'
 
 ## Updating seyfert config
 
@@ -30,7 +30,8 @@ module.exports = config.bot({
 Each command file needs to export by default the command class so seyfert is able to load it.
 
 For this example we'll setup `ping` command, let's start by declaring the ping command class as shown below.
-
+<Tabs>
+  <TabItem label="gateway">
 ```ts title="src/commands/ping.ts" showLineNumbers
 import { Declare, Command, type CommandContext } from 'seyfert';
 
@@ -50,6 +51,33 @@ export default class PingCommand extends Command {
   }
 }
 ```
+  </TabItem>
+  <TabItem label="http">
+```ts title="src/commands/ping.ts" showLineNumbers
+import { Declare, Command, snowflakeToTimestamp, type CommandContext } from 'seyfert';
+
+@Declare({
+	name: 'ping',
+	description: 'Show the ping with discord',
+})
+export default class PingCommand extends Command {
+
+	async run(ctx: CommandContext) {
+		// latency between discord creating the interaction and it being computed
+		const ping = (
+      Date.now() - Number(snowflakeToTimestamp(ctx.interaction.id))
+    ) / 1000;
+
+		await ctx.write({
+			content: `The ping is \`${ping}\``,
+		});
+	}
+}
+
+```
+  </TabItem>
+</Tabs>
+
 
 To test whether your command works, you must publish it on Discord before making minor changes to your main file:
 
@@ -100,6 +128,7 @@ export default class PingCommand extends Command {
     const flags = ctx.options.hide ? MessageFlags.Ephemeral : undefined;
 
     // average latency between shards
+    // in http change this for the example above
     const ping = ctx.client.gateway.latency;
 
     await ctx.write({

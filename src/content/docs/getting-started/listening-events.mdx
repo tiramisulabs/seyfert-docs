@@ -40,6 +40,7 @@ Let's listen the `botReady` event as first example
 import { createEvent } from "seyfert";
 
 export default createEvent({
+  // botReady executes when all shards and guilds are ready.
   data: { once: true, name: "botReady" },
   run(user, client) {
     client.logger.info(`${user.username} is ready`);
@@ -56,6 +57,7 @@ import { createEvent } from "seyfert";
 export default createEvent({
   data: { name: "guildDelete" },
   run(unguild, client) {
+    // it's possible that the guild has been deleted.
     if (unguild.unavailable) return;
     client.logger.info(`I have been kicked out of: ${unguild.id}`);
   }

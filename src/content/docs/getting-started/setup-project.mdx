@@ -32,11 +32,12 @@ npm add github:tiramisulabs/seyfert
 To make Seyfert work as intended you must update your `tsconfig.json` file and add `emitDecoratorMetadata` and `experimentalDecorators` in order to be able to use decorators:
 
 <Tabs>
-    <TabItem label ="tsconfig.json">
-    ```json {"Adding this to your own tsconfig is enough":3-5} title="tsconfig.json" copy
+    <TabItem label="tsconfig.json">
+    ```json {"Adding this to your own tsconfig is enough":3-6} title="tsconfig.json" copy
 {
       "compilerOptions": {
-
+        
+        "outDir": "./dist",
         "emitDecoratorMetadata": true,
         "experimentalDecorators": true,
       }

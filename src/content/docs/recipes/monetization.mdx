@@ -109,8 +109,7 @@ import { ButtonStyle } from 'seyfert/lib/types';
 })
 export class PremiumCommand extends Command  {
   run(ctx: CommandContext) {
-    const allEntitlements = ctx.interaction.entitlements;
-    const isPremium = allEntitlements.some(ent => ent.userId === ctx.author.id);
+    const isPremium = ctx.interaction.entitlements.length;
 
     const row = new ActionRow()
     .setComponents(
