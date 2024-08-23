@@ -27,7 +27,7 @@ export default defineConfig({
       },
       plugins: [],
       expressiveCode: {
-        plugins: [pluginLineNumbers()],
+        plugins: [pluginLineNumbers],
         styleOverrides: {
           codeFontFamily: 'JetBrains Mono Variable',
           uiFontFamily: 'JetBrains Mono Variable',
