@@ -1,0 +1,136 @@
+---
+title: Music Library
+---
+import { TabItem, Tabs } from '@astrojs/starlight/components'
+
+Seyfert doesn't have support for playing audio, but we can use an external library called [kazagumo](https://npmjs.com/package/kazagumo).
+
+### Installation
+
+First of all, we have to install `kazagumo` and `shoukaku`. Both dependencies are extremely necessary when moving forward within this guide.
+
+```sh title="Dependencies..." copy showLineNumbers=false
+pnpm add kazagumo shoukaku
+```
+
+### Setup
+
+:::caution
+
+To be able to move forward within this guide it is highly recommended to read the [Understanding declare module](/guides/declare-module) for a better understanding of what we are doing.
+:::
+
+For further information about the different options and events of kazagumo see the official [bot example](https://www.npmjs.com/package/kazagumo#example-bot)
+
+<Tabs>
+<TabItem label="index.ts">
+```ts title="index.ts" showLineNumbers
+import { Client } from "seyfert";
+import { Kazagumo } from "kazagumo";
+import { type NodeOption, Connectors } from "shoukaku";
+
+const client = new Client();
+const nodes: NodeOption[] = [
+	{
+		name: "Node",
+		url: "localhost:2333",
+		auth: "youshallnotpass",
+		secure: false
+	}
+];
+
+//Basic configuration, perfect for this case
+client.kazagumo = new Kazagumo(
+	{
+		defaultSearchEngine: "youtube",
+		send: (guildId, payload) =>
+			client.gateway.send(client.gateway.calculeShardId(guildId), payload)
+	},
+	new Connectors.Seyfert(client),
+	nodes
+);
+
+//To see whether the node is connected
+client.kazagumo.shoukaku.on("ready", (name) =>
+	console.log(`Lavalink ${name}: Ready!`)
+);
+
+declare module "seyfert" {
+	interface Client {
+		kazagumo: Kazagumo;
+	}
+}
+
+client.start().then(() => client.uploadCommands());
+```
+  </TabItem>
+  <TabItem label="play.ts">
+```ts title="src/commands/play.ts" showLineNumbers
+import {
+	Command,
+	Declare,
+	Options,
+	type CommandContext,
+	createStringOption
+} from "seyfert";
+import { MessageFlags } from "seyfert/lib/types";
+
+const options = {
+	query: createStringOption({
+		description: "Enter a song name or url.",
+		required: true
+	})
+};
+
+@Declare({
+	name: "play",
+	description: "Play music."
+})
+@Options(options)
+export default class PlayCommand extends Command {
+	async run(ctx: CommandContext<typeof options>) {
+		const { options, client, guildId, channelId, member, author } = ctx;
+		const { query } = options;
+
+		if (!guildId || !member) return;
+
+		const voice = member.voice();
+		if (!voice)
+			return ctx.write({
+				content: "You must be in a voice channel to play music.",
+				flags: MessageFlags.Ephemeral
+			});
+
+		const botVoice = ctx.me()?.voice();
+		if (botVoice && botVoice.channelId !== voice.channelId)
+			return ctx.write({
+				content: "You must be in the same voice channel as me.",
+				flags: MessageFlags.Ephemeral
+			});
+
+		const player = await client.kazagumo.createPlayer({
+			guildId: guildId,
+			textId: channelId,
+			voiceId: voice.channelId,
+			volume: 100
+		});
+
+		const result = await client.kazagumo.search(query, { requester: author });
+		if (!result.tracks.length)
+			return ctx.write({ content: "No results found!" });
+
+		if (result.type === "PLAYLIST") player.queue.add(result.tracks);
+		else player.queue.add(result.tracks[0]);
+
+		if (!player.playing && !player.paused) player.play();
+		return ctx.write({
+			content:
+				result.type === "PLAYLIST"
+					? `Queued ${result.tracks.length} from ${result.playlistName}`
+					: `Queued ${result.tracks[0].title}`
+		});
+	}
+}
+```
+    </TabItem>
+</Tabs>

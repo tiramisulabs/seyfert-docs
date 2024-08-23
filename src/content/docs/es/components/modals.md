@@ -39,7 +39,7 @@ Para manejar modales, dado que no son componentes, Seyfert ofrece la clase `Moda
 
 ```ts showLineNumbers copy
 
-import { ModalCommand, type ModalSubmitInteraction } from 'seyfert';
+import { ModalCommand, type ModalContext } from 'seyfert';
 
 export default class MyModal extends ModalCommand {
   filter(context: ModalContext) {

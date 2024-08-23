@@ -1,0 +1,59 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* constants */
+:root {
+    --sl-font: 'Inter variable', serif;
+    --sl-text-h1: 32px;
+    --sl-text-h2: 24px;
+    --sl-text-h3: 20px;
+}
+
+
+/* Dark mode colors. */
+:root {
+    --sl-color-accent-low: #131e4f;
+    --sl-color-accent: #3447ff;
+    --sl-color-accent-high: #b3c7ff;
+    --sl-color-white: #ffffff;
+    --sl-color-gray-1: #eeeeee;
+    --sl-color-gray-2: #c2c2c2;
+    --sl-color-gray-3: #8b8b8b;
+    --sl-color-gray-4: #585858;
+    --sl-color-gray-5: #383838;
+    --sl-color-gray-6: #272727;
+    --sl-color-black: #181818;
+
+    --sl-color-bg-sidebar: #161618;
+    --sl-color-sidebar-group: rgba(255, 255, 245, .86);
+    --sl-color-sidebar-group-hover: #ffffff;
+    --sl-color-sidebar-link: rgba(235, 235, 245, .6);
+    --sl-color-sidebar-link-hover: #a8b1ff;
+
+    --sl-color-mainframe-bg: #1b1b1f;
+}
+
+/* Light mode colors. */
+:root[data-theme='light'] {
+    --sl-color-accent-low: #c7d6ff;
+    --sl-color-accent: #364bff;
+    --sl-color-accent-high: #182775;
+    --sl-color-white: #181818;
+    --sl-color-gray-1: #272727;
+    --sl-color-gray-2: #383838;
+    --sl-color-gray-3: #585858;
+    --sl-color-gray-4: #8b8b8b;
+    --sl-color-gray-5: #c2c2c2;
+    --sl-color-gray-6: #eeeeee;
+    --sl-color-gray-7: #f6f6f6;
+    --sl-color-black: #ffffff;
+
+    --sl-color-bg-sidebar: #f6f6f7;
+    --sl-color-sidebar-group: rgba(60, 60, 67);
+    --sl-color-sidebar-group-hover: #000;
+    --sl-color-sidebar-link: rgba(60, 60, 67, .78);
+    --sl-color-sidebar-link-hover: #3451b2;
+
+    --sl-color-mainframe-bg: #ffffff;
+}

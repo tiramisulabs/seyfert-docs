@@ -1,0 +1,179 @@
+---
+title: Supporting different languages
+sidebar:
+    label: Language support
+---
+
+import { FileTree } from '@astrojs/starlight/components'
+
+Seyfert has a i18n built-in feature that allows you to create language files and use them in your bot.
+
+## Updating seyfert config
+
+Before starting this chapter we could update `seyfert.config.js` to tell seyfert where our languages file will be.
+
+```ts {12} title="seyfert.config.js" showLineNumbers
+// @ts-check
+const { config } = require('seyfert');
+
+module.exports = config.bot({
+  token: process.env.BOT_TOKEN ?? "",
+  intents: ["Guilds"],
+  locations: {
+    base: "src",
+    output: "dist",
+    commands: "commands",
+    events: "events",
+    langs: "languages" // - src/languages will be our languages directory
+  }
+});
+```
+
+## Creating a language file
+
+Each language file shall export by default an object containing the translations for the language.
+
+```ts title="languages/en.ts" showLineNumbers wrap
+export default {
+  hello: "Each key value pair will be the translation for the key",
+  foo: {
+    bar: "You may nest objects to create a more complex language file",
+    baz: () => `You may also use functions to pass variables to the translation and add some logic`,
+    ping: ({ ping }: { ping: number }) => `The ping is ${ping}`
+  },
+  qux: [
+    "You may also use arrays to create a list of translations",
+    "This is the second item in the list"
+  ].join("\n")
+}
+```
+
+You can create as many language files as you want, seyfert will load them and they will be available to use in your bot.
+
+```ts title="languages/es.ts" showLineNumbers wrap
+import English from "./en";
+
+export default {
+  hello: "Hola, mundo!",
+  foo: {
+    bar: "Puedes anidar objetos para crear un archivo de idioma más complejo",
+    baz: () => `Puedes usar funciones para pasar variables a la traducción y agregar lógica`,
+    ping: ({ ping }: { ping: number }) => `El ping es ${ping}`
+  },
+  qux: [
+    "También puedes usar arrays para crear una lista de traducciones",
+    "Este es el segundo elemento de la lista"
+  ].join("\n")
+} satisfies English; // This is a utility type to ensure that object is the same across languages
+```
+
+:::note
+
+Each key should return either a string or a function that returns a string.
+
+:::
+
+:::caution
+
+The name of the file will be the language code, that you will use to get the language translations.
+
+:::
+
+Next we must do some updates to the `declare module` on index file:
+
+```ts {1,12} title="src/index.ts" copy
+import type English from './languages/en';
+import { Client, ParseClient, ParseLocales } from "seyfert";
+
+const client = new Client();
+
+client.start();
+
+declare module 'seyfert' {
+  interface UsingClient extends ParseClient<Client<true>> { }
+  // interface UsingClient extends ParseClient<HttpClient> { } // If you are using the rest api
+
+  interface DefaultLocale extends ParseLocales<typeof English> { }
+}
+```
+
+:::tip
+You can pass any of the language files to the `DefaultLocale` interface since they should be the same object structure.
+
+:::
+
+
+After doing this, you can use the language in your commands, events, components, etc. 
+
+## Using translations in your commands
+
+Let's see an example with our `ping` command by adding an option to respond in a specific language
+
+```ts {35, 41} title="src/commands/ping.ts" showLineNumbers
+import {
+  Command,
+  Declare,
+  Options,
+  createBooleanOption,
+  createStringOption,
+  type CommandContext
+} from 'seyfert';
+import { MessageFlags } from 'seyfert/lib/types';
+
+const options = {
+  hide: createBooleanOption({
+    description: "Hide command output",
+  }),
+  language: createStringOption({
+    description: "Language to respond in",
+    choices: [
+      { name: "English", value: "en" },
+      { name: "Spanish", value: "es" }
+    ]
+  })
+}
+
+@Declare({
+  name: 'ping',
+  description: 'Show the ping with discord'
+})
+@Options(options)
+export default class PingCommand extends Command {
+
+  async run(ctx: CommandContext<typeof options>) {
+    const flags = ctx.options.hide ? MessageFlags.Ephemeral : undefined;
+    const lang = ctx.options.language;
+
+    // Get the translations for the language
+    const t = ctx.t(lang);
+
+    // average latency between shards
+    const ping = ctx.client.gateway.latency;
+
+    await ctx.write({
+      content: t.foo.ping({ ping }),
+      flags,
+    });
+  }
+
+}
+```
+
+Below is the current file tree of the project if you did follow the previous steps.
+
+<FileTree>
+- src
+	- commands
+		- ping.ts
+	- events
+		- botReady.ts
+		- guildDelete.ts
+	- languages
+		- **en.ts**
+		- **es.ts**
+	- index.ts
+- package.json
+- seyfert.config.js
+- .env
+- tsconfig.json
+</FileTree>

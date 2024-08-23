@@ -2,10 +2,12 @@
 title: Command Options
 ---
 
-Each function takes the following parameters:
+In this page we list all the options functions that you can use to create options for your commands, a briefly example how to setup commands was given in [Creating your first command](/guides/first-command#using-options)
+
+In general each function takes the following parameters, then some functions have some specific parameters:
 - **description**: The description of the option.
-- **required**?: If the option is required.
-- **value**?: Callback where you can filter the value sent by discord before it reaches the main command. [How to use here](#using-the-value-callback)
+- **required**?: Whether the option is required.
+- **value**?: Callback where you filter the value sent by discord before it reaches the main command. [How to use here](#using-the-value-callback)
 ## Type Options
 
 ### createStringOption
@@ -14,7 +16,7 @@ Each function takes the following parameters:
   choices: createStringOption({
     choices: [
       { name: 'The best library', value: 'seyfert' },
-      { name: 'An odd stuff', value: 'oceanicjs' }
+      { name: 'An odd typa stuff', value: 'oceanicjs' }
     ]
   }),
   autocomplete: createStringOption({
@@ -99,7 +101,7 @@ Each function takes the following parameters:
   channel: createChannelOption({
     description: 'This is a channel option',
   })
-});
+})
 
 import { ChannelTypes } from 'seyfert/lib/types';
 
@@ -108,7 +110,7 @@ import { ChannelTypes } from 'seyfert/lib/types';
     description: 'This is a limited channel option',
     channel_types: [ChannelTypes.GuildVoice]
   })
-});
+})
 ```
 ### createBooleanOption
 ```ts {2-5} 
@@ -117,7 +119,7 @@ import { ChannelTypes } from 'seyfert/lib/types';
     description: 'This is a boolean option',
     required: true
   })
-});
+})
 ```
 ### createUserOption
 ```ts {2-5} 
@@ -126,7 +128,7 @@ import { ChannelTypes } from 'seyfert/lib/types';
     description: 'This is a user option',
     required: true
   })
-});
+})
 ```
 ### createRoleOption
 ```ts {2-5} 
@@ -135,7 +137,7 @@ import { ChannelTypes } from 'seyfert/lib/types';
     description: 'This is a role option',
     required: true
   })
-});
+})
 ```
 ### createMentionableOption
 ```ts {2-5} 
@@ -144,7 +146,7 @@ import { ChannelTypes } from 'seyfert/lib/types';
     description: 'This is a mentionable option',
     required: true
   })
-});
+})
 ```
 ### createAttachmentOption
 ```ts {2-5} 
@@ -153,7 +155,7 @@ import { ChannelTypes } from 'seyfert/lib/types';
     description: 'This is a attachment option',
     required: true
   })
-});
+})
 ```
 ## Using the `value` callback
 
@@ -168,7 +170,5 @@ import { OKFunction } from 'seyfert';
         fail('expected a valid url');
     }
   })
-});
+})
 ```
-
-A briefly example was given in [Creating your first command](/guides/first-command#using-options)

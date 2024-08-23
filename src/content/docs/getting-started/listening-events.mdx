@@ -1,0 +1,81 @@
+---
+title: Listening Events
+---
+
+import { FileTree } from '@astrojs/starlight/components'
+
+:::note
+
+This section is only necessary for gateway applications, so if your bot is built in http application-only you may skip this section.
+
+:::
+
+## Updating seyfert config
+
+Before starting this chapter we shall update `seyfert.config.js` in order to tell seyfert where our events file will be.
+
+```ts {11} title="seyfert.config.js" showLineNumbers
+// @ts-check
+const { config } = require('seyfert');
+
+module.exports = config.bot({
+  token: process.env.BOT_TOKEN ?? "",
+  intents: ["Guilds"],
+  locations: {
+    base: "src",
+    output: "dist",
+    commands: "commands",
+    events: "events" // - src/events will be our events directory
+  }
+});
+```
+
+## Listening Event
+
+Each event file shall export by default the `createEvent` function so seyfert is able to load them
+
+Let's listen the `botReady` event as first example
+
+```ts title="src/events/botReady.ts" showLineNumbers
+import { createEvent } from "seyfert";
+
+export default createEvent({
+  // botReady executes when all shards and guilds are ready.
+  data: { once: true, name: "botReady" },
+  run(user, client) {
+    client.logger.info(`${user.username} is ready`);
+  }
+})
+```
+
+
+Let's check another example with `guildDelete` event:
+
+```ts title="src/events/guildDelete.ts" showLineNumbers
+import { createEvent } from "seyfert";
+
+export default createEvent({
+  data: { name: "guildDelete" },
+  run(unguild, client) {
+    // it's possible that the guild has been deleted.
+    if (unguild.unavailable) return;
+    client.logger.info(`I have been kicked out of: ${unguild.id}`);
+  }
+})
+```
+
+Below is the current file tree of the project if you did follow the previous steps.
+
+<FileTree>
+- src
+	- commands
+		- ping.ts
+	- events
+		- **botReady.ts**
+		- **guildDelete.ts**
+	- index.ts
+- package.json
+- seyfert.config.js
+- .env
+- tsconfig.json
+</FileTree>

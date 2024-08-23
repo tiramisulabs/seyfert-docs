@@ -59,7 +59,7 @@ declare module "seyfert" {
 Ahora podemos usar el middleware `logger` en cualquier comando.
 
 ```ts title="ping.command.ts" copy
-import { Middlewares, Declare, Command } from "seyfert";
+import { Middlewares, Declare, Command, type CommandContext } from "seyfert";
 
 @Declare({
 	name: "ping",
@@ -88,6 +88,7 @@ Vamos a ver agregando algo de lógica al middleware de registro.
 
 ```ts title="logger.middleware.ts" ins={8-10} copy wrap
 import { createMiddleware } from "seyfert";
+import { ChannelType } from "seyfert/lib/types";
 
 export const loggerMiddleware = createMiddleware<void>((middle) => {
   // Registrar el comando
@@ -115,6 +116,7 @@ Por otro lado, podríamos ignorar la interacción (ignorar la interacción y lit
 
 ```ts title="logger.middleware.ts" ins={9} copy
 import { createMiddleware } from "seyfert";
+import { ChannelType } from "seyfert/lib/types";
 
 export const loggerMiddleware = createMiddleware<void>((middle) => {
   // Registrar el comando
@@ -164,7 +166,7 @@ Si quieres pasar datos de más de un middleware, puedes usar el operador `|`, po
 :::
 
 ```ts title="ping.command.ts" ins={10-11} copy
-import { Middlewares, Declare, Command } from "seyfert";
+import { Middlewares, Declare, Command, type CommandContext } from "seyfert";
 
 @Declare({
     name: "ping",
@@ -176,7 +178,7 @@ export default class PingCommand extends Command {
         const time = ctx.middleware.metadata.logger.time;
         console.log(time);
         await ctx.reply({
-            content: `Pong! Time: ${data.time}`,
+            content: `Pong! Time: ${time}`,
         });
     }
 }

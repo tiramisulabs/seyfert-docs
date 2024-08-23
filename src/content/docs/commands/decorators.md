@@ -4,38 +4,33 @@ title: Command Decorators
 
 Take a loot at the differente decorators that seyfert provides to create commands.
 
-## `@Declare()` [API](/api/functions/declare)
+## `@Declare()`
 
-This decorator is used to declare a command. It is used to define the command name, the command description, and the command options.
+This decorator is used to declare a command. It is used to define the command name, the command description, and other things. Example was given in [Creating your first command](/guides/first-command)
+
+The required parameters are:
 
 - **name**: The name of the slash command.
 - **description**: The description of the slash command.
-- **dm**: If the command can be used in DMs.
-- **guildId**: guildsIds where the command can be published.
+
+for more information about the other parameters you can check the [interface herein](https://github.com/tiramisulabs/seyfert/blob/449be8ea3840fb31a36b1df84ef1b352fe350702/src/commands/decorators.ts#L14)
+
+## ``@Options()``
+
+This decorator simplifies the setup of slash commands by using an option object. Seyfert provides a range of user-friendly decorators designed to make defining command options that you can [see herein](./options)
 
 
-## ``@Options()`` [API](/api/functions/options)
-
-:::tip
-
-You can learn more about it [here](./options).
-
-:::
-
-This decorator simplifies the setup of slash commands by using an option object. Seyfert provides a range of user-friendly decorators designed to make defining command options straightforward.
-
-
-## ``@Middlewares()`` [API](/api/functions/middlewares)
+## ``@Middlewares()``
 
 Seyfert offers an advanced middleware system that is fully typed and incredibly powerful. This system takes in a list of middlewares, which are functions that run before a command is executed.
 
-You can learn how to create middlewares and use them [here](./middlewares).
+You can learn how to create middlewares and use them [herein](./middlewares).
 
-# Sub-command related decorators
+# Commands group decorators
 
 :::tip
 
-We have a dedicated section for sub-commands, you can find it [here](./subcommands).
+We have a dedicated section for sub-commands, you can find it [herein](./subcommands).
 
 :::
 
@@ -43,10 +38,12 @@ We have a dedicated section for sub-commands, you can find it [here](./subcomman
 
 Seyfert handles all aspects of the commands for you, including the command group system that discord exposes.
 
-`@Groups()` is the decorator to tell a parent command what groups it will have and handle.
+`@Groups()` is the decorator to tell a parent command which groups it will have and handle.
 
-`@Group()` is the decorator to tell a subcommand (child command) what group it belongs to.
+`@Group()` is the decorator to tell a subcommand (child command) which group it belongs to.
 
-## `@AutoLoad` [API](/api/functions/autoload)
+# Other decorators
+
+## `@AutoLoad`
 
 This decorator is used to automatically load all the sub-command files in the directory where `parent` is located.

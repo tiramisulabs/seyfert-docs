@@ -1,0 +1,126 @@
+---
+import type { Props as AstroProps } from "@astrojs/starlight/props";
+
+// const { sidebar } = Astro.props;
+
+interface Props {
+    sublist: AstroProps["sidebar"];
+    nested?: boolean;
+    first?: boolean;
+}
+
+type Link = {
+    type: "link";
+    label: string;
+    href: string;
+    isCurrent: boolean;
+};
+
+function flattenSidebar(sidebar: AstroProps["sidebar"]): Link[] {
+    return sidebar.flatMap((entry) =>
+        entry.type === "group" ? flattenSidebar(entry.entries) : entry,
+    );
+}
+
+const { sublist, nested, first } = Astro.props;
+---
+
+{
+    sublist.map((entry) => {
+        if (entry.type === "group") {
+            return (
+                <div
+                    class:list={[
+                        "mb-2 pb-2 border-gray-300 dark:border-[#2e2e32]",
+                        { "border-b": !first },
+                    ]}
+                >
+                    <details
+                        open={
+                            flattenSidebar(entry.entries).some(
+                                (i) => i.isCurrent,
+                            ) || !entry.collapsed
+                        }
+                    >
+                        <summary>
+                            <div class="sidebar-group w-full transition-transform ease-in-out duration-300 bg-transparent py-2 px-0 flex cursor-pointer justify-between">
+                                <h2 class="flex items-center font-bold justify-center text-sm">
+                                    {entry.label}
+                                </h2>
+                                <svg
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    width="24"
+                                    height="24"
+                                    viewBox="0 0 24 24"
+                                    stroke="currentColor"
+                                    fill="none"
+                                    stroke-width="2"
+                                    stroke-linecap="round"
+                                    stroke-linejoin="round"
+                                    class="w-5 h-5 text-current transform duration-200 ease-in-out caret"
+                                >
+                                    <path d="m9 18 6-6-6-6" />
+                                </svg>
+                            </div>
+                        </summary>
+                        <Astro.self
+                            sublist={entry.entries}
+                            nested
+                            first={false}
+                        />
+                    </details>
+                </div>
+            );
+        } else {
+            return (
+                <a
+                    class="sidebar-link block duration-300 transition-all cursor-pointer font-medium no-underline text-sm py-1"
+                    href={entry.href}
+                    aria-current={entry.isCurrent && "page"}
+                >
+                    {entry.label}
+                </a>
+            );
+        }
+    })
+}
+
+<style>
+    .sidebar-group {
+        color: var(--sl-color-sidebar-group);
+    }
+
+    .sidebar-group:hover {
+        color: var(--sl-color-sidebar-group-hover);
+    }
+
+    .sidebar-link {
+        color: var(--sl-color-sidebar-link);
+    }
+
+    .sidebar-link:hover {
+        color: var(--sl-color-sidebar-link-hover);
+    }
+
+    .sidebar-link[aria-current="page"] {
+        color: var(--sl-color-sidebar-link-hover);
+    }
+
+    details > summary {
+        list-style: none;
+    }
+
+    details summary::-webkit-details-marker {
+        display: none;
+    }
+
+    summary {
+        display: flex;
+        cursor: pointer;
+        user-select: none;
+    }
+
+    [open] > summary .caret {
+        transform: rotateZ(90deg);
+    }
+</style>

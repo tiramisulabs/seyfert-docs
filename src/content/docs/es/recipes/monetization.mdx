@@ -1,0 +1,130 @@
+---
+title: Monetización
+---
+import { TabItem, Tabs, FileTree } from '@astrojs/starlight/components'
+
+Con Seyfert ahora puedes controlar las últimas características de monetización de Discord.
+
+Esta sección mostrará la creación básica de **botones premium, eventos y comandos**.
+
+:::note
+
+Primero necesitas activar la monetización en tu bot para que todo esto funcione. Aprende cómo hacerlo [**aquí**](https://discord.com/developers/docs/monetization/overview#monetizing-your-discord-app)
+
+:::
+
+### Entitlements
+
+Los entitlements en Discord representan que un usuario o servidor tiene acceso a una oferta premium en tu aplicación. Con esto puedes saber si un usuario está suscrito a tu aplicación y otorgarle los beneficios que desees.
+
+### Recibiendo Eventos
+
+Actualmente hay 3 eventos para los entitlements: 
+
+> ##### ``entitlementCreate(entitlement: Entitlement)``
+> Se emite cada vez que se crea un entitlement.
+
+> ##### ``entitlementDelete(entitlement: Entitlement)``
+> Se emite cada vez que se elimina un entitlement. Los entitlements no se eliminan cuando expiran. Esto solo se activa cuando Discord emite un reembolso o el desarrollador elimina el entitlement manualmente.
+
+> ##### ``entitlementUpdate(entitlement: Entitlement)``
+> Se emite cada vez que se actualiza un entitlement, por ejemplo, cuando se renueva la suscripción de un usuario.
+
+<Tabs>
+<TabItem label='entitlementCreate.ts'>
+```ts title='events/entitlementCreate.ts' showLineNumbers
+export default createEvent({
+    data: { name: 'entitlementCreate' },
+    async run(entitlement, client) {
+        const subscribedUser = await client.users.fetch(entitlement.userId);
+        client.messages.write('LOG_CHANNEL_ID', {
+            content: `${subscribedUser.globalName} (${subscribedUser.id}) se ha suscrito a ${entitlement.skuId}`,
+        });
+    },
+});
+```
+</TabItem>
+
+<TabItem label='entitlementDelete.ts'>
+```ts title='events/entitlementDelete.ts' showLineNumbers
+export default createEvent({
+    data: { name: 'entitlementDelete' },
+    run(entitlement, client) {
+        client.messages.write('LOG_CHANNEL_ID', {
+            content: `Reembolso o suscripción eliminada (${entitlement.skuId}) [${entitlement.type}]`,
+        });
+    },
+});
+```
+</TabItem>
+
+<TabItem label='entitlementUpdate.ts'>
+```ts title='events/entitlementUpdate.ts' showLineNumbers
+export default createEvent({
+    data: { name: 'entitlementUpdate' },
+    async run: (entitlement, client) => {
+        const subscribedUser = await client.users.fetch(newEntitlement.userId);
+        client.messages.write('LOG_CHANNEL_ID', {
+            content: `Suscripción (${newEntitlement.skuId}) renovada por ${subscribedUser.globalName}`,
+        });
+    },
+});
+```
+</TabItem>
+</Tabs>
+
+### Botón Premium
+
+Ahora puedes crear un **Botón** que redirija a cualquier artículo en tu tienda, como una suscripción, consumible, etc.
+
+Este tipo de botón no necesita un CustomID o Label, pero sí necesita un SkuID, que puedes obtener desde el menú de tu tienda en https://discord.com/developers/applications/{APP_ID}/skus
+
+```ts showLineNumbers
+import { Button } from 'seyfert';
+import { ButtonStyle } from 'seyfert/lib/types';
+
+new Button()
+.setSKUId('STORE_ITEM_SKU_ID')
+.setSyle(ButtonStyle.Premium)
+```
+
+:::note[Más información]
+
+Para obtener más información sobre los botones premium, visita la documentación de Discord [**aquí**](https://discord.com/developers/docs/interactions/message-components#button-design-guidelines-premium-buttons)
+
+:::
+
+### Comandos / Interacciones
+
+En cada **Interacción** también puedes obtener todos los entitlements activos, con ellos puedes detectar si el usuario tiene alguna suscripción, consumibles, etc.
+
+Ejemplo:
+```ts title='commands/premium.ts' showLineNumbers
+import { Declare, Command, type CommandContext, ActionRow, Button } from 'seyfert';
+import { ButtonStyle } from 'seyfert/lib/types';
+
+@Declare({
+  name: 'premium',
+  description: 'Comando premium',
+})
+export class PremiumCommand extends Command  {
+  run(ctx: CommandContext) {
+    const allEntitlements = ctx.interaction.entitlements;
+    const isPremium = allEntitlements.some(ent => ent.userId === ctx.author.id);
+
+    const row = new ActionRow()
+    .setComponents(
+        new Button()
+        .setSkuId('STORE_ITEM_SKU_ID')
+        .setSyle(ButtonStyle.Premium)
+    );
+
+    if (!isPremium) return ctx.editOrReply({ 
+        content: '¡Haz clic en este botón para suscribirte y obtener acceso al comando!',
+        components: [row] 
+    });
+
+    // Premium code
+  }
+}
+```

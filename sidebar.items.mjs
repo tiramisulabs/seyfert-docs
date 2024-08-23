@@ -1,5 +1,3 @@
-import { typeDocSidebarGroup } from './src/lib/startlight-typedoc';
-
 export default [
   {
     label: 'Guide',
@@ -22,39 +20,39 @@ export default [
         collapsed: true,
         items: [
           {
-            label: 'Setup seyfert project',
+            label: 'Setup Project',
             translations: {
               es: 'Configuración de Seyfert',
             },
-            link: '/guides/setup-project',
-          },
-          {
-            label: 'Start from example',
-            translations: {
-              es: 'Empezar desde un ejemplo',
-            },
-            link: '/guides/start-from-example',
+            link: '/getting-started/setup-project',
           },
           {
             label: 'First Command',
             translations: {
-              es: 'Creando tu primer comando',
+              es: 'Primer Comando',
             },
-            link: '/guides/first-command',
+            link: '/getting-started/first-command',
           },
           {
-            label: 'Listening discord events',
+            label: 'Listening Events',
             translations: {
-              es: 'Escuchando los eventos de Discord',
+              es: 'Recibiendo Eventos',
             },
-            link: '/guides/listening-events',
+            link: '/getting-started/listening-events',
+          },
+          {
+            label: 'Language Management',
+            translations: {
+              es: 'Gestión de idiomas'
+            },
+            link: '/getting-started/languages',
           },
           {
             label: 'Understanding declare module',
             translations: {
               es: 'Entendiendo declare module',
             },
-            link: '/guides/declare-module',
+            link: '/getting-started/declare-module',
           },
         ],
       },
@@ -66,39 +64,36 @@ export default [
         collapsed: true,
         items: [
           {
-            label: 'Command Options',
+            label: 'Decorators',
             translations: {
-              es: 'Opciones de un Comando',
-            },
-            link: '/commands/options',
-          },
-          {
-            label: 'Command Decorators',
-            translations: {
-              es: 'Decoradores para el Comando',
+              es: 'Decoradores',
             },
             link: '/commands/decorators',
           },
           {
-            label: 'Command Middlewares',
+            label: 'Options',
             translations: {
-              es: 'Middlewares de Comandos',
+              es: 'Opciones',
             },
+            link: '/commands/options',
+          },
+          {
+            label: 'Middlewares',
             link: '/commands/middlewares',
           },
           {
-            label: 'Sub-Zero (Sub Commands)',
+            label: 'Sub Commands',
             translations: {
-              es: 'Sub-Zero (Sub Comandos)',
+              es: 'Sub Comandos',
             },
             link: '/commands/subcommands',
           },
           {
-            label: 'Extending Commands',
+            label: 'Handling Errors',
             translations: {
-              es: 'Extendiendo Comandos',
+              es: 'Manejando errores',
             },
-            link: '/commands/command-class',
+            link: '/commands/handling-errors',
           },
           {
             label: 'Prefix Commands',
@@ -107,22 +102,22 @@ export default [
             },
             link: '/commands/prefix-commands',
           },
+          {
+            label: 'Extending CommandContext',
+            translations: {
+              es: 'Extendiendo el CommandContext'
+            },
+            link: '/commands/extend-commandcontext'
+          },
         ],
       },
       {
-        label: 'Components',
+        label: 'Components and Interactions',
         translations: {
-          es: 'Componentes',
+          es: 'Componentes e Interacciones',
         },
         collapsed: true,
         items: [
-          {
-            label: 'Introduction',
-            translations: {
-              es: 'Introducción',
-            },
-            link: '/components/introduction',
-          },
           {
             label: 'Building Components',
             translations: {
@@ -151,60 +146,56 @@ export default [
             },
             link: '/components/collectors',
           },
+          {
+            label: 'Polls',
+            translations: {
+              es: 'Encuestas'
+            },
+            link: '/components/polls'
+          },
         ],
       },
       {
-        label: 'Miscellaneous',
-        translations: {
-          es: 'Misceláneos',
-        },
+        label: 'Recipes',
         collapsed: true,
         items: [
           {
-            label: 'Sending Messages',
+            label: 'Monetization',
             translations: {
-              es: 'Enviando Mensajes',
+              es: 'Monetizacion'
             },
-            link: '/misc/sending-messages',
+            link: '/recipes/monetization'
           },
           {
-            label: 'Music library',
+            label: 'Playing audio',
             translations: {
-              es: 'Librería de música',
+              es: 'Reproducir audio'
             },
-            link: '/misc/music',
-          },
-          {
-            label: 'API Access',
-            translations: {
-              es: 'Acceso a la API',
-            },
-            link: '/misc/api-access',
-          },
-          {
-            label: 'Extending CommandContext',
-            translations: {
-              es: 'Extendiendo el CommandContext'
-            },
-            link: '/misc/extendcontext'
-          },
-          {
-            label: 'Creating Polls',
-            translations: {
-              es: 'Creando Encuestas'
-            },
-            link: '/misc/polls'
+            link: '/recipes/music'
           },
           {
             label: 'Cloudflare Workers',
             translations: {
               es: 'Cloudflare Workers'
             },
-            link: '/misc/cloudflare-workers'
+            link: '/recipes/cloudflare-workers'
+          },
+          {
+            label: 'API Access',
+            translations: {
+              es: 'Acceso a la API',
+            },
+            link: '/recipes/api-access',
+          },
+          {
+            label: 'Transformers',
+            translations: {
+              es: 'Transformers'
+            },
+            link: '/recipes/transformers'
           }
-        ],
+        ]
       },
     ],
   },
-  typeDocSidebarGroup,
 ];
