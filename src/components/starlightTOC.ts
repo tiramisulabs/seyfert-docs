@@ -101,5 +101,3 @@ export class StarlightTOC extends HTMLElement {
 		return `-${top}px 0% ${bottom - height}px`;
 	}
 }
-
-customElements.define('starlight-toc', StarlightTOC);

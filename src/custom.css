@@ -30,6 +30,9 @@
     --sl-color-sidebar-group-hover: #ffffff;
     --sl-color-sidebar-link: rgba(235, 235, 245, .6);
     --sl-color-sidebar-link-hover: #a8b1ff;
+    --sl-color-theme-toggle-bg: #272a2f;
+    --sl-color-theme-toggle-border: #3b3e43;
+    --sl-color-theme-toggle-bg-circle: #000;
 
     --sl-color-mainframe-bg: #1b1b1f;
 }
@@ -54,6 +57,9 @@
     --sl-color-sidebar-group-hover: #000;
     --sl-color-sidebar-link: rgba(60, 60, 67, .78);
     --sl-color-sidebar-link-hover: #3451b2;
+    --sl-color-theme-toggle-bg: #eff0f3;
+    --sl-color-theme-toggle-border: #c2c2c4;
+    --sl-color-theme-toggle-bg-circle: #ffffff;
 
     --sl-color-mainframe-bg: #ffffff;
 }
