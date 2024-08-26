@@ -1,0 +1,128 @@
+---
+import { Icon } from "@astrojs/starlight/components";
+
+// Toggle.astro
+---
+
+<div class="theme-toggle">
+  <div class="circle">
+    <Icon name="sun" class="sun-icon" />
+    <Icon name="moon" class="moon-icon" />
+  </div>
+</div>
+
+<style>
+  .theme-toggle {
+    width: 40px;
+    height: 22px;
+    background-color: var(--sl-color-theme-toggle-bg);
+    border-radius: 15px;
+    border: 1px solid var(--sl-color-theme-toggle-border);
+    position: relative;
+    cursor: pointer;
+  }
+
+  .circle {
+    width: 16px;
+    height: 16px;
+    background-color: var(--sl-color-theme-toggle-bg-circle);
+    border-radius: 50%;
+    position: absolute;
+    top: 2px;
+    left: 2px;
+    transition: transform 0.3s ease;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .theme-toggle.active .circle {
+    transform: translateX(18px);
+  }
+
+  .sun-icon,
+  .moon-icon {
+    position: absolute;
+    color: var(--sl-color-sidebar-group);
+    width: 14px;
+    height: 14px;
+  }
+
+  .sun-icon {
+    opacity: 1;
+    transition: opacity 0.3s ease;
+  }
+
+  .moon-icon {
+    opacity: 0;
+    transition: opacity 0.3s ease;
+  }
+
+  .theme-toggle.active .sun-icon {
+    opacity: 0;
+  }
+
+  .theme-toggle.active .moon-icon {
+    opacity: 1;
+  }
+</style>
+
+<script is:inline>
+	StarlightThemeProvider.updatePickers();
+</script>
+
+<script>
+    // Code taken from official Starlight ThemeSelect.astro
+    
+    type Theme = 'auto' | 'dark' | 'light';
+
+    /** Key in `localStorage` to store color theme preference at. */
+    const storageKey = 'starlight-theme';
+
+    const parseTheme = (theme: unknown): Theme =>
+        theme === 'auto' || theme === 'dark' || theme === 'light' ? theme : 'auto';
+
+    /** Load the user's preference from `localStorage`. */
+    const loadTheme = (): Theme =>
+        parseTheme(typeof localStorage !== 'undefined' && localStorage.getItem(storageKey));
+
+    /** Store the user's preference in `localStorage`. */
+    function storeTheme(theme: Theme): void {
+        if (typeof localStorage !== 'undefined') {
+            localStorage.setItem(storageKey, theme === 'light' || theme === 'dark' ? theme : '');
+        }
+    }
+
+    /** Get the preferred system color scheme. */
+    const getPreferredColorScheme = (): Theme =>
+        matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark';
+
+    /** Update select menu UI, document theme, and local storage state. */
+    function onThemeChange(theme: Theme): void {
+        //@ts-expect-error
+        StarlightThemeProvider.updatePickers(theme);
+        document.documentElement.dataset.theme = theme === 'auto' ? getPreferredColorScheme() : theme;
+        storeTheme(theme);
+    }
+
+    // React to changes in system color scheme.
+    matchMedia(`(prefers-color-scheme: light)`).addEventListener('change', () => {
+        if (loadTheme() === 'auto') onThemeChange('auto');
+        
+    });
+
+    // Set the theme to the user's preference.
+    onThemeChange(loadTheme());
+    
+    const toggles = document.querySelectorAll('.theme-toggle');
+    toggles.forEach(toggle => {
+        if (loadTheme() === 'dark') {
+            toggle.classList.add('active');
+        }
+        toggle.addEventListener('click', () => {
+            toggle.classList.toggle('active');
+            const newTheme = toggle.classList.contains('active') ? 'dark' : 'light';
+            onThemeChange(newTheme);
+        });
+    });
+</script>

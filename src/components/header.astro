@@ -4,7 +4,8 @@ import type { Props } from "@astrojs/starlight/props";
 
 import Search from "virtual:starlight/components/Search";
 import SocialIcons from "virtual:starlight/components/SocialIcons";
-import ThemeSelect from "virtual:starlight/components/ThemeSelect";
+import ThemeSelect from "./themeSelect.astro";
+// import ThemeSelect from "virtual:starlight/components/ThemeSelect";
 import LanguageSelect from "virtual:starlight/components/LanguageSelect";
 
 /**
@@ -16,16 +17,19 @@ const shouldRenderSearch =
 ---
 
 <div class="flex justify-between">
-    <div class="sl-flex">
+    <div class="sl-flex w-1/3">
         {shouldRenderSearch && <Search {...Astro.props} />}
     </div>
     <div class="sl-hidden md:sl-flex right-group items-center">
-        <ThemeSelect {...Astro.props} />
         <LanguageSelect {...Astro.props} />
-        <div class="sl-flex social-icons border-gray-300">
+        <div class="h-6 border-r border-gray-300 dark:border-[#2e2e32]"></div>
+        <ThemeSelect {...Astro.props} />
+        <div class="h-6 border-r border-gray-300 dark:border-[#2e2e32]"></div>
+        <div class="sl-flex social-icons border-gray-300 -ml-3">
             <SocialIcons {...Astro.props} />
         </div>
     </div>
+    
 </div>
 
 <style>
@@ -36,16 +40,12 @@ const shouldRenderSearch =
 
     .right-group,
     .social-icons {
-        gap: 1rem;
+        gap: 0.7rem;
         align-items: center;
     }
     .social-icons::before {
         content: "";
         height: 2rem;
-        /* border-inline-start: 1px solid var(--sl-color-gray-5); */
-        border-inline-end-width: 1px;
-        border-inline-end-style: solid;
-        @apply dark:border-[#2e2e32];
     }
 
     @media (min-width: 50rem) {
