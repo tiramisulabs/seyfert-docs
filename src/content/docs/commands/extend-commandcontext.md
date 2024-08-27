@@ -21,5 +21,5 @@ const client = new Client({ context });
 ```
 
 :::note
-Although you have extended the context, the properties you have added aren't typed in the CommandContext. To make them typed you will have to declare Seyfert module. See the [declare module guide](/guides/declare-module) for further information.
+Although you have extended the context, the properties you have added aren't typed in the CommandContext. To make them typed you will have to declare Seyfert module. See the [declare module guide](/getting-started/declare-module) for further information.
 :::

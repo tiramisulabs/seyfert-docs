@@ -36,7 +36,7 @@ declare module 'seyfert' {
 ```
 :::note 
 
-The context variable in the example above is the one we are using to extend the context. For further information see [extending context guide](/misc/extendcontext).
+The context variable in the example above is the one we are using to extend the context. For further information see [extending context guide](/commands/extend-commandcontext).
 ::: 
 ## Internal Options
 

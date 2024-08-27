@@ -13,24 +13,24 @@ The required parameters are:
 - **name**: The name of the slash command.
 - **description**: The description of the slash command.
 
-for more information about the other parameters you can check the [interface herein](https://github.com/tiramisulabs/seyfert/blob/449be8ea3840fb31a36b1df84ef1b352fe350702/src/commands/decorators.ts#L14)
+for more information about the other parameters you can check the [interface here](https://github.com/tiramisulabs/seyfert/blob/449be8ea3840fb31a36b1df84ef1b352fe350702/src/commands/decorators.ts#L14)
 
 ## ``@Options()``
 
-This decorator simplifies the setup of slash commands by using an option object. Seyfert provides a range of user-friendly decorators designed to make defining command options that you can [see herein](./options)
+This decorator simplifies the setup of slash commands by using an option object. Seyfert provides a range of user-friendly decorators designed to make defining command options that you can [see here](./options)
 
 
 ## ``@Middlewares()``
 
 Seyfert offers an advanced middleware system that is fully typed and incredibly powerful. This system takes in a list of middlewares, which are functions that run before a command is executed.
 
-You can learn how to create middlewares and use them [herein](./middlewares).
+You can learn how to create middlewares and use them [here](./middlewares).
 
 # Commands group decorators
 
 :::tip
 
-We have a dedicated section for sub-commands, you can find it [herein](./subcommands).
+We have a dedicated section for sub-commands, you can find it [here](./subcommands).
 
 :::
 
