@@ -47,7 +47,7 @@ export default defineConfig({
         github: 'https://github.com/tiramisulabs/seyfert',
         discord: 'https://discord.com/invite/XNw2RZFzaP',
       },
-      sidebar: ,
+      sidebar,
       components: {
         Sidebar: './src/components/newSidebar.astro',
         PageFrame: './src/components/pageFrame.astro',
