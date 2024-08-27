@@ -6,7 +6,7 @@ Take a loot at the differente decorators that seyfert provides to create command
 
 ## `@Declare()`
 
-This decorator is used to declare a command. It is used to define the command name, the command description, and other things. Example was given in [Creating your first command](/guides/first-command)
+This decorator is used to declare a command. It is used to define the command name, the command description, and other things. Example was given in [Creating your first command](/getting-started/first-command)
 
 The required parameters are:
 
@@ -26,6 +26,12 @@ Seyfert offers an advanced middleware system that is fully typed and incredibly 
 
 You can learn how to create middlewares and use them [here](./middlewares).
 
+## ``@LocalesT()``
+
+This decorator makes it easy to add different localizations to our commands, both names and descriptions. In a fast, simple and typed way.
+
+You can learn how to use them [here](/i18n/usage). 
+
 # Commands group decorators
 
 :::tip
@@ -41,6 +47,9 @@ Seyfert handles all aspects of the commands for you, including the command group
 `@Groups()` is the decorator to tell a parent command which groups it will have and handle.
 
 `@Group()` is the decorator to tell a subcommand (child command) which group it belongs to.
+
+`@GroupsT()` is the decorator to to add localizations to our group names and descriptions.
+
 
 # Other decorators
 

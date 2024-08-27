@@ -94,14 +94,14 @@ export default class PlayCommand extends Command {
 
 		if (!guildId || !member) return;
 
-		const voice = member.voice();
+		const voice = await member.voice();
 		if (!voice)
 			return ctx.write({
 				content: "You must be in a voice channel to play music.",
 				flags: MessageFlags.Ephemeral
 			});
 
-		const botVoice = ctx.me()?.voice();
+		const botVoice = await ctx.me()?.voice();
 		if (botVoice && botVoice.channelId !== voice.channelId)
 			return ctx.write({
 				content: "You must be in the same voice channel as me.",
@@ -123,12 +123,12 @@ export default class PlayCommand extends Command {
 		else player.queue.add(result.tracks[0]);
 
 		if (!player.playing && !player.paused) player.play();
-		return ctx.write({
-			content:
-				result.type === "PLAYLIST"
-					? `Queued ${result.tracks.length} from ${result.playlistName}`
-					: `Queued ${result.tracks[0].title}`
-		});
+			return ctx.write({
+				content:
+					result.type === "PLAYLIST"
+						? `Queued ${result.tracks.length} from ${result.playlistName}`
+						: `Queued ${result.tracks[0].title}`
+			});
 	}
 }
 ```
