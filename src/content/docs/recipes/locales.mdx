@@ -1,0 +1,93 @@
+---
+title: Locales
+---
+
+import { TabItem, Tabs, FileTree } from '@astrojs/starlight/components'
+
+In Seyfert the possibility to take your bot to multiple locales is quite simple.
+
+:::note
+This section will assume that you read and understood [Language Management](/getting-started/languages/#creating-a-language-file).
+:::
+
+## How to use the locales
+
+Seyfert provides a way to use the locales in your bot. The way to do it is quite simple.
+
+> There are some [decorators](https://www.typescriptlang.org/docs/handbook/decorators.html) that can be used to use the locales in your code.
+
+### Using `@LocalesT` decorator
+
+This decorator will get all the locales that you have defined as `DefaultLocale`.
+
+<TabItem label='supremacy.ts'>
+```ts title="src/commands/supremacy.ts" showLineNumbers
+import { Command, Declare, LocalesT } from 'seyfert';
+
+@Declare({
+	name: 'supremacy',
+	description: 'Ganyu Supremacy.'
+})
+// You can also pass 'undefined'
+// if you don't want to add a command localized name or description!
+// Like this: @LocalesT(undefined 'some.command.description')
+@LocalesT('some.command.name', 'some.command.description')
+export default class SupremacyCommand extends Command { }
+```
+</TabItem>
+
+### Using `@GroupsT` decorator
+
+This decorator has a special structure and can be a bit confusing.
+
+> The decorator has the following structure:
+```ts
+@GroupsT({
+    // This is the name of the group... Created in the parent command
+    groupName: {
+        // This is obligatory! Is the default name of the group.
+        defaultDescription,
+        // This is optional! Is the localized name of the group.
+        name,
+    }
+})
+```
+
+> Once you understand how it works, you can use it as follows:
+
+<TabItem label='supremacy.ts'>
+```ts title="src/commands/supremacy.ts" showLineNumbers
+import { Command, LocalesT } from 'seyfert';
+
+@GroupsT({
+    supremacy: {
+        defaultDescription: "Ganyu Supremacy.",
+        name: "some.command.group.name",
+    }
+})
+export default class SupremacyCommand extends Command { }
+```
+</TabItem>
+
+### Using `locales` object property
+
+Seyfert provides a special property to add localizations in command options.
+
+<TabItem label='supremacy.ts'>
+```ts title="src/commands/supremacy.ts" showLineNumbers
+import { createStringOption } from 'seyfert';
+
+const options = {
+    supremacy: createStringOption({
+        description: "Enter a supremacy name.",
+        required: true,
+        // If you don't want to add a command localized name or description!
+        // Just remove the property from the object
+        locales: {
+            name: "some.command.option.name",
+            description: "some.command.option.description",
+        }
+    })
+}
+```
+</TabItem>

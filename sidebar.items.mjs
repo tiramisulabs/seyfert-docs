@@ -193,6 +193,13 @@ export default [
               es: 'Transformers'
             },
             link: '/recipes/transformers'
+          },
+          {
+            label: 'Locales',
+            translations: {
+              es: 'Localización'
+            },
+            link: '/recipes/locales'
           }
         ]
       },
