@@ -105,6 +105,29 @@ export default [
         ],
       },
       {
+        label: 'i18n',
+        translations: {
+          es: 'i18n',
+        },
+        collapsed: true,
+        items: [
+          {
+            label: 'Setting Up',
+            translations: {
+              es: 'Gestión de idiomas'
+            },
+            link: '/i18n/languages',
+          },
+          {
+            label: 'Locales Usage',
+            translations: {
+              es: 'Uso de locales'
+            },
+            link: '/i18n/usage',
+          },
+        ],
+      },
+      {
         label: 'Components and Interactions',
         translations: {
           es: 'Componentes e Interacciones',
@@ -196,29 +219,6 @@ export default [
           }
         ]
       },
-      {
-        label: 'i18n',
-        translations: {
-          es: 'i18n',
-        },
-        collapsed: true,
-        items: [
-          {
-            label: 'Setting Up',
-            translations: {
-              es: 'Gestión de idiomas'
-            },
-            link: '/i18n/languages',
-          },
-          {
-            label: 'Locales Usage',
-            translations: {
-              es: 'Uso de locales'
-            },
-            link: '/i18n/usage',
-          },
-        ],
-      }
     ],
   },
 ];
