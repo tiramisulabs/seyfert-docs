@@ -31,7 +31,7 @@ import { Command, Declare, LocalesT } from 'seyfert';
 // You can also pass 'undefined'
 // if you don't want to add a command localized name or description!
 // Like this: @LocalesT(undefined 'some.command.description')
-@LocalesT('some.command.name', 'some.command.description')
+@LocalesT('hello', 'foo.bar')
 export default class SupremacyCommand extends Command { }
 ```
 </TabItem>
@@ -62,7 +62,7 @@ import { Command, LocalesT } from 'seyfert';
 @GroupsT({
     supremacy: {
         defaultDescription: "Ganyu Supremacy.",
-        name: "some.command.group.name",
+        name: "foo.bar",
     }
 })
 export default class SupremacyCommand extends Command { }
@@ -84,8 +84,8 @@ const options = {
         // If you don't want to add a command localized name or description!
         // Just remove the property from the object
         locales: {
-            name: "some.command.option.name",
-            description: "some.command.option.description",
+            name: "hello",
+            description: "foo.bar",
         }
     })
 }
