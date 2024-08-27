@@ -8,6 +8,10 @@ import { FileTree } from '@astrojs/starlight/components'
 
 Seyfert has a i18n built-in feature that allows you to create language files and use them in your bot.
 
+:::note
+For this section we are going to follow the setup we did in **Getting Started** for example purposes
+:::
+
 ## Updating seyfert config
 
 Before starting this chapter we could update `seyfert.config.js` to tell seyfert where our languages file will be.
@@ -58,7 +62,7 @@ export default {
   foo: {
     bar: "Puedes anidar objetos para crear un archivo de idioma más complejo",
     baz: () => `Puedes usar funciones para pasar variables a la traducción y agregar lógica`,
-    ping: ({ ping }: { ping: number }) => `El ping es ${ping}`
+    ping: ({ ping }) => `El ping es ${ping}`
   },
   qux: [
     "También puedes usar arrays para crear una lista de traducciones",

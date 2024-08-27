@@ -88,7 +88,7 @@ As we had said you can use middlewares to do verifications, and you can stop the
 
 Let's take a look adding some logic to the logger middleware.
 
-```ts title="logger.middleware.ts" ins={8-10} copy wrap
+```ts title="logger.middleware.ts" ins={11-13} copy wrap 
 import { createMiddleware } from "seyfert";
 import { ChannelTypes } from 'seyfert/lib/types';
 
@@ -116,7 +116,7 @@ Notice you can access to the interaction data using `middle.context.interaction`
 
 On the other hand we could skip the interaction (ignore the interaction and literally do nothing) by using `middle.pass()`
 
-```ts title="logger.middleware.ts" ins={9} copy
+```ts title="logger.middleware.ts" ins={11} copy
 import { createMiddleware } from "seyfert";
 import { ChannelTypes } from 'seyfert/lib/types';
 

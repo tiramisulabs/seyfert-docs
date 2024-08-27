@@ -32,7 +32,7 @@ Having set up our prefixes for the commands it's about time we want to make them
 
 And for your luck, the handling works as application commands. The only difference is that we receive an optional [`Message`](/api/classes/message) property inside [`CommandContext`](/api/classes/commandcontext).
 
-To make this property appear in our CommandContext the only thing we shall do is declaring seyfert module and set the `withPrefix` property inside [`InternalOptions`](/api/interfaces/internaloptions) into true. You can see this [detailed example](/guides/declare-module#internal-options). 
+To make this property appear in our CommandContext the only thing we shall do is declaring seyfert module and set the `withPrefix` property inside [`InternalOptions`](/api/interfaces/internaloptions) into true. You can see this [detailed example](/getting-started/declare-module#internal-options). 
 
 
 In this example we are going to create a command which `cross post` the message that was sent in an announcement channel.

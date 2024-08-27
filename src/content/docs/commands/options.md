@@ -2,7 +2,7 @@
 title: Command Options
 ---
 
-In this page we list all the options functions that you can use to create options for your commands, a briefly example how to setup commands was given in [Creating your first command](/guides/first-command#using-options)
+In this page we list all the options functions that you can use to create options for your commands, a briefly example how to setup commands was given in [Creating your first command](/getting-started/first-command#using-options)
 
 In general each function takes the following parameters, then some functions have some specific parameters:
 - **description**: The description of the option.
