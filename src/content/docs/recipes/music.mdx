@@ -123,12 +123,13 @@ export default class PlayCommand extends Command {
 		else player.queue.add(result.tracks[0]);
 
 		if (!player.playing && !player.paused) player.play();
-			return ctx.write({
-				content:
-					result.type === "PLAYLIST"
-						? `Queued ${result.tracks.length} from ${result.playlistName}`
-						: `Queued ${result.tracks[0].title}`
-			});
+		
+		return ctx.write({
+			content:
+				result.type === "PLAYLIST"
+					? `Queued ${result.tracks.length} from ${result.playlistName}`
+					: `Queued ${result.tracks[0].title}`
+		});
 	}
 }
 ```
