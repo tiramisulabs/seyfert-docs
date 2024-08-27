@@ -41,13 +41,6 @@ export default [
             link: '/getting-started/listening-events',
           },
           {
-            label: 'Language Management',
-            translations: {
-              es: 'Gestión de idiomas'
-            },
-            link: '/getting-started/languages',
-          },
-          {
             label: 'Understanding declare module',
             translations: {
               es: 'Entendiendo declare module',
@@ -203,6 +196,29 @@ export default [
           }
         ]
       },
+      {
+        label: 'i18n',
+        translations: {
+          es: 'i18n',
+        },
+        collapsed: true,
+        items: [
+          {
+            label: 'Setting Up',
+            translations: {
+              es: 'Gestión de idiomas'
+            },
+            link: '/i18n/languages',
+          },
+          {
+            label: 'Locales Usage',
+            translations: {
+              es: 'Uso de locales'
+            },
+            link: '/i18n/usage',
+          },
+        ],
+      }
     ],
   },
 ];
