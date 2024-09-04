@@ -1,0 +1,104 @@
+---
+title: Docker
+description: Una introducción sobre cómo desplegar Seyfert en un contenedor de Docker
+---
+
+Esta guía asume que tiene nociones en los siguientes temas:
+
+- [TypeScript](https://www.typescriptlang.org/)
+- [Node.js](https://nodejs.org/en)
+- [Docker](https://www.docker.com/)
+- [Virtualización](https://es.wikipedia.org/wiki/Virtualizaci%C3%B3n_a_nivel_de_sistema_operativo)
+
+## ¿Qué archivos necesita un proyecto de Seyfert?
+
+Son cuatro los archivos que necesitamos:
+
+- `package.json`: soporte para JavaScript modules
+- `seyfert.config.js`: configuraciones para Seyfert
+- `/node_modules`: dependencias
+- `/src` ó `/dist`: punto de entrada de la aplicación
+
+## Desplegando con Node.js
+
+### Dockerfile para un proyecto TypeScript
+
+El `Dockerfile` de ejemplo asume lo siguiente sobre su proyecto:
+
+- Posee los siguientes *scripts de npm*:
+    - `start`: ejecuta el punto de entrada de la aplicación
+    - `build`: transpila el código de TypeScript a JavaScript
+
+```docker
+FROM node:<VERSION_TAG>
+
+WORKDIR /project
+
+COPY package*.json ./
+
+# Ref: https://docs.npmjs.com/cli/v10/commands/npm-ci
+RUN npm ci
+
+COPY tsconfig.json ./
+COPY seyfert.config.js ./
+COPY /src ./src
+
+# Ref: https://docs.npmjs.com/cli/v10/commands/npm-prune
+RUN npm run build && \
+    npm prune --production
+
+ENV USER node
+ENV NODE_ENV=production
+
+# Restringe los permisos de usuario en producción
+USER $USER
+
+CMD ["npm", "start"]
+```
+
+Debe reemplazar `<VERSION_TAG>` por la versión de Node.js que quiera utilizar.
+
+### Con Multi-stage builds
+
+Si bien la anterior imagen es funcional, no es muy óptima o segura. El siguiente ejemplo hace uso de las `multi-stage builds` y `dumb-init`:
+
+```docker
+# Base stage
+FROM node:<VERSION_TAG>-alpine<ALPINE_VERSION> AS base
+
+ENV DIR /project
+WORKDIR $DIR
+
+# Build stage
+FROM base AS build
+
+# Ref: https://github.com/Yelp/dumb-init
+RUN apk update && apk add --no-cache dumb-init
+
+COPY package*.json ./
+
+RUN npm ci
+
+COPY tsconfig.json ./
+COPY seyfert.config.js ./
+COPY /src ./src
+
+RUN npm run build && \
+    npm prune --production
+
+# Production stage
+FROM base AS production
+
+COPY --from=build /usr/bin/dumb-init /usr/bin/dumb-init
+COPY --from=build $DIR/node_modules $DIR/node_modules
+COPY --from=build $DIR/dist $DIR/dist
+COPY --from=build $DIR/package.json $DIR/package.json
+COPY --from=build $DIR/seyfert.config.js $DIR/seyfert.config.js
+
+ENV USER node
+ENV NODE_ENV=production
+
+USER $USER
+
+CMD ["dumb-init", "node", "dist/index.js"]
+```
