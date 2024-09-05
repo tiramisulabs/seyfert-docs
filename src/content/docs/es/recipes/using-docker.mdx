@@ -35,7 +35,7 @@ El `Dockerfile` de ejemplo asume lo siguiente sobre su proyecto:
     - `start`: ejecuta el punto de entrada de la aplicación
     - `build`: transpila el código de TypeScript a JavaScript
 
-```docker
+```docker title="Dockerfile" copy
 FROM node:<VERSION_TAG>
 
 WORKDIR /project
@@ -68,7 +68,7 @@ Debe reemplazar `<VERSION_TAG>` por la versión de Node.js que quiera utilizar.
 
 Si bien la anterior imagen es funcional, no es muy óptima o segura. El siguiente ejemplo hace uso de las `multi-stage builds` y `dumb-init`:
 
-```docker
+```docker title="Dockerfile" copy
 # Base stage
 FROM node:<VERSION_TAG>-alpine<ALPINE_VERSION> AS base
 
