@@ -26,7 +26,7 @@ export const loggerMiddleware = createMiddleware<void>(
 ```
 
 
-Now let's register the middlewares on seyfert [extending the client](guides/declare-module) but first we should create a command to export all our middleware
+Now let's register the middlewares on seyfert but first we should create a file to export all our middleware
 
 ```ts title="middlewares.ts" wrap copy
 import { loggerMiddleware } from "./path/to/logger.middleware";
@@ -108,7 +108,7 @@ export const loggerMiddleware = createMiddleware<void>((middle) => {
 });
 ```
 
-Now every time the `ping` command is executed in a DM, the logger middleware will stop the execution of the command and send the error message to the handler. Learn how to handle errors [here](commands/command-class#middleware-return-stop).
+Now every time the `ping` command is executed in a DM, the logger middleware will stop the execution of the command and send the error message to the handler. Learn how to handle errors [here](handling-errors#middleware-return-stop).
 
 :::note
 Notice you can access to the interaction data using `middle.context.interaction`
