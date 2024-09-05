@@ -1,0 +1,110 @@
+---
+title: Docker
+description: An introduction on how to deploy Seyfert in a Docker container
+---
+
+This guide assumes you have knowledge of the following topics:
+
+- [TypeScript](https://www.typescriptlang.org/)
+- [Node.js](https://nodejs.org/en)
+- [Docker](https://www.docker.com/)
+- [Virtualization](https://en.wikipedia.org/wiki/OS-level_virtualization)
+
+## Why Docker?
+
+Docker provides a consistent environment that ensures the correct operation of any bot in both development and production, as well as simplifying workflow by integrating with CI/CD tools.
+
+With Docker, scaling a bot horizontally is simple, allowing workloads to be distributed across multiple instances as needed.
+
+## What files does a Seyfert project need?
+
+There are four files we need:
+
+- `package.json`: support for JavaScript modules
+- `seyfert.config.js`: configurations for Seyfert
+- `/node_modules`: dependencies
+- `/src` or `/dist`: application entry point
+
+## Deploying with Node.js
+
+### Dockerfile for a TypeScript project
+
+The example `Dockerfile` assumes the following about your project:
+
+- It has the following *npm scripts*:
+    - `start`: runs the application's entry point
+    - `build`: transpiles TypeScript code to JavaScript
+
+```docker title="Dockerfile" copy
+FROM node:<VERSION_TAG>
+
+WORKDIR /project
+
+COPY package*.json ./
+
+# Ref: https://docs.npmjs.com/cli/v10/commands/npm-ci
+RUN npm ci
+
+COPY tsconfig.json ./
+COPY seyfert.config.js ./
+COPY /src ./src
+
+# Ref: https://docs.npmjs.com/cli/v10/commands/npm-prune
+RUN npm run build && \
+    npm prune --production
+
+ENV USER node
+ENV NODE_ENV=production
+
+# Restrict user permissions in production
+USER $USER
+
+CMD ["npm", "start"]
+```
+
+You must replace `<VERSION_TAG>` with the Node.js version you want to use.
+
+### With Multi-stage builds
+
+While the previous image is functional, it's not very optimal or secure. The following example uses `multi-stage builds` and `dumb-init`:
+
+```docker title="Dockerfile" copy
+# Base stage
+FROM node:<VERSION_TAG>-alpine<ALPINE_VERSION> AS base
+
+ENV DIR /project
+WORKDIR $DIR
+
+# Build stage
+FROM base AS build
+
+# Ref: https://github.com/Yelp/dumb-init
+RUN apk update && apk add --no-cache dumb-init
+
+COPY package*.json ./
+
+RUN npm ci
+
+COPY tsconfig.json ./
+COPY seyfert.config.js ./
+COPY /src ./src
+
+RUN npm run build && \
+    npm prune --production
+
+# Production stage
+FROM base AS production
+
+COPY --from=build /usr/bin/dumb-init /usr/bin/dumb-init
+COPY --from=build $DIR/node_modules $DIR/node_modules
+COPY --from=build $DIR/dist $DIR/dist
+COPY --from=build $DIR/package.json $DIR/package.json
+COPY --from=build $DIR/seyfert.config.js $DIR/seyfert.config.js
+
+ENV USER node
+ENV NODE_ENV=production
+
+USER $USER
+
+CMD ["dumb-init", "node", "dist/index.js"]
+```

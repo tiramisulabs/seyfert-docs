@@ -204,6 +204,13 @@ export default [
             link: '/recipes/api-access',
           },
           {
+            label: 'Docker',
+            translations: {
+              es: 'Docker'
+            },
+            link: '/recipes/using-docker'
+          },
+          {
             label: 'Transformers',
             translations: {
               es: 'Transformers'
