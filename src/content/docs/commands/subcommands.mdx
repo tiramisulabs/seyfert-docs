@@ -87,7 +87,7 @@ import { type CommandContext, Declare, SubCommand } from "seyfert";
 	name: "delete",
 	description: "delete something"
 })
-export default class DeleteCommand extends SubCommand {
+export class DeleteCommand extends SubCommand {
 	run(ctx: CommandContext) {
 		// some logic here
 
