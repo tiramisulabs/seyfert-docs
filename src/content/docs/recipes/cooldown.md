@@ -70,7 +70,7 @@ export default class extends Command {
 And then we need to create a [middleware]("/commands/middlewares") for handle when the user is in cooldown:
 
 ```ts
-import { type CommandContext, createMiddleware, Formatter } from 'seyfert';
+import { createMiddleware, Formatter } from 'seyfert';
 import { TimestampStyle } from 'seyfert/lib/common';
 
 export default createMiddleware<void>(async ({ context, next, stop }) => {
