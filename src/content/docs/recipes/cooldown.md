@@ -73,30 +73,14 @@ And then we need to create a [middleware]("/commands/middlewares") for handle wh
 import { type CommandContext, createMiddleware, Formatter } from 'seyfert';
 import { TimestampStyle } from 'seyfert/lib/common';
 
-export default createMiddleware<void, CommandContext>(async ({ context, next, stop }) => {
-	const resolve = resolveTarget(context);
-	if (!resolve) return next();
-
-	const inCooldown = await context.client.cooldown.use(context.command.name, resolve);
+export default createMiddleware<void>(async ({ context, next, stop }) => {
+	
+	const inCooldown = context.client.cooldown.context(context);
 
 	typeof inCooldown === 'number'
 		? stop(
-				`You are in cooldown, try again ${Formatter.timestamp(new Date(Date.now() + inCooldown), TimestampStyle.RelativeTime)}`,
+				`You're in cooldown, try again ${Formatter.timestamp(new Date(Date.now() + inCooldown), TimestampStyle.RelativeTime)}`,
 			)
 		: next();
 });
-
-export function resolveTarget(context: CommandContext) {
-	const data = context.command.cooldown;
-	if (!data) return;
-
-	switch (data.type) {
-		case 'user':
-			return context.author.id;
-		case 'guild':
-			return context.guildId;
-		case 'channel':
-			return context.channelId;
-	}
-}
 ```
