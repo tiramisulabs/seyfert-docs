@@ -216,6 +216,13 @@ export default [
               es: 'Transformers'
             },
             link: '/recipes/transformers'
+          },
+          {
+            label: 'Cooldown',
+            translations: {
+              es: 'Cooldown'
+            },
+            link: '/recipes/cooldown'
           }
         ]
       },
