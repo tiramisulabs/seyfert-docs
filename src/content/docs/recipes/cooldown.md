@@ -67,7 +67,7 @@ export default class extends Command {
 }
 ```
 
-And then we need to create a [middleware]("/commands/middlewares") for handle when the user is in cooldown:
+And then we need to create a [middleware](/commands/middlewares) for handle when the user is in cooldown:
 
 ```ts
 import { createMiddleware, Formatter } from 'seyfert';
