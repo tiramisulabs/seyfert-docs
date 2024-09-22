@@ -72,7 +72,7 @@ import {
 const stringMenu = new StringSelectMenu()
   .setCustomId('string-menu')
   .setPlaceholder('Select an string option')
-  .setOptions(
+  .addOption(
     new StringSelectOption().setLabel('Option 1').setValue('1'),
     new StringSelectOption().setLabel('Option 2').setValue('2')
   );
