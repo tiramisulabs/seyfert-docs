@@ -6,7 +6,7 @@ Collectors are a way to handle interactions from components for a specific time,
 
 ## Building collectors
 
-Collectors are built using [`createComponentCollector`](/api/classes/basemessage#createcomponentcollector) method in a message, which is inherited by [`BaseMessage`](/api/classes/basemessage). This method returns an object representing a collector.
+Collectors are built using [`createComponentCollector`](https://github.com/tiramisulabs/seyfert/blob/455ed12b0ebcb3ddf55bc8b3274b0ce904becc62/src/components/handler.ts#L39) method in a message, which is inherited by [`BaseMessage`](https://github.com/tiramisulabs/seyfert/blob/455ed12b0ebcb3ddf55bc8b3274b0ce904becc62/src/structures/Message.ts#L44). This method returns an object representing a collector.
 
 Here is an example of how to build a simple collector after sending a message with one button attached to it in a `hello world` command.
 

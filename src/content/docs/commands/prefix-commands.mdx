@@ -6,7 +6,7 @@ import { TabItem, Tabs } from '@astrojs/starlight/components'
 
 ## Setting up prefixes
 
-Not only does seyfert handle application commands but also `prefix commands`. They are not enabled by default but you can enable them by setting up an option inside the [`ClientOptions`](/api/interfaces/ClientOptions). We have to access to the `command` option where we can specify a suboption called `prefix`. This option expects a callback returning an array of possible prefixes for that command. As the callback returns a [`Message`](/api/classes/message) is pretty simple to handle diffrent prefixes per guild.
+Not only does seyfert handle application commands but also `prefix commands`. They are not enabled by default but you can enable them by setting up an option inside the [`ClientOptions`](https://github.com/tiramisulabs/seyfert/blob/455ed12b0ebcb3ddf55bc8b3274b0ce904becc62/src/client/client.ts#L230). We have to access to the `command` option where we can specify a suboption called `prefix`. This option expects a callback returning an array of possible prefixes for that command. As the callback returns a [`Message`](https://github.com/tiramisulabs/seyfert/blob/455ed12b0ebcb3ddf55bc8b3274b0ce904becc62/src/structures/Message.ts#L123) is pretty simple to handle diffrent prefixes per guild.
 
 Here is an example in which we are going to set multiple prefixes for all the commands.
 
@@ -28,11 +28,11 @@ const client = new Client({
 
 ## Handling prefix commands
 
-Having set up our prefixes for the commands it's about time we want to make them run. 
+Having set up our prefixes for the commands it's about time we want to make them run.
 
-And for your luck, the handling works as application commands. The only difference is that we receive an optional [`Message`](/api/classes/message) property inside [`CommandContext`](/api/classes/commandcontext).
+And for your luck, the handling works as application commands. The only difference is that we receive an optional [`Message`](https://github.com/tiramisulabs/seyfert/blob/455ed12b0ebcb3ddf55bc8b3274b0ce904becc62/src/structures/Message.ts#L123) property inside [`CommandContext`](https://github.com/tiramisulabs/seyfert/blob/455ed12b0ebcb3ddf55bc8b3274b0ce904becc62/src/commands/applications/chatcontext.ts#L24).
 
-To make this property appear in our CommandContext the only thing we shall do is declaring seyfert module and set the `withPrefix` property inside [`InternalOptions`](/api/interfaces/internaloptions) into true. You can see this [detailed example](/getting-started/declare-module#internal-options). 
+To make this property appear in our CommandContext the only thing we shall do is declaring seyfert module and set the `withPrefix` property inside [`InternalOptions`](https://github.com/tiramisulabs/seyfert/blob/455ed12b0ebcb3ddf55bc8b3274b0ce904becc62/src/commands/applications/shared.ts#L11) into true. You can see this [detailed example](/getting-started/declare-module#internal-options).
 
 
 In this example we are going to create a command which `cross post` the message that was sent in an announcement channel.
@@ -66,7 +66,7 @@ Seyfert supports subcommands within prefix commands.
 
 ## Replying to prefix commands
 
-By default when you use `write` or `editOrReply` function it will only send a message to the channel where the command was fired. To make the command being replied you have to set `reply` suboption inside `command` option in the client options. This option is a callback which first parameter is the [`CommandContext`](/api/classes/commandcontext) and expects a boolean to be returned, if is `true` it will reply to the command, if not it will just send a message. 
+By default when you use `write` or `editOrReply` function it will only send a message to the channel where the command was fired. To make the command being replied you have to set `reply` suboption inside `command` option in the client options. This option is a callback which first parameter is the [`CommandContext`](/api/classes/commandcontext) and expects a boolean to be returned, if is `true` it will reply to the command, if not it will just send a message.
 
 Here is a detailed example about how it will looks your client with all the modifications mentioned in this guide:
 

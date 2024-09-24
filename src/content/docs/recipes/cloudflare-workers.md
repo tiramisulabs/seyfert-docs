@@ -1,7 +1,8 @@
 ---
 title: Using Cloudflare Workers
 ---
-Seyfert supports Cloudflare Workers, you can setup it by configuring `seyfert.config.js` with `config.http` [see more info here](/guides/setup-project)
+
+Seyfert supports Cloudflare Workers, you can setup it by configuring `seyfert.config.js` with `config.http` [see more info here](/getting-started/setup-project#configuration)
 
 :::note
 
