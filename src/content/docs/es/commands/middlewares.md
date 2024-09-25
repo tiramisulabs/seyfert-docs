@@ -25,7 +25,7 @@ export const loggerMiddleware = createMiddleware<void>(
 );
 ```
 
-Ahora vamos a registrar el middleware en Seyfert [extendiendo el cliente](guides/declare-module), pero primero debemos crear un comando para exportar todos nuestros middlewares
+Ahora vamos a registrar el middleware en Seyfert [extendiendo el cliente](/es/getting-started/declare-module), pero primero debemos crear un comando para exportar todos nuestros middlewares
 
 ```ts title="middlewares.ts" wrap copy
 import { loggerMiddleware } from "./path/to/logger.middleware";
@@ -106,7 +106,7 @@ export const loggerMiddleware = createMiddleware<void>((middle) => {
 });
 ```
 
-Ahora cada vez que el comando `ping` se ejecute en un DM, el middleware de registro detendrá la ejecución del comando y enviará el mensaje de error al manejador. Aprende cómo manejar errores [aquí](commands/command-class#middleware-return-stop).
+Ahora cada vez que el comando `ping` se ejecute en un DM, el middleware de registro detendrá la ejecución del comando y enviará el mensaje de error al manejador. Aprende cómo manejar errores [aquí](/es/commands/handling-errors#middleware-return-stop).
 
 :::note
 Observa que puedes unirte a los datos de interacción usando `middle.context.interaction`

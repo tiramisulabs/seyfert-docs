@@ -27,7 +27,7 @@ module.exports = config.bot({
 
 First of all we are going to create a file inside the directory which is set for the components.
 
-Then we are going to create a class that extends [`ComponentCommand`](/api/classes/componentcommand), something like what we do with commands, and then we are going to set the type of the component we want to handle (`Buttons` or whichever type of `SelectMenu`)
+Then we are going to create a class that extends [`ComponentCommand`](https://github.com/tiramisulabs/seyfert/blob/455ed12b0ebcb3ddf55bc8b3274b0ce904becc62/src/components/componentcommand.ts#L14), something like what we do with commands, and then we are going to set the type of the component we want to handle (`Buttons` or whichever type of `SelectMenu`)
 
 
 In this example I have created a component to reply `Hello World` to the interaction. I have set the customId of the button to `hello-world`.

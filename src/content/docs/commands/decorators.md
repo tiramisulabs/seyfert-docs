@@ -17,14 +17,14 @@ for more information about the other parameters you can check the [interface her
 
 ## ``@Options()``
 
-This decorator simplifies the setup of slash commands by using an option object. Seyfert provides a range of user-friendly decorators designed to make defining command options that you can [see here](./options)
+This decorator simplifies the setup of slash commands by using an option object. Seyfert provides a range of user-friendly decorators designed to make defining command options that you can [see here](/commands/options)
 
 
 ## ``@Middlewares()``
 
 Seyfert offers an advanced middleware system that is fully typed and incredibly powerful. This system takes in a list of middlewares, which are functions that run before a command is executed.
 
-You can learn how to create middlewares and use them [here](./middlewares).
+You can learn how to create middlewares and use them [here](/commands/middlewares).
 
 ## ``@LocalesT()``
 
@@ -36,7 +36,7 @@ You can learn how to use them [here](/i18n/usage).
 
 :::tip
 
-We have a dedicated section for sub-commands, you can find it [here](./subcommands).
+We have a dedicated section for sub-commands, you can find it [here](/commands/subcommands).
 
 :::
 

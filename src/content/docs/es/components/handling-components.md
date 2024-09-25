@@ -6,7 +6,7 @@ Habiendo enviado el componente dentro de un canal, es momento de manejar la inte
 
 Primero vamos a crear un archivo dentro del directorio que hemos establecido al inicio de nuestro proyecto para los componentes.
 
-Luego vamos a crear una clase que extienda de [`ComponentCommand`](/api/classes/componentcommand), algo similar a lo que hacemos con comandos simples, y después vamos a establecer el tipo de componente que queremos manejar (`Buttons` o cualquier tipo de `SelectMenu`).
+Luego vamos a crear una clase que extienda de [`ComponentCommand`](https://github.com/tiramisulabs/seyfert/blob/455ed12b0ebcb3ddf55bc8b3274b0ce904becc62/src/components/componentcommand.ts#L14), algo similar a lo que hacemos con comandos simples, y después vamos a establecer el tipo de componente que queremos manejar (`Buttons` o cualquier tipo de `SelectMenu`).
 
 En este ejemplo, he creado un componente para responder `Hello World` a la interacción. He establecido el customId del botón como `hello-world`.
 

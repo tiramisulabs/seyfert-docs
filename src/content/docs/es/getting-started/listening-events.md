@@ -54,4 +54,4 @@ export default createEvent({
 ```
 
 Y eso es todo, puedes crear tantos eventos como quieras. 
-Para más información puedes consultar la lista de todos los eventos de la gateway [aquí](/api/type-aliases/clientnameevents).
+Para más información puedes consultar la lista de todos los eventos de la gateway [aquí](https://github.com/tiramisulabs/seyfert/blob/455ed12b0ebcb3ddf55bc8b3274b0ce904becc62/src/events/hooks/index.ts#L23).
