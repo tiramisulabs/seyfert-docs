@@ -15,6 +15,11 @@ pnpm add kazagumo shoukaku
 
 ### Setup
 
+:::caution
+
+To be able to move forward within this guide it is highly recommended to read the [Understanding declare module](/getting-started/declare-module) for a better understanding of what we are doing.
+:::
+
 For further information about the different options and events of kazagumo see the official [bot example](https://www.npmjs.com/package/kazagumo#example-bot)
 
 <Tabs>
@@ -118,7 +123,7 @@ export default class PlayCommand extends Command {
 		else player.queue.add(result.tracks[0]);
 
 		if (!player.playing && !player.paused) player.play();
-		
+
 		return ctx.write({
 			content:
 				result.type === "PLAYLIST"
