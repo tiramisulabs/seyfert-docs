@@ -66,7 +66,7 @@ Seyfert supports subcommands within prefix commands.
 
 ## Replying to prefix commands
 
-By default when you use `write` or `editOrReply` function it will only send a message to the channel where the command was fired. To make the command being replied you have to set `reply` suboption inside `command` option in the client options. This option is a callback which first parameter is the [`CommandContext`](/api/classes/commandcontext) and expects a boolean to be returned, if is `true` it will reply to the command, if not it will just send a message.
+By default when you use `write` or `editOrReply` function it will only send a message to the channel where the command was fired. To make the command being replied you have to set `reply` suboption inside `command` option in the client options. This option is a callback which first parameter is the [`CommandContext`](https://github.com/tiramisulabs/seyfert/blob/455ed12b0ebcb3ddf55bc8b3274b0ce904becc62/src/commands/applications/chatcontext.ts#L24) and expects a boolean to be returned, if is `true` it will reply to the command, if not it will just send a message.
 
 Here is a detailed example about how it will looks your client with all the modifications mentioned in this guide:
 
