@@ -10,7 +10,7 @@ Hay diferentes tipos de constructores de componentes con diferente personalizaci
 
 ## ActionRow
 
-Todos los constructores se envían dentro de una [`ActionRow`](/api/classes/actionrow). Cada mensaje puede contener un máximo de 5 acciones fila.
+Todos los constructores se envían dentro de una [`ActionRow`](https://github.com/tiramisulabs/seyfert/blob/455ed12b0ebcb3ddf55bc8b3274b0ce904becc62/src/builders/ActionRow.ts#L16). Cada mensaje puede contener un máximo de 5 acciones fila.
 
 Así es como creamos un ActionRow básico:
 
@@ -56,7 +56,7 @@ const row = new ActionRow<Button>().setComponents([button]);
 
 Una ActionRow no debe contener más de un select menu.
 
-Hay diferentes tipos de Select Menu: [`StringSelectMenu`](/api/classes/stringselectmenu), [`UserSelectMenu`](/api/classes/userselectmenu), [`RoleSelectMenu`](/api/classes/roleselectmenu), [`ChannelSelectMenu`](/api/classes/channelselectmenu) y [`MentionableSelectMenu`](/api/classes/mentionableselectmenu).
+Hay diferentes tipos de Select Menu: [`StringSelectMenu`](https://github.com/tiramisulabs/seyfert/blob/455ed12b0ebcb3ddf55bc8b3274b0ce904becc62/src/builders/SelectMenu.ts#L276), [`UserSelectMenu`](https://github.com/tiramisulabs/seyfert/blob/455ed12b0ebcb3ddf55bc8b3274b0ce904becc62/src/builders/SelectMenu.ts#L114), [`RoleSelectMenu`](https://github.com/tiramisulabs/seyfert/blob/455ed12b0ebcb3ddf55bc8b3274b0ce904becc62/src/builders/SelectMenu.ts#L149), [`ChannelSelectMenu`](https://github.com/tiramisulabs/seyfert/blob/455ed12b0ebcb3ddf55bc8b3274b0ce904becc62/src/builders/SelectMenu.ts#L227) and [`MentionableSelectMenu`](https://github.com/tiramisulabs/seyfert/blob/455ed12b0ebcb3ddf55bc8b3274b0ce904becc62/src/builders/SelectMenu.ts#L185).
 
 Vamos a hacer diferentes ActionRows para cada select menu.
 
@@ -152,5 +152,3 @@ const row = new ActionRow<TextInput>().setComponents([input]);
 ```
 </TabItem>
 </Tabs>
-
-Después de crear los componentes tendrá que enviar el ActionRow al campo de componentes. [Ver más abajo](/misc/sending-messages#sending-components-attached-to-the-message).

@@ -4,7 +4,7 @@ title: Decoradores para el Comando
 
 Echa un vistazo a los diferentes decoradores que Seyfert proporciona para crear comandos.
 
-## `@Declare()` [API](/api/functions/declare)
+## `@Declare()`
 
 Este decorador se utiliza para declarar un comando. Se utiliza para definir el nombre del comando, la descripción del comando y las opciones del comando.
 - **name**: El nombre del comando barra.
@@ -13,11 +13,11 @@ Este decorador se utiliza para declarar un comando. Se utiliza para definir el n
 - **guildId**: Ids de servidores donde se puede publicar el comando.
 
 
-## ``@Options()`` [API](/api/functions/options)
+## ``@Options()``
 
 :::tip
 
-Puede obtener más información al respecto [aquí](./options).
+Puede obtener más información al respecto [aquí](/es/commands/options).
 
 :::
 
@@ -25,18 +25,18 @@ Este decorador simplifica la configuración de comandos de barra utilizando un o
 Seyfert proporciona una serie de decoradores fáciles de usar diseñados para que la definición de opciones de comandos sea sencilla.
 
 
-## ``@Middlewares()`` [API](/api/functions/middlewares)
+## ``@Middlewares()`` 
 
 Seyfert ofrece un avanzado sistema de middlewares totalmente typeados e increíblemente potente. 
 Este sistema recibe una lista de middlewares, que son funciones que se ejecutan antes de que se ejecute un comando.
 
-Puedes aprender a crear middlewares y utilizarlos [aquí](./middlewares).
+Puedes aprender a crear middlewares y utilizarlos [aquí](/es/commands/middlewares).
 
 # Decoradores relacionados con subcomandos
 
 :::tip
 
-Tenemos una sección dedicada a los subcomandos, puedes encontrarla [aquí](./subcomandos).
+Tenemos una sección dedicada a los subcomandos, puedes encontrarla [aquí](/es/commands/subcommands).
 
 :::
 
@@ -48,6 +48,6 @@ Seyfert se encarga de todos los aspectos de los comandos por ti, incluido el sis
 
 `@Group()` es el decorador para indicar a un subcomando (comando hijo) a qué grupo pertenece.
 
-## `@AutoLoad` [API](/api/functions/autoload)
+## `@AutoLoad`
 
 Este decorador se utiliza para cargar automáticamente todos los archivos de subcomandos en el directorio donde se encuentra `parent`.

@@ -78,7 +78,7 @@ export default class HelloWorldCommand extends Command {
 
 Discord añade la posibilidad de enviar mensajes incrustados dentro de un canal.
 
-Para enviar esos mensajes incrustados con Seyfert, tendremos que construir el embed con el constructor de Embed. Para obtener más información sobre la personalización del mensaje incrustado, puedes consultar el [constructor de Embed](/api/classes/embed) dentro de esta documentación.
+Para enviar esos mensajes incrustados con Seyfert, tendremos que construir el embed con el constructor de Embed. Para obtener más información sobre la personalización del mensaje incrustado, puedes consultar el [constructor de Embed](https://github.com/tiramisulabs/seyfert/blob/455ed12b0ebcb3ddf55bc8b3274b0ce904becc62/src/builders/Embed.ts#L13) dentro de esta documentación.
 
 Aquí hay un ejemplo de cómo enviar un embed con un título y descripción personalizados.
 
@@ -100,11 +100,11 @@ export default class HelloWorldCommand extends Command {
 
 ## Enviando componentes adjuntos al mensaje
 
-Discord incluye la posibilidad de enviar componentes adjuntos al mensaje dentro de un `ActionRow`. Estos componentes pueden ser [`Buttons`](/api/classes/button) o [`SelectMenus`](/api/classes/selectmenu/).
+Discord incluye la posibilidad de enviar componentes adjuntos al mensaje dentro de un `ActionRow`. Estos componentes pueden ser [`Buttons`](https://github.com/tiramisulabs/seyfert/blob/455ed12b0ebcb3ddf55bc8b3274b0ce904becc62/src/builders/Button.ts#L8) o [`SelectMenus`](https://github.com/tiramisulabs/seyfert/blob/455ed12b0ebcb3ddf55bc8b3274b0ce904becc62/src/builders/SelectMenu.ts#L60).
 
-Los componentes se almacenan en un [`ActionRow`](/api/classes/actionrow) que puede contener hasta 5 botones diferentes y solo un menú de selección y no puede contener otro ActionRow en su interior.
+Los componentes se almacenan en un [`ActionRow`](https://github.com/tiramisulabs/seyfert/blob/455ed12b0ebcb3ddf55bc8b3274b0ce904becc62/src/builders/ActionRow.ts#L16) que puede contener hasta 5 botones diferentes y solo un menú de selección y no puede contener otro ActionRow en su interior.
 
-En este ejemplo vamos a enviar dos filas de acciones dentro del mensaje. Cada fila va a tener un botón y un [menú de selección de cadena](/api/classes/stringselectmenu) adjuntos respectivamente.
+En este ejemplo vamos a enviar dos filas de acciones dentro del mensaje. Cada fila va a tener un botón y un [menú de selección de cadena](https://github.com/tiramisulabs/seyfert/blob/455ed12b0ebcb3ddf55bc8b3274b0ce904becc62/src/builders/SelectMenu.ts#L276) adjuntos respectivamente.
 
 ```ts title="src/commands/helloworld.ts" ins={1-7} {"1. Construir botón": 12-19} {"2. Construir selectmenu": 21-29} ins={30} showLineNumbers
 import {
@@ -143,5 +143,5 @@ export default class HelloWorldCommand extends Command {
 
 :::note
 
-Para más información sobre componentes, consulta la [guía de componentes](../components/introduction).
+Para más información sobre componentes, consulta la [guía de componentes](/es/components/building-components).
 :::

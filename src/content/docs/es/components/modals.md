@@ -1,7 +1,7 @@
 ---
 title: Modals
 ---
-En Seyfert también se pueden crear modals. Se crean con un constructor como otros componentes y luego se adjuntan componentes [`TextInput`](/api/classes/textinput) dentro de un [`ActionRow`](/api/classes/actionrow).
+En Seyfert también se pueden crear modals. Se crean con un constructor como otros componentes y luego se adjuntan componentes [`TextInput`](https://github.com/tiramisulabs/seyfert/blob/455ed12b0ebcb3ddf55bc8b3274b0ce904becc62/src/builders/Modal.ts#L113) dentro de un [`ActionRow`](https://github.com/tiramisulabs/seyfert/blob/455ed12b0ebcb3ddf55bc8b3274b0ce904becc62/src/builders/ActionRow.ts#L16).
 
 Aquí tienes un ejemplo de cómo crear un modal con dos campos de texto:
 

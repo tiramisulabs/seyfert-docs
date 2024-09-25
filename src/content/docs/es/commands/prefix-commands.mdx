@@ -6,7 +6,7 @@ import { TabItem, Tabs } from '@astrojs/starlight/components'
 
 ## Configuración de prefijos
 
-Seyfert no solo maneja comandos de aplicación, sino también `comandos de prefijo`. No están habilitados por defecto, pero puedes habilitarlos configurando una opción dentro de [`ClientOptions`](/api/interfaces/ClientOptions). Tenemos acceso a la opción `command` donde podemos especificar una subopción llamada `prefix`. Esta opción espera un callback que devuelve un array de posibles prefijos para ese comando. Como el callback devuelve un [`Message`](/api/classes/message) es bastante simple manejar diferentes prefijos por servidor.
+Seyfert no solo maneja comandos de aplicación, sino también `comandos de prefijo`. No están habilitados por defecto, pero puedes habilitarlos configurando una opción dentro de [`ClientOptions`](https://github.com/tiramisulabs/seyfert/blob/455ed12b0ebcb3ddf55bc8b3274b0ce904becc62/src/client/client.ts#L230). We have to access to the `command` option where we can specify a suboption called `prefix`. This option expects a callback returning an array of possible prefixes for that command. As the callback returns a [`Message`](https://github.com/tiramisulabs/seyfert/blob/455ed12b0ebcb3ddf55bc8b3274b0ce904becc62/src/structures/Message.ts#L123). Tenemos acceso a la opción `command` donde podemos especificar una subopción llamada `prefix`. Esta opción espera un callback que devuelve un array de posibles prefijos para ese comando. Como el callback devuelve un [`Message`](https://github.com/tiramisulabs/seyfert/blob/455ed12b0ebcb3ddf55bc8b3274b0ce904becc62/src/structures/Message.ts#L123) property inside [`CommandContext`](https://github.com/tiramisulabs/seyfert/blob/455ed12b0ebcb3ddf55bc8b3274b0ce904becc62/src/commands/applications/chatcontext.ts#L24) es bastante simple manejar diferentes prefijos por servidor.
 
 Aquí tienes un ejemplo en el que vamos a configurar múltiples prefijos para todos los comandos.
 
@@ -30,9 +30,9 @@ const client = new Client({
 
 Habiendo configurado nuestros prefijos para los comandos, es hora de hacerlos funcionar.
 
-Y por suerte, el manejo funciona como los comandos de aplicación. La única diferencia es que recibimos una propiedad opcional [`Message`](/api/classes/message) dentro de [`CommandContext`](/api/classes/commandcontext).
+Y por suerte, el manejo funciona como los comandos de aplicación. La única diferencia es que recibimos una propiedad opcional [`Message`](https://github.com/tiramisulabs/seyfert/blob/455ed12b0ebcb3ddf55bc8b3274b0ce904becc62/src/structures/Message.ts#L123) dentro de [`CommandContext`](https://github.com/tiramisulabs/seyfert/blob/455ed12b0ebcb3ddf55bc8b3274b0ce904becc62/src/commands/applications/chatcontext.ts#L24).
 
-Para que esta propiedad aparezca en nuestro CommandContext lo único que debemos hacer es declarar el módulo de Seyfert y configurar la propiedad `withPrefix` dentro de [`InternalOptions`](/api/interfaces/internaloptions) en verdadero. Puedes ver este [ejemplo detallado](/guides/declare-module#internal-options). 
+Para que esta propiedad aparezca en nuestro CommandContext lo único que debemos hacer es declarar el módulo de Seyfert y configurar la propiedad `withPrefix` dentro de [`InternalOptions`](https://github.com/tiramisulabs/seyfert/blob/455ed12b0ebcb3ddf55bc8b3274b0ce904becc62/src/commands/applications/shared.ts#L11) en verdadero. Puedes ver este [ejemplo detallado](/guides/declare-module#internal-options).
 
 
 En este ejemplo vamos a crear un comando que `republica` el mensaje que fue enviado en un canal de anuncios.
@@ -66,7 +66,7 @@ Seyfert soporta subcomandos dentro de los comandos de prefijo.
 
 ## Respondiendo a comandos de prefijo
 
-Por defecto, cuando usas la función `write` o `editOrReply`, solo enviará un mensaje al canal donde se disparó el comando. Para hacer que el comando sea respondido tienes que configurar la subopción `reply` dentro de la opción `command` en las opciones del cliente. Esta opción es un callback cuyo primer parámetro es el [`CommandContext`](/api/classes/commandcontext) y espera que se devuelva un booleano, si es `true` responderá al comando, si no, solo enviará un mensaje.
+Por defecto, cuando usas la función `write` o `editOrReply`, solo enviará un mensaje al canal donde se disparó el comando. Para hacer que el comando sea respondido tienes que configurar la subopción `reply` dentro de la opción `command` en las opciones del cliente. Esta opción es un callback cuyo primer parámetro es el [`CommandContext`](https://github.com/tiramisulabs/seyfert/blob/455ed12b0ebcb3ddf55bc8b3274b0ce904becc62/src/commands/applications/chatcontext.ts#L24) y espera que se devuelva un booleano, si es `true` responderá al comando, si no, solo enviará un mensaje.
 
 Aquí tienes un ejemplo detallado de cómo se verá tu cliente con todas las modificaciones mencionadas en esta guía:
 

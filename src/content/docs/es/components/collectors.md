@@ -13,7 +13,7 @@ Si el proceso donde creaste el colector de componentes se detiene, el colector d
 
 ## Construcción de colectores
 
-Los colectores se construyen utilizando el método [`createComponentCollector`](/api/classes/basemessage#createcomponentcollector) en un mensaje, el cual es heredado por [`BaseMessage`](/api/classes/basemessage). Este método devuelve un objeto que representa un colector.
+Los colectores se construyen utilizando el método [`createComponentCollector`](https://github.com/tiramisulabs/seyfert/blob/455ed12b0ebcb3ddf55bc8b3274b0ce904becc62/src/components/handler.ts#L39) en un mensaje, el cual es heredado por [`BaseMessage`](https://github.com/tiramisulabs/seyfert/blob/455ed12b0ebcb3ddf55bc8b3274b0ce904becc62/src/structures/Message.ts#L44). Este método devuelve un objeto que representa un colector.
 
 Aquí tienes un ejemplo de cómo construir un colector simple después de enviar un mensaje con un botón adjunto en un comando de `hola mundo`.
 

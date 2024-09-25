@@ -108,7 +108,7 @@ export const loggerMiddleware = createMiddleware<void>((middle) => {
 });
 ```
 
-Now every time the `ping` command is executed in a DM, the logger middleware will stop the execution of the command and send the error message to the handler. Learn how to handle errors [here](handling-errors#middleware-return-stop).
+Now every time the `ping` command is executed in a DM, the logger middleware will stop the execution of the command and send the error message to the handler. Learn how to handle errors [here](/commands/handling-errors#middleware-return-stop).
 
 :::note
 Notice you can access to the interaction data using `middle.context.interaction`

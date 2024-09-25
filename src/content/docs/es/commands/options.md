@@ -5,7 +5,7 @@ title: Opciones de un Comando
 Cada función recibe los siguientes parámetros:
 - **description**: La descripción de la opción.
 - **required**: Si la opción es obligatoria.
-- **value**? Callback donde se puede filtrar el valor enviado por Discord antes de que llegue al comando principal. [Cómo usar aquí](#using-the-value-callback)
+- **value**? Callback donde se puede filtrar el valor enviado por Discord antes de que llegue al comando principal. [Cómo usar aquí](#usando-el-callback-de-value)
 ## Tipos de opciones
 
 ### createStringOption
@@ -171,4 +171,4 @@ import { OKFunction } from 'seyfert';
 })
 ```
 
-En [Crear su primer comando](/es/guides/first-command#using-options) se ofrece un breve ejemplo.
+En [Crear su primer comando](/es/getting-started/first-command#usando-opciones) se ofrece un breve ejemplo.
