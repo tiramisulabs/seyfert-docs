@@ -56,11 +56,31 @@ export default class CrosspostCommand extends Command {
 };
 ```
 
-:::note
-Currently, there isn't any support for applications which use both `prefix commands` and `application commands` for selecting which commands are from a specific type. All the commands are consider as application commands and prefix commands.
-:::
+### Ignoring 
 
-:::note
+You can decide whether a command will ignore being a slash command or a prefix command.
+```ts showLineNumbers copy ins={5,11}
+import { 
+    Command,
+    CommandContext,
+    Declare,
+    IgnoreCommand
+} from 'seyfert';
+
+@Declare({
+    name: 'crosspost',
+    description: 'Cross post and announcement message.',
+    ignore: IgnoreCommand.Slash
+})
+export default class CrosspostCommand extends Command {
+    async run(ctx: CommandContext){
+        if(ctx.message) await ctx.message.crosspost();
+        return ctx.write({ content: 'I have cross posted your announcement.'});
+    }
+};
+```
+
+:::tip
 Seyfert supports subcommands within prefix commands.
 :::
 

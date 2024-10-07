@@ -56,11 +56,30 @@ export default class CrosspostCommand extends Command {
 };
 ```
 
-:::note
-Actualmente, no hay soporte para aplicaciones que usen tanto `comandos de prefijo` como `comandos de aplicación` para seleccionar qué comandos son de un tipo específico. Todos los comandos se consideran como comandos de aplicación y comandos de prefijo.
-:::
+### Ignorando 
 
-:::note
+Puedes decidir si un comando ignorara ser un slash command o un comando de texto
+```ts showLineNumbers copy ins={5,11}
+import { 
+    Command,
+    CommandContext,
+    Declare,
+    IgnoreCommand
+} from 'seyfert';
+
+@Declare({
+    name: 'crosspost',
+    description: 'Republicar un mensaje de anuncio.',
+    ignore: IgnoreCommand.Slash
+})
+export default class CrosspostCommand extends Command {
+    async run(ctx: CommandContext){
+        if(ctx.message) await ctx.message.crosspost();
+        return ctx.write({ content: 'He republicado tu anuncio.'});
+    }
+};
+```
+:::tip
 Seyfert soporta subcomandos dentro de los comandos de prefijo.
 :::
 
