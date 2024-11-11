@@ -1,0 +1,62 @@
+---
+title: Entendiendo el sharding
+---
+import { TabItem, Tabs } from '@astrojs/starlight/components';
+
+# Sharding
+
+In seyfert the sharding approach (sharding for friends) is to give the full benefit of scaling while keeping the same structure in your project.
+
+## Why sharding?
+
+While, by default, seyfert handles sharding internally in the `Client` instance, this has a processing limit, starting with the fact that javascript runtimes are single-threaded, so all the load is evaluated together, spreading this load is what sharding is all about (although it is still an imperfect technique).
+
+## Managing shards
+
+The base of the `Worker` is to allow to execute code in parallel in different parts of the cpu, either in threads or different processes. In terms of discord, this means the ability to connect several `shards` by spreading the load on each `Worker`, for seyfert this is just changing the `mode` property in the `WorkerManager` to decide the execution mode between `threads` to `spawn` clients on processor threads or `cluster` to `spawn` clients on different processes of the runtime.
+
+<Tabs>
+	<TabItem label='manager.ts'>
+```ts showLineNumbers
+import { WorkerManager } from 'seyfert';
+
+const manager = new WorkerManager({
+	mode: "threads",
+	// ./src/client.ts for bun and deno (?
+	path: "./dist/client.js",
+	// you can override a lot of options, like number of workers, shards per worker...
+});
+
+manager.start();
+```
+	</TabItem>
+	<TabItem label='client.ts'>
+```ts showLineNumbers
+import { WorkerClient } from "seyfert";
+
+const client = new WorkerClient();
+
+client.start();
+
+declare module 'seyfert' {
+	interface UsingClient extends ParseClient<WorkerClient> {}
+}
+```
+	</TabItem>
+</Tabs>
+
+Too simple? Seyfert takes care of all the logic so your project shouldn't change much just by switching to a `WorkerSharding`.
+
+## Cache
+Unlike what other libraries may be, by having fully unified sharding seyfert maintains power in some areas, among them `the cache`. The cache stays centralized in the main process, i.e. the `WorkerManager` executor, no matter where you are in the code, you will always have access to all the data.
+
+## Talking to other workers
+If for some reason (I did not find any for the example), you want a specific worker to execute an action that another one received, you can simply ask it.
+
+```ts
+// I wish typescript allowed to represent parameters like python
+client.tellWorker(workerId = 1, (worker, vars) => console.log(`Hii worker #${worker.workerId} from ${vars.workerId}`), vars = { workerId: client.workerId});
+```
+# Advanced
+
+While seyfert takes care of much of the logic, that does not mean that it is not applicable on the developer's side. Not only can you provide your own system by implementing `CustomManagerAdapter`, you can also do horizontal scaling either statically by defining the number of workers and shards on each machine or dynamically with a `central` api that balances things out. We hope to provide a better implementation of this soon.
