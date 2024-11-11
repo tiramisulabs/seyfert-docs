@@ -176,6 +176,13 @@ export default [
         collapsed: true,
         items: [
           {
+            label: 'Sharding',
+            translations: {
+              es: 'Sharding'
+            },
+            link: '/recipes/sharding'
+          },
+          {
             label: 'Monetization',
             translations: {
               es: 'Monetizacion'
