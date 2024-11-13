@@ -41,8 +41,13 @@ import { Client } from 'seyfert';
 
 const client = new Client();
 
-client.start().then(() => client.uploadCommands());
+client.start().then(() => client.uploadCommands({ cachePath: './commands.json' }));
 ```
+
+:::tip[Publicando commandos]
+Al asignar la propiedad `cachePath`, seyfert creara un cache de tus comandos, solo actualizandolos en la api cuando es necesario
+:::
+
 
 Bastante simple, ¿verdad? Pero a veces los comandos no se limitan a recibir una petición y responderla, también hay que pensar en lo que quiere el usuario, ahí es donde entran las `options`, hagamos que la respuesta de este comando sea algo privado.
 

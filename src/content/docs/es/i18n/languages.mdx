@@ -1,20 +1,20 @@
 ---
-title: Supporting different languages
+title: Soportando diferentes lenguajes
 sidebar:
-    label: Language support
+    label: Soporte a traducciones
 ---
 
 import { FileTree } from '@astrojs/starlight/components'
 
-Seyfert has a i18n built-in feature that allows you to create language files and use them in your bot.
+Seyfert tiene una función i18n incorporada que te permite crear archivos de idioma y utilizarlos en tu bot.
 
 :::note
-For this section we are going to follow the setup we did in **Getting Started** for example purposes
+Para esta sección vamos a seguir la configuración que hicimos en **Empezando** a modo de ejemplo.
 :::
 
-## Updating seyfert config
+## Actualizando seyfert config
 
-Before starting this chapter we could update `seyfert.config.js` to tell seyfert where our languages file will be.
+Antes de empezar este capítulo debe actualizar `seyfert.config.js` para decirle a seyfert donde estará nuestro fichero de idiomas.
 
 ```ts {12} title="seyfert.config.js" showLineNumbers
 // @ts-check
@@ -28,14 +28,14 @@ module.exports = config.bot({
     output: "dist",
     commands: "commands",
     events: "events",
-    langs: "languages" // - src/languages will be our languages directory
+    langs: "languages" // - src/languages será nuestro directorio de idiomas
   }
 });
 ```
 
-## Creating a language file
+## Creación de un archivo de traducciones
 
-Each language file shall export by default an object containing the translations for the language.
+Cada fichero de idioma exportará por defecto un objeto que contendrá las traducciones del idioma.
 
 ```ts title="languages/en.ts" showLineNumbers wrap
 export default {
@@ -52,7 +52,7 @@ export default {
 }
 ```
 
-You can create as many language files as you want, seyfert will load them and they will be available to use in your bot.
+Puedes crear tantos archivos de idioma como quieras, seyfert los cargará y estarán disponibles para usar en tu bot.
 
 ```ts title="languages/es.ts" showLineNumbers wrap
 import English from "./en";
@@ -68,22 +68,22 @@ export default {
     "También puedes usar arrays para crear una lista de traducciones",
     "Este es el segundo elemento de la lista"
   ].join("\n")
-} satisfies English; // This is a utility type to ensure that object is the same across languages
+} satisfies English; // Este es un type de utilidad para asegurar que el objeto es el mismo en todos los idiomas
 ```
 
 :::note
 
-Each key should return either a string or a function that returns a string.
+Cada clave debe devolver una cadena o una función que devuelva una cadena.
 
 :::
 
 :::caution
 
-The name of the file will be the language code, that you will use to get the language translations.
+El nombre del archivo será el código de idioma que utilizará para obtener las traducciones.
 
 :::
 
-Next we must do some updates to the `declare module` on index file:
+NA continuación debemos hacer algunas actualizaciones al `declare module` en el archivo index:
 
 ```ts {1,12} title="src/index.ts" copy
 import type English from './languages/en';
@@ -95,30 +95,29 @@ client.start();
 
 declare module 'seyfert' {
   interface UsingClient extends ParseClient<Client<true>> { }
-  // interface UsingClient extends ParseClient<HttpClient> { } // If you are using the rest api
+  // interface UsingClient extends ParseClient<HttpClient> { } // Si utiliza la API Rest
 
   interface DefaultLocale extends ParseLocales<typeof English> { }
 }
 ```
 
-:::note[Preventing errors]
-You can assign a default language to avoid getting `undefined`.
+:::tip[Previniendo errores]
+Puedes asignar un lenguaje por defecto para evitar obtener `undefined`
 ```ts
 client.setService({ langs: { default: 'en-US' } });
 ```
 :::
 
-:::tip
-You can pass any of the language files to the `DefaultLocale` interface since they should be the same object structure.
-
+:::note
+Puedes pasar cualquiera de los archivos de idioma a la interfaz `DefaultLocale` ya que deben tener la misma estructura de objeto.
 :::
 
 
-After doing this, you can use the language in your commands, events, components, etc. 
+Una vez hecho esto, podrá utilizar el idioma en sus comandos, eventos, componentes, etc. 
 
-## Using translations in your commands
+## Usando traducciones en tus comandos
 
-Let's see an example with our `ping` command by adding an option to respond in a specific language
+Veamos un ejemplo con nuestro comando `ping` añadiendo una opción para responder en un idioma específico
 
 ```ts {35, 41} title="src/commands/ping.ts" showLineNumbers
 import {
@@ -155,10 +154,10 @@ export default class PingCommand extends Command {
     const flags = ctx.options.hide ? MessageFlags.Ephemeral : undefined;
     const lang = ctx.options.language;
 
-    // Get the translations for the language
+    // Obtener las traducciones del idioma
     const t = ctx.t(lang);
 
-    // average latency between shards
+    // latencia promedio entre shards
     const ping = ctx.client.gateway.latency;
 
     await ctx.write({
@@ -170,7 +169,7 @@ export default class PingCommand extends Command {
 }
 ```
 
-Below is the current file tree of the project if you did follow the previous steps.
+A continuación se muestra el árbol de archivos actual del proyecto si ha seguido los pasos anteriores.
 
 <FileTree>
 - src

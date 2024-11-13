@@ -80,7 +80,7 @@ Ahora cada vez que se ejecute el comando `ping`, el middleware logger registrar�
 Los middlewares se ejecutan en el orden en que se agregan.
 :::
 
-## Middleware de parada
+## Parando middlewares
 
 Como dijimos, puedes usar middlewares para hacer verificaciones, y puedes detener la ejecución del comando si la verificación falla.
 
@@ -181,5 +181,33 @@ export default class PingCommand extends Command {
             content: `Pong! Time: ${time}`,
         });
     }
+}
+```
+
+## Middlewares globales
+
+Los middlewares globales siguen la misma regla y estructura explicada anteriormente, con la breve diferencia de que tienen una propiedad unica en el context y se declaran de forma separada
+
+```ts
+import { type ParseGlobalMiddlewares, Client } from 'seyfert';
+import { middlewares } from "./path/to/middlewares";
+import { global } from "./path/to/globas";
+
+const globalMiddlewares: (keyof typeof global)[] = ['logger']
+
+// Register middleware
+const client = new Client({
+  globalMiddlewares
+});
+
+client.setServices({
+  middlewares: { ...global, ...middlewares },
+});
+
+declare module 'seyfert' {
+  interface RegisteredMiddlewares
+    extends ParseMiddlewares<typeof middlewares & typeof global> {}
+  interface GlobalMetadata
+    extends ParseGlobalMiddlewares<typeof global> {}
 }
 ```

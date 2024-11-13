@@ -1,0 +1,93 @@
+---
+title: Usando traducciones
+---
+
+import { TabItem, Tabs, FileTree } from '@astrojs/starlight/components'
+
+En Seyfert la posibilidad de llevar tu bot a múltiples traducciones es bastante sencilla.
+
+:::note
+En esta sección se presupone que ha leído y comprendido [cómo configurar los idiomas].(/i18n/languages).
+:::
+
+## Cómo usar las traducciones
+
+Seyfert proporciona una manera de utilizar las traducciones en tu bot. La forma de hacerlo es bastante simple.
+
+> Hay algunos [decoradores](/comandos/decoradores) que se pueden utilizar para usar las traducciones en tu código.
+
+### Usando el decorador `@LocalesT`
+
+Este decorador obtendrá todas las localizaciones que hayas definido como `DefaultLocale`.
+
+<TabItem label='supremacy.ts'>
+```ts title="src/commands/supremacy.ts" showLineNumbers
+import { Command, Declare, LocalesT } from 'seyfert';
+
+@Declare({
+	name: 'supremacy',
+	description: 'Ganyu Supremacy.'
+})
+// También puedes pasar 'undefined'
+// Si no quieres añadir un nombre o descripción localizada del comando.
+// Así: @LocalesT(undefined, 'algun.comando.descripcion')
+@LocalesT('hello', 'foo.bar')
+export default class SupremacyCommand extends Command { }
+```
+</TabItem>
+
+### Uso del decorador `@GroupsT
+
+Este decorador tiene una estructura especial y puede ser un poco confuso.
+
+> El decorador tiene la siguiente estructura:
+```ts
+@GroupsT({
+    // Este es el nombre del grupo... Creado en el comando padre
+    groupName: {
+        // ¡Es obligatorio! Es el nombre por defecto del grupo.
+        defaultDescription,
+        // ¡Es opcional! Es el nombre localizado del grupo.
+        name,
+    }
+})
+```
+
+> Una vez que entiendas cómo funciona, puedes utilizarlo de la siguiente manera:
+
+<TabItem label='supremacy.ts'>
+```ts title="src/commands/supremacy.ts" showLineNumbers
+import { Command, LocalesT } from 'seyfert';
+
+@GroupsT({
+    supremacy: {
+        defaultDescription: "Ganyu Supremacy.",
+        name: "foo.bar",
+    }
+})
+export default class SupremacyCommand extends Command { }
+```
+</TabItem>
+
+### Uso de la propiedad `locales` del objeto
+
+Seyfert proporciona una propiedad especial para añadir localizaciones en las opciones de los comandos.
+
+<TabItem label='supremacy.ts'>
+```ts title="src/commands/supremacy.ts" showLineNumbers
+import { createStringOption } from 'seyfert';
+
+const options = {
+    supremacy: createStringOption({
+        description: "Enter a supremacy name.",
+        required: true,
+        // ¡Si no quieres añadir un nombre o descripción localizada del comando!
+        // Simplemente elimine la propiedad del objeto
+        locales: {
+            name: "hello",
+            description: "foo.bar",
+        }
+    })
+}
+```
+</TabItem>

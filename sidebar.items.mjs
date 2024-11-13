@@ -183,6 +183,13 @@ export default [
             link: '/recipes/sharding'
           },
           {
+            label: 'Cache',
+            translations: {
+              es: 'Cache'
+            },
+            link: '/recipes/cache'
+          },
+          {
             label: 'Monetization',
             translations: {
               es: 'Monetizacion'
