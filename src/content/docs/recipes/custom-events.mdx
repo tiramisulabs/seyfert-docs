@@ -1,0 +1,90 @@
+---
+title: Custom Events
+---
+:::tip
+As in other sections, [module augmentation](/getting-started/declare-module) will be used, we recommend reading it first.
+:::
+
+Seyfert allows to load, integrate and execute custom “events” to be called anywhere, the use of [music modules](/recipes/music) will be put into practice.
+## Integrating
+:::danger
+Note that there may exist events with the same name, in runtime they will end up being overwritten.
+:::
+
+You must remind yourself that events exist, let's type them:
+
+```ts title="index.ts"
+import type { ShoukakuEvents } from 'shoukaku';
+
+type MappedEvents = {
+    [K in keyof Omit<ShoukakuEvents, 'ready'>]: (...params: ShoukakuEvents[K]) => never;
+};
+
+declare module "seyfert" {
+	interface CustomEvents extends MappedEvents {
+		shoukakuReady: (...params: ShoukakuEvents['ready']) => never;
+	}
+}
+```
+
+### Loading events
+
+This is just here to flex that you don't have to do anything, just put your events in the designated folder in `seyfert.config`.
+```ts title="events/music/ready.ts"
+import { createEvent } from 'seyfert';
+
+export default createEvent({
+	data: { name: "shoukakuReady", once: true },
+	run: (name) => {
+		console.log(`Lavalink ${name}: Ready!`);
+	}
+});
+```
+
+## Executing
+
+```ts title="index.ts" {3,28,30-32,38-40}
+import { Client } from "seyfert";
+import { Kazagumo } from "kazagumo";
+import type { ShoukakuEvents } from 'shoukaku';
+import { type NodeOption, Connectors } from "shoukaku";
+
+const client = new Client();
+const nodes: NodeOption[] = [
+	{
+		name: "Node",
+		url: "localhost:2333",
+		auth: "youshallnotpass",
+		secure: false
+	}
+];
+
+//Basic configuration, perfect for this case
+client.kazagumo = new Kazagumo(
+	{
+		defaultSearchEngine: "youtube",
+		send: (guildId, payload) =>
+			client.gateway.send(client.gateway.calculateShardId(guildId), payload)
+	},
+	new Connectors.Seyfert(client),
+	nodes
+);
+
+//To see whether the node is connected
+client.kazagumo.shoukaku.on("ready", (...args) => client.events?.runCustom('ready', ...args));
+
+type MappedEvents = {
+    [K in keyof Omit<ShoukakuEvents, 'ready'>]: (...params: ShoukakuEvents[K]) => never;
+};
+
+declare module "seyfert" {
+	interface Client {
+		kazagumo: Kazagumo;
+	}
+	interface CustomEvents extends MappedEvents {
+		shoukakuReady: (...params: ShoukakuEvents['ready']) => never;
+	}
+}
+
+client.start().then(() => client.uploadCommands());
+```
