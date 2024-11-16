@@ -95,15 +95,15 @@ Currently, Seyfert supports two types of applications: one based on the Discord 
 ### Configuration
 
 Once `tsconfig.json` has been modified, we still have a few steps to follow before we can run our bot. In this case, you must tell your project's structure to seyfert:
-so create a file called `seyfert.config.js` in the root folder of your project and add the following code:
+so create a file called `seyfert.config.mjs` in the root folder of your project and add the following code:
 
 <Tabs>
     <TabItem label="Gateway">
- ```js title="seyfert.config.js" copy wrap 
+ ```js title="seyfert.config.mjs" copy wrap 
 // @ts-check is better
 const { config } = require('seyfert');
 
-module.exports = config.bot({
+export default config.bot({
     token: process.env.BOT_TOKEN ?? "",
     intents: ["Guilds"],
     locations: {
@@ -114,11 +114,11 @@ module.exports = config.bot({
 ```
     </TabItem>
     <TabItem label="HTTP">
-```js title="seyfert.config.js" copy
+```js title="seyfert.config.mjs" copy
 // @ts-check is better
 const { config } = require('seyfert');
 
-module.exports = config.http({
+export default config.http({
     token: process.env.BOT_TOKEN ?? "",
     applicationId: process.env.BOT_APP_ID,
     port: 3000, // by default is 8080
@@ -193,7 +193,7 @@ So after finishing these steps, your project structure should look like this:
 
 - src
   - index.ts
-- seyfert.config.js
+- seyfert.config.mjs
 - package.json
 - .env
 - tsconfig.json

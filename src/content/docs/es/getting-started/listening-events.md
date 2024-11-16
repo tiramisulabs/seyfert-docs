@@ -10,11 +10,11 @@ Esta sección sólo es necesaria para aplicaciones que usen la gateway, por lo q
 
 En primer lugar, debe indicarle a Seyfert dónde se crearán sus eventos, esto se hace desde su archivo de configuración.
 
-```ts {11} title="seyfert.config.js" showLineNumbers
+```ts {11} title="seyfert.config.mjs" showLineNumbers
 // @ts-check
 const { config } = require('seyfert');
 
-module.exports = config.bot({
+export default config.bot({
   token: process.env.BOT_TOKEN ?? "",
   intents: ["Guilds"],
   locations: {

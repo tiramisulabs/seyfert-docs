@@ -16,8 +16,8 @@ In order to receive `poll events`, some new intents are required.
 
 > This is an extended section of the [configuration file](/getting-started/setup-project#configuration).
 
-```js title='seyfert.config.js' showLineNumbers
-module.exports = config.bot({
+```js title='seyfert.config.mjs' showLineNumbers
+export default config.bot({
    //... other options
    intents: ['GuildMessagePolls', 'DirectMessagePolls'],
 });
@@ -104,7 +104,7 @@ It’s suppose you have the following directory structure:
 	 	- end.command.ts
 	 	- parent.ts
  - index.ts
-- seyfert.config.js
+- seyfert.config.mjs
 - package.json
 - tsconfig.json
 </FileTree>

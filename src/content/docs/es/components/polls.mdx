@@ -16,8 +16,8 @@ Para recibir los `eventos de encuestas`, se necesitan nuevos intents.
 
 > Esta es una sección ampliada del [archivo de configuración](/es/getting-started/setup-project#configuración).
 
-```js title='seyfert.config.js' showLineNumbers
-module.exports = config.bot({
+```js title='seyfert.config.mjs' showLineNumbers
+export default config.bot({
    //... otras opciones
    intents: ['GuildMessagePolls', 'DirectMessagePolls'],
 });
@@ -110,7 +110,7 @@ Supongamos que tienes la siguiente estructura de directorios:
 	 	- end.command.ts
 	 	- parent.ts
  - index.ts
-- seyfert.config.js
+- seyfert.config.mjs
 - package.json
 - tsconfig.json
 </FileTree>

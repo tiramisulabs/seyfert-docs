@@ -55,7 +55,7 @@ Es muy recomendable utilizar archivos `.ts`, `.js` para tus traducciones, ¡así
 :::
 
 :::warning
-Si utiliza json para esto (no recomendado), debe añadir `../` a la ruta en su `seyfert.config.js` ya que typescript ignora los archivos json que no se importan manualmente.
+Si utiliza json para esto (no recomendado), debe añadir `../` a la ruta en su `seyfert.config.mjs` ya que typescript ignora los archivos json que no se importan manualmente.
 :::
 
 ```ts copy

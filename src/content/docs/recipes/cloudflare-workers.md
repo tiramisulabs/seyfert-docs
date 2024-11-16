@@ -2,7 +2,7 @@
 title: Using Cloudflare Workers
 ---
 
-Seyfert supports Cloudflare Workers, you can setup it by configuring `seyfert.config.js` with `config.http` [see more info here](/getting-started/setup-project#configuration)
+Seyfert supports Cloudflare Workers, you can setup it by configuring `seyfert.config.mjs` with `config.http` [see more info here](/getting-started/setup-project#configuration)
 
 :::note
 
@@ -26,7 +26,7 @@ npm add @slipher/generic-adapter
 and your `index.ts` shall follow the following example:
 
 ```ts copy
-import '../seyfert.config.js'; // ye, importing our seyfert.config.js
+import '../seyfert.config.mjs'; // ye, importing our seyfert.config.mjs
 import { HttpClient } from 'seyfert';
 import { GenericAdapter } from '@slipher/generic-adapter';
 
@@ -53,7 +53,7 @@ export default {
 and the same when we load both `components` and `langs`
 
 ```ts copy
-import '../seyfert.config.js'; // ye, importing our seyfert.config.js
+import '../seyfert.config.mjs'; // ye, importing our seyfert.config.mjs
 import { HttpClient } from 'seyfert';
 
 // commands

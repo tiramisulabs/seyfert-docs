@@ -12,13 +12,13 @@ This section is only necessary for gateway applications, so if your bot is built
 
 ## Updating seyfert config
 
-Before starting this chapter we shall update `seyfert.config.js` in order to tell seyfert where our events file will be.
+Before starting this chapter we shall update `seyfert.config.mjs` in order to tell seyfert where our events file will be.
 
-```ts {11} title="seyfert.config.js" showLineNumbers
+```ts {11} title="seyfert.config.mjs" showLineNumbers
 // @ts-check
 const { config } = require('seyfert');
 
-module.exports = config.bot({
+export default config.bot({
   token: process.env.BOT_TOKEN ?? "",
   intents: ["Guilds"],
   locations: {
@@ -75,7 +75,7 @@ Below is the current file tree of the project if you did follow the previous ste
 		- **guildDelete.ts**
 	- index.ts
 - package.json
-- seyfert.config.js
+- seyfert.config.mjs
 - .env
 - tsconfig.json
 </FileTree>

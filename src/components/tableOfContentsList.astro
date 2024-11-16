@@ -17,6 +17,7 @@ const { toc, isMobile = false, depth = 0 } = Astro.props;
                 <a href={"#" + heading.slug}>
                     <span>{heading.text}</span>
                 </a>
+
                 {heading.children.length > 0 && (
                     <Astro.self
                         toc={heading.children}
@@ -34,6 +35,7 @@ const { toc, isMobile = false, depth = 0 } = Astro.props;
         padding: 0;
         list-style: none;
     }
+
     a {
         --pad-inline: 0.5rem;
         display: block;
@@ -46,6 +48,7 @@ const { toc, isMobile = false, depth = 0 } = Astro.props;
     a[aria-current="true"] {
         color: var(--sl-color-text-accent);
     }
+
     .isMobile a {
         --pad-inline: 1rem;
         display: flex;
@@ -59,15 +62,18 @@ const { toc, isMobile = false, depth = 0 } = Astro.props;
         text-decoration: none;
         outline-offset: var(--sl-outline-offset-inside);
     }
+
     .isMobile:first-child > li:first-child > a {
         border-top: 0;
     }
+
     .isMobile a[aria-current="true"],
     .isMobile a[aria-current="true"]:hover,
     .isMobile a[aria-current="true"]:focus {
         color: var(--sl-color-white);
         background-color: unset;
     }
+
     .isMobile a[aria-current="true"]::after {
         content: "";
         width: 1rem;

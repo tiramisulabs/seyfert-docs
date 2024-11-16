@@ -1,15 +1,12 @@
 ---
 import type { Props as AstroProps } from "@astrojs/starlight/props";
 
-// const { sidebar } = Astro.props;
-
 interface Props {
     sublist: AstroProps["sidebar"];
-    nested?: boolean;
     first?: boolean;
 }
 
-type Link = {
+interface Link {
     type: "link";
     label: string;
     href: string;
@@ -22,7 +19,7 @@ function flattenSidebar(sidebar: AstroProps["sidebar"]): Link[] {
     );
 }
 
-const { sublist, nested, first } = Astro.props;
+const { sublist, first } = Astro.props;
 ---
 
 {
@@ -65,8 +62,6 @@ const { sublist, nested, first } = Astro.props;
                         </summary>
                         <Astro.self
                             sublist={entry.entries}
-                            nested
-                            first={false}
                         />
                     </details>
                 </div>

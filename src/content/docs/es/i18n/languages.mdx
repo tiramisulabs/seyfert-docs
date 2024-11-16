@@ -14,13 +14,13 @@ Para esta sección vamos a seguir la configuración que hicimos en **Empezando**
 
 ## Actualizando seyfert config
 
-Antes de empezar este capítulo debe actualizar `seyfert.config.js` para decirle a seyfert donde estará nuestro fichero de idiomas.
+Antes de empezar este capítulo debe actualizar `seyfert.config.mjs` para decirle a seyfert donde estará nuestro fichero de idiomas.
 
-```ts {12} title="seyfert.config.js" showLineNumbers
+```ts {12} title="seyfert.config.mjs" showLineNumbers
 // @ts-check
 const { config } = require('seyfert');
 
-module.exports = config.bot({
+export default config.bot({
   token: process.env.BOT_TOKEN ?? "",
   intents: ["Guilds"],
   locations: {
@@ -183,7 +183,7 @@ A continuación se muestra el árbol de archivos actual del proyecto si ha segui
 		- **es.ts**
 	- index.ts
 - package.json
-- seyfert.config.js
+- seyfert.config.mjs
 - .env
 - tsconfig.json
 </FileTree>

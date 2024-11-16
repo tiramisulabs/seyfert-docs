@@ -79,15 +79,15 @@ En estos primeros pasos, se muestran las opciones que comparten ambos tipos de a
 ### Configuración
 
 Una vez modificado el `tsconfig.json`, aún nos quedan algunos pasos antes de poder ejecutar la aplicación. En este caso es necesario indicarle a Seyfert la estructura del proyecto:
-Para ello es necesario crear un fichero llamado `seyfert.config.js` en la carpeta raíz de tu proyecto y añadir el siguiente código:
+Para ello es necesario crear un fichero llamado `seyfert.config.mjs` en la carpeta raíz de tu proyecto y añadir el siguiente código:
 
 <Tabs>
     <TabItem label="Gateway">
- ```js title="seyfert.config.js" copy wrap 
+ ```js title="seyfert.config.mjs" copy wrap 
 // @ts-check is better
 const { config } = require('seyfert');
 
-module.exports = config.bot({
+export default config.bot({
     token: process.env.BOT_TOKEN ?? "",
     intents: ["Guilds"],
     locations: {
@@ -99,11 +99,11 @@ module.exports = config.bot({
 ```
     </TabItem>
     <TabItem label="HTTP">
-```js title="seyfert.config.js" copy
+```js title="seyfert.config.mjs" copy
 // @ts-check is better
 const { config } = require('seyfert');
 
-module.exports = config.http({
+export default config.http({
     token: process.env.BOT_TOKEN ?? "",
     applicationId: process.env.BOT_APP_ID,
     port: 3000, // by default is 8080
@@ -150,7 +150,7 @@ Una vez completado los pasos, la estructura de su proyecto debe tener este aspec
 - src
   - commands/
   - index.ts
-- seyfert.config.js
+- seyfert.config.mjs
 - package.json
 - .env
 - tsconfig.json
