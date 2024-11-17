@@ -10,7 +10,7 @@ To handle them we have to tell seyfert where will be the components located in o
 
 ```js title="seyfert.config.mjs" showLineNumbers copy ins={12}
 // @ts-check
-import { config } from 'seyfert';
+import { config } from "seyfert";
 
 export default config.bot({
   token: process.env.BOT_TOKEN ?? "",

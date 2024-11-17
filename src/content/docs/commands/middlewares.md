@@ -39,7 +39,7 @@ export const middlewares = {
 
 
 ```ts title="index.ts" ins={2,7-9,15-16} copy
-import { ParseLocales, Client, ParseMiddlewares, ParseClient } from "seyfert";
+import { type ParseLocales, Client, type ParseMiddlewares, type ParseClient } from "seyfert";
 import { middlewares } from "./path/to/middlewares";
 
 const client = new Client();

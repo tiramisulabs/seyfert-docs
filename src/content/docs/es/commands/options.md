@@ -158,7 +158,7 @@ import { ChannelTypes } from 'seyfert/lib/common';
 ## Usando el callback de `value`
 
 ```ts 
-import { OKFunction } from 'seyfert';
+import type { OKFunction } from 'seyfert';
 
 @Options({
   url: createStringOption({

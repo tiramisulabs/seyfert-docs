@@ -18,7 +18,7 @@ Before starting this chapter we could update `seyfert.config.mjs` to tell seyfer
 
 ```ts {12} title="seyfert.config.mjs" showLineNumbers
 // @ts-check
-const { config } = require('seyfert');
+import { config } from "seyfert";
 
 export default config.bot({
   token: process.env.BOT_TOKEN ?? "",
@@ -55,7 +55,7 @@ export default {
 You can create as many language files as you want, seyfert will load them and they will be available to use in your bot.
 
 ```ts title="languages/es.ts" showLineNumbers wrap
-import English from "./en";
+import type English from "./en";
 
 export default {
   hello: "Hola, mundo!",
@@ -68,7 +68,7 @@ export default {
     "También puedes usar arrays para crear una lista de traducciones",
     "Este es el segundo elemento de la lista"
   ].join("\n")
-} satisfies English; // This is a utility type to ensure that object is the same across languages
+} satisfies typeof English; // This is a utility type to ensure that object is the same across languages
 ```
 
 :::note
@@ -87,7 +87,7 @@ Next we must do some updates to the `declare module` on index file:
 
 ```ts {1,12} title="src/index.ts" copy
 import type English from './languages/en';
-import { Client, ParseClient, ParseLocales } from "seyfert";
+import { Client, type ParseClient, type ParseLocales } from "seyfert";
 
 const client = new Client();
 

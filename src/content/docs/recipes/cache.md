@@ -59,14 +59,14 @@ import { type APIChannel, ChannelType } from "seyfert/lib/types";
 const client = new Client();
 
 client.cache.channels!.filter = (
-    data: APIChannel,
-    id: string,
-    guildId: string,
+    channel,
+    id,
+    guildId,
 ) => {
     return ![
         ChannelType.DM,
         ChannelType.GroupDM
-    ].includes(data.type);
+    ].includes(channel.type);
 };
 ```
 
@@ -76,6 +76,8 @@ Seyfert allows you to provide your own adapter for the cache, you can call it a 
 
 :::tip[Redis]
 Seyfert has official support for redis
+
+See the [declare module guide](/getting-started/declare-module#asynccache) for further information.
 ```bash
 pnpm i @slipher/redis-adapter
 ```
@@ -86,7 +88,11 @@ import { RedisAdapter } from '@slipher/redis-adapter';
 
 const client = new Client();
 
-client.setServices({ cache: { adapter: new RedisAdapter({ redisOptions: { port: 4444 } }) } });
+client.setServices({
+    cache: {
+        adapter: new RedisAdapter({ redisOptions: { port: 4444 } })
+    }
+});
 ```
 
 ## Setting up your own cache

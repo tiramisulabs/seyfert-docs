@@ -59,14 +59,14 @@ import { type APIChannel, ChannelType } from "seyfert/lib/types";
 const client = new Client();
 
 client.cache.channels!.filter = (
-    data: APIChannel,
-    id: string,
-    guildId: string,
+    channel,
+    id,
+    guildId,
 ) => {
     return ![
         ChannelType.DM,
         ChannelType.GroupDM
-    ].includes(data.type);
+    ].includes(channel.type);
 };
 ```
 
@@ -86,7 +86,11 @@ import { RedisAdapter } from '@slipher/redis-adapter';
 
 const client = new Client();
 
-client.setServices({ cache: { adapter: new RedisAdapter({ redisOptions: { port: 4444 } }) } });
+client.setServices({
+    cache: {
+        adapter: new RedisAdapter({ redisOptions: { port: 4444 } })
+    }
+});
 ```
 
 ## Armando tu propio cache

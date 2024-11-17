@@ -85,7 +85,7 @@ Para ello es necesario crear un fichero llamado `seyfert.config.mjs` en la carpe
     <TabItem label="Gateway">
  ```js title="seyfert.config.mjs" copy wrap 
 // @ts-check is better
-const { config } = require('seyfert');
+import { config } from "seyfert";
 
 export default config.bot({
     token: process.env.BOT_TOKEN ?? "",
@@ -101,7 +101,7 @@ export default config.bot({
     <TabItem label="HTTP">
 ```js title="seyfert.config.mjs" copy
 // @ts-check is better
-const { config } = require('seyfert');
+import { config } from "seyfert";
 
 export default config.http({
     token: process.env.BOT_TOKEN ?? "",

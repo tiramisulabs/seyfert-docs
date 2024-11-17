@@ -12,7 +12,7 @@ En primer lugar, debe indicarle a Seyfert dónde se crearán sus eventos, esto s
 
 ```ts {11} title="seyfert.config.mjs" showLineNumbers
 // @ts-check
-const { config } = require('seyfert');
+import { config } from "seyfert";
 
 export default config.bot({
   token: process.env.BOT_TOKEN ?? "",

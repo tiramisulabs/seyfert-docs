@@ -12,7 +12,7 @@ Before starting this chapter we shall update `seyfert.config.mjs` in order to te
 
 ```ts {10} title="seyfert.config.mjs" showLineNumbers
 // @ts-check
-const { config } = require('seyfert');
+import { config } from "seyfert";
 
 export default config.bot({
   token: process.env.BOT_TOKEN ?? "",

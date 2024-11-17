@@ -160,7 +160,7 @@ import { ChannelTypes } from 'seyfert/lib/types';
 ## Using the `value` callback
 
 ```ts ins={1} {6-9}
-import { OKFunction } from 'seyfert';
+import type { OKFunction } from 'seyfert';
 
 @Options({
   url: createStringOption({

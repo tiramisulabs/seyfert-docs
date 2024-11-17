@@ -18,12 +18,13 @@ Debe recordarse usted mismo que los eventos existen, vamos a typearlos:
 import type { ShoukakuEvents } from 'shoukaku';
 
 type MappedEvents = {
-    [K in keyof Omit<ShoukakuEvents, 'ready'>]: (...params: ShoukakuEvents[K]) => never;
+    [K in keyof Omit<ShoukakuEvents, 'ready' | 'raw'>]: (...params: ShoukakuEvents[K]) => never;
 };
 
 declare module "seyfert" {
 	interface CustomEvents extends MappedEvents {
 		shoukakuReady: (...params: ShoukakuEvents['ready']) => never;
+		shoukakuRaw: (...params: ShoukakuEvents['raw']) => never;
 	}
 }
 ```
@@ -76,7 +77,7 @@ client.kazagumo = new Kazagumo(
 client.kazagumo.shoukaku.on("ready", (...args) => client.events?.runCustom('ready', ...args));
 
 type MappedEvents = {
-    [K in keyof Omit<ShoukakuEvents, 'ready'>]: (...params: ShoukakuEvents[K]) => never;
+    [K in keyof Omit<ShoukakuEvents, 'ready' | 'raw'>]: (...params: ShoukakuEvents[K]) => never;
 };
 
 declare module "seyfert" {
@@ -85,6 +86,7 @@ declare module "seyfert" {
 	}
 	interface CustomEvents extends MappedEvents {
 		shoukakuReady: (...params: ShoukakuEvents['ready']) => never;
+		shoukakuRaw: (...params: ShoukakuEvents['raw']) => never;
 	}
 }
 

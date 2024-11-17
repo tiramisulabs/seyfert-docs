@@ -55,7 +55,11 @@ If for some reason (I did not find any for the example), you want a specific wor
 
 ```ts
 // I wish typescript allowed to represent parameters like python
-client.tellWorker(workerId = 1, (worker, vars) => console.log(`Hii worker #${worker.workerId} from ${vars.workerId}`), vars = { workerId: client.workerId});
+client.tellWorker(
+	workerId = 1,
+	(worker, vars) => console.log(`Hii worker #${worker.workerId} from ${vars.workerId}`),
+	vars = { workerId: client.workerId }
+);
 ```
 # Advanced
 

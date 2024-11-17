@@ -55,7 +55,11 @@ Si por alguna razon (no encontre ninguna para el ejemplo), se desea que un worke
 
 ```ts
 // Ojala typescript permitiera representar parametros como python
-client.tellWorker(workerId = 1, (worker, vars) => console.log(`Hii worker #${worker.workerId} from ${vars.workerId}`), vars = { workerId: client.workerId});
+client.tellWorker(
+	workerId = 1,
+	(worker, vars) => console.log(`Oaa worker #${worker.workerId} desde ${vars.workerId}`),
+	vars = { workerId: client.workerId }
+);
 ```
 
 # Avanzado

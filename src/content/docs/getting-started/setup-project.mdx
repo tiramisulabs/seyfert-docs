@@ -101,7 +101,7 @@ so create a file called `seyfert.config.mjs` in the root folder of your project 
     <TabItem label="Gateway">
  ```js title="seyfert.config.mjs" copy wrap 
 // @ts-check is better
-const { config } = require('seyfert');
+import { config } from "seyfert";
 
 export default config.bot({
     token: process.env.BOT_TOKEN ?? "",
@@ -116,7 +116,7 @@ export default config.bot({
     <TabItem label="HTTP">
 ```js title="seyfert.config.mjs" copy
 // @ts-check is better
-const { config } = require('seyfert');
+import { config } from "seyfert";
 
 export default config.http({
     token: process.env.BOT_TOKEN ?? "",
@@ -164,15 +164,16 @@ npm add @slipher/uws-adapter
 ```
 
 ```ts title="src/index.ts" copy wrap
-import { HttpClient, ParseClient } from "seyfert";
+import { HttpClient, type ParseClient } from "seyfert";
 import { UwsAdapter } from '@slipher/uws-adapter';
 
+// You can also use Client or WorkerClient.
 const client = new HttpClient();
 const adapter = new UwsAdapter(client);
 
 // This will start listening to `https://yourweb.xyz/interactions` and load commands, components and langs
-client.start();
 adapter.start();
+client.start();
 
 declare module 'seyfert' {
   interface UsingClient extends ParseClient<HttpClient> { }
