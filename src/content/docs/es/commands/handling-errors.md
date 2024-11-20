@@ -1,22 +1,22 @@
 ---
-title: Extending Command
+title: Extendiendo Comando
 ---
 
-With Seyfert, you can handle errors in an organized way and treat them differently depending on the type of error.
+Con Seyfert puedes manejar errores de una manera organizada y también puedes tratarlos de diferentes formas dependiendo del tipo de error.
 
-### Error when executing a command
+### Error al ejecutar un comando
 
-This is the most common error and occurs when an error is thrown in the `run` method.
+Este es el error más común y se lanza cuando ocurre un error en el método `run`.
 
 ```ts twoslash {5}
 import { Command, type CommandContext } from "seyfert";
 
 export class HandlingErrors extends Command {
   async run(context: CommandContext) {
-    throw new Error("Error, ehm, lol player detected");
+    throw new Error("Error, ehm, se detectó un jugador de lol");
   }
 
-// @log: This responds with the previous error message: "Error, ehm, lol player detected"
+// @log: Esto responde con el mensaje de error anterior: "Error, ehm, se detectó un jugador de lol"
   async onRunError(context: CommandContext, error: unknown) {
     context.client.logger.fatal(error);
     await context.editOrReply({
@@ -26,9 +26,9 @@ export class HandlingErrors extends Command {
 }
 ```	
 
-### Error when validating options
+### Error al validar opciones
 
-This error is thrown when an option fails in the `value` method.
+Este error se lanza cuando una opción falla en el método `value`.
 
 ```ts twoslash {14-17}
 // @exactOptionalPropertyTypes: false
@@ -44,12 +44,12 @@ const isURL: ((url: string) => boolean) = () => false;
 // ---cut---
 const options = {
   url: createStringOption({
-    description: 'how to be a gamer',
+    description: 'cómo ser un gamer',
     value(data, ok: OKFunction<URL>, fail) {
         if (isURL(data.value)) return ok(new URL(data.value));
 
-// @annotate: This will trigger the onOptionsError method
-        fail('expected a valid URL');
+// @annotate: Esto activará el método onOptionsError
+        fail('se esperaba una URL válida');
     },
   })
 };
@@ -60,7 +60,7 @@ export class HandlingErrors extends Command {
         context: CommandContext,
         metadata: OnOptionsReturnObject
     ) {
-// @log: url: expected a valid URL
+// @log: url: se esperaba una URL válida
     await context.editOrReply({
       content: Object.entries(metadata)
         .filter((_) => _[1].failed)
@@ -71,9 +71,9 @@ export class HandlingErrors extends Command {
 }
 ```
 
-### Stop a middleware with an error
+### Detener un middleware con un error
 
-When a middleware returns a stop, Seyfert generates this error and stops the progress of the command being handled.
+Cuando un middleware devuelve un stop, Seyfert genera este error y detiene el progreso del comando que se estaba manejando.
 
 ```ts twoslash {5}
 const Devs = [''];
@@ -82,7 +82,7 @@ import { createMiddleware } from "seyfert";
 
 export default createMiddleware<void>(({ context, next, stop, pass }) => {
     if (!Devs.includes(context.author.id)) {
-        return stop("User is not a developer");
+        return stop("El usuario no es un desarrollador");
     }
     next();
 });
@@ -101,7 +101,7 @@ import { Command, Middlewares, type CommandContext } from "seyfert";
 export class HandlingErrors extends Command {
     async onMiddlewaresError(context: CommandContext, error: string) {
         await context.editOrReply({
-// @log: User is not a developer
+// @log: El usuario no es un desarrollador
             content: error
         });
     }
@@ -110,5 +110,5 @@ export class HandlingErrors extends Command {
 ```
 
 :::note
-Although Seyfert provides a way to handle errors, you can do it in the way that best suits your needs (we recommend the way we showed, lol).
+Aunque Seyfert ofrece una manera de manejar errores, puedes hacerlo de la forma que mejor se adapte a tus necesidades (te recomendamos la forma que mostramos, lol).
 :::

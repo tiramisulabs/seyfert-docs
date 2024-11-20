@@ -27,9 +27,8 @@ import { Declare, Command, type CommandContext } from 'seyfert';
   description: 'Mostrar la latencia con Discord'
 })
 export default class PingCommand extends Command {
-
-	async run(ctx: CommandContext) {
-		// Latencia media entre las shards existentes
+  async run(ctx: CommandContext) {
+    // Latencia media entre las shards existentes
     const ping = ctx.client.gateway.latency;
 
     await ctx.write({
@@ -63,7 +62,12 @@ Más información sobre las opciones de los comandos [aquí](/es/commands/option
 ## Usando opciones
 
 ```ts twoslash {4-5,10-14,20,23-25} title="src/commands/ping.ts" showLineNumbers
-// @noErrors
+// @exactOptionalPropertyTypes: false
+import type { ParseClient, Client } from 'seyfert';
+declare module 'seyfert' {
+  interface UsingClient extends ParseClient<Client<true>> {}
+}
+// ---cut---
 import {
   Command,
   Declare,

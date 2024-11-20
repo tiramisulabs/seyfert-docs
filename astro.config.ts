@@ -24,13 +24,7 @@ export default defineConfig({
         baseUrl: 'https://github.com/tiramisulabs/seyfert-docs/edit/main/',
       },
       expressiveCode: {
-        plugins: [ecTwoSlash({
-          twoslashOptions: {
-            compilerOptions: {
-              exactOptionalPropertyTypes: false,
-            }
-          }
-        })],
+        plugins: [ecTwoSlash()],
         themes: ['github-dark-default', 'github-light'],
         styleOverrides: {
           codeFontFamily: 'JetBrains Mono Variable',
