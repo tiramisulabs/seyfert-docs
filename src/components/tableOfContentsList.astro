@@ -1,10 +1,10 @@
 ---
-import type { Props as AstroProps } from "@astrojs/starlight/props";
+import type { Props as AstroProps } from '@astrojs/starlight/props';
 
 interface Props {
-    toc: NonNullable<AstroProps["toc"]>["items"];
-    depth?: number;
-    isMobile?: boolean;
+	toc: NonNullable<AstroProps['toc']>['items'];
+	depth?: number;
+	isMobile?: boolean;
 }
 
 const { toc, isMobile = false, depth = 0 } = Astro.props;

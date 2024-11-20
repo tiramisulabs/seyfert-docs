@@ -2,17 +2,15 @@
 title: Configuración de Seyfert
 ---
 
-import {
-    FileTree, TabItem, Tabs
-} from '@astrojs/starlight/components'
+import { FileTree, TabItem, Tabs } from '@astrojs/starlight/components'
 
-### Configuración de Typescript
+### Configuración de TypeScript
  
 Para que Seyfert funcione correctamente debes actualizar tu archivo `tsconfig.json` y añadir `emitDecoratorMetadata` y `experimentalDecorators` para poder utilizar decoradores:
 
 <Tabs>
     <TabItem label ="tsconfig.json">
-    ```json {"Basta con añadir lo siguiente a su tsconfig":3-5} title="tsconfig.json" copy
+```json {"Basta con añadir lo siguiente a su tsconfig.json":3-5} title="tsconfig.json" copy
 {
     "compilerOptions": {
 
@@ -23,33 +21,33 @@ Para que Seyfert funcione correctamente debes actualizar tu archivo `tsconfig.js
 ``` 
     </TabItem>
     <TabItem label="ejemplo">
-    ```json title="tsconfig.json" copy
+```json title="tsconfig.json" copy
 {
-  "compilerOptions": {
-      "module": "CommonJS",
-      "target": "ESNext",
-      "moduleResolution": "node",
-      "strict": true,
-      "esModuleInterop": true,
-      "experimentalDecorators": true,
-      "emitDecoratorMetadata": true,
-      "preserveConstEnums": true,
-      "noImplicitAny": true,
-      "strictNullChecks": true,
-      "strictFunctionTypes": true,
-      "noImplicitThis": true,
-      "noUnusedLocals": true,
-      "noUnusedParameters": true,
-      "noImplicitReturns": true,
-      "skipLibCheck": true,
-      "noErrorTruncation": true,
-      "outDir": "./dist",
-      "rootDir": "./src",
-      "baseUrl": ".",
-      "stripInternal": true,
-  },
-  "exclude": ["node_modules"],
-  "include": ["src/**/*"]
+    "compilerOptions": {
+        "module": "CommonJS",
+        "target": "ESNext",
+        "moduleResolution": "node",
+        "strict": true,
+        "esModuleInterop": true,
+        "experimentalDecorators": true,
+        "emitDecoratorMetadata": true,
+        "preserveConstEnums": true,
+        "noImplicitAny": true,
+        "strictNullChecks": true,
+        "strictFunctionTypes": true,
+        "noImplicitThis": true,
+        "noUnusedLocals": true,
+        "noUnusedParameters": true,
+        "noImplicitReturns": true,
+        "skipLibCheck": true,
+        "noErrorTruncation": true,
+        "outDir": "./dist",
+        "rootDir": "./src",
+        "baseUrl": ".",
+        "stripInternal": true,
+    },
+    "exclude": ["node_modules"],
+    "include": ["src/**/*"]
 }
 ```
     </TabItem>
@@ -83,8 +81,7 @@ Para ello es necesario crear un fichero llamado `seyfert.config.mjs` en la carpe
 
 <Tabs>
     <TabItem label="Gateway">
- ```js title="seyfert.config.mjs" copy wrap 
-// @ts-check is better
+ ```ts twoslash title="seyfert.config.mjs" copy wrap 
 import { config } from "seyfert";
 
 export default config.bot({
@@ -99,8 +96,11 @@ export default config.bot({
 ```
     </TabItem>
     <TabItem label="HTTP">
-```js title="seyfert.config.mjs" copy
-// @ts-check is better
+```ts twoslash title="seyfert.config.mjs" copy
+// Esto no se muestra, previene errores.
+process.env.BOT_APP_ID = '';
+process.env.BOT_PUBLIC_KEY = '';
+// ---cut---
 import { config } from "seyfert";
 
 export default config.http({
@@ -122,22 +122,22 @@ Y vamos a crear el archivo principal llamado `index.ts` dentro de la carpeta `sr
 
 <Tabs>
     <TabItem label="Gateway">
-```ts {5-8} title="src/index.ts" copy wrap
+```ts twoslash {5-8} title="src/index.ts" copy wrap
 import { Client } from 'seyfert';
 
 const client = new Client();
 
-// Esto iniciará la conexión con la gateway de Discord y cargará comandos, eventos, componentes y langs
+// Esto iniciará la conexión con la gateway de Discord y cargará comandos, eventos, componentes y lenguajes (i18n)
 client.start();
 ```
     </TabItem>
     <TabItem label="HTTP">
-```ts {5-8} title="src/index.ts" copy wrap
+```ts twoslash {5-8} title="src/index.ts" copy wrap
 import { HttpClient } from 'seyfert';
 
 const client = new HttpClient();
 
-// Esto empezará a escuchar `https://yourweb.xyz/interactions` y cargará comandos, componentes y langs
+// Esto empezará a escuchar `https://yourweb.xyz/interactions` y cargará comandos, componentes y lenguajes (i18n)
 client.start();
 ```
     </TabItem>

@@ -53,12 +53,12 @@ export class StarlightTOC extends HTMLElement {
 		};
 
 		/** Handle intersections and set the current link to the heading for the current intersection. */
-		const setCurrent: IntersectionObserverCallback = (entries) => {
+		const setCurrent: IntersectionObserverCallback = entries => {
 			for (const { isIntersecting, target } of entries) {
 				if (!isIntersecting) continue;
 				const heading = getElementHeading(target);
 				if (!heading) continue;
-				const link = links.find((link) => link.hash === '#' + encodeURIComponent(heading.id));
+				const link = links.find(link => link.hash === '#' + encodeURIComponent(heading.id));
 				if (link) {
 					this.current = link;
 					break;
@@ -75,11 +75,11 @@ export class StarlightTOC extends HTMLElement {
 		const observe = () => {
 			if (observer) observer.disconnect();
 			observer = new IntersectionObserver(setCurrent, { rootMargin: this.getRootMargin() });
-			toObserve.forEach((h) => observer!.observe(h));
+			toObserve.forEach(h => observer!.observe(h));
 		};
 		observe();
 
-		const onIdle = window.requestIdleCallback || ((cb) => setTimeout(cb, 1));
+		const onIdle = window.requestIdleCallback || (cb => setTimeout(cb, 1));
 		let timeout: NodeJS.Timeout;
 		window.addEventListener('resize', () => {
 			// Disable intersection observer while window is resizing.

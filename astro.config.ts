@@ -1,9 +1,7 @@
-// @ts-check
-import react from '@astrojs/react';
 import starlight from '@astrojs/starlight';
-import { pluginLineNumbers } from '@expressive-code/plugin-line-numbers';
+import ecTwoSlash from "expressive-code-twoslash";
 import { defineConfig } from 'astro/config';
-import sidebar from './sidebar.items.mjs';
+import sidebar from './sidebar.items';
 import tailwind from '@astrojs/tailwind';
 
 // https://astro.build/config
@@ -25,9 +23,15 @@ export default defineConfig({
       editLink: {
         baseUrl: 'https://github.com/tiramisulabs/seyfert-docs/edit/main/',
       },
-      plugins: [],
       expressiveCode: {
-        plugins: [pluginLineNumbers],
+        plugins: [ecTwoSlash({
+          twoslashOptions: {
+            compilerOptions: {
+              exactOptionalPropertyTypes: false,
+            }
+          }
+        })],
+        themes: ['github-dark-default', 'github-light'],
         styleOverrides: {
           codeFontFamily: 'JetBrains Mono Variable',
           uiFontFamily: 'JetBrains Mono Variable',
@@ -56,7 +60,6 @@ export default defineConfig({
         MobileTableOfContents: './src/components/mobileTableOfContents.astro',
       },
     }),
-    react(),
     tailwind({
       applyBaseStyles: false,
       nesting: true,

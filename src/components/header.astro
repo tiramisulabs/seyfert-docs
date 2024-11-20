@@ -1,18 +1,16 @@
 ---
-import config from "virtual:starlight/user-config";
-import type { Props } from "@astrojs/starlight/props";
+import config from 'virtual:starlight/user-config';
+import type { Props } from '@astrojs/starlight/props';
 
-import Search from "virtual:starlight/components/Search";
-import SocialIcons from "virtual:starlight/components/SocialIcons";
-import ThemeSelect from "./themeSelect.astro";
-import LanguageSelect from "virtual:starlight/components/LanguageSelect";
+import Search from 'virtual:starlight/components/Search';
+import SocialIcons from 'virtual:starlight/components/SocialIcons';
+import ThemeSelect from './themeSelect.astro';
+import LanguageSelect from 'virtual:starlight/components/LanguageSelect';
 
 /**
  * Render the `Search` component if Pagefind is enabled or the default search component has been overridden.
  */
-const shouldRenderSearch =
-    config.pagefind ||
-    config.components.Search !== "@astrojs/starlight/components/Search.astro";
+const shouldRenderSearch = config.pagefind || config.components.Search !== '@astrojs/starlight/components/Search.astro';
 ---
 
 <div class="flex justify-between">

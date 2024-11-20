@@ -14,12 +14,17 @@ Empecemos declarando el primer comando de la aplicación
 Si obtiene algún error de tipo en el código, consulte [Entendiendo el `declare module`](/es/getting-started/declare-module)
 :::
 
-```ts title="src/commands/ping.ts" showLineNumbers
+```ts twoslash title="src/commands/ping.ts" showLineNumbers
+import type { ParseClient, Client } from 'seyfert';
+declare module 'seyfert' {
+  interface UsingClient extends ParseClient<Client<true>> {}
+}
+// ---cut---
 import { Declare, Command, type CommandContext } from 'seyfert';
 
 @Declare({
   name: 'ping',
-  description: 'Mostrar la latencia con discord'
+  description: 'Mostrar la latencia con Discord'
 })
 export default class PingCommand extends Command {
 
@@ -36,7 +41,7 @@ export default class PingCommand extends Command {
 
 Para probar si tu comando funciona correctamente, primero debes publicarlo en Discord, hazlo en tu archivo principal:
 
-```ts {5-8} title="src/index.ts" showLineNumbers
+```ts twoslash {5-8} title="src/index.ts" showLineNumbers
 import { Client } from 'seyfert';
 
 const client = new Client();
@@ -52,14 +57,13 @@ Al asignar la propiedad `cachePath`, seyfert creara un cache de tus comandos, so
 Bastante simple, ¿verdad? Pero a veces los comandos no se limitan a recibir una petición y responderla, también hay que pensar en lo que quiere el usuario, ahí es donde entran las `options`, hagamos que la respuesta de este comando sea algo privado.
 
 :::tip
-
 Más información sobre las opciones de los comandos [aquí](/es/commands/options)
- 
 :::
 
 ## Usando opciones
 
-```ts {4-5,10-14,20,23-25} title="src/commands/ping.ts" showLineNumbers
+```ts twoslash {4-5,10-14,20,23-25} title="src/commands/ping.ts" showLineNumbers
+// @noErrors
 import {
   Command,
   Declare,
@@ -73,11 +77,11 @@ const options = {
   hide: createBooleanOption({
     description: "Ocultar la respuesta del comando",
   }),
-}
+};
 
 @Declare({
   name: 'ping',
-  description: 'Mostrar la latencia con discord'
+  description: 'Mostrar la latencia con Discord'
 })
 @Options(options)
 export default class PingCommand extends Command {

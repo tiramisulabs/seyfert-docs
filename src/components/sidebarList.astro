@@ -1,22 +1,20 @@
 ---
-import type { Props as AstroProps } from "@astrojs/starlight/props";
+import type { Props as AstroProps } from '@astrojs/starlight/props';
 
 interface Props {
-    sublist: AstroProps["sidebar"];
-    first?: boolean;
+	sublist: AstroProps['sidebar'];
+	first?: boolean;
 }
 
 interface Link {
-    type: "link";
-    label: string;
-    href: string;
-    isCurrent: boolean;
-};
+	type: 'link';
+	label: string;
+	href: string;
+	isCurrent: boolean;
+}
 
-function flattenSidebar(sidebar: AstroProps["sidebar"]): Link[] {
-    return sidebar.flatMap((entry) =>
-        entry.type === "group" ? flattenSidebar(entry.entries) : entry,
-    );
+function flattenSidebar(sidebar: AstroProps['sidebar']): Link[] {
+	return sidebar.flatMap(entry => (entry.type === 'group' ? flattenSidebar(entry.entries) : entry));
 }
 
 const { sublist, first } = Astro.props;

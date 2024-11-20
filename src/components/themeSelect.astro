@@ -1,5 +1,5 @@
 ---
-import { Icon } from "@astrojs/starlight/components";
+import { Icon } from '@astrojs/starlight/components';
 
 // Toggle.astro
 ---
@@ -99,16 +99,16 @@ import { Icon } from "@astrojs/starlight/components";
 
     /** Update select menu UI, document theme, and local storage state. */
     function onThemeChange(theme: Theme): void {
+        const realTheme = theme === 'auto' ? getPreferredColorScheme() : theme;
         //@ts-expect-error
-        StarlightThemeProvider.updatePickers(theme);
-        document.documentElement.dataset.theme = theme === 'auto' ? getPreferredColorScheme() : theme;
-        storeTheme(theme);
+        StarlightThemeProvider.updatePickers(realTheme);
+        document.documentElement.dataset.theme = realTheme;
+        storeTheme(realTheme);
     }
 
     // React to changes in system color scheme.
     matchMedia(`(prefers-color-scheme: light)`).addEventListener('change', () => {
         if (loadTheme() === 'auto') onThemeChange('auto');
-        
     });
 
     // Set the theme to the user's preference.
@@ -119,6 +119,7 @@ import { Icon } from "@astrojs/starlight/components";
         if (loadTheme() === 'dark') {
             toggle.classList.add('active');
         }
+
         toggle.addEventListener('click', () => {
             toggle.classList.toggle('active');
             const newTheme = toggle.classList.contains('active') ? 'dark' : 'light';
