@@ -1,5 +1,5 @@
 ---
-title: Seyfert Configuration
+title: Setup Seyfert
 ---
 
 import { FileTree, TabItem, Tabs } from '@astrojs/starlight/components'
@@ -157,13 +157,13 @@ import type { ParseClient, Client, HttpClient, WorkerClient } from 'seyfert';
 // ---cut---
 declare module 'seyfert' {
 
-  interface UsingClient extends ParseClient<Client<true>> { }
+    interface UsingClient extends ParseClient<Client<true>> { }
   
   
-  interface UsingClient extends ParseClient<HttpClient> { }
+    interface UsingClient extends ParseClient<HttpClient> { }
   
   
-  interface UsingClient extends ParseClient<WorkerClient<true>> { }
+    interface UsingClient extends ParseClient<WorkerClient<true>> { }
 } 
 ```
 

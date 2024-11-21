@@ -1,5 +1,5 @@
 ---
-title: Configuración de Seyfert
+title: Configurando Seyfert
 ---
 
 import { FileTree, TabItem, Tabs } from '@astrojs/starlight/components'
@@ -156,13 +156,13 @@ Además de lo anterior, debes configurar los tipos correspondientes según el cl
 ```ts {"Gateway":2-3} {"HTTP":5-6} {"Worker":8-9} copy
 declare module 'seyfert' {
 
-  interface UsingClient extends ParseClient<Client<true>> { }
+    interface UsingClient extends ParseClient<Client<true>> { }
   
   
-  interface UsingClient extends ParseClient<HttpClient> { }
+    interface UsingClient extends ParseClient<HttpClient> { }
   
   
-  interface UsingClient extends ParseClient<WorkerClient<true>> { }
+    interface UsingClient extends ParseClient<WorkerClient<true>> { }
 } 
 ```
 
