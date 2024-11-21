@@ -1,0 +1,80 @@
+---
+title: Escuchando Eventos
+---
+
+import { FileTree } from '@astrojs/starlight/components'
+
+:::note
+
+Esta sección es necesaria solo para aplicaciones basadas en gateway, por lo que si tu bot está construido exclusivamente como una aplicación HTTP, puedes omitir esta sección.
+
+:::
+
+## Actualizando la configuración de Seyfert
+
+Antes de comenzar este capítulo, debemos actualizar `seyfert.config.mjs` para indicarle a Seyfert dónde se encontrarán nuestros archivos de eventos.
+
+```ts {11} title="seyfert.config.mjs" showLineNumbers
+// @ts-check
+import { config } from "seyfert";
+
+export default config.bot({
+  token: process.env.BOT_TOKEN ?? "",
+  intents: ["Guilds"],
+  locations: {
+    base: "src",
+    output: "dist",
+    commands: "commands",
+    events: "events" // - src/events será nuestro directorio de eventos
+  }
+});
+```
+
+## Escuchando eventos
+
+Cada archivo de evento debe exportar por defecto la función `createEvent` para que Seyfert pueda cargarlos.
+
+Escuchemos el evento `botReady` como primer ejemplo:
+
+```ts title="src/events/botReady.ts" showLineNumbers
+import { createEvent } from "seyfert";
+
+export default createEvent({
+  // botReady se ejecuta cuando todos los shards y servidores están listos.
+  data: { once: true, name: "botReady" },
+  run(user, client) {
+    client.logger.info(`${user.username} está listo`);
+  }
+})
+```
+
+Veamos otro ejemplo con el evento `guildDelete`:
+
+```ts title="src/events/guildDelete.ts" showLineNumbers
+import { createEvent } from "seyfert";
+
+export default createEvent({
+  data: { name: "guildDelete" },
+  run(unguild, client) {
+    // es posible que el servidor haya sido eliminado.
+    if (unguild.unavailable) return;
+    client.logger.info(`Me han expulsado de: ${unguild.id}`);
+  }
+})
+```
+
+A continuación, se muestra la estructura actual de archivos del proyecto si seguiste los pasos anteriores.
+
+<FileTree>
+- src
+	- commands
+		- ping.ts
+	- events
+		- **botReady.ts**
+		- **guildDelete.ts**
+	- index.ts
+- package.json
+- seyfert.config.mjs
+- .env
+- tsconfig.json
+</FileTree>

@@ -1,18 +1,18 @@
 ---
-title: Custom Events
+title: Eventos Personalizados
 ---
 :::tip
-Al igual que en otras secciones, se usara [module augmentation](/getting-started/declare-module), recomendamos leerla primero.
+Como en otras secciones, se usará la [ampliación de módulos](/getting-started/declare-module), recomendamos leerla primero.
 :::
 
+Seyfert permite cargar, integrar y ejecutar eventos personalizados que pueden ser llamados desde cualquier lugar. En este ejemplo se pondrá en práctica el uso de [módulos de música](/recipes/music).
 
-Seyfert permite cargar, integrar y ejecutar "eventos" personalizados para poder llamarlos en cualquier lugar, se pondra en practica el uso de [modulos de musica](/recipes/music).
-## Integrando
+## Integración
 :::danger
-Tome en cuenta que pueden existir eventos con el mismo nombre, en runtime se terminaran sobre-escribiendo
+Ten en cuenta que pueden existir eventos con el mismo nombre. En tiempo de ejecución, estos serán sobrescritos.
 :::
 
-Debe recordarse usted mismo que los eventos existen, vamos a typearlos:
+Debes asegurarte de declarar los eventos que existan, para ello definimos los tipos:
 
 ```ts title="index.ts"
 import type { ShoukakuEvents } from 'shoukaku';
@@ -31,7 +31,7 @@ declare module "seyfert" {
 
 ### Cargando eventos
 
-Esto solo esta aqui para flexear que no tienes que hacer nada, solo ponga sus eventos en la carpeta designada en `seyfert.config`.
+No necesitas hacer nada especial; simplemente coloca tus eventos en la carpeta designada en `seyfert.config`.
 
 ```ts title="events/music/ready.ts"
 import { createEvent } from 'seyfert';
@@ -39,12 +39,12 @@ import { createEvent } from 'seyfert';
 export default createEvent({
 	data: { name: "shoukakuReady", once: true },
 	run: (name) => {
-		console.log(`Lavalink ${name}: Ready!`);
+		console.log(`Lavalink ${name}: ¡Listo!`);
 	}
 });
 ```
 
-## Ejecutando
+## Ejecución
 
 ```ts title="index.ts" {3,28,30-32,38-40}
 import { Client } from "seyfert";
@@ -62,7 +62,7 @@ const nodes: NodeOption[] = [
 	}
 ];
 
-//Basic configuration, perfect for this case
+// Configuración básica, perfecta para este caso
 client.kazagumo = new Kazagumo(
 	{
 		defaultSearchEngine: "youtube",
@@ -73,7 +73,7 @@ client.kazagumo = new Kazagumo(
 	nodes
 );
 
-//To see whether the node is connected
+// Para verificar si el nodo está conectado
 client.kazagumo.shoukaku.on("ready", (...args) => client.events?.runCustom('ready', ...args));
 
 type MappedEvents = {
