@@ -34,9 +34,9 @@ export default [
 						link: '/getting-started/first-command',
 					},
 					{
-						label: 'Listening Events',
+						label: 'Listening to events',
 						translations: {
-							es: 'Recibiendo Eventos',
+							es: 'Escuchando eventos',
 						},
 						link: '/getting-started/listening-events',
 					},
