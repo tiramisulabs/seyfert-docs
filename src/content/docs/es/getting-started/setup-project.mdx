@@ -83,7 +83,7 @@ Para ello es necesario crear un archivo llamado `seyfert.config.mjs` en la carpe
 
 <Tabs>
     <TabItem label="Gateway">
- ```ts twoslash title="seyfert.config.mjs" copy wrap 
+```ts twoslash title="seyfert.config.mjs" copy wrap 
 import { config } from "seyfert";
 
 export default config.bot({
@@ -153,7 +153,9 @@ client.start();
 
 Además de lo anterior, debes configurar los tipos correspondientes según el cliente que uses:
 
-```ts {"Gateway":2-3} {"HTTP":5-6} {"Worker":8-9} copy
+```ts twoslash {"Gateway":4-5} {"HTTP":7-8} {"Worker":10-11} copy
+import type { ParseClient, Client, HttpClient, WorkerClient } from 'seyfert';
+
 declare module 'seyfert' {
 
     interface UsingClient extends ParseClient<Client<true>> { }
@@ -163,7 +165,7 @@ declare module 'seyfert' {
   
   
     interface UsingClient extends ParseClient<WorkerClient<true>> { }
-} 
+}
 ```
 
 > Para más información sobre cómo declarar los tipos y qué puedes hacer con ellos, visita [extendiendo declare module](./declare-module).
