@@ -20,16 +20,16 @@ export default [
 				collapsed: true,
 				items: [
 					{
-						label: 'Setup Project',
+						label: 'Setup Seyfert',
 						translations: {
-							es: 'Configuración de Seyfert',
+							es: 'Configurando Seyfert',
 						},
 						link: '/getting-started/setup-project',
 					},
 					{
-						label: 'First Command',
+						label: 'Your first command',
 						translations: {
-							es: 'Primer Comando',
+							es: 'Tu primer comando',
 						},
 						link: '/getting-started/first-command',
 					},

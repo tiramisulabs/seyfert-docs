@@ -84,15 +84,15 @@ To do this, you need to create a file called `seyfert.config.mjs` in the root di
 <Tabs>
     <TabItem label="Gateway">
  ```ts twoslash title="seyfert.config.mjs" copy wrap 
-import { config } from "seyfert";
+import { config } from 'seyfert';
 
 export default config.bot({
-    token: process.env.BOT_TOKEN ?? "",
-    intents: ["Guilds"],
+    token: process.env.BOT_TOKEN ?? '',
+    intents: ['Guilds'],
     locations: {
-        base: "src",    
-        output: "dist", // replace with "src" if using bun
-        commands: "commands"
+        base: 'src',
+        output: 'dist', // replace with "src" if using bun
+        commands: 'commands'
     }
 });
 ```
@@ -103,17 +103,17 @@ export default config.bot({
 process.env.BOT_APP_ID = '';
 process.env.BOT_PUBLIC_KEY = '';
 // ---cut---
-import { config } from "seyfert";
+import { config } from 'seyfert';
 
 export default config.http({
-    token: process.env.BOT_TOKEN ?? "",
+    token: process.env.BOT_TOKEN ?? '',
     applicationId: process.env.BOT_APP_ID,
     port: 3000, // default is 8080
     publicKey: process.env.BOT_PUBLIC_KEY,
     locations: {
-        base: "src",
-        output: "dist", // replace with "src" if using bun
-        commands: "commands"
+        base: 'src',
+        output: 'dist', // replace with 'src' if using bun
+        commands: 'commands'
     }
 });
 ```
@@ -125,7 +125,7 @@ Additionally, you need to create a main file called `index.ts` inside the `src` 
 <Tabs>
     <TabItem label="Gateway">
 ```ts twoslash {5-8} title="src/index.ts" copy wrap
-import { Client } from "seyfert";
+import { Client } from 'seyfert';
 
 const client = new Client();
 
@@ -135,7 +135,7 @@ client.start();
     </TabItem>
     <TabItem label="HTTP">
 ```ts twoslash {5-8} title="src/index.ts" copy wrap
-import { HttpClient } from "seyfert";
+import { HttpClient } from 'seyfert';
 
 const client = new HttpClient();
 
@@ -176,9 +176,9 @@ Once all steps are completed, your project structure should look like this:
 - src
   - commands/
   - index.ts
-- seyfert.config.mjs
 - package.json
-- .env
+- seyfert.config.mjs
 - tsconfig.json
+- .env
 
 </FileTree>

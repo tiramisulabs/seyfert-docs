@@ -1,20 +1,16 @@
 ---
 title: Creando tu primer comando
-sidebar:
-    label: Primer Comando
 ---
 
 import { FileTree } from '@astrojs/starlight/components'
 
-En Seyfert, los comandos son la estructura principal de cualquier proyecto de bot de Discord, aunque el soporte de Discord para ellos es bastante pobre, se han desarrollado utilidades para crearlos.
+La entrada principal de cualquier bot de Discord son los comandos, en Seyfert, puedes crear y administrar comandos de forma sencilla.
+Seyfert se encargará de cargar y ejecutar todos los comandos que hayas creado dentro de la carpeta `commands` (especificada también en la configuración).
 
-Empecemos declarando el primer comando de la aplicación
+Para empezar, vamos a crear el siguiente archivo y utilizar el comando `ping` como ejemplo.
+Todos los comandos deben usar el decorador `@Declare` para la información y una clase que extiende a `Command`:
 
-:::caution
-Si obtiene algún error de tipo en el código, consulte [Entendiendo el `declare module`](/es/getting-started/declare-module)
-:::
-
-```ts twoslash title="src/commands/ping.ts" showLineNumbers
+```ts twoslash title="src/commands/ping.ts" showLineNumbers wrap
 import type { ParseClient, Client } from 'seyfert';
 declare module 'seyfert' {
   interface UsingClient extends ParseClient<Client<true>> {}
@@ -28,7 +24,7 @@ import { Declare, Command, type CommandContext } from 'seyfert';
 })
 export default class PingCommand extends Command {
   async run(ctx: CommandContext) {
-    // Latencia media entre las shards existentes
+    // Latencia media entre las conexiones existentes
     const ping = ctx.client.gateway.latency;
 
     await ctx.write({
@@ -38,30 +34,34 @@ export default class PingCommand extends Command {
 }
 ```
 
-Para probar si tu comando funciona correctamente, primero debes publicarlo en Discord, hazlo en tu archivo principal:
+Antes de poder ejecutar comandos nuevos necesitas registrarlos en Discord. Para ello, puedes utilizar el siguiente código:
 
-```ts twoslash {5-8} title="src/index.ts" showLineNumbers
+```ts twoslash {5-6} title="src/index.ts" showLineNumbers
 import { Client } from 'seyfert';
 
 const client = new Client();
 
-client.start().then(() => client.uploadCommands({ cachePath: './commands.json' }));
+client.start()
+  .then(() => client.uploadCommands({ cachePath: './commands.json' }));
 ```
 
-:::tip[Publicando commandos]
-Al asignar la propiedad `cachePath`, seyfert creara un cache de tus comandos, solo actualizandolos en la api cuando es necesario
+:::tip[Prevenir cambios innecesarios]
+Al iniciar el bot, se subirán los comandos a Discord y se creará un archivo `./commands.json` (cachePath) que los mantendrá guardados para detectar cambios y prevenir subirlos siempre.
 :::
 
+Con esto puedes ejecutar tu bot y probar el comando `/ping` en Discord. ¡Deberías ver la latencia de tu bot!
 
-Bastante simple, ¿verdad? Pero a veces los comandos no se limitan a recibir una petición y responderla, también hay que pensar en lo que quiere el usuario, ahí es donde entran las `options`, hagamos que la respuesta de este comando sea algo privado.
-
-:::tip
-Más información sobre las opciones de los comandos [aquí](/es/commands/options)
-:::
+<br />
 
 ## Usando opciones
 
-```ts twoslash {4-5,10-14,20,23-25} title="src/commands/ping.ts" showLineNumbers
+¿Todo simple, verdad? Sin embargo, los comandos no siempre se limitan a responder lo mismo cada que lo ejecutas, hay veces que necesitamos interpretar lo que realmente necesita el usuario. Aquí es donde entran las `options`.
+
+Vamos a configurar este comando para que su respuesta sea invisible para el resto de usuarios (mensaje efímero -- *ephemeral*).
+Para esto utilizaremos el decorador `@Options` y crearemos una opción `hide` de tipo booleano:
+
+
+```ts twoslash {4-5,10-14,20,23-24,31} title="src/commands/ping.ts" showLineNumbers
 // @exactOptionalPropertyTypes: false
 import type { ParseClient, Client } from 'seyfert';
 declare module 'seyfert' {
@@ -93,7 +93,7 @@ export default class PingCommand extends Command {
   async run(ctx: CommandContext<typeof options>) {
     const flags = ctx.options.hide ? MessageFlags.Ephemeral : undefined;
     
-    // Latencia media entre las shards existentes
+    // Latencia media entre las conexiones existentes
     const ping = ctx.client.gateway.latency;
 
     await ctx.write({
@@ -101,20 +101,27 @@ export default class PingCommand extends Command {
       flags,
     });
   }
-
 }
 ```
 
+Al `CommandContext` se le añade el genérico para inferir el tipo de las opciones y poder acceder a ellas.
+
+> Más información sobre las opciones de los comandos [aquí](../commands/options).
+
 :::tip
-Puedes crear categorías dentro de las carpetas para organizar los comandos de forma ordenada.
+Puedes crear más carpetas dentro de la carpeta de comandos para mantener tus archivos de forma organizada.
 :::
 
+La estructura de tu proyecto debería verse así:
+
 <FileTree>
+
 - src
 	- commands
 		- **ping.ts** 
-- index.ts
+  - index.ts
 - package.json
 - seyfert.config.mjs
 - tsconfig.json
+
 </FileTree>
