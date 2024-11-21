@@ -152,7 +152,9 @@ client.start();
 
 Additionally, you must configure the appropriate types based on the client you're using:
 
-```ts {"Gateway":2-3} {"HTTP":5-6} {"Worker":8-9} copy
+```ts twoslash {"Gateway":2-3} {"HTTP":5-6} {"Worker":8-9} copy
+import type { ParseClient, Client, HttpClient, WorkerClient } from 'seyfert';
+// ---cut---
 declare module 'seyfert' {
 
   interface UsingClient extends ParseClient<Client<true>> { }

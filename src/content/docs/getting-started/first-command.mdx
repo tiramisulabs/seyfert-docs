@@ -10,7 +10,7 @@ import { FileTree, Tabs, TabItem } from '@astrojs/starlight/components'
 
 Before starting this chapter we shall update `seyfert.config.mjs` in order to tell seyfert where our commands file will be.
 
-```ts {10} title="seyfert.config.mjs" showLineNumbers
+```ts twoslash {10} title="seyfert.config.mjs" showLineNumbers
 // @ts-check
 import { config } from "seyfert";
 
@@ -32,7 +32,13 @@ Each command file needs to export by default the command class so seyfert is abl
 For this example we'll setup `ping` command, let's start by declaring the ping command class as shown below.
 <Tabs>
   <TabItem label="gateway">
-```ts title="src/commands/ping.ts" showLineNumbers
+```ts twoslash title="src/commands/ping.ts" showLineNumbers
+import type { Client, ParseClient } from 'seyfert';
+
+declare module 'seyfert' {
+  interface UsingClient extends ParseClient<Client> {}
+}
+// ---cut---
 import { Declare, Command, type CommandContext } from 'seyfert';
 
 @Declare({
@@ -53,7 +59,7 @@ export default class PingCommand extends Command {
 ```
   </TabItem>
   <TabItem label="http">
-```ts title="src/commands/ping.ts" showLineNumbers
+```ts twoslash title="src/commands/ping.ts" showLineNumbers
 import { Declare, Command, type CommandContext } from 'seyfert';
 import { snowflakeToTimestamp } from 'seyfert/lib/common';
 
@@ -82,7 +88,7 @@ export default class PingCommand extends Command {
 
 To test whether your command works, you must publish it on Discord before making minor changes to your main file:
 
-```ts {5-5} title="src/index.ts" showLineNumbers
+```ts twoslash {5-5} title="src/index.ts" showLineNumbers
 import { Client, ParseClient } from "seyfert";
 
 const client = new Client();
@@ -106,7 +112,14 @@ Learn more about command options [here](/commands/options)
 
 ## Using options
 
-```ts {4-5,10-14,20,23-24} title="src/commands/ping.ts" showLineNumbers
+```ts twoslash {4-5,10-14,20,23-24} title="src/commands/ping.ts" showLineNumbers
+import type { Client, ParseClient } from 'seyfert';
+
+declare module 'seyfert' {
+  interface UsingClient extends ParseClient<Client> {}
+}
+// @exactOptionalPropertyTypes: false
+// ---cut---
 import {
   Command,
   Declare,

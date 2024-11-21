@@ -14,7 +14,7 @@ This section is only necessary for gateway applications, so if your bot is built
 
 Before starting this chapter we shall update `seyfert.config.mjs` in order to tell seyfert where our events file will be.
 
-```ts {11} title="seyfert.config.mjs" showLineNumbers
+```ts twoslash {11} title="seyfert.config.mjs" showLineNumbers
 // @ts-check
 import { config } from "seyfert";
 
@@ -36,7 +36,7 @@ Each event file shall export by default the `createEvent` function so seyfert is
 
 Let's listen the `botReady` event as first example
 
-```ts title="src/events/botReady.ts" showLineNumbers
+```ts twoslash title="src/events/botReady.ts" showLineNumbers
 import { createEvent } from "seyfert";
 
 export default createEvent({
@@ -51,7 +51,7 @@ export default createEvent({
 
 Let's check another example with `guildDelete` event:
 
-```ts title="src/events/guildDelete.ts" showLineNumbers
+```ts twoslash title="src/events/guildDelete.ts" showLineNumbers
 import { createEvent } from "seyfert";
 
 export default createEvent({

@@ -12,7 +12,9 @@ Due to the versatility of seyfert, it can get confusing understanding exactly ho
 ## Clients
 
 Seyfert includes several types of client to create the instance of a bot, this might create confusion when calling the client anywhere in your code, so you may specify to typescript which one you are using:
-```ts copy
+```ts twoslash copy
+import type { ParseClient, Client } from 'seyfert';
+//---cut---
 declare module 'seyfert' {
   interface UsingClient extends ParseClient<Client<true>> { }
   // interface UsingClient extends ParseClient<WorkerClient<true>> { }
@@ -30,7 +32,7 @@ We have to edit the `ExtendContext` interface within Seyfert's module which expe
 
 declare module 'seyfert' {
     //we are using ReturnType which gives us the typeof the whatever the function context returns.
-    interface ExtendContext extends ReturnType<typeof context>;
+    interface ExtendContext extends ReturnType<typeof context> {}
 }
 
 ```
@@ -42,7 +44,9 @@ The context variable in the example above is the one we are using to extend the 
 
 Since seyfert accepts different ways of operating, it becomes more complicated to keep the types true to reality. Because of that there is `InternalOptions`, an interface that expects properties to transform the seyfert types to something more complete.
 
-```ts copy
+```ts twoslash copy
+import type {} from 'seyfert';
+//---cut---
 declare module 'seyfert' {
 	interface InternalOptions {
 		withPrefix: true | false;
