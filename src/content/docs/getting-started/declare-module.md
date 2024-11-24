@@ -81,7 +81,7 @@ We often need to extend contexts to add useful properties or methods, which also
 If you’ve used `extendContext` for this, you can use the following code to infer the type returned by your function and add it to the context:
 
 ```ts twoslash {3,6} copy
-import { ExtendContext, extendContext } from 'seyfert';
+import { extendContext } from 'seyfert';
 
 const context = extendContext((ctx) => ({ juli: '' }));
 
@@ -96,9 +96,9 @@ declare module 'seyfert' {
 
 Since Seyfert supports various modes of operation, it’s necessary to add types as required by your implementations. For this, `InternalOptions` exists as an interface designed to include properties that transform Seyfert types into something more comprehensive.
 
-```ts twoslash {5,6} copy
-import type { InternalOptions } from 'seyfert';
-
+```ts twoslash copy
+import 'seyfert';
+//---cut---
 declare module 'seyfert' {
     interface InternalOptions {
         withPrefix: true; // or false
@@ -119,9 +119,9 @@ Setting this property to `true` tells Seyfert whether the cache will return a pr
 
 In Seyfert, you can add more properties to the configuration file `seyfert.config.mjs`, regardless of whether you’re using the `http` or `bot` configuration. This can be done using `ExtendedRC` as follows:
 
-```ts twoslash {4-6}
-import type { ExtendedRC } from 'seyfert';
-
+```ts twoslash
+import 'seyfert';
+//---cut---
 declare module 'seyfert' {
     interface ExtendedRC {
         developers: string[];
@@ -134,9 +134,9 @@ declare module 'seyfert' {
 
 Just as you can extend Seyfert’s base configuration, you can also extend the folder locations object using `ExtendedRCLocations`. This can be done as follows:
 
-```ts twoslash {4-6}
-import type { ExtendedRCLocations } from 'seyfert';
-
+```ts twoslash
+import 'seyfert';
+//---cut---
 declare module 'seyfert' {
     interface ExtendedRCLocations {
         models: string;

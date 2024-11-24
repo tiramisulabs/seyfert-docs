@@ -53,7 +53,7 @@ declare module 'seyfert' {
 }
 ```
 
-> Si aún sabes qué es un middleware, puedes revisar sus casos de uso y estructura en su [respectiva sección](../commands/middlewares).
+> Si aún no sabes qué es un middleware, puedes revisar sus casos de uso y estructura en su [respectiva sección](../commands/middlewares).
 
 ## Idiomas
 
@@ -82,7 +82,7 @@ A menudo necesitamos extender los contextos para agregar propiedades o métodos 
 Si has utilizado `extendContext` para esto, puedes utilizar el siguiente código para inferir el tipo que devuelve tu función y añadirlo al contexto:
 
 ```ts twoslash {3,6} copy
-import { ExtendContext, extendContext } from 'seyfert';
+import { extendContext } from 'seyfert';
 
 const context = extendContext((ctx) => ({ juli: '' }));
 
@@ -97,9 +97,9 @@ declare module 'seyfert' {
 
 Como Seyfert admite diversas formas de operar, es necesario añadir tipos según lo requieran nuestras implementaciones. Para ello, existe `InternalOptions`, una interfaz diseñada para incluir propiedades que transformen los tipos de Seyfert en algo más completo.
 
-```ts twoslash {5,6} copy
-import type { InternalOptions } from 'seyfert';
-
+```ts twoslash copy
+import 'seyfert';
+// ---cut---
 declare module 'seyfert' {
     interface InternalOptions {
         withPrefix: true; // o false
@@ -121,9 +121,9 @@ Establecer esta propiedad en `true` indica a Seyfert si la caché devolverá una
 
 En Seyfert, puedes agregar más propiedades al archivo de configuración `seyfert.config.mjs`, independientemente de si estás utilizando la configuración `http` o `bot`. Esto se puede lograr utilizando `ExtendedRC` de la siguiente manera:
 
-```ts twoslash {4-6}
-import type { ExtendedRC } from 'seyfert';
-
+```ts twoslash
+import 'seyfert';
+// ---cut---
 declare module 'seyfert' {
     interface ExtendedRC {
         developers: string[];
@@ -137,9 +137,9 @@ declare module 'seyfert' {
 
 Al igual que es posible extender la configuración base de Seyfert, también puedes ampliar el objeto de las ubicaciones de tus carpetas (locations) utilizando `ExtendedRCLocations`. Esto se realiza de la siguiente manera:
 
-```ts twoslash {4-6}
-import type { ExtendedRCLocations } from 'seyfert';
-
+```ts twoslash
+import 'seyfert';
+// ---cut---
 declare module 'seyfert' {
     interface ExtendedRCLocations {
         models: string;
