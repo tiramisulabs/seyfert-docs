@@ -68,62 +68,67 @@ import { Icon } from '@astrojs/starlight/components';
 </style>
 
 <script is:inline>
-	StarlightThemeProvider.updatePickers();
+  StarlightThemeProvider.updatePickers();
 </script>
 
 <script>
-    // Code taken from official Starlight ThemeSelect.astro
-    
-    type Theme = 'auto' | 'dark' | 'light';
+  // Code taken from official Starlight ThemeSelect.astro
 
-    /** Key in `localStorage` to store color theme preference at. */
-    const storageKey = 'starlight-theme';
+  type Theme = 'auto' | 'dark' | 'light';
 
-    const parseTheme = (theme: unknown): Theme =>
-        theme === 'auto' || theme === 'dark' || theme === 'light' ? theme : 'auto';
+  /** Key in `localStorage` to store color theme preference at. */
+  const storageKey = 'starlight-theme';
 
-    /** Load the user's preference from `localStorage`. */
-    const loadTheme = (): Theme =>
-        parseTheme(typeof localStorage !== 'undefined' && localStorage.getItem(storageKey));
+  const parseTheme = (theme: unknown): Theme =>
+    theme === 'auto' || theme === 'dark' || theme === 'light' ? theme : 'auto';
 
-    /** Store the user's preference in `localStorage`. */
-    function storeTheme(theme: Theme): void {
-        if (typeof localStorage !== 'undefined') {
-            localStorage.setItem(storageKey, theme === 'light' || theme === 'dark' ? theme : '');
-        }
+  /** Load the user's preference from `localStorage`. */
+  const loadTheme = (): Theme =>
+    parseTheme(
+      typeof localStorage !== 'undefined' && localStorage.getItem(storageKey)
+    );
+
+  /** Store the user's preference in `localStorage`. */
+  function storeTheme(theme: Theme): void {
+    if (typeof localStorage !== 'undefined') {
+      localStorage.setItem(
+        storageKey,
+        theme === 'light' || theme === 'dark' ? theme : ''
+      );
+    }
+  }
+
+  /** Get the preferred system color scheme. */
+  const getPreferredColorScheme = (): Theme =>
+    matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark';
+
+  /** Update select menu UI, document theme, and local storage state. */
+  function onThemeChange(theme: Theme): void {
+    const realTheme = theme === 'auto' ? getPreferredColorScheme() : theme;
+    //@ts-expect-error
+    StarlightThemeProvider.updatePickers(realTheme);
+    document.documentElement.dataset.theme = realTheme;
+    storeTheme(realTheme);
+  }
+
+  // React to changes in system color scheme.
+  matchMedia(`(prefers-color-scheme: light)`).addEventListener('change', () => {
+    if (loadTheme() === 'auto') onThemeChange('auto');
+  });
+
+  // Set the theme to the user's preference.
+  onThemeChange(loadTheme());
+
+  const toggles = document.querySelectorAll('.theme-toggle');
+  toggles.forEach((toggle) => {
+    if (loadTheme() === 'dark') {
+      toggle.classList.add('active');
     }
 
-    /** Get the preferred system color scheme. */
-    const getPreferredColorScheme = (): Theme =>
-        matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark';
-
-    /** Update select menu UI, document theme, and local storage state. */
-    function onThemeChange(theme: Theme): void {
-        const realTheme = theme === 'auto' ? getPreferredColorScheme() : theme;
-        //@ts-expect-error
-        StarlightThemeProvider.updatePickers(realTheme);
-        document.documentElement.dataset.theme = realTheme;
-        storeTheme(realTheme);
-    }
-
-    // React to changes in system color scheme.
-    matchMedia(`(prefers-color-scheme: light)`).addEventListener('change', () => {
-        if (loadTheme() === 'auto') onThemeChange('auto');
+    toggle.addEventListener('click', () => {
+      toggle.classList.toggle('active');
+      const newTheme = toggle.classList.contains('active') ? 'dark' : 'light';
+      onThemeChange(newTheme);
     });
-
-    // Set the theme to the user's preference.
-    onThemeChange(loadTheme());
-    
-    const toggles = document.querySelectorAll('.theme-toggle');
-    toggles.forEach(toggle => {
-        if (loadTheme() === 'dark') {
-            toggle.classList.add('active');
-        }
-
-        toggle.addEventListener('click', () => {
-            toggle.classList.toggle('active');
-            const newTheme = toggle.classList.contains('active') ? 'dark' : 'light';
-            onThemeChange(newTheme);
-        });
-    });
+  });
 </script>

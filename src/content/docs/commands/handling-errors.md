@@ -24,7 +24,7 @@ export class HandlingErrors extends Command {
     });
   }
 }
-```	
+```
 
 ### Error when validating options
 
