@@ -55,7 +55,7 @@ export default {
 You can create as many language files as you want, seyfert will load them and they will be available to use in your bot.
 
 ```ts title="languages/es.ts" showLineNumbers wrap
-import English from "./en";
+import { DefaultLocale } from 'seyfert';
 
 export default {
   hello: "Hola, mundo!",
@@ -68,7 +68,7 @@ export default {
     "También puedes usar arrays para crear una lista de traducciones",
     "Este es el segundo elemento de la lista"
   ].join("\n")
-} satisfies English; // This is a utility type to ensure that object is the same across languages
+} satisfies DefaultLocale; // This is a utility type to ensure that object is the same across languages
 ```
 
 :::note
@@ -149,7 +149,7 @@ export default class PingCommand extends Command {
     const lang = ctx.options.language;
 
     // Get the translations for the language
-    const t = ctx.t(lang);
+    const t = ctx.client.t(lang).get();
 
     // average latency between shards
     const ping = ctx.client.gateway.latency;
