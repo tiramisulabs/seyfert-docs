@@ -1,0 +1,263 @@
+---
+title: Introduction to Commands
+---
+
+import { FileTree, TabItem, Tabs } from '@astrojs/starlight/components';
+
+The primary entry point for any Discord bot is commands. In Seyfert, commands are defined using TypeScript decorators, making it easier to specify their properties, options, middlewares, and subcommands.  
+This guide will help you understand how the decorators related to commands work in Seyfert.
+
+:::note  
+If you haven’t created [your first command](../getting-started/first-command) yet, please refer to that introductory guide before proceeding.  
+:::  
+
+## Declaring a Command  
+
+All commands in Seyfert are class-based, and each class extends the base **`Command`** class.  
+
+Additionally, the **name** and **description** are mandatory properties for every command. Below is a list of possible properties that can be used with the `@Declare` decorator:
+
+```ts twoslash
+import { Declare, Command, IgnoreCommand } from 'seyfert';
+
+@Declare({
+    name: 'your-command',
+    description: 'A description for this command',
+    // Properties to pass as metadata
+    props: {},
+
+    // List of permissions required by the member
+    defaultMemberPermissions: ['Administrator'],
+
+    // List of permissions required by the bot
+    botPermissions: ['ManageGuild'],
+
+    // List of server IDs to register the command
+    guildId: ['100000'],
+
+    // Determines if the command is NSFW
+    nsfw: false,
+
+    // List of alternate names for the command (text commands)
+    aliases: ['an-alias'],
+
+    // Identifies the installation types the command supports,
+    //   default is server-only
+    integrationTypes: ['GuildInstall', 'UserInstall'],
+
+    // Specifies where a command can be used
+    contexts: ['BotDM', 'Guild', 'PrivateChannel'],
+
+    // Defines whether to ignore the execution of the command in slash
+    //   or text-message versions
+    ignore: IgnoreCommand.Slash,
+    //                    ^|
+
+    // Sets the type of command:
+    /// type: ApplicationCommandType.User
+})
+class MyCommand extends Command {}
+```
+
+<br />
+
+## Adding Options  
+
+An essential feature is allowing commands to adapt to user-input options. For this, the `@Options` decorator is used, requiring an object containing all command options:
+
+```ts twoslash
+// @exactOptionalPropertyTypes: false
+import {
+    Options,
+    Command,
+    createStringOption,
+    type CommandContext,
+} from 'seyfert';
+
+const options = {
+    message: createStringOption({
+        description: 'My text option',
+    }),
+};
+
+@Options(options)
+class MyCommand extends Command {
+    run(ctx: CommandContext<typeof options>) {
+        ctx.options.message;
+        //           ^?       
+    }
+}
+```
+
+> All types and possible options for each command can be found in their [respective section](../commands/options).
+
+<br />
+
+## Using Middlewares  
+
+Seyfert provides an advanced middleware system, fully typed and highly efficient. This system enables processing a list of middlewares, which are functions executed before the command itself.
+
+Ensure you’ve used [the declare module](../getting-started/declare-module) for proper functionality:
+
+```ts twoslash
+import { createMiddleware, type ParseMiddlewares } from 'seyfert';
+const middle = createMiddleware(() => ({}));
+const middlewares = {
+    'my-middleware': middle,
+    'next-middleware': middle,
+};
+
+declare module 'seyfert' {
+    interface RegisteredMiddlewares
+        extends ParseMiddlewares<typeof middlewares> {}
+}
+// ---cut---
+import { Command, Middlewares } from 'seyfert';
+
+@Middlewares(['my-middleware', 'next-middleware'])
+class MyCommand extends Command {}
+```
+
+> Use cases and details for middlewares can be found in the [middlewares section](../commands/middlewares).
+
+<br />
+
+## Languages  
+
+With Seyfert’s advanced language system, you can automatically translate all command content using the `@LocalesT` decorator.
+
+Ensure you’ve properly set up [the declare module](../getting-started/declare-module) for this to work.
+
+```ts twoslash
+import type { ParseLocales } from 'seyfert';
+const lang = {
+    'my-command': {
+        name: '',
+        description: '',
+    },
+};
+declare module 'seyfert' {
+    interface DefaultLocale extends ParseLocales<typeof lang> {}
+}
+// ---cut---
+import { Command, LocalesT } from 'seyfert';
+
+@LocalesT('my-command.name', 'my-command.description')
+//                   ^|
+class MyCommand extends Command {}
+```
+
+## Subcommands  
+
+:::note  
+We have a dedicated section for subcommands; you can find it [here](/es/commands/subcommands).  
+:::  
+
+Based on Discord’s [structure](https://discord.com/developers/docs/interactions/application-commands#subcommands-and-subcommand-groups), slash subcommands may or may not belong to groups. Note that subcommands can only be executed directly, without including the groups or the parent command.
+
+To add subcommands, use the `@Options` decorator in a parent command, specifying the subcommands with the `SubCommand` class. To maintain organization, it’s recommended to use a folder structure for managing subcommands:
+
+<Tabs>
+<TabItem label="commands/my-command/parent.ts">
+
+```ts twoslash copy
+// @noErrors
+import { Command, Declare, Options } from 'seyfert';
+import MySubCommand from './sub';
+
+@Declare({
+    name: 'parent',
+    description: 'My main command',
+})
+@Options([MySubCommand])
+export default class ParentCommand extends Command {}
+```
+</TabItem>
+
+<TabItem label="commands/my-command/sub.ts">
+
+```ts twoslash
+import { SubCommand, Declare, CommandContext } from 'seyfert';
+
+@Declare({
+    name: 'subcommand',
+    description: 'One of my subcommands',
+})
+export default class MySubCommand extends SubCommand {
+    run(ctx: CommandContext) {
+        return ctx.write({
+            content: 'Hello from the subcommand!',
+        });
+    }
+}
+```
+</TabItem>
+</Tabs>
+
+<br />
+
+### Subcommand Groups  
+
+For a more divided structure, you can create groups for subcommands using the `@Group` and `@Groups` decorators in the main command.
+
+<Tabs>
+<TabItem label="parent.ts">
+
+```ts twoslash copy
+// @noErrors
+import { Command, Declare, Options, Groups } from 'seyfert';
+import MySubCommand from './sub';
+
+@Declare({
+    name: 'parent',
+    description: 'My main command',
+})
+@Options([MySubCommand])
+@Groups({
+    'my-group': {
+        defaultDescription: 'A subcommand group',
+    }
+})
+export default class ParentCommand extends Command {}
+```
+</TabItem>
+
+<TabItem label="mygroup-sub.ts">
+
+```ts twoslash
+import { SubCommand, Declare, CommandContext, Group } from 'seyfert';
+
+@Declare({
+    name: 'subcommand',
+    description: 'One of my subcommands within the my-group group',
+})
+@Group('my-group')
+export default class GroupMySubCommand extends SubCommand {
+    run(ctx: CommandContext) {
+        return ctx.write({
+            content: 'Hello from the subcommand!',
+        });
+    }
+}
+```
+</TabItem>
+</Tabs>
+
+<br />
+
+### Automatic Subcommand Loading  
+
+To avoid manually importing each command, Seyfert allows automatic loading of commands from a folder. Use the `@AutoLoad` decorator on the main command.
+
+```ts twoslash
+import { Command, Declare, AutoLoad } from 'seyfert';
+
+@Declare({
+    name: 'parent',
+    description: 'My main command',
+})
+@AutoLoad()
+export default class ParentCommand extends Command {}
+```
+
+> Using `@Options` is unnecessary when `@AutoLoad` is used. Seyfert will automatically load subcommands from the folder.  

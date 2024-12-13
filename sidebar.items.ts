@@ -57,11 +57,11 @@ export default [
         collapsed: true,
         items: [
           {
-            label: 'Decorators',
+            label: 'Introducction',
             translations: {
-              es: 'Decoradores',
+              es: 'Introducción',
             },
-            link: '/commands/decorators',
+            link: '/commands/intro',
           },
           {
             label: 'Options',
