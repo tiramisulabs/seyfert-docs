@@ -140,6 +140,8 @@ client.start();
     </TabItem>
     <TabItem label="HTTP">
 ```ts twoslash {9-11} title="src/index.ts" copy wrap
+// @exactOptionalPropertyTypes: false
+// @errors: 2379 2345
 import { HttpClient } from "seyfert";
 import { UwsAdapter } from "@slipher/uws-adapter";
 // import { GenericAdapter } from "@slipher/generic-adapter";
