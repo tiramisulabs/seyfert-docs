@@ -17,10 +17,11 @@
     "@expressive-code/plugin-line-numbers": "^0.35.3",
     "@fontsource-variable/inter": "^5.0.19",
     "@fontsource-variable/jetbrains-mono": "^5.0.21",
+    "@slipher/uws-adapter": "https://pkg.pr.new/tiramisulabs/extra/@slipher/uws-adapter@a7360e9",
     "astro": "^4.16.13",
     "astro-expressive-code": "^0.38.3",
     "expressive-code-twoslash": "^0.2.3",
-    "seyfert": "^2.1.1-dev-11905633709.0",
+    "seyfert": "2.1.1-dev-12450598903.0",
     "tailwindcss": "^3.4.7"
   },
   "devDependencies": {

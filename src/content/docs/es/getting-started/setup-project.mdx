@@ -88,12 +88,16 @@ import { config } from "seyfert";
 
 export default config.bot({
     token: process.env.BOT_TOKEN ?? "",
-    intents: ["Guilds"],
     locations: {
         base: "src",    
         output: "dist", // reemplazar por "src" en caso de usar bun
         commands: "commands"
-    }
+    },
+    intents: ["Guilds"],
+    // Esta configuración es opcional, por si desea recibir las interacciones por HTTP
+    // Así se puede usar tanto la gateway como el HTTP webhook
+    publicKey: "...", // reemplazar por tu clave pública
+    port: 4444, // reemplazar por el puerto de tu aplicación 
 });
 ```
     </TabItem>
@@ -107,14 +111,14 @@ import { config } from "seyfert";
 
 export default config.http({
     token: process.env.BOT_TOKEN ?? "",
-    applicationId: process.env.BOT_APP_ID,
-    port: 3000, // por defecto es 8080
-    publicKey: process.env.BOT_PUBLIC_KEY,
     locations: {
         base: "src",
         output: "dist", // reemplazar por "src" en caso de usar bun
         commands: "commands"
-    }
+    },
+    applicationId: process.env.BOT_APP_ID,
+    port: 3000, // por defecto es 8080
+    publicKey: process.env.BOT_PUBLIC_KEY,
 });
 ```
     </TabItem>
@@ -135,13 +139,18 @@ client.start();
 ```
     </TabItem>
     <TabItem label="HTTP">
-```ts twoslash {5-8} title="src/index.ts" copy wrap
+```ts twoslash {9-11} title="src/index.ts" copy wrap
 import { HttpClient } from "seyfert";
+import { UwsAdapter } from "@slipher/uws-adapter";
+// import { GenericAdapter } from "@slipher/generic-adapter";
 
 const client = new HttpClient();
 
+const adapter = new UwsAdapter(client); // También puedes pasar un `Client` o `WorkerClient`.
+
 // Esto empezará a escuchar `https://yourweb.xyz/interactions` y cargará comandos, componentes e idioma (i18n)
 client.start();
+adapter.start();
 ```
 
 > En el caso de utilizar Cloudfare Workers, te recomendamos seguir la guía en su [página correspondiente](../recipes/cloudflare-workers).

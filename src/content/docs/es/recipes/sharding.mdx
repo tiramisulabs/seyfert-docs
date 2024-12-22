@@ -54,7 +54,7 @@ A diferencia de lo que pueden ser otras librerias, al tener el sharding totalmen
 Si por alguna razon (no encontre ninguna para el ejemplo), se desea que un worker en especifico ejecute una accion que otro recibio, puede simplemente pedirselo.
 
 ```ts
-// Ojala typescript permitiera representar parametros como python
+// Ojalá typescript permitiera representar parametros como python
 client.tellWorker(
 	workerId = 1,
 	(worker, vars) => console.log(`Oaa worker #${worker.workerId} desde ${vars.workerId}`),

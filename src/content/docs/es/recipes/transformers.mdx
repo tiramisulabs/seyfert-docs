@@ -1,21 +1,20 @@
 ---
 title: Transformers
 ---
+# ¿Qué es un transformer?
 
-## What is a transformer?
+Basicamente, un transformer es una función que toma un objeto y lo transforma en otro valor. En Seyfert, los transformers son usados para transformar los datos que vienen de discord en valores cualesquiera que necesites.
 
-Basically, a transformer is a function that takes an object and transforms it into another value. In Seyfert, transformers are used to transform data coming from Discord into any values you need.
+## ¿Cómo se usan?
 
-## How are they used?
-
-Let's look at an example of a transformer.
+Vamos a ver un ejemplo de un transformer.
 
 ```ts twoslash
 import type { APIUser } from 'seyfert/lib/types';
 
 interface MyUser {
     username: string;
-    isAdmin: boolean;
+    esAdmin: boolean;
     raw(): Promise<APIUser>;
 }
 //---cut---
@@ -24,7 +23,7 @@ import { Transformers } from 'seyfert';
 Transformers.User = (client, data) => {
     return {
         username: data.username,
-        isAdmin: Math.random() > 0.5,
+        esAdmin: Math.random() > 0.5,
         raw() {
             return client.users.raw(data.id);
         },
@@ -32,19 +31,20 @@ Transformers.User = (client, data) => {
 };
 
 /*
-At this point, you should have a `declare module "seyfert"` in your project, 
-if not, add it.
+Ya llegado a este punto,
+deberias tener un `declare module "seyfert"` en tu proyecto,
+si no, añadelo.
 */
 declare module "seyfert" {
-// Declaring the type this way will reflect in the typing throughout the entire project.
+// Declarando el tipo de esta manera, 
+// se reflejará en el tipado de todo el proyecto.
     interface CustomStructures {
         User: MyUser;
+// Puedes añadir tantos transformers como quieras, con cualquier tipo
     }
-// You can add as many transformers as you like with any type.
 }
 ```
-
-Let the autocomplete of your editor guide you and discover all the possibilities you have.
+Dejate llevar por el autocompletado de tu editor y descubre todas las posibilidades que tienes.
 ```ts twoslash
 import { Transformers } from 'seyfert';
 
@@ -52,15 +52,15 @@ Transformers.GuildMember
               // ^|
 ```
 
-## How can I use them?
+## ¿Cómo puedo usarlos?
 
-For example, we defined a transformer for the user earlier, now let's see how we can use it.
+Por ejemplo, arriba hemos definido un transformer para el usuario, ahora vamos a ver cómo podemos usarlo.
 ```ts twoslash
 import type { APIUser } from 'seyfert/lib/types';
 
 interface MyUser {
     username: string;
-    isAdmin: boolean;
+    esAdmin: boolean;
     raw(): Promise<APIUser>;
 }
 
@@ -84,5 +84,5 @@ class Ping extends Command {
     }
 }
 ```
-
 ![A seyfert transformer](./public/transformers.gif)
+

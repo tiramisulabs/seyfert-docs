@@ -1,20 +1,20 @@
 ---
-title: Cache
+title: Caché
 ---
-# ¿Que es el cache?
+# ¿Qué es el caché?
 
-En seyfert el cache es el almacenamiento en memoria (en cuanto menos) de los datos emitidos por Discord. Seyfert provee varias formas de manejar el cache para los datos de Discord.
+En seyfert el caché es el almacenamiento en memoria (en cuanto menos) de los datos emitidos por Discord. Seyfert provee varias formas de manejar el caché para los datos de Discord.
 
 ## Resources
 
-Todas las entidades soportadas por el cache de seyfert son `recursos` dígase `canales`, `usuarios`, `miembros`... Por ello, cada uno se maneja, si bien de la misma forma, se permite modificar y gestionar de diferentes formas en relación con el `Adaptador`.
+Todas las entidades soportadas por el caché de seyfert son `recursos` dígase `canales`, `usuarios`, `miembros`... Por ello, cada uno se maneja, si bien de la misma forma, se permite modificar y gestionar de diferentes formas en relación con el `Adaptador`.
 
 ### Deshabilitando
 
 Seyfert permite deshabilitar estos `recursos` por separado
 
 :::note[Datos Globales]
-En seyfert el cache es global, por lo que todo se guarda en el mismo recurso, sin distinción de guild hasta el momento de obtenerlos donde se requeriría especificar la fuente
+En seyfert el caché es global, por lo que todo se guarda en el mismo recurso, sin distinción de guild hasta el momento de obtenerlos donde se requeriría especificar la fuente
 :::
 
 | Recurso         | Elementos                                              |
@@ -41,10 +41,10 @@ const client = new Client();
 client.setServices({ cache: { disabledCache: { bans: true } } })
 
 ```
-El ejemplo deshabilitaría el cache de bans y dicho recurso no existiría en runtime.
+El ejemplo deshabilitaría el caché de bans y dicho recurso no existiría en runtime.
 
-:::tip[Deshabilitando el cache]
-Puedes remover la funcionalidad del cache por completo
+:::tip[Deshabilitando el caché]
+Puedes remover la funcionalidad del caché por completo
 ```ts
 client.setServices({ cache: { disabledCache: true } })
 ```
@@ -72,7 +72,7 @@ client.cache.channels!.filter = (
 
 ## Adapters
 
-Seyfert permite proporcionar tu propio adaptador para el cache, puedes llamarlo un driver para que seyfert use una herramienta no soportada. Por defecto seyfert incorpora `MemoryAdapter` y `LimitedMemoryAdapter` ambos trabajan en RAM.
+Seyfert permite proporcionar tu propio adaptador para el caché, puedes llamarlo un driver para que seyfert use una herramienta no soportada. Por defecto seyfert incorpora `MemoryAdapter` y `LimitedMemoryAdapter` ambos trabajan en RAM.
 
 :::tip[Redis]
 Seyfert tiene soporte oficial para redis
@@ -93,11 +93,11 @@ client.setServices({
 });
 ```
 
-## Armando tu propio cache
+## Armando tu propio caché
 
 ### Custom Resource
 
-Un `recurso custom` no es mas que una nueva entidad de cache, por lo que integrarlo es relativamente simple, tomemos de ejemplo el recurso [Cooldown](https://github.com/tiramisulabs/extra/blob/main/packages/cooldown/src/resource.ts) del paquete de [cooldown](/recipes/cooldown).
+Un `recurso custom` no es mas que una nueva entidad de caché, por lo que integrarlo es relativamente simple, tomemos de ejemplo el recurso [Cooldown](https://github.com/tiramisulabs/extra/blob/main/packages/cooldown/src/resource.ts) del paquete de [cooldown](/recipes/cooldown).
 
 Es importante destacar que seyfert proporciona una base para 3 tipo de recursos:
 
