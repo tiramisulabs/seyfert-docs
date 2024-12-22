@@ -85,4 +85,4 @@ class Ping extends Command {
 }
 ```
 
-![A seyfert transformer](./public/transformers.gif)
+![A seyfert transformer](../../../../public/transformers.gif)
