@@ -6,8 +6,8 @@ La característica básica de los Bots de Discord es enviar mensajes en todo Dis
 
 Primero que nada, tenemos que configurar un comando básico de `Hola mundo`.
 
-```ts title="src/commands/helloworld.ts" showLineNumbers
-import { Command, Declare } from 'seyfert';
+```ts twoslash title="src/commands/helloworld.ts" showLineNumbers
+import { Command, Declare, type CommandContext } from 'seyfert';
 
 @Declare({
   name: 'helloworld',
@@ -20,8 +20,8 @@ export default class HelloWorldCommand extends Command {
 
 Habiendo configurado nuestro comando básico de `Hola mundo`, estamos listos para enviar nuestro primer mensaje usando la función `CommandContext.write()`.
 
-```ts title="src/commands/helloworld.ts" ins={12} showLineNumbers
-import { Command, Declare } from 'seyfert';
+```ts twoslash title="src/commands/helloworld.ts" ins={12} showLineNumbers
+import { Command, Declare, type CommandContext } from 'seyfert';
 
 @Declare({
   name: 'helloworld',
@@ -46,7 +46,9 @@ Esta función es muy útil si queremos desarrollar un comando que responda al co
 
 Aquí hay un ejemplo de cómo implementar esta función.
 
-```ts title="src/commands/helloworld.ts" ins={3,7} showLineNumbers
+```ts twoslash title="src/commands/helloworld.ts" ins={5,9} showLineNumbers
+import { Command, type CommandContext } from 'seyfert';
+
 export default class HelloWorldCommand extends Command {
   async run(ctx: CommandContext) {
     await ctx.deferReply();
@@ -66,7 +68,9 @@ Aquí estamos. Para enviar un mensaje simple a un canal específico, necesitamos
 
 Aquí hay un ejemplo de cómo enviar ese mensaje sin responder a un comando:
 
-```ts title="src/commands/helloworld.ts" ins={3} showLineNumbers
+```ts twoslash title="src/commands/helloworld.ts" ins={5} showLineNumbers
+import { Command, type CommandContext } from 'seyfert';
+
 export default class HelloWorldCommand extends Command {
   async run(ctx: CommandContext) {
     return ctx.client.messages.write(ctx.channelId, { content: 'Hola mundo 👋' });
@@ -82,8 +86,8 @@ Para enviar esos mensajes incrustados con Seyfert, tendremos que construir el em
 
 Aquí hay un ejemplo de cómo enviar un embed con un título y descripción personalizados.
 
-```ts title="src/commands/helloworld.ts" {1} {"1. Ah sí, los constructores.":6-9} ins={11} showLineNumbers
-import { Embed } from 'seyfert';
+```ts twoslash title="src/commands/helloworld.ts" {1} {"1. Ah sí, los constructores.":6-9} ins={11} showLineNumbers
+import { Embed, Command, type CommandContext } from 'seyfert';
 
 export default class HelloWorldCommand extends Command {
   async run(ctx: CommandContext) {
@@ -93,7 +97,7 @@ export default class HelloWorldCommand extends Command {
       .setTitle('Mi Embed Asombroso')
       .setDescription('Hola mundo 👋');
 
-    ctx.write({ embeds: [embed] });
+    await ctx.write({ embeds: [embed] });
   }
 }
 ```
@@ -106,14 +110,16 @@ Los componentes se almacenan en un [`ActionRow`](https://github.com/tiramisulabs
 
 En este ejemplo vamos a enviar dos filas de acciones dentro del mensaje. Cada fila va a tener un botón y un [menú de selección de cadena](https://github.com/tiramisulabs/seyfert/blob/455ed12b0ebcb3ddf55bc8b3274b0ce904becc62/src/builders/SelectMenu.ts#L276) adjuntos respectivamente.
 
-```ts title="src/commands/helloworld.ts" ins={1-7} {"1. Construir botón": 12-19} {"2. Construir selectmenu": 21-29} ins={30} showLineNumbers
+```ts twoslash title="src/commands/helloworld.ts" ins={1-7} {"1. Construir botón": 14-21} {"2. Construir selectmenu": 23-32} ins={32} showLineNumbers
 import {
   ActionRow,
   Button,
   StringSelectMenu,
-  ButtonStyle,
   StringSelectOption,
+  Command,
+  type CommandContext
 } from 'seyfert';
+import { ButtonStyle } from 'seyfert/lib/types'
 
 export default class HelloWorldCommand extends Command {
   async run(ctx: CommandContext) {
@@ -136,7 +142,7 @@ export default class HelloWorldCommand extends Command {
 
     const menuRow = new ActionRow<StringSelectMenu>().addComponents(menu);
 
-    ctx.write({ content: 'Hola mundo 👋', components: [buttonRow, menuRow] });
+    await ctx.write({ content: 'Hola mundo 👋', components: [buttonRow, menuRow] });
   }
 }
 ```

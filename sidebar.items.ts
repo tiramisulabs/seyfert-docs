@@ -167,6 +167,13 @@ export default [
 				collapsed: true,
 				items: [
 					{
+						label: 'Sending messages',
+						translations: {
+							es: 'Enviando mensajes',
+						},
+						link: '/recipes/sending-messages',
+					},
+					{
 						label: 'Cache',
 						translations: {
 							es: 'Caché',
