@@ -8,7 +8,7 @@ Shorters are a simple combination of the seyfert methods and the discord api, in
 
 Suppose we have a welcome system, in its database, it already has access to the id of the channel whereto send its message, then why should it look for that channel in the cache? why should it get data? doesn't it need to simply send a message? That's where shorters come in.
 
-```ts copy ins={11-13}
+```ts twoslash copy ins={11-13}
 import { createEvent } from 'seyfert';
 
 const db = new Map<string, string>();
@@ -27,7 +27,7 @@ export default createEvent({
 ```
 This applies to all seyfert, the methods in the classes that represent discord objects are just an extra layer of the shorters for easy access, for example, by default seyfert does not add cache properties to the objects, but brings amenities to access them.
 
-```ts copy wrap {11-12}
+```ts twoslash copy wrap {11-12}
 import { createEvent } from 'seyfert';
 
 const db = new Map<string, string>();
@@ -61,7 +61,7 @@ The proxy object is the layer below the shorters, it is in charge of creating a 
 
 Is there anything that is not supported in seyfert? Then access it directly, let's create a thread directly with the discord api:
 
-```ts wrap copy {10-15}
+```ts twoslash wrap copy {10-15}
 import { createEvent } from 'seyfert';
 
 export default createEvent({

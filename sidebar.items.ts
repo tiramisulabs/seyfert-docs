@@ -211,10 +211,6 @@ export default [
 						link: '/recipes/using-docker',
 					},
 					{
-						label: 'Transformers',
-						link: '/recipes/transformers',
-					},
-					{
 						label: 'Cooldown',
 						link: '/recipes/cooldown',
 					},

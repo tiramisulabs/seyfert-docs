@@ -10,22 +10,18 @@ npm add @slipher/cooldown
 
 Primero necesitas agregar la propiedad `cooldown` al `client` como se muestra a continuación:
 
-```ts
-import { Client } from "seyfert";
+```ts twoslash
+import { Client, type UsingClient } from "seyfert";
 import { CooldownManager } from "@slipher/cooldown";
 
-const client = new Client();
+const client = new Client() as UsingClient & Client;
 
 client.start().then(() => {
 	client.cooldown = new CooldownManager(client);
-});
+})
 
 declare module "seyfert" {
-	interface UsingClient extends ParseClient<Client<true>> {
-		cooldown: CooldownManager;
-	}
-	// esto es para prevenir un @ts-expect-error en la línea anterior
-	interface Client {
+	interface UsingClient {
 		cooldown: CooldownManager;
 	}
 }
@@ -39,8 +35,8 @@ Luego podemos usar el decorador `@Cooldown()` en nuestros comandos. Este decorad
 | interval   | number         | Tiempo en el que se renuevan los usos disponibles. |
 | uses       | number         | Cantidad de veces que se puede usar el comando en el intervalo dado. |
 
-```ts
-import { Declare, Command } from "seyfert";
+```ts twoslash
+import { Declare, Command, type CommandContext } from "seyfert";
 import { CooldownType, Cooldown } from "@slipher/cooldown";
 
 @Declare({
@@ -50,29 +46,38 @@ import { CooldownType, Cooldown } from "@slipher/cooldown";
 @Cooldown({
 	type: CooldownType.User,
 	interval: 1000 * 60, // 1 minuto
-	uses: 2, // 2 usos por minuto
+	uses: {
+		default: 2 // 2 usos por minuto
+	},
 })
-export default class extends Command {
+export default class Genial extends Command {
   async run(ctx: CommandContext) {
     await ctx.write({
       content: `Un comando genial`
     });
   }
 
-	onMiddlewaresError(context: CommandContext, error: string) {
-		context.editOrReply({ content: error });
-	}
+  onMiddlewaresError(context: CommandContext, error: string) {
+    context.editOrReply({ content: error })
+  }
 }
 ```
 
 Luego necesitamos crear un [middleware](/commands/middlewares) para manejar cuando un usuario está en tiempo de reutilización:
 
-```ts
+```ts twoslash
+import { CooldownManager } from "@slipher/cooldown";
+
+declare module "seyfert" {
+	interface UsingClient {
+		cooldown: CooldownManager;
+	}
+}
+// ---cut---
 import { createMiddleware, Formatter } from 'seyfert';
 import { TimestampStyle } from 'seyfert/lib/common';
 
 export default createMiddleware<void>(async ({ context, next, stop }) => {
-	
 	const inCooldown = context.client.cooldown.context(context);
 
 	typeof inCooldown === 'number'

@@ -33,7 +33,7 @@ En seyfert el caché es global, por lo que todo se guarda en el mismo recurso, s
 | voiceStates     | VoiceStates                                            |
 | stagesInstances | StageChannel                                           |
 
-```ts
+```ts twoslash
 import { Client } from 'seyfert';
 
 const client = new Client();
@@ -45,7 +45,11 @@ El ejemplo deshabilitaría el caché de bans y dicho recurso no existiría en ru
 
 :::tip[Deshabilitando el caché]
 Puedes remover la funcionalidad del caché por completo
-```ts
+```ts twoslash
+import { Client } from 'seyfert';
+
+const client = new Client();
+// ---cut---
 client.setServices({ cache: { disabledCache: true } })
 ```
 :::
@@ -53,7 +57,7 @@ client.setServices({ cache: { disabledCache: true } })
 
 Por ejemplo, desde que todos los canales se guardan en el mismo `recurso`, supongamos que su aplicación no tiene una utilidad para ciertos canales, así que podemos `filtrar` la entrada de los datos:
 
-```ts title="index.ts" copy showLineNumbers
+```ts twoslash title="index.ts" copy showLineNumbers
 import { Client } from "seyfert";
 import { type APIChannel, ChannelType } from "seyfert/lib/types";
 const client = new Client();
@@ -80,7 +84,7 @@ Seyfert tiene soporte oficial para redis
 pnpm i @slipher/redis-adapter
 ```
 :::
-```ts
+```ts twoslash
 import { Client } from 'seyfert';
 import { RedisAdapter } from '@slipher/redis-adapter';
 
@@ -88,7 +92,7 @@ const client = new Client();
 
 client.setServices({
     cache: {
-        adapter: new RedisAdapter({ redisOptions: { port: 4444 } })
+        adapter: new RedisAdapter({ redisOptions: { url: 'redis://127.0.0.1:6379' } })
     }
 });
 ```
@@ -126,11 +130,11 @@ import { CooldownResource } from './resource'
 
 const client = new Client();
 
-client.cache.cooldown = new Cooldown(client.cache);
+client.cache.cooldown = new CooldownResource(client.cache);
 
 declare module "seyfert" {
     interface Cache {
-        cooldown: Cooldown;
+        cooldown: CooldownResource;
     }
     interface UsingClient extends ParseClient<Client> {}
 }

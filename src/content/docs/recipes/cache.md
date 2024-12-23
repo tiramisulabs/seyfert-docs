@@ -33,7 +33,7 @@ In seyfert the cache is global, so everything is stored in the same resource, wi
 | voiceStates     | VoiceStates                                            |
 | stagesInstances | StageChannel                                           |
 
-```ts
+```ts twoslash
 import { Client } from 'seyfert';
 
 const client = new Client();
@@ -45,7 +45,11 @@ The example would disable the bans cache and this resource would not exist in ru
 
 :::tip[Turn off cache]
 You can remove the cache functionality completely.
-```ts
+```ts twoslash
+import { Client } from 'seyfert';
+
+const client = new Client();
+// ---cut---
 client.setServices({ cache: { disabledCache: true } })
 ```
 :::
@@ -53,7 +57,7 @@ client.setServices({ cache: { disabledCache: true } })
 
 For example, since all channels are stored in the same `resource`, suppose your application does not have a utility for certain channels, so we can `filter` the input data:
 
-```ts title="index.ts" copy showLineNumbers
+```ts twoslash title="index.ts" copy showLineNumbers
 import { Client } from "seyfert";
 import { type APIChannel, ChannelType } from "seyfert/lib/types";
 const client = new Client();
@@ -82,7 +86,7 @@ See the [declare module guide](/getting-started/declare-module#asynccache) for f
 pnpm i @slipher/redis-adapter
 ```
 :::
-```ts
+```ts twoslash
 import { Client } from 'seyfert';
 import { RedisAdapter } from '@slipher/redis-adapter';
 
@@ -90,7 +94,7 @@ const client = new Client();
 
 client.setServices({
     cache: {
-        adapter: new RedisAdapter({ redisOptions: { port: 4444 } })
+        adapter: new RedisAdapter({ redisOptions: { url: 'redis://127.0.0.1:6379' } })
     }
 });
 ```
@@ -128,11 +132,11 @@ import { CooldownResource } from './resource'
 
 const client = new Client();
 
-client.cache.cooldown = new Cooldown(client.cache);
+client.cache.cooldown = new CooldownResource(client.cache);
 
 declare module "seyfert" {
     interface Cache {
-        cooldown: Cooldown;
+        cooldown: CooldownResource;
     }
     interface UsingClient extends ParseClient<Client> {}
 }
