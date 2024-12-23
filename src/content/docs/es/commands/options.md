@@ -1,174 +1,289 @@
 ---
-title: Opciones de un Comando
+title: Opciones de un comando
 ---
 
-Cada función recibe los siguientes parámetros:
-- **description**: La descripción de la opción.
-- **required**: Si la opción es obligatoria.
-- **value**? Callback donde se puede filtrar el valor enviado por Discord antes de que llegue al comando principal. [Cómo usar aquí](#usando-el-callback-de-value)
+Las opciones en Discord tienen por obligación una descripción. Además, en todas las opciones podemos establecer si será requerida y una función para moldear el valor.
+
 ## Tipos de opciones
 
-### createStringOption
-```ts 
+Los posibles tipos de opciones en un comando son los siguientes:
+
+### Texto
+
+```ts twoslash
+// @exactOptionalPropertyTypes: false
+import { Options, createStringOption, Command } from 'seyfert';
+
 @Options({
-  choices: createStringOption({
-    choices: [
-      { name: 'The best library', value: 'seyfert' },
-      { name: 'An odd stuff', value: 'oceanicjs' }
-    ]
-  }),
-  autocomplete: createStringOption({
-    autocomplete: (interaction) => {
-      const select = ['bugs', 'actions', 'random'];
-      const focus = interaction.getInput();
-      return interaction.respond(
-        select
-          .filter((ch) => ch.includes(focus))
-          .map((ch) => ({ name: ch, value: ch }))
-      );
+    normal: createStringOption({
+        description: '',
+    }),
+
+
+    /// Opciones fijas
+    choices: createStringOption({
+        description: '',
+        choices: [
+            { name: 'The best library', value: 'seyfert' },
+            { name: 'An odd stuff', value: 'meowdb' },
+        ] as const,
+    }),
+
+    /// Autocompletado
+    autocomplete: createStringOption({
+        description: '',
+        autocomplete: (interaction) => {
+            // aquí la lógica
+
+            const select = ['bugs', 'actions', 'random'];
+            const focus = interaction.getInput();
+            return interaction.respond(
+                select
+                    .filter((ch) => ch.includes(focus))
+                    .map((ch) => ({ name: ch, value: ch }))
+            );
+        },
+    }),
+
+    /// Límites de carácteres
+    limitLength: createStringOption({
+        description: '',
+        max_length: 500,
+        min_length: 200,
+    }),
+})
+class Ping extends Command {}
+```
+
+<details>
+<summary>Ejemplo de autocompletado de TypeScript</summary>
+
+```ts twoslash
+// @exactOptionalPropertyTypes: false
+import { Options, createStringOption, Command, CommandContext } from 'seyfert';
+
+const options = {
+    /// Opciones fijas
+    best: createStringOption({
+        description: '',
+        choices: [
+            { name: 'The best library', value: 'seyfert' },
+            { name: 'An odd stuff', value: 'meowdb' },
+        ] as const,
+    }),
+};
+
+@Options(options)
+class Ping extends Command {
+    async run(ctx: CommandContext<typeof options>) {
+        ctx.options.best;
+        //          ^?
     }
-  }),
-  limitLength: createStringOption({
-    max_length: 500,
-    min_length: 200
-  })
-})
+}
 ```
-### createIntegerOption
-```ts 
-@Options({
-  choices: createIntegerOption({
-    choices: [
-      { name: 'seyfert', value: 1 },
-      { name: '?discord.js', value: 2 },
-      { name: '??oceanicjs', value: 3 }
-    ]
-  }),
-  autocomplete: createIntegerOption({
-    autocomplete: (interaction) => {
-      const select = ['1651611', '4616165156549', '15616416515616'];
+</details>
 
-      const focus = interaction.getInput();
+<br />
 
-      return interaction.respond(
-        select
-          .filter((ch) => ch.includes(`${focus}`))
-          .map((ch) => ({ name: ch, value: parseInt(ch) }))
-      );
-    }
-  }),
-  limitValue: createIntegerOption({
-    max_value: 500,
-    min_value: 200
-  })
-})
-```
-### createNumberOption
-```ts 
-@Options({
-  choices: createNumberOption({
-    choices: [
-      { name: 'seyfert', value: 1 },
-      { name: '?discord.js', value: 2 },
-      { name: '??Oceanicjs', value: 3 }
-    ]
-  }),
-  autocomplete: createNumberOption({
-    autocomplete: (interaction) => {
-      // imagine javascript Number or Integer kekw
-      const select = ['1651611', '4616165156549', '15616416515616'];
+### Números enteros
 
-      const focus = interaction.getInput();
-
-      return interaction.respond(
-        select
-          .filter((ch) => ch.includes(`${focus}`))
-          .map((ch) => ({ name: ch, value: parseInt(ch) }))
-      );
-    }
-  }),
-  limitValue: createNumberOption({
-    max_value: 500,
-    min_value: 200
-  })
-})
-```
-### createChannelOption
-```ts {1-5,7,10-13} 
-@Options({
-  channel: createChannelOption({
-    description: 'This is a channel option',
-  })
-})
-
-import { ChannelTypes } from 'seyfert/lib/common';
+```ts twoslash
+// @exactOptionalPropertyTypes: false
+import { Options, createIntegerOption, Command } from 'seyfert';
 
 @Options({
-  channelTypes: createChannelOption({
-    description: 'This is a limited channel option',
-    channel_types: [ChannelTypes.GuildVoice]
-  })
-})
-```
-### createBooleanOption
-```ts {2-5} 
-@Options({
-  bool: createBooleanOption({
-    description: 'This is a boolean option',
-    required: true
-  })
-})
-```
-### createUserOption
-```ts {2-5} 
-@Options({
-  user: createUserOption({
-    description: 'This is a user option',
-    required: true
-  })
-})
-```
-### createRoleOption
-```ts {2-5} 
-@Options({
-  role: createRoleOption({
-    description: 'This is a role option',
-    required: true
-  })
-})
-```
-### createMentionableOption
-```ts {2-5} 
-@Options({
-  mentionable: createMentionableOption({
-    description: 'This is a mentionable option',
-    required: true
-  })
-})
-```
-### createAttachmentOption
-```ts {2-5} 
-@Options({
-  attachment: createAttachmentOption({
-    description: 'This is a attachment option',
-    required: true
-  })
-})
-```
-## Usando el callback de `value`
+    normal: createIntegerOption({
+        description: '',
+    }),
+    
+    /// Opciones fijas
+    choices: createIntegerOption({
+        description: '',
+        choices: [
+            { name: 'seyfert', value: 1 },
+            { name: 'potocuit', value: 2 },
+            { name: 'biscuit', value: 3 }
+        ]
+    }),
 
-```ts 
+    /// Autocompletado
+    autocomplete: createIntegerOption({
+        description: '',
+        autocomplete: (interaction) => {
+            const select = ['1651611', '4616165156549', '15616416515616'];
+
+            const focus = interaction.getInput();
+
+            return interaction.respond(
+                select
+                    .filter((ch) => ch.includes(focus))
+                    .map((ch) => ({ name: ch, value: parseInt(ch) }))
+            );
+        }
+    }),
+
+    /// Límites de valores
+    limitValue: createIntegerOption({
+        description: '',
+        max_value: 500,
+        min_value: 200
+    })
+})
+class Ping extends Command {}
+```
+
+<br />
+
+### Número
+
+```ts twoslash
+// @exactOptionalPropertyTypes: false
+import { Options, createNumberOption, Command } from 'seyfert';
+
+@Options({
+    normal: createNumberOption({
+        description: '',
+    }),
+   
+    // Aplica lo mismo que el anterior (integer/enteros), pero para todos los números incluyendo decimales
+})
+class Ping extends Command {}
+```
+
+<br />
+
+### Canales
+
+```ts twoslash
+// @exactOptionalPropertyTypes: false
+import { Options, createChannelOption, Command } from 'seyfert';
+import { ChannelType } from 'seyfert/lib/types';
+
+@Options({
+    channel: createChannelOption({
+        description: '',
+    }),
+
+    /// Tipo específico de canal
+    channelTypes: createChannelOption({
+        description: 'This is a limited channel option',
+        channel_types: [ChannelType.GuildVoice]
+    })
+})
+class Ping extends Command {}
+```
+
+<br />
+
+### Booleanos
+
+```ts twoslash
+// @exactOptionalPropertyTypes: false
+import { Options, createBooleanOption, Command } from 'seyfert';
+
+@Options({
+    bool: createBooleanOption({
+        description: 'This is a boolean option',
+        required: true
+    })
+})
+class Ping extends Command {}
+```
+
+<br />
+
+### Usuarios
+
+```ts twoslash
+// @exactOptionalPropertyTypes: false
+import { Options, createUserOption, Command } from 'seyfert';
+
+@Options({
+    user: createUserOption({
+        description: 'This is a user option',
+        required: true
+    })
+})
+class Ping extends Command {}
+```
+
+<br />
+
+### Roles
+
+```ts twoslash
+// @exactOptionalPropertyTypes: false
+import { Options, createRoleOption, Command } from 'seyfert';
+
+@Options({
+    role: createRoleOption({
+        description: 'This is a role option',
+        required: true
+    })
+})
+class Ping extends Command {}
+```
+
+<br />
+
+### Mencionables
+
+```ts twoslash
+// @exactOptionalPropertyTypes: false
+import { Options, createMentionableOption, Command } from 'seyfert';
+
+@Options({
+    mentionable: createMentionableOption({
+        description: 'This is a mentionable option',
+        required: true
+    })
+})
+class Ping extends Command {}
+```
+
+<br />
+
+### Archivos
+
+```ts twoslash
+// @exactOptionalPropertyTypes: false
+import { Options, createAttachmentOption, Command } from 'seyfert';
+
+@Options({
+    attachment: createAttachmentOption({
+        description: 'This is a attachment option',
+        required: true
+    })
+})
+class Ping extends Command {}
+```
+
+<br/>
+
+## Moldeando el valor
+
+Podemos transformar el valor de cualquier opción en algo más, para eso utilizamos el método `value` que recibe como parámetros el valor del dato y dos funciones: `ok` y `fail`.
+
+```ts twoslash {8-11}
+// @exactOptionalPropertyTypes: false
+function isUrl(url: string): boolean { return true; }
+// ---cut---
+import { Options, createStringOption, Command } from 'seyfert';
 import type { OKFunction } from 'seyfert';
 
 @Options({
-  url: createStringOption({
-    description: 'how to be a gamer',
-    value(data, ok: OKFunction<URL>, fail) {
-        if (isUrl(data.value)) return ok(new URL(data.value));
-        fail('expected a valid url');
-    }
-  })
+    url: createStringOption({
+        description: 'how to be a gamer',
+
+        value(data, ok: OKFunction<URL>, fail) {
+            if (isUrl(data.value)) return ok(new URL(data.value));
+            fail('expected a valid url');
+        }
+    })
 })
+class Ping extends Command {}
 ```
 
-En [Crear su primer comando](/es/getting-started/first-command#usando-opciones) se ofrece un breve ejemplo.
+Ahora el tipo de dato que recibe el valor del comando es `URL`, si no es así se lanzará un error.
+
+En [crear su primer comando](/getting-started/first-command) se ofrece un ejemplo detallado para obtener autocompletado.
