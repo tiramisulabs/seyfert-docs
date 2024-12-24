@@ -421,7 +421,7 @@ class MiAdaptador implements Adapter {
 
 ### Borrando datos
 
-#### `remove` y `bulkRemove`
+#### `remove`, `bulkRemove` y `flush`
 
 Hay 3 metodos que debes implementar en tu adaptador para borrar valores: `remove`, `bulkRemove` y `flush`.
 
@@ -499,7 +499,6 @@ const client = new Client();
 client.setServices({
     cache: {
         adapter: new MiAdaptador()
-        // adapter: ...
     }
 })
 

@@ -424,7 +424,7 @@ class MyAdapter implements Adapter {
 
 ### Deleting Data
 
-#### `remove` and `bulkRemove`
+#### `remove`, `bulkRemove` and `flush`
 
 There are three methods you must implement in your adapter to delete values: `remove`, `bulkRemove`, and `flush`.
 
@@ -502,7 +502,6 @@ const client = new Client();
 client.setServices({
     cache: {
         adapter: new MyAdapter()
-        // adapter: ...
     }
 })
 
