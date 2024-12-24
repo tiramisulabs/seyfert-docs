@@ -84,7 +84,7 @@ Si has utilizado `extendContext` para esto, puedes utilizar el siguiente código
 ```ts twoslash {3,6} copy
 import { extendContext } from 'seyfert';
 
-const context = extendContext((ctx) => ({ juli: '' }));
+const context = extendContext((ctx) => ({ nutria: 'tierna' }));
 
 declare module 'seyfert' {
     interface ExtendContext extends ReturnType<typeof context> {}
@@ -92,6 +92,42 @@ declare module 'seyfert' {
 ```
 
 > Si aún no sabías que con Seyfert puedes modificar y extender el contexto de forma sencilla, puedes revisar su [respectiva sección](../commands/extend-commandcontext).
+
+## Propiedades de comando
+
+A menudo necesitamos categorizar algunos comandos, o simplemente ponerles un identificador para algo.
+
+Para esto, podemos usar `ExtraProps`:
+
+```ts twoslash {3,6} copy
+// @errors: 2741 2322
+import { Client, Declare, Command } from 'seyfert';
+// ---cut---
+const client = new Client({
+    commands: {
+        defaults: {
+            props: {
+                categoria: 'none'
+            }
+        }
+    }
+});
+
+@Declare({
+    name: 'test',
+    description: 'comando de prueba',
+    props: {}
+})
+class Test extends Command {}
+
+declare module 'seyfert' {
+    interface ExtraProps {
+        soloParaAdmins: boolean;
+        deshabilitado?: true;
+        categoria?: string
+    }
+}
+```
 
 ## Opciones internas
 

@@ -48,7 +48,22 @@ declare module 'seyfert' {
 ¿Demasiado simple? Seyfert se encarga de toda la logica por lo que tu proyecto no deberia cambiar mucho solo por pasarte a un `WorkerSharding`.
 
 ## Cache
-A diferencia de lo que pueden ser otras librerias, al tener el sharding totalmente unificado seyfert mantiene el poder en algunas areas, entre ellas `el cache`. El cache se queda centralizado en el proceso principal, digase el ejecutor de `WorkerManager`, no importa en que parte del codigo estes, siempre tendras acceso a todos los datos.
+A diferencia de lo que pueden ser otras librerias, al tener el sharding totalmente unificado seyfert mantiene el poder en algunas areas, entre ellas `el cache`.
+Puedes hacer que el cache se centralize en el proceso principal, digase el ejecutor de `WorkerManager`, no importa en que parte del codigo estes, siempre tendras acceso a todos los datos.
+Para esto, es necesario usar el WorkerAdapter:
+```ts twoslash
+import { WorkerClient, WorkerAdapter } from 'seyfert';
+
+const client = new WorkerClient();
+
+await client.start();
+
+client.setServices({
+	cache: {
+		adapter: new WorkerAdapter(client.workerData)
+	}
+});
+```
 
 ## Hablandole a otros workers
 Si por alguna razon (no encontre ninguna para el ejemplo), se desea que un worker en especifico ejecute una accion que otro recibio, puede simplemente pedirselo.
