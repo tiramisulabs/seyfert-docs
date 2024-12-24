@@ -56,13 +56,13 @@ import { WorkerClient, WorkerAdapter } from 'seyfert';
 
 const client = new WorkerClient();
 
-await client.start();
-
 client.setServices({
 	cache: {
 		adapter: new WorkerAdapter(client.workerData)
 	}
 });
+
+await client.start();
 ```
 
 ## Hablandole a otros workers
