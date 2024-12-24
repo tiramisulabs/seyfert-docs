@@ -149,7 +149,7 @@ Setting this property to `true` tells Seyfert that the context can include eithe
 
 ### asyncCache
 
-Setting this property to `true` tells Seyfert whether the cache will return a promise. By default, Seyfert uses `MemoryAdapter`, a RAM cache that doesn’t return promises, while `RedisAdapter` does.
+Setting this property to `true` tells Seyfert whether the cache will return a promise. By default, Seyfert uses `MemoryAdapter`, a RAM cache that doesn’t return promises, while [`RedisAdapter`](https://npmjs.com/package/@slipher/redis-adapter) does.
 
 ## Configuration
 

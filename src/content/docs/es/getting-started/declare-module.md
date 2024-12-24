@@ -150,7 +150,7 @@ Establecer esta propiedad en `true` indica a Seyfert que el contexto puede inclu
 
 ### asyncCache
 
-Establecer esta propiedad en `true` indica a Seyfert si la caché devolverá una promesa. Por defecto, Seyfert utiliza `MemoryAdapter`, una caché en RAM que no devuelve promesas, mientras que `RedisAdapter` sí lo hace.
+Establecer esta propiedad en `true` indica a Seyfert si la caché devolverá una promesa. Por defecto, Seyfert utiliza `MemoryAdapter`, una caché en RAM que no devuelve promesas, mientras que [`RedisAdapter`](https://npmjs.com/package/@slipher/redis-adapter) sí lo hace.
 
 
 ## Configuración

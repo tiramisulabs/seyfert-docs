@@ -1,23 +1,23 @@
 ---
 title: Cache
 ---
-# What is the cache?
+# What is cache?
 
 In seyfert the cache is the storage in memory (at least) of the data emitted by Discord. Seyfert provides several ways to handle the cache for Discord data.
 
 ## Resources
 
-All the entities supported by the seyfert cache are `resources`, namely `channels`, `users`, `members`.... Therefore, each one is handled, although in the same way, it is allowed to be modified and managed in different ways in relation to the `Adapter`.
+All entities supported by Seyfert's cache are `resources`, such as `channels`, `users`, `members`, etc. Each of these resources is managed in the same way, but they can be modified and handled differently depending on the `Adapter`.
 
-### Shutdown
+### Disabling
 
-Seyfert allows to disable these `resources` separately
+Seyfert allows you to disable these `resources` separately.
 
 :::note[Global Data]
-In seyfert the cache is global, so everything is stored in the same resource, without guild distinction until the time to get them where it would require specifying the source.
+In Seyfert, the cache is global, meaning everything is stored in the same resource, with no distinction between guilds, until they are retrieved, at which point you would need to specify the source.
 :::
 
-| Resource        | Elements                                               |
+| Resource         | Elements                                              |
 |-----------------|--------------------------------------------------------|
 | channels        | TextChannel, DMChannel, VoiceChannel, ThreadChannel... |
 | bans            | GuildBan                                               |
@@ -39,12 +39,11 @@ import { Client } from 'seyfert';
 const client = new Client();
 
 client.setServices({ cache: { disabledCache: { bans: true } } })
-
 ```
-The example would disable the bans cache and this resource would not exist in runtime.
+The example above disables the bans cache, and that resource would not exist at runtime.
 
-:::tip[Turn off cache]
-You can remove the cache functionality completely.
+:::tip[Disabling the Cache]
+You can completely remove the cache functionality:
 ```ts twoslash
 import { Client } from 'seyfert';
 
@@ -55,7 +54,7 @@ client.setServices({ cache: { disabledCache: true } })
 :::
 ### Filtering
 
-For example, since all channels are stored in the same `resource`, suppose your application does not have a utility for certain channels, so we can `filter` the input data:
+For example, since all channels are stored in the same `resource`, suppose your application does not need certain channels, so we can `filter` the data entry:
 
 ```ts twoslash title="index.ts" copy showLineNumbers
 import { Client } from "seyfert";
@@ -76,12 +75,10 @@ client.cache.channels!.filter = (
 
 ## Adapters
 
-Seyfert allows you to provide your own adapter for the cache, you can call it a driver so that seyfert uses an unsupported tool. By default seyfert incorporates `MemoryAdapter` and `LimitedMemoryAdapter` both of which work in RAM.
+Seyfert allows you to provide your own adapter for the cache, which you can think of as a driver to let Seyfert use an unsupported tool. By default, Seyfert includes `MemoryAdapter` and `LimitedMemoryAdapter`, both of which operate in RAM.
 
 :::tip[Redis]
-Seyfert has official support for redis
-
-See the [declare module guide](/getting-started/declare-module#asynccache) for further information.
+Seyfert has official Redis support.
 ```bash
 pnpm i @slipher/redis-adapter
 ```
@@ -99,32 +96,32 @@ client.setServices({
 });
 ```
 
-## Setting up your own cache
+## Building Your Own Cache
 
 ### Custom Resource
 
-A `custom resource` is nothing more than a new cache entity, so integrating it is relatively simple, let's take the [Cooldown](https://github.com/tiramisulabs/extra/blob/main/packages/cooldown/src/resource.ts) resource from the [cooldown](/recipes/cooldown) package as an example.
+A `custom resource` is just a new cache entity, so integrating it is relatively simple. Let's take the example of the [Cooldown](https://github.com/tiramisulabs/extra/blob/main/packages/cooldown/src/resource.ts) resource from the [cooldown](https://docs) package.
 
-It is important to note that seyfert provides a base for 3 types of resources:
+It's important to note that Seyfert provides a base for three types of resources:
 
-- **BaseResource**: basic entity, which should be totally independent.
-- **GuildBaseResource**: entity that is linked to a guild (like bans)
-- **GuildRelatedResource**: entity that may or may not be linked to a guild (like messages)
+- **BaseResource**: a basic entity, which should be completely independent
+- **GuildBaseResource**: an entity linked to a guild (like bans)
+- **GuildRelatedResource**: an entity that may or may not be linked to a guild (like messages)
 
 ```ts title="resource.ts"
 import { BaseResource } from 'seyfert/lib/cache';
 
 export class CooldownResource extends BaseResource<CooldownData> {
-  // the namespace is the base separating each resource
-	namespace = 'cooldowns';
+    // The namespace is the base that separates each resource
+    namespace = 'cooldowns';
 
-  // we overwrite the set to give it the typing and formatting we desire
-	override set(id: string, data: MakePartial<CooldownData, 'lastDrip'>) {
-		return super.set(id, { ...data, lastDrip: data.lastDrip ?? Date.now() });
-	}
+    // We override set to apply the typing and format we want
+    override set(id: string, data: MakePartial<CooldownData, 'lastDrip'>) {
+        return super.set(id, { ...data, lastDrip: data.lastDrip ?? Date.now() });
+    }
 }
 ```
-Note, that a custom resource is for developer use, seyfert will not interact with it unless indicated in the application code.
+Note that a custom resource is for developer use; Seyfert will not interact with it unless specified in the application's code.
 
 ```ts
 import { Client } from 'seyfert';
@@ -141,6 +138,373 @@ declare module "seyfert" {
     interface UsingClient extends ParseClient<Client> {}
 }
 ```
-### Custom adapter
 
-WIP
+## Custom Adapter
+
+Don't like storing the cache in memory or Redis? Or maybe you just want to do it your own way?
+
+Here, you'll learn how to create your own cache adapter.
+
+### Before You Start
+
+Consider whether your adapter might be asynchronous; if it is, you'll need to specify it:
+
+```ts twoslash
+// @noErrors
+import { Adapter } from 'seyfert';
+
+class MyAdapter implements Adapter {
+    isAsync = true;
+
+    async start() {
+        // This function will run before starting the bot
+    }
+}
+```
+> This guide is for creating an asynchronous adapter. If you want a synchronous one, simply do not return a promise in any of the methods (the `start` method can be asynchronous).
+
+### Storing Data
+
+In Seyfert's cache, there are relationships, so you can know who a resource belongs to.
+
+There are four methods you must implement in your adapter to store values: `set`, `patch`, `bulkPatch`, and `bulkSet`.
+
+#### `set` and `bulkSet`
+
+Starting with the simplest:
+
+```ts twoslash
+interface SeyfertDotDev {
+    set(key: string, value: any): Promise<void>;
+}
+// @noErrors
+// ---cut---
+import { Adapter } from 'seyfert';
+
+class MyAdapter implements Adapter {
+    // ---cut-start---
+    storage: SeyfertDotDev;
+    // ---cut-end---
+    async set(key: string, value: any | any[]) {
+        await this.storage.set(key, { value });
+    }
+
+    async bulkSet(keys: [string, any][]) {
+        for (let [key, value] of keys) {
+            await this.set(key, value);
+        }
+    }
+}
+```
+
+#### `patch` and `bulkPatch`
+
+The `patch` method should not overwrite the entire properties of the old value, just the ones you pass.
+
+```ts twoslash
+interface SeyfertDotDev {
+    set(key: string, value: any): Promise<void>;
+    get(key: string): Promise<any>;
+}
+// @noErrors
+// ---cut---
+import { Adapter } from 'seyfert';
+
+class MyAdapter implements Adapter {
+    // ---cut-start---
+    storage: SeyfertDotDev;
+    // ---cut-end---
+    async patch(key: string, value: any | any[]) {
+        const oldData = await this.storage.get(key) ?? {};
+        const newValue = Array.isArray(value)
+            ? value
+            : ({ ...oldData, ...value });
+
+        await this.storage.set(key, { value: newValue });
+    }
+
+    async bulkPatch(keys: [string, any][]) {
+        for (let [key, value] of keys) {
+            await this.patch(key, value);
+        }
+    }
+}
+```
+
+#### Storing Relationships
+
+To store relationships, you use the `bulkAddToRelationShip` and `addToRelationship` methods.
+
+```ts twoslash
+interface SeyfertDotDev {
+    setAdd(key: string, key: string): Promise<void>;
+}
+// @noErrors
+// ---cut---
+import { Adapter } from 'seyfert';
+
+class MyAdapter implements Adapter {
+    // ---cut-start---
+    storage: SeyfertDotDev;
+    // ---cut-end---
+    async addToRelationship(id: string, keys: string | string[]) {
+        for (const key of Array.isArray(keys) ? keys : [keys]) {
+            // Add to a "Set", IDs must be unique
+            await this.storage.setAdd(id, key);
+        }
+    }
+
+    async bulkAddToRelationShip(data: Record<string, string[]>) {
+        for (const i in data) {
+            await this.addToRelationship(i, data[i]);
+        }
+    }
+}
+```
+
+### Retrieving Data
+
+You must implement three methods in your adapter to retrieve values: `get`, `bulkGet`, and `scan`.
+
+#### `get` and `bulkGet`
+
+Starting with the simplest:
+
+```ts twoslash
+interface SeyfertDotDev {
+    get(key: string): Promise<any>;
+}
+// @noErrors
+// ---cut---
+import { Adapter } from 'seyfert';
+
+class MyAdapter implements Adapter {
+    // ---cut-start---
+    storage: SeyfertDotDev;
+    // ---cut-end---
+    async get(key: string) {
+        return this.storage.get(key);
+    }
+
+    async bulkGet(keys: string[]) {
+        const values: Promise<any>[] = [];
+        for (let key of keys) {
+            values.push(this.get(key));
+        }
+
+        return (await Promise.all(values))
+            // Do not return null values
+            .filter(value => value)
+    }
+}
+```
+
+#### The `scan` method
+
+Currently, we are storing data in this format:
+```ts
+<resource>.<id2>.<id1> // member.1003825077969764412.1095572785482444860
+<resource>.<id1> // user.863313703072170014
+```
+
+The `scan` method takes a string with this format:
+```ts
+<resource>.<*>.<*> // member.*.*
+<resource>.<*>.<id> // member.*.1095572785482444860
+<resource>.<id>.<*> // member.1003825077969764412.*
+<resource>.<*> // user.*
+```
+The `*` indicates that any ID may be present.
+
+You should return all matches.
+
+```ts twoslash
+interface SeyfertDotDev {
+    entries(): Promise<[string, unknown][]>; 
+}
+// @noErrors
+// ---cut---
+import { Adapter } from 'seyfert';
+
+class MyAdapter implements Adapter {
+    // ---cut-start---
+    storage: SeyfertDotDev;
+    // ---cut-end---
+    async scan(query: string, keys?: false): any[]; 
+    async scan(query: string, keys: true): string[]; 
+    async scan(query: string, keys = false) {
+        const values: (string | unknown)[] = [];
+        const sq = query.split('.');
+        // Your client will likely have a more optimized way to do this.
+        // Like our Redis adapter.
+        for (const [key, value] of await this.storage.entries()) {
+            const match = key.split('.')
+                .every((value, i) => (sq[i] === '*' ? !!value : sq[i] === value));
+            if (match) {
+                values.push(keys ? key : value);
+            }
+        }
+
+        return values;
+    }
+}
+```
+> [Example of Redis Adapter](https://github.com/tiramisulabs/extra/blob/db36914ace5f4b948ee109a3c25987e162811b44/packages/redis-adapter/src/adapter.ts#L46)
+
+#### Retrieving Relationships
+
+To get the IDs of a relationship, we have the `getToRelationship` method.
+
+```ts twoslash
+interface SeyfertDotDev {
+    setGet(key: string): Promise<string[] | undefined>;
+}
+// @noErrors
+// ---cut---
+import { Adapter } from 'seyfert';
+
+class MyAdapter implements Adapter {
+    // ---cut-start---
+    storage: SeyfertDotDev;
+    // ---cut-end---
+    async getToRelationship(to: string) {
+        return await this.storage.setGet(to) ?? []
+    }
+}
+```
+
+#### `keys`, `values`, `count`, and `contains`
+
+```ts twoslash
+interface SeyfertDotDev {
+    setGet(key: string): Promise<string[] | undefined>;
+}
+// @noErrors
+// ---cut---
+import { Adapter } from 'seyfert';
+
+class MyAdapter implements Adapter {
+    // ---cut-start---
+    storage: SeyfertDotDev;
+    get(key: string): Promise<any>
+    // ---cut-end---
+    async getToRelationship(to: string) {
+        return await this.storage.setGet(to) ?? []
+    }
+
+    async keys(to: string) {
+        const keys = await this.storage.setGet(to) ?? [];
+        return keys.map(key => `${to}.${key}`);
+    }
+
+    async values(to: string) {
+        const array: any[] = [];
+        const keys = await this.keys(to);
+
+        for (const key of keys) {
+            const content = await this.get(key);
+
+            if (content) {
+                array.push(content);
+            }
+        }
+
+        return array;
+    }
+
+    async count(to: string) {
+        return (await this.getToRelationship(to)).length;
+    }
+
+    async contains(to: string, key: string) {
+        return (await this.getToRelationship(to)).includes(key);
+    }
+}
+```
+
+### Deleting Data
+
+#### `remove` and `bulkRemove`
+
+There are three methods you must implement in your adapter to delete values: `remove`, `bulkRemove`, and `flush`.
+
+```ts twoslash
+interface SeyfertDotDev {
+    remove(key: string): Promise<void>;
+    flush(): Promise<void>;
+    setFlush(): Promise<void>;
+}
+// @noErrors
+// ---cut---
+import { Adapter } from 'seyfert';
+
+class MyAdapter implements Adapter {
+    // ---cut-start---
+    storage: SeyfertDotDev;
+    // ---cut-end---
+    async remove(key: string) {
+        await this.storage.remove(key);
+    }
+
+    async bulkRemove(keys: string[]) {
+        for (const key of keys) {
+            await this.remove(key);
+        }
+    }
+
+    async flush() {
+        await this.storage.flush(); // Delete values
+        await this.storage.setFlush(); // Delete relationships
+    }
+}
+```
+
+#### Deleting Relationships
+
+To remove IDs from a relationship, we have the `removeToRelationship` and `removeRelationship` methods.
+
+```ts twoslash
+interface SeyfertDotDev {
+    setRemove(key: string): Promise<void>;
+    setPull(to: string, key: string[]): Promise<void>
+}
+// @noErrors
+// ---cut---
+import { Adapter } from 'seyfert';
+
+class MyAdapter implements Adapter {
+    // ---cut-start---
+    storage: SeyfertDotDev;
+    // ---cut-end---
+    async removeToRelationship(to: string) {
+        // Remove the "Set" completely
+        await this.storage.setRemove(to);
+    }
+
+    async removeRelationship(to: string, key: string | string[]) {
+        // Remove the ID(s) from the "Set"
+        const keys = Array.isArray(key) ? key : [key];
+        await this.storage.setPull(to, keys);
+    }
+}
+```
+
+### Testing
+To ensure your adapter works, run the `testAdapter` method from `Cache`.
+
+```ts twoslash
+// @errors: 2304
+// @noErrors
+import { Client } from 'seyfert';
+
+const client = new Client();
+
+client.setServices({
+    cache: {
+        adapter: new MyAdapter()
+        // adapter: ...
+    }
+})
+
+await client.cache.testAdapter();
+```
