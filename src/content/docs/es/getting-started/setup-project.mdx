@@ -89,8 +89,7 @@ import { config } from "seyfert";
 export default config.bot({
     token: process.env.BOT_TOKEN ?? "",
     locations: {
-        base: "src",    
-        output: "dist", // reemplazar por "src" en caso de usar bun
+        base: "dist", // reemplazar por "src" en caso de usar bun
         commands: "commands"
     },
     intents: ["Guilds"],
@@ -112,8 +111,7 @@ import { config } from "seyfert";
 export default config.http({
     token: process.env.BOT_TOKEN ?? "",
     locations: {
-        base: "src",
-        output: "dist", // reemplazar por "src" en caso de usar bun
+        base: "dist", // reemplazar por "src" en caso de usar bun
         commands: "commands"
     },
     applicationId: process.env.BOT_APP_ID,

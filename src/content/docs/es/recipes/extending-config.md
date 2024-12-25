@@ -14,8 +14,7 @@ import { config } from "seyfert";
 
 export default config.bot({
 	locations: {
-		base: "src",
-		output: "dist",
+		base: "dist",
 		commands: "commands",
 	},
 	token: process.env.TOKEN!,
@@ -76,8 +75,7 @@ import { config } from "seyfert";
 
 export default config.bot({
 	locations: {
-		base: "src",
-		output: "dist",
+		base: "dist",
 		commands: "commands",
 		music: "lavalink", // dist/lavalink
 	},

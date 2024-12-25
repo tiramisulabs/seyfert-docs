@@ -16,8 +16,7 @@ export default config.bot({
   token: process.env.BOT_TOKEN ?? "",
   intents: ["Guilds"],
   locations: {
-    base: "src",
-    output: "dist",
+    base: "dist",
     commands: "commands",
     events: "events",
     components: 'components'
