@@ -1,58 +1,182 @@
 ---
-title: Understanding `declare module`
+title: Understanding 'declare module'
 ---
 
 :::tip
+This technique, known as Module Augmentation, is explained in more detail in the [official TypeScript documentation](https://www.typescriptlang.org/docs/handbook/declaration-merging.html#module-augmentation).
 
-This technique is called module augmentation, learn more in [typescript documentation](https://www.typescriptlang.org/docs/handbook/declaration-merging.html#module-augmentation)
-
+In this section, we won’t dive deeply into how it works, but we’ll explain what’s necessary to apply it correctly within Seyfert.
 :::
 
-Due to the versatility of seyfert, it can get confusing understanding exactly how to include content in the project, so seyfert includes various interfaces for the developer to use when defining their own rules.
+> The following code snippets can be used in any TypeScript file in your project. However, it’s recommended to place a single `declare module 'seyfert'` in the main file `src/index.ts` that contains everything your bot needs.
+
 ## Clients
 
-Seyfert includes several types of client to create the instance of a bot, this might create confusion when calling the client anywhere in your code, so you may specify to typescript which one you are using:
-```ts copy
-declare module 'seyfert' {
-  interface UsingClient extends ParseClient<Client<true>> { }
-  // interface UsingClient extends ParseClient<WorkerClient<true>> { }
-  // interface UsingClient extends ParseClient<HttpClient> { }
-} 
-```
+Seyfert provides several [client types](./setup-project) to instantiate your bot, which could cause confusion when referencing the client in different parts of your code. To avoid this, you can specify the client type you're using to TypeScript. Be sure to choose only one of the following three implementations:
 
-## Extends Context
-
-As you may notice when you are extending the CommandContext, the properties you want to be either extended or added in are not typed. To do that we ought to declare Seyfert's module.
-
-We have to edit the `ExtendContext` interface within Seyfert's module which expects to receive the data to add.
-
-```ts showLineNumbers copy wrap ins={11-14}
+```ts twoslash {"Gateway":4-5} {"HTTP":7-8} {"Worker":10-11} copy
+import type { ParseClient, Client, HttpClient, WorkerClient } from 'seyfert';
 
 declare module 'seyfert' {
-    //we are using ReturnType which gives us the typeof the whatever the function context returns.
-    interface ExtendContext extends ReturnType<typeof context>;
+
+    interface UsingClient extends ParseClient<Client<true>> { }
+  
+  
+    interface UsingClient extends ParseClient<HttpClient> { }
+  
+  
+    interface UsingClient extends ParseClient<WorkerClient<true>> { }
 }
-
 ```
-:::note 
 
-The context variable in the example above is the one we are using to extend the context. For further information see [extending context guide](/commands/extend-commandcontext).
-::: 
+## Middlewares
+
+To use your middlewares throughout the project, you need to inform TypeScript about their structure and composition. Export all middlewares from your code and provide them to Seyfert as follows:
+
+```ts {2,5} copy
+// Assuming you exported all middlewares from './middlewares';
+import type * as allMiddlewares from './middlewares';
+
+declare module 'seyfert' {
+    interface RegisteredMiddlewares extends ParseMiddlewares<typeof allMiddlewares> {}
+}
+```
+
+This applies similarly to global middlewares, which are automatically executed on every command, even if they aren’t explicitly specified in it.
+
+```ts {2,5} copy
+// Assuming you exported all global middlewares from './globalMiddlewares';
+import type * as globalMiddlewares from './globalMiddlewares';
+
+declare module 'seyfert' {
+    interface GlobalMetadata extends ParseMiddlewares<typeof globalMiddlewares> {}
+}
+```
+
+> If you’re not yet familiar with middlewares, you can review their use cases and structure in their [dedicated section](../commands/middlewares).
+
+## Languages
+
+To correctly configure types for languages, it’s recommended to establish a primary or base language that you always update. This way, all types will derive from this language, making it easier to keep the rest of the translations up to date.
+
+:::note
+Although you can use `.json` files to store languages, it’s highly recommended to use `.ts` or `.js` files. This allows you to include functions and benefit from autocomplete!
+:::
+
+```ts {2,5} copy
+// Assuming your base language is located in './langs/en';
+import type * as defaultLang from './langs/en';
+
+declare module 'seyfert' {
+    interface DefaultLocale extends ParseLocales<typeof defaultLang> {}
+}
+```
+
+> If you didn’t know that Seyfert has an automatic language system, we recommend visiting the [dedicated section on this](../i18n/languages).
+
+## Contexts
+
+We often need to extend contexts to add useful properties or methods, which also requires updating the types.
+
+If you’ve used `extendContext` for this, you can use the following code to infer the type returned by your function and add it to the context:
+
+```ts twoslash {3,6} copy
+import { extendContext } from 'seyfert';
+
+const context = extendContext((ctx) => ({ otter: 'cute' }));
+
+declare module 'seyfert' {
+    interface ExtendContext extends ReturnType<typeof context> {}
+}
+```
+
+> If you’re not yet familiar with how Seyfert allows you to easily modify and extend the context, you can review its [dedicated section](../commands/extend-commandcontext).
+
+## Command Properties
+
+We often need to categorize some commands or simply assign an identifier for something.
+
+To achieve this, we can use `ExtraProps`:
+
+```ts twoslash {3,6} copy
+// @errors: 2741 2322
+import { Client, Declare, Command } from 'seyfert';
+// ---cut---
+const client = new Client({
+    commands: {
+        defaults: {
+            props: {
+                category: 'none'
+            }
+        }
+    }
+});
+
+@Declare({
+    name: 'test',
+    description: 'test command',
+    props: {}
+})
+class Test extends Command {}
+
+declare module 'seyfert' {
+    interface ExtraProps {
+        onlyForAdmins: boolean;
+        disabled?: true;
+        category?: string
+    }
+}
+```
+
 ## Internal Options
 
-Since seyfert accepts different ways of operating, it becomes more complicated to keep the types true to reality. Because of that there is `InternalOptions`, an interface that expects properties to transform the seyfert types to something more complete.
+Since Seyfert supports various modes of operation, it’s necessary to add types as required by your implementations. For this, `InternalOptions` exists as an interface designed to include properties that transform Seyfert types into something more comprehensive.
 
-```ts copy
+```ts twoslash copy
+import 'seyfert';
+//---cut---
 declare module 'seyfert' {
-	interface InternalOptions {
-		withPrefix: true | false;
-		asyncCache: true | false;
-	}
+    interface InternalOptions {
+        withPrefix: true; // or false
+        asyncCache: false; // or true
+    }
 }
 ```
 
 ### withPrefix
-Setting this property to `true` tells seyfert that the context can have either message or interaction and both will be optional, by default `.interaction` is always part of the context.
+
+Setting this property to `true` tells Seyfert that the context can include either a message or an interaction, both of which will be optional. By default, `.interaction` is always present in the context.
 
 ### asyncCache
-Setting this property to `true` tells seyfert whether the cache will return a promise, by default seyfert uses `MemoryAdapter` a RAM cache which does not return a promise, but `RedisAdapter` does.
+
+Setting this property to `true` tells Seyfert whether the cache will return a promise. By default, Seyfert uses `MemoryAdapter`, a RAM cache that doesn’t return promises, while [`RedisAdapter`](https://npmjs.com/package/@slipher/redis-adapter) does.
+
+## Configuration
+
+In Seyfert, you can add more properties to the configuration file `seyfert.config.mjs`, regardless of whether you’re using the `http` or `bot` configuration. This can be done using `ExtendedRC` as follows:
+
+```ts twoslash
+import 'seyfert';
+//---cut---
+declare module 'seyfert' {
+    interface ExtendedRC {
+        developers: string[];
+        // more properties here...
+    }
+}
+```
+
+## Locations
+
+Just as you can extend Seyfert’s base configuration, you can also extend the folder locations object using `ExtendedRCLocations`. This can be done as follows:
+
+```ts twoslash
+import 'seyfert';
+//---cut---
+declare module 'seyfert' {
+    interface ExtendedRCLocations {
+        models: string;
+        // more properties here...
+    }
+}
+```

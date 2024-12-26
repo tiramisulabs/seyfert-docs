@@ -1,0 +1,263 @@
+---
+title: Introducción a comandos
+---
+
+import { FileTree, TabItem, Tabs } from '@astrojs/starlight/components'
+
+La entrada principal de cualquier bot de Discord son los comandos. En Seyfert, estos se definen utilizando decoradores de TypeScript, lo que facilita definir sus propiedades, opciones, middlewares y subcomandos.
+Esta guía te ayudará a comprender cómo funcionan los decoradores relacionados con comandos en Seyfert.
+
+:::note
+Si aún no has creado [tu primer comando](../getting-started/first-command), consulta esa guía introductoria antes de continuar.
+:::
+
+## Declarando un comando
+
+Todos los comandos en Seyfert son basados en clases y cada una de estas clases son extendidas de la clase base **`Command`**.
+
+Además de esto, el **nombre** y la **descripción** son propiedades obligatorias en cada comando. A continuación, una lista de las posibles propiedades que puedes utilizar junto al decorador `@Declare`:
+
+```ts twoslash
+import { Declare, Command, IgnoreCommand } from 'seyfert';
+
+@Declare({
+    name: 'tu-comando',
+    description: 'Una descripción para este comando',
+    // Propiedades para pasar en el comando como metadata
+    props: {},
+
+    // Lista de permisos que necesita el miembro
+    defaultMemberPermissions: ['Administrator'],
+
+    // Lista de permisos que necesita el bot
+    botPermissions: ['ManageGuild'],
+
+    // Lista de IDs de servidores para registrar el comando
+    guildId: ['100000'],
+
+    // Determina si el comando es NSFW
+    nsfw: false,
+
+    // Lista de nombres alternos para el comando (en comandos de texto)
+    aliases: ['un-comando'],
+
+    // Identifica los tipos de instalaciones que soporta el comando,
+    //   por defecto solo en el servidor
+    integrationTypes: ['GuildInstall', 'UserInstall'],
+
+    // Determina dónde se puede usar un comando
+    contexts: ['BotDM', 'Guild', 'PrivateChannel'],
+
+    // Establece si ignorar la ejecución del comando en slash
+    //   o en su versión mensaje de texto
+    ignore: IgnoreCommand.Slash,
+    //                    ^|
+
+    // Establece el tipo de comando:
+    /// type: ApplicationCommandType.User
+})
+class MiComando extends Command {}
+```
+
+<br />
+
+## Añadiendo opciones
+
+Algo esencial es que los comandos se ajusten a las opciones ingresadas por el usuario. Para ello, utilizamos el decorador `@Options`, que necesita un objeto con todas las opciones del comando:
+
+```ts twoslash
+// @exactOptionalPropertyTypes: false
+import {
+    Options,
+    Command,
+    createStringOption,
+    type CommandContext,
+} from 'seyfert';
+
+const options = {
+    message: createStringOption({
+        description: 'Mi opción de texto',
+    }),
+};
+
+@Options(options)
+class MiComando extends Command {
+    run(ctx: CommandContext<typeof options>) {
+        ctx.options.message;
+        //           ^?       
+    }
+}
+```
+
+> Todas los tipos y posibles opciones para cada comando se pueden encontrar en su [respectiva sección](../commands/options).
+
+<br />
+
+## Utilizando middlewares
+
+Seyfert cuenta con un sistema avanzado de middlewares, completamente tipado y de gran potencia. Este sistema permite procesar una lista de middlewares, que son funciones diseñadas para ejecutarse previamente a la ejecución de un comando.
+
+Recuerda que debes haber hecho [uso del declare module](../getting-started/declare-module) para que funcione correctamente:
+
+```ts twoslash
+import { createMiddleware, type ParseMiddlewares } from 'seyfert';
+const middle = createMiddleware(() => ({}));
+const middlewares = {
+    'mi-middleware': middle,
+    'siguiente-middleware': middle,
+};
+
+declare module 'seyfert' {
+    interface RegisteredMiddlewares
+        extends ParseMiddlewares<typeof middlewares> {}
+}
+// ---cut---
+import { Command, Middlewares } from 'seyfert';
+
+@Middlewares(['mi-middleware', 'siguiente-middleware'])
+class MiComando extends Command {}
+```
+
+> Los casos de uso para los middlewares y cómo empezar a usarlos están en la [sección de middlewares](../commands/middlewares).
+
+<br />
+
+## Idiomas
+
+Con el sistema de idiomas avanzado de Seyfert, puedes automáticamente traducir todo el contenido de un comando utilizando el decorador `@LocalesT`.
+
+Recuerda que para el funcionamiento correcto de este, debes haber usado el [declare module](../getting-started/declare-module) correctamente.
+
+```ts twoslash
+import type { ParseLocales } from 'seyfert';
+const lang = {
+    'mi-comando': {
+        nombre: '',
+        description: '',
+    },
+};
+declare module 'seyfert' {
+    interface DefaultLocale extends ParseLocales<typeof lang> {}
+}
+// ---cut---
+import { Command, LocalesT } from 'seyfert';
+
+@LocalesT('mi-comando.nombre', 'mi-comando.description')
+//                   ^|
+class MiComando extends Command {}
+```
+
+## Subcomandos
+
+:::note
+Tenemos una sección dedicada a los subcomandos, puedes encontrarla [aquí](/es/commands/subcommands).
+:::
+
+
+Basándonos en la [estructura de Discord](https://discord.com/developers/docs/interactions/application-commands#subcommands-and-subcommand-groups), los subcomandos de tipo *slash* pueden pertenecer a grupos o no. Es importante tener en cuenta que solo se pueden ejecutar los subcomandos directamente, sin incluir los grupos o el comando principal.
+
+Para añadir subcomandos, se puede utilizar el decorador `@Options` en un comando principal, especificando los subcomandos disponibles con la clase `SubCommand`. Para mantener una buena organización, se recomienda usar una estructura de carpetas que permita gestionar los subcomandos de manera ordenada:
+
+<Tabs>
+    <TabItem label="commands/mi-comando/parent.ts">
+```ts twoslash copy
+// @noErrors
+import { Command, Declare, Options } from 'seyfert';
+import MiSubComando from './sub';
+
+@Declare({
+    name: 'padre',
+    description: 'Mi comando principal',
+})
+@Options([MiSubComando])
+export default class PadreCommand extends Command { }
+``` 
+    </TabItem>
+
+    <TabItem label="commands/mi-comando/sub.ts">
+```ts twoslash
+import { SubCommand, Declare, CommandContext } from 'seyfert';
+
+@Declare({
+    name: 'subcomando',
+    description: 'Uno de mi subcomandos',
+})
+export default class MiSubCommand extends SubCommand {
+    run(ctx: CommandContext) {
+        return ctx.write({
+            content: '¡Hola desde el subcomando!',
+        });
+    }
+}
+
+```
+    </TabItem>
+</Tabs>
+
+
+<br />
+
+### Grupos de subcomandos
+
+Si queremos una estructura más dividida, podemos crear grupos para los subcomandos. Para ello, se utiliza el decorador `@Group` y `@Groups` en el comando principal.
+
+<Tabs>
+    <TabItem label="parent.ts">
+```ts twoslash copy
+// @noErrors
+import { Command, Declare, Options, Groups } from 'seyfert';
+import MiSubComando from './sub';
+
+@Declare({
+    name: 'padre',
+    description: 'Mi comando principal',
+})
+@Options([MiSubComando])
+@Groups({
+    'mi-grupo': {
+        defaultDescription: 'Un grupo de subcomandos',
+    }
+})
+export default class PadreCommand extends Command { }
+``` 
+    </TabItem>
+
+    <TabItem label="migrupo-sub.ts">
+```ts twoslash
+import { SubCommand, Declare, CommandContext, Group } from 'seyfert';
+
+@Declare({
+    name: 'subcomando',
+    description: 'Uno de mi subcomandos dentro del grupo mi-grupo',
+})
+@Group('mi-grupo')
+export default class GrupoMiSubCommand extends SubCommand {
+    run(ctx: CommandContext) {
+        return ctx.write({
+            content: '¡Hola desde el subcomando!',
+        });
+    }
+}
+
+```
+    </TabItem>
+</Tabs>
+
+<br />
+
+### Carga automática de subcomandos
+
+Para ahorrarnos el hecho de importar cada comando manualmente, Seyfert nos permite cargar automáticamente los comandos de una carpeta. Para ello, se utiliza el decorador `@AutoLoad` en el comando principal.
+
+```ts twoslash
+import { Command, Declare, AutoLoad } from 'seyfert';
+
+@Declare({
+    name: 'padre',
+    description: 'Mi comando principal',
+})
+@AutoLoad()
+export default class PadreCommand extends Command { }
+```
+
+> No es necesario utilizar el decorador `@Options` si se utiliza `@AutoLoad`. Seyfert cargará automáticamente los subcomandos de la carpeta.

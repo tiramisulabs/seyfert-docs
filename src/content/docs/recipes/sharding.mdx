@@ -1,0 +1,79 @@
+---
+title: Understanding sharding
+---
+import { TabItem, Tabs } from '@astrojs/starlight/components';
+
+# Sharding
+
+In seyfert the sharding approach is to give the full benefit of scaling while keeping the same structure in your project.
+
+## Why sharding?
+
+JavaScript runtimes are single-threaded, which means that without sharding, all processing would happen in a single thread. This creates a processing limit where all the load is evaluated together. Seyfert handles sharding internally in the `Client` instance to help distribute this load across multiple processes or threads (although it is still an imperfect technique).
+
+## Managing shards
+
+The base of the `Worker` is to allow to execute code in parallel in different parts of the CPU, either in threads or different processes. In terms of discord, this means the ability to connect several `shards` by spreading the load on each `Worker`, for seyfert this is just changing the `mode` property in the `WorkerManager` to decide the execution mode between `threads` to `spawn` clients on processor threads or `cluster` to `spawn` clients on different processes of the runtime.
+
+<Tabs>
+	<TabItem label='manager.ts'>
+```ts showLineNumbers
+import { WorkerManager } from 'seyfert';
+
+const manager = new WorkerManager({
+	mode: "threads",
+	// ./src/client.ts for bun and deno (?
+	path: "./dist/client.js",
+	// you can override a lot of options, like number of workers, shards per worker...
+});
+
+manager.start();
+```
+	</TabItem>
+	<TabItem label='client.ts'>
+```ts showLineNumbers
+import { WorkerClient } from "seyfert";
+
+const client = new WorkerClient();
+
+client.start();
+
+declare module 'seyfert' {
+	interface UsingClient extends ParseClient<WorkerClient> {}
+}
+```
+	</TabItem>
+</Tabs>
+
+Too simple? Seyfert takes care of all the logic so your project shouldn't change much just by switching to a `WorkerSharding`.
+
+## Cache
+Unlike traditional Discord libraries, Seyfert offers unified cache management across all shards. The cache can be centralized in the main process (the `WorkerManager` executor), ensuring consistent data access throughout your application. 
+
+To implement centralized caching, use the WorkerAdapter:
+
+```ts
+import { WorkerClient, WorkerAdapter } from 'seyfert';
+
+const client = new WorkerClient();
+
+client.setServices({
+	cache: {
+		adapter: new WorkerAdapter(client.workerData)
+	}
+});
+
+await client.start();
+```
+
+## Talking to other workers
+If for some reason (I did not find any for the example), you want a specific worker to execute an action that another one received, you can simply ask it.
+
+```ts
+// I wish typescript allowed to represent parameters like python
+client.tellWorker(
+	workerId = 1,
+	(worker, vars) => console.log(`Hii worker #${worker.workerId} from ${vars.workerId}`),
+	vars = { workerId: client.workerId }
+);
+```

@@ -37,7 +37,7 @@ export const middlewares = {
 ```
 
 ```ts title="index.ts" ins={2,7-9,15-16} copy
-import { ParseLocales, Client, ParseMiddlewares, ParseClient } from "seyfert";
+import { type ParseLocales, Client, type ParseMiddlewares, type ParseClient } from "seyfert";
 import { middlewares } from "./path/to/middlewares";
 
 const client = new Client();
@@ -80,13 +80,13 @@ Ahora cada vez que se ejecute el comando `ping`, el middleware logger registrar�
 Los middlewares se ejecutan en el orden en que se agregan.
 :::
 
-## Middleware de parada
+## Parando middlewares
 
 Como dijimos, puedes usar middlewares para hacer verificaciones, y puedes detener la ejecución del comando si la verificación falla.
 
 Vamos a ver agregando algo de lógica al middleware de registro.
 
-```ts title="logger.middleware.ts" ins={8-10} copy wrap
+```ts title="logger.middleware.ts" ins={11-13} copy wrap
 import { createMiddleware } from "seyfert";
 import { ChannelType } from "seyfert/lib/types";
 
@@ -114,7 +114,7 @@ Observa que puedes unirte a los datos de interacción usando `middle.context.int
 
 Por otro lado, podríamos ignorar la interacción (ignorar la interacción y literalmente no hacer nada) usando `middle.pass()`
 
-```ts title="logger.middleware.ts" ins={9} copy
+```ts title="logger.middleware.ts" ins={11} copy
 import { createMiddleware } from "seyfert";
 import { ChannelType } from "seyfert/lib/types";
 
@@ -181,5 +181,33 @@ export default class PingCommand extends Command {
             content: `Pong! Time: ${time}`,
         });
     }
+}
+```
+
+## Middlewares globales
+
+Los middlewares globales siguen la misma regla y estructura explicada anteriormente, con la breve diferencia de que tienen una propiedad unica en el context y se declaran de forma separada
+
+```ts
+import { type ParseGlobalMiddlewares, Client } from 'seyfert';
+import { middlewares } from "./path/to/middlewares";
+import { global } from "./path/to/globas";
+
+const globalMiddlewares: (keyof typeof global)[] = ['logger']
+
+// Register middleware
+const client = new Client({
+  globalMiddlewares
+});
+
+client.setServices({
+  middlewares: { ...global, ...middlewares },
+});
+
+declare module 'seyfert' {
+  interface RegisteredMiddlewares
+    extends ParseMiddlewares<typeof middlewares & typeof global> {}
+  interface GlobalMetadata
+    extends ParseGlobalMiddlewares<typeof global> {}
 }
 ```

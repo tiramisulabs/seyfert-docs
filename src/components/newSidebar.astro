@@ -1,12 +1,11 @@
 ---
-import type { Props } from "@astrojs/starlight/props";
-import seyfertIcon from "../../public/icon.svg";
-import { Image } from "astro:assets";
-import SidebarList from "./sidebarList.astro";
-import { Icon } from "@astrojs/starlight/components";
-import LanguageSelect from "virtual:starlight/components/LanguageSelect";
-import SocialIcons from "virtual:starlight/components/SocialIcons";
-import ThemeSelect from "./themeSelect.astro";
+import type { Props } from '@astrojs/starlight/props';
+import seyfertIcon from '../../public/icon.svg';
+import { Image } from 'astro:assets';
+import SidebarList from './sidebarList.astro';
+import { Icon } from '@astrojs/starlight/components';
+import LanguageSelect from 'virtual:starlight/components/LanguageSelect';
+import ThemeSelect from './themeSelect.astro';
 
 const { sidebar } = Astro.props;
 ---
@@ -18,7 +17,7 @@ const { sidebar } = Astro.props;
         <button
             class="px-0 transition-transform ease-in-out duration-300 mb-1 pb-2 bg-transparent text-center border-b border-gray-300 dark:border-[#2e2e32]"
         >
-            <a class="flex items-center gap-2 cursor-pointer font-bold">
+            <a class="flex items-center gap-2 cursor-pointer font-bold text-inherit no-underline" href="https://seyfert.dev">
                 <Image src={seyfertIcon} alt="Seyfert" class="w-8 h-8" />
                 Seyfert
             </a>
@@ -53,10 +52,9 @@ const { sidebar } = Astro.props;
     const showSidebar = document.querySelector('.show-sidebar');
     const closeSidebar = document.querySelector('.close-sidebar');
 
-    if(mobileMenuToggle && sidebar && showSidebar && closeSidebar) {   
+    if (mobileMenuToggle && sidebar && showSidebar && closeSidebar) {   
         mobileMenuToggle.addEventListener('click', () => {
             sidebar.classList.toggle('-translate-x-full');
-            // mobileMenuToggle.classList.toggle('rotate-180');
             showSidebar.classList.toggle('hidden');
             closeSidebar.classList.toggle('hidden');
         });

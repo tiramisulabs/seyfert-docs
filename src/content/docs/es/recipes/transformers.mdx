@@ -1,0 +1,88 @@
+---
+title: Transformers
+---
+# ¿Qué es un transformer?
+
+Basicamente, un transformer es una función que toma un objeto y lo transforma en otro valor. En Seyfert, los transformers son usados para transformar los datos que vienen de discord en valores cualesquiera que necesites.
+
+## ¿Cómo se usan?
+
+Vamos a ver un ejemplo de un transformer.
+
+```ts twoslash
+import type { APIUser } from 'seyfert/lib/types';
+
+interface MyUser {
+    username: string;
+    esAdmin: boolean;
+    raw(): Promise<APIUser>;
+}
+//---cut---
+import { Transformers } from 'seyfert';
+
+Transformers.User = (client, data) => {
+    return {
+        username: data.username,
+        esAdmin: Math.random() > 0.5,
+        raw() {
+            return client.users.raw(data.id);
+        },
+    };
+};
+
+/*
+Ya llegado a este punto,
+deberias tener un `declare module "seyfert"` en tu proyecto,
+si no, añadelo.
+*/
+declare module "seyfert" {
+// Declarando el tipo de esta manera, 
+// se reflejará en el tipado de todo el proyecto.
+    interface CustomStructures {
+        User: MyUser;
+// Puedes añadir tantos transformers como quieras, con cualquier tipo
+    }
+}
+```
+Dejate llevar por el autocompletado de tu editor y descubre todas las posibilidades que tienes.
+```ts twoslash
+import { Transformers } from 'seyfert';
+
+Transformers.GuildMember
+              // ^|
+```
+
+## ¿Cómo puedo usarlos?
+
+Por ejemplo, arriba hemos definido un transformer para el usuario, ahora vamos a ver cómo podemos usarlo.
+```ts twoslash
+import type { APIUser } from 'seyfert/lib/types';
+
+interface MyUser {
+    username: string;
+    esAdmin: boolean;
+    raw(): Promise<APIUser>;
+}
+
+declare module "seyfert" {
+    interface CustomStructures {
+        User: MyUser;
+    }
+}
+//---cut---
+import { type CommandContext, Command, Declare } from 'seyfert';
+
+@Declare({
+    name: 'ping',
+    description: 'Ping!',
+})
+class Ping extends Command {
+    async run(ctx: CommandContext) {
+        const result = await ctx.author.raw();
+                                     // ^|
+        console.log(result.id, result.username);
+    }
+}
+```
+![A seyfert transformer](../../../../../public//transformers.gif)
+

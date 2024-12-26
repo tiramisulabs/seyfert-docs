@@ -4,11 +4,11 @@ title: Prefix Commands
 
 import { TabItem, Tabs } from '@astrojs/starlight/components'
 
-## Setting up prefixes
+## Prefix Configuration
 
-Not only does seyfert handle application commands but also `prefix commands`. They are not enabled by default but you can enable them by setting up an option inside the [`ClientOptions`](https://github.com/tiramisulabs/seyfert/blob/455ed12b0ebcb3ddf55bc8b3274b0ce904becc62/src/client/client.ts#L230). We have to access to the `command` option where we can specify a suboption called `prefix`. This option expects a callback returning an array of possible prefixes for that command. As the callback returns a [`Message`](https://github.com/tiramisulabs/seyfert/blob/455ed12b0ebcb3ddf55bc8b3274b0ce904becc62/src/structures/Message.ts#L123) is pretty simple to handle diffrent prefixes per guild.
+Seyfert handles not only application commands but also `prefix commands`. They are not enabled by default, but you can enable them by configuring an option within [`ClientOptions`](https://github.com/tiramisulabs/seyfert/blob/455ed12b0ebcb3ddf55bc8b3274b0ce904becc62/src/client/client.ts#L230). We have access to the `command` option where we can specify a suboption called `prefix`. This option expects a callback that returns an array of possible prefixes for that command. Since the callback returns a [`Message`](https://github.com/tiramisulabs/seyfert/blob/455ed12b0ebcb3ddf55bc8b3274b0ce904becc62/src/structures/Message.ts#L123), we have access to the `command` option where we can specify a suboption called `prefix`. This option expects a callback returning an array of possible prefixes for that command. As the callback returns a [`Message`](https://github.com/tiramisulabs/seyfert/blob/455ed12b0ebcb3ddf55bc8b3274b0ce904becc62/src/structures/Message.ts#L123) property inside [`CommandContext`](https://github.com/tiramisulabs/seyfert/blob/455ed12b0ebcb3ddf55bc8b3274b0ce904becc62/src/commands/applications/chatcontext.ts#L24), it is quite simple to handle different prefixes per server.
 
-Here is an example in which we are going to set multiple prefixes for all the commands.
+Here’s an example where we configure multiple prefixes for all commands.
 
 ```ts showLineNumbers copy ins={4-9} wrap
 
@@ -17,7 +17,7 @@ import { Client } from 'seyfert';
 const client = new Client({
     commands: {
         prefix: (msg) => {
-            //here you can handle whatever prefixes you will want to be consider depending on the message data.
+            // here you can handle whatever prefixes you want depending on the message data.
             return ['!', '?', '.']
         }
     }
@@ -25,17 +25,15 @@ const client = new Client({
 
 ```
 
+## Handling Prefix Commands
 
-## Handling prefix commands
+After configuring our prefixes for commands, it's time to make them work.
 
-Having set up our prefixes for the commands it's about time we want to make them run.
+Fortunately, handling them works the same way as application commands. The only difference is that we receive an optional [`Message`](https://github.com/tiramisulabs/seyfert/blob/455ed12b0ebcb3ddf55bc8b3274b0ce904becc62/src/structures/Message.ts#L123) property inside the [`CommandContext`](https://github.com/tiramisulabs/seyfert/blob/455ed12b0ebcb3ddf55bc8b3274b0ce904becc62/src/commands/applications/chatcontext.ts#L24).
 
-And for your luck, the handling works as application commands. The only difference is that we receive an optional [`Message`](https://github.com/tiramisulabs/seyfert/blob/455ed12b0ebcb3ddf55bc8b3274b0ce904becc62/src/structures/Message.ts#L123) property inside [`CommandContext`](https://github.com/tiramisulabs/seyfert/blob/455ed12b0ebcb3ddf55bc8b3274b0ce904becc62/src/commands/applications/chatcontext.ts#L24).
+To make this property appear in our CommandContext, all we need to do is declare the Seyfert module and set the `withPrefix` property inside [`InternalOptions`](https://github.com/tiramisulabs/seyfert/blob/455ed12b0ebcb3ddf55bc8b3274b0ce904becc62/src/commands/applications/shared.ts#L11) to true. You can see this [detailed example](/guides/declare-module#internal-options).
 
-To make this property appear in our CommandContext the only thing we shall do is declaring seyfert module and set the `withPrefix` property inside [`InternalOptions`](https://github.com/tiramisulabs/seyfert/blob/455ed12b0ebcb3ddf55bc8b3274b0ce904becc62/src/commands/applications/shared.ts#L11) into true. You can see this [detailed example](/getting-started/declare-module#internal-options).
-
-
-In this example we are going to create a command which `cross post` the message that was sent in an announcement channel.
+In this example, we are going to create a command that `crossposts` the message sent in an announcement channel.
 
 ```ts showLineNumbers copy
 import { 
@@ -46,19 +44,20 @@ import {
 
 @Declare({
     name: 'crosspost',
-    description: 'Cross post and announcement message.'
+    description: 'Crosspost an announcement message.'
 })
 export default class CrosspostCommand extends Command {
     async run(ctx: CommandContext){
         if(ctx.message) await ctx.message.crosspost();
-        return ctx.write({ content: 'I have cross posted your announcement.'});
+        return ctx.write({ content: 'I have crossposted your announcement.'});
     }
 };
 ```
 
-### Ignoring 
+### Ignoring Commands
 
-You can decide whether a command will ignore being a slash command or a prefix command.
+You can decide whether a command should ignore being a slash command or a text command.
+
 ```ts showLineNumbers copy ins={5,11}
 import { 
     Command,
@@ -69,13 +68,13 @@ import {
 
 @Declare({
     name: 'crosspost',
-    description: 'Cross post and announcement message.',
+    description: 'Crosspost an announcement message.',
     ignore: IgnoreCommand.Slash
 })
 export default class CrosspostCommand extends Command {
     async run(ctx: CommandContext){
         if(ctx.message) await ctx.message.crosspost();
-        return ctx.write({ content: 'I have cross posted your announcement.'});
+        return ctx.write({ content: 'I have crossposted your announcement.'});
     }
 };
 ```
@@ -84,11 +83,11 @@ export default class CrosspostCommand extends Command {
 Seyfert supports subcommands within prefix commands.
 :::
 
-## Replying to prefix commands
+## Responding to Prefix Commands
 
-By default when you use `write` or `editOrReply` function it will only send a message to the channel where the command was fired. To make the command being replied you have to set `reply` suboption inside `command` option in the client options. This option is a callback which first parameter is the [`CommandContext`](https://github.com/tiramisulabs/seyfert/blob/455ed12b0ebcb3ddf55bc8b3274b0ce904becc62/src/commands/applications/chatcontext.ts#L24) and expects a boolean to be returned, if is `true` it will reply to the command, if not it will just send a message.
+By default, when you use the `write` or `editOrReply` function, it will only send a message to the channel where the command was triggered. To make the command respond, you need to configure the `reply` suboption within the `command` option in the client options. This option is a callback whose first parameter is the [`CommandContext`](https://github.com/tiramisulabs/seyfert/blob/455ed12b0ebcb3ddf55bc8b3274b0ce904becc62/src/commands/applications/chatcontext.ts#L24) and expects a boolean to be returned: if `true`, it will reply to the command; if not, it will just send a message.
 
-Here is a detailed example about how it will looks your client with all the modifications mentioned in this guide:
+Here’s a detailed example of what your client will look like with all the modifications mentioned in this guide:
 
 ```ts showLineNumbers copy ins={9} wrap
 
@@ -97,7 +96,7 @@ import { Client } from 'seyfert';
 const client = new Client({
     commands: {
         prefix: (msg) => {
-            //here you can handle whichever prefixes you will want to be consider depending on the message data.
+            // here you can handle whatever prefixes you want depending on the message data.
             return ['!', '?', '.']
         },
         reply: (ctx) => true
@@ -106,18 +105,17 @@ const client = new Client({
 
 ```
 
-## Prefix commands options
+## Prefix Command Options
 
-Like `application commands` you can set options for `prefix commands`. The only think you will have to do it's to declare them as you do in `application commands`. They are parsed with a regex that indicates options will be splited when they are followed by `-`. You can replace the parser with your own parser in the `argsParser` suboption inside `commands` options in client options. This is a callback whose params are `content`, the content of the message, and `command`, the command which was run and expects an object whose keys are the options and values the values of the options.
+Just like with `application commands`, you can configure options for `prefix commands`. The only thing you need to do is declare them as you do with application commands. They are parsed with a regex that indicates that options will be split when followed by `-`. You can replace the parser with your own parser in the `argsParser` suboption within the `commands` options in the client options. This is a callback whose parameters are `content`, the message content, and `command`, the command that was executed, and expects an object whose keys are the options and values are the option values.
 
-Here is a brief template which shows how options work in prefix commands.
+Here’s a short template showing how options work in prefix commands.
 
 ```txt hideLineNumbers title="Prefix Command Template"
-!command -option option_value -option2 option2_value
+!command -option value_option -option2 value_option2
 ```
 
-
-Here you can see how we make the previous command but instead of cross posting the current command cross posing another message, fetching it by its id that will be given to us in the options.
+Here you can see how we modify the previous command, but instead of crossposting the current message, we crosspost another message by getting its ID, which will be provided in the options.
 
 ```ts showLineNumbers copy
 import { 
@@ -130,30 +128,29 @@ import {
 
 const options = {
     id: createStringOption({
-        description: 'The id of the message we are going to cross post',
+        description: 'The ID of the message we are going to crosspost',
         required: true
     })
 };
 
 @Declare({
     name: 'crosspost',
-    description: 'Cross post and announcement message.'
+    description: 'Crosspost an announcement message.'
 })
 @Options(options)
 export default class CrosspostCommand extends Command {
     async run(ctx: CommandContext<typeof options>){
         await ctx.client.messages.crosspost(ctx.options.id, ctx.channelId);
-        return ctx.write({ content: 'I have cross posted your announcement.'});
+        return ctx.write({ content: 'I have crossposted your announcement.'});
     }
 };
 ```
 
-## Defering the reply with prefix commands
+## Deferring Response with Prefix Commands
 
-As in `application commands` you can defer reply the response of the command. By default if you use `CommandContext.deferReply()` function it will make the response to be deferred showing a `Loading ...` message. If we want it to be custom we will have to take another look into `commands` option in client options as we have to create a callback for `deferReplyResponse` which expects the content you will send in the defer to be returned.
+Just like with `application commands`, you can defer the response of a command. By default, if you use the `CommandContext.deferReply()` function, it will defer the response by showing a `Loading...` message. If we want the deferred response to be customized, we need to check the `commands` option in the client options again, as we need to create a callback for `deferReplyResponse` that expects the content to send during the deferral.
 
-Here is an example of how we modify the client options and how we make the response of the command to be deferred using the previous example.
-
+Here is an example of how we modify the client options and make the command response deferred using the previous example.
 
 <Tabs>
 <TabItem label='index.ts'>
@@ -165,18 +162,19 @@ import { Client } from 'seyfert';
 const client = new Client({
     commands: {
         prefix: (msg) => {
-            //here you can handle whichever prefixes you will want to be consider depending on the message data.
+            // here you can handle whatever prefixes you want depending on the message data.
             return ['!', '?', '.']
         },
         reply: (ctx) => true,
-        deferReplyResponse: (ctx) => ({ content: 'Thinking...' }) 
+        deferReplyResponse: (ctx) => ({ content: 'Please wait, processing your request...' })
     }
 });
+
 ```
 </TabItem>
 <TabItem label='command.ts'>
 
-```ts showLineNumbers copy ins={23, 27}
+```ts showLineNumbers copy
 import { 
     Command,
     CommandContext,
@@ -187,21 +185,21 @@ import {
 
 const options = {
     id: createStringOption({
-        description: 'The id of the message we are going to cross post',
+        description: 'The ID of the message we are going to crosspost',
         required: true
     })
 };
 
 @Declare({
     name: 'crosspost',
-    description: 'Cross post and announcement message.'
+    description: 'Crosspost an announcement message.'
 })
 @Options(options)
 export default class CrosspostCommand extends Command {
     async run(ctx: CommandContext<typeof options>){
         await ctx.deferReply();
         await ctx.client.messages.crosspost(ctx.options.id, ctx.channelId);
-        return ctx.editOrReply({ content: 'I have cross posted your announcement.'});
+        return ctx.write({ content: 'I have crossposted your announcement.'});
     }
 };
 ```

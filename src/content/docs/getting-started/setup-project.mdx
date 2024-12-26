@@ -1,53 +1,30 @@
 ---
-title: Setup Project
+
+title: Configuring Seyfert
 ---
 
-import {
-    FileTree, TabItem, Tabs
-} from '@astrojs/starlight/components'
+import { FileTree, TabItem, Tabs } from '@astrojs/starlight/components'
 
-## Prerequisites
+### TypeScript Configuration
 
-In order to use Seyfert, you must have installed:
-
-- NodeJS installed (18 or higher)
-- TypeScript installed (4.9 or higher)
-- npm installed (or a package manager alike)
-
-### Install seyfert
-
-```bash copy title="Installing seyfert..."
-npm add seyfert
-```
-
-Also you might want to install the github version for the latest changes:
-    
-```bash copy title="Installing seyfert from github..."
-npm add github:tiramisulabs/seyfert
-```
-
-
-## Typescript settings
- 
-To make Seyfert work as intended you must update your `tsconfig.json` file and add `emitDecoratorMetadata` and `experimentalDecorators` in order to be able to use decorators:
+For Seyfert to work correctly, you need to update your `tsconfig.json` file and add `emitDecoratorMetadata` and `experimentalDecorators` to enable the use of decorators:
 
 <Tabs>
     <TabItem label="tsconfig.json">
-    ```json {"Adding this to your own tsconfig is enough":3-6} title="tsconfig.json" copy
+```json {"Simply add the following to your tsconfig.json":3-5} title="tsconfig.json" copy
 {
-      "compilerOptions": {
-        
-        "outDir": "./dist",
+    "compilerOptions": {
+
         "emitDecoratorMetadata": true,
         "experimentalDecorators": true,
-      }
+    }
 }
 ``` 
     </TabItem>
-    <TabItem label="tsconfig.json (example)">
-    ```json title="tsconfig.json" copy
+    <TabItem label="Recommended">
+```json title="tsconfig.json" copy
 {
-      "compilerOptions": {
+    "compilerOptions": {
         "module": "CommonJS",
         "target": "ESNext",
         "moduleResolution": "node",
@@ -69,133 +46,150 @@ To make Seyfert work as intended you must update your `tsconfig.json` file and a
         "rootDir": "./src",
         "baseUrl": ".",
         "stripInternal": true,
-      },
-      "exclude": ["node_modules"],
-      "include": ["src/**/*"]
+    },
+    "exclude": ["node_modules"],
+    "include": ["src/**/*"]
 }
 ```
     </TabItem>
 </Tabs>
 
-## Selecting Your Bot Type.
+<br/>
+---
 
-Currently, Seyfert supports two types of applications: one based on the Discord gateway, and one based on the Discord HTTP interaction system, the former being used the most. It is key to understand the differences between these two types in order to choose whichever application for your needs.
+### Selecting the Bot Type
+
+Seyfert supports two types of applications that interact with the Discord API: one based on the **gateway** (websocket) and another based on the **HTTP interaction system**.
+
+Each type has a distinct purpose, and it is crucial to understand their differences to choose the one that best suits your needs. If you are unsure which bot type to choose, we recommend using the **Gateway** option.
 
 <Tabs>
     <TabItem label="Gateway">
-        - The Gateway client receives all events from discord like messageCreate, interactionCreate, guildCreate, ready, etc.
-        - The events that the client receives depend on the client intents.
+        - The **Gateway** client handles all events emitted by Discord, such as `messageCreate`, `interactionCreate`, `guildCreate`, `ready`, among others.  
+        - The available events depend on the **intents** configured in the client.
     </TabItem>
     <TabItem label="HTTP">
-        - Unlike gateway, does not receive events.
-        - Only executes commands with an http request from discord.
+        - Unlike the gateway, the **HTTP** client does not handle events.  
+        - Its functionality is limited to receiving interactions (commands and components) through HTTP requests sent from Discord.
     </TabItem>
 </Tabs>
 
-### Configuration
+<br />
 
-Once `tsconfig.json` has been modified, we still have a few steps to follow before we can run our bot. In this case, you must tell your project's structure to seyfert:
-so create a file called `seyfert.config.js` in the root folder of your project and add the following code:
+## Configuration
+
+Once you have modified the `tsconfig.json` to support decorators, there are a few more steps before you can run your application. Seyfert is set up to automatically load your commands, events, components, and language.
+
+For this, you need to create a file called `seyfert.config.mjs` in the root folder of your project and add the configuration according to the bot type you selected:
 
 <Tabs>
     <TabItem label="Gateway">
- ```js title="seyfert.config.js" copy wrap 
-// @ts-check is better
-const { config } = require('seyfert');
+```ts twoslash title="seyfert.config.mjs" copy wrap 
+import { config } from "seyfert";
 
-module.exports = config.bot({
+export default config.bot({
     token: process.env.BOT_TOKEN ?? "",
+    locations: {
+        base: "dist", // replace with "src" if using bun
+        commands: "commands"
+    },
     intents: ["Guilds"],
-    locations: {
-        base: "src",    
-        output: "dist", //If you are using bun, set "src" instead
-    }
+    // This configuration is optional, in case you want to receive interactions via HTTP
+    // This allows you to use both the gateway and the HTTP webhook
+    publicKey: "...", // replace with your public key
+    port: 4444, // replace with your application's port 
 });
 ```
     </TabItem>
     <TabItem label="HTTP">
-```js title="seyfert.config.js" copy
-// @ts-check is better
-const { config } = require('seyfert');
+```ts twoslash title="seyfert.config.mjs" copy
+// This is not shown, prevents errors.
+process.env.BOT_APP_ID = '';
+process.env.BOT_PUBLIC_KEY = '';
+// ---cut---
+import { config } from "seyfert";
 
-module.exports = config.http({
+export default config.http({
     token: process.env.BOT_TOKEN ?? "",
-    applicationId: process.env.BOT_APP_ID,
-    port: 3000, // by default is 8080
-    publicKey: process.env.BOT_PUBLIC_KEY,
     locations: {
-        base: "src",
-        output: "dist", //If you are using bun, set "src" instead
-    }
+        base: "dist", // replace with "src" if using bun
+        commands: "commands"
+    },
+    applicationId: process.env.BOT_APP_ID,
+    port: 3000, // default is 8080
+    publicKey: process.env.BOT_PUBLIC_KEY,
 });
 ```
     </TabItem>
 </Tabs>
 
-And let's create the main file called `index` in the `src` folder and add the following code:
+This is not all, you also need to create a main file called `index.ts` inside the `src` folder (specified as *base* in the configuration) and start using it.
 
 <Tabs>
     <TabItem label="Gateway">
-```ts title="src/index.ts" copy wrap
-import { Client, ParseClient } from "seyfert";
+```ts twoslash {5-8} title="src/index.ts" copy wrap
+import { Client } from "seyfert";
 
 const client = new Client();
 
-// This will start the connection with the gateway and load commands, events, components and langs
+// This will start the connection with the Discord gateway and load commands, events, components, and language (i18n)
 client.start();
-
-declare module 'seyfert' {
-  interface UsingClient extends ParseClient<Client<true>> { }
-}
 ```
     </TabItem>
     <TabItem label="HTTP">
-
-In order to use the http client, you must install `uws-adapter`.
-
-:::note
-
-We have another adapter `generic-adapter` but we recommend using `uws-adapter` for most cases except for [cloudflare workers](/recipes/cloudflare-workers)
-
-:::
-
-```bash copy
-npm add @slipher/uws-adapter
-```
-
-```ts title="src/index.ts" copy wrap
-import { HttpClient, ParseClient } from "seyfert";
-import { UwsAdapter } from '@slipher/uws-adapter';
+```ts twoslash {9-11} title="src/index.ts" copy wrap
+// @exactOptionalPropertyTypes: false
+// @errors: 2379 2345
+import { HttpClient } from "seyfert";
+import { UwsAdapter } from "@slipher/uws-adapter";
+// import { GenericAdapter } from "@slipher/generic-adapter";
 
 const client = new HttpClient();
-const adapter = new UwsAdapter(client);
 
-// This will start listening to `https://yourweb.xyz/interactions` and load commands, components and langs
+const adapter = new UwsAdapter(client); // You can also pass a `Client` or `WorkerClient`.
+
+// This will start listening at `https://yourweb.xyz/interactions` and load commands, components, and language (i18n)
 client.start();
 adapter.start();
-
-declare module 'seyfert' {
-  interface UsingClient extends ParseClient<HttpClient> { }
-}
 ```
+
+> If you're using Cloudflare Workers, we recommend following the guide on their [official page](../recipes/cloudflare-workers).
+
     </TabItem>
 </Tabs>
 
-:::note
+<br />
 
-the `declare module 'seyfert'` is necessary to tell typescript which client we are using. [Understaind declare module](/getting-started/declare-module)
+In addition to the above, you need to configure the appropriate types based on the client you are using:
 
-:::
+```ts twoslash {"Gateway":4-5} {"HTTP":7-8} {"Worker":10-11} copy
+import type { ParseClient, Client, HttpClient, WorkerClient } from 'seyfert';
 
-So after finishing these steps, your project structure should look like this:
+declare module 'seyfert' {
+
+    interface UsingClient extends ParseClient<Client<true>> { }
+  
+  
+    interface UsingClient extends ParseClient<HttpClient> { }
+  
+  
+    interface UsingClient extends ParseClient<WorkerClient<true>> { }
+}
+```
+
+> For more information on how to declare types and what you can do with them, visit [extending declare module](./declare-module).
+
+
+Once these steps are completed, your project structure should look like this:
 
 <FileTree>
 
 - src
+  - commands/
   - index.ts
-- seyfert.config.js
 - package.json
-- .env
+- seyfert.config.mjs
 - tsconfig.json
+- .env
 
 </FileTree>

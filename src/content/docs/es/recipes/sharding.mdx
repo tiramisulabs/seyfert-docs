@@ -1,0 +1,79 @@
+---
+title: Entendiendo el sharding
+---
+import { TabItem, Tabs } from '@astrojs/starlight/components'
+
+# Sharding 
+
+En seyfert el enfoque de sharding (fragmentación para los amigos) es dar todo el beneficio del escalado manteniendo la misma estructura en tu proyecto.
+
+## ¿Por qué hacer sharding?
+
+Los runtimes de JavaScript son de un solo hilo, lo que significa que sin sharding, todo el procesamiento ocurriría en un único hilo. Esto crea un límite de procesamiento donde toda la carga se evalúa junta. Seyfert maneja el sharding internamente en la instancia del `Client` para ayudar a distribuir esta carga a través de múltiples procesos o hilos (aunque sigue siendo una técnica imperfecta).
+
+## Manejando los shards
+
+La base de los `Worker` es permitir ejecutar código en paralelo en diferentes partes de la CPU, ya sea en hilos o procesos diferentes. En términos de Discord, esto significa la capacidad de conectar varios `shards` repartiendo la carga en cada `Worker`. Para Seyfert esto es tan simple como cambiar la propiedad `mode` en el `WorkerManager` para decidir el modo de ejecución entre `threads` para hacer `spawn` de clientes en los hilos del procesador o `cluster` para hacer `spawn` de los clientes en procesos diferentes del runtime.
+
+<Tabs>
+	<TabItem label='manager.ts'>
+```ts showLineNumbers
+import { WorkerManager } from 'seyfert';
+
+const manager = new WorkerManager({
+	mode: "threads",
+	// ./src/client.ts para bun y deno (?
+	path: "./dist/client.js",
+	// puedes sobrescribir muchas opciones, como el número de workers y la cantidad de shards en cada worker
+});
+
+manager.start();
+```
+	</TabItem>
+	<TabItem label='client.ts'>
+```ts showLineNumbers
+import { WorkerClient } from "seyfert";
+
+const client = new WorkerClient();
+
+client.start();
+
+declare module 'seyfert' {
+	interface UsingClient extends ParseClient<WorkerClient> {}
+}
+```
+	</TabItem>
+</Tabs>
+
+¿Demasiado simple? Seyfert se encarga de toda la lógica por lo que tu proyecto no debería cambiar mucho solo por pasarte a un `WorkerSharding`.
+
+## Cache
+A diferencia de las bibliotecas tradicionales de Discord, Seyfert ofrece una gestión de caché unificada a través de todos los shards. El caché puede centralizarse en el proceso principal (el ejecutor de `WorkerManager`), asegurando un acceso consistente a los datos en toda tu aplicación.
+
+Para implementar el caché centralizado, usa el WorkerAdapter:
+
+```ts
+import { WorkerClient, WorkerAdapter } from 'seyfert';
+
+const client = new WorkerClient();
+
+client.setServices({
+	cache: {
+		adapter: new WorkerAdapter(client.workerData)
+	}
+});
+
+await client.start();
+```
+
+## Hablando con otros workers
+Si por alguna razón (no encontré ninguna para el ejemplo), deseas que un worker específico ejecute una acción que otro recibió, puedes simplemente pedírselo.
+
+```ts
+// Ojalá typescript permitiera representar parámetros como python
+client.tellWorker(
+	workerId = 1,
+	(worker, vars) => console.log(`Hola worker #${worker.workerId} desde ${vars.workerId}`),
+	vars = { workerId: client.workerId }
+);
+```

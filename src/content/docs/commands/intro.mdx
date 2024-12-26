@@ -1,0 +1,59 @@
+---
+title: Introduction to Commands
+---
+
+import { FileTree, TabItem, Tabs } from '@astrojs/starlight/components';
+
+The primary entry point for any Discord bot is commands. In Seyfert, commands are defined using TypeScript decorators, making it easier to specify their properties, options, middlewares, and subcommands.  
+
+:::note  
+If you haven’t created [your first command](../getting-started/first-command) yet, please refer to that introductory guide before proceeding.  
+:::
+
+## Declaring a Command  
+
+All commands in Seyfert are class-based, and each class extends the base **`Command`** class.  
+
+Additionally, the **name** and **description** are mandatory properties for every command. Below is a list of possible properties that can be used with the `@Declare` decorator:
+
+```ts twoslash
+import { Declare, Command, IgnoreCommand } from 'seyfert';
+
+@Declare({
+    name: 'your-command',
+    description: 'A description for this command',
+    // Properties to pass as metadata
+    props: {},
+
+    // List of permissions required by the member
+    defaultMemberPermissions: ['Administrator'],
+
+    // List of permissions required by the bot
+    botPermissions: ['ManageGuild'],
+
+    // List of server IDs to register the command
+    guildId: ['100000'],
+
+    // Determines if the command is NSFW
+    nsfw: false,
+
+    // List of alternate names for the command (text commands)
+    aliases: ['an-alias'],
+
+    // Identifies the installation types the command supports,
+    //   default is server-only
+    integrationTypes: ['GuildInstall', 'UserInstall'],
+
+    // Specifies where a command can be used
+    contexts: ['BotDM', 'Guild', 'PrivateChannel'],
+
+    // Defines whether to ignore the execution of the command in slash
+    //   or text-message versions
+    ignore: IgnoreCommand.Slash,
+    //                    ^|
+
+    // Sets the type of command:
+    /// type: ApplicationCommandType.User
+})
+class MyCommand extends Command {}
+```

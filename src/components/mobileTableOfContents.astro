@@ -1,9 +1,9 @@
 ---
-import { Icon } from "@astrojs/starlight/components";
-import TableOfContentsList from "./tableOfContentsList.astro";
-import type { Props } from "@astrojs/starlight/props";
+import { Icon } from '@astrojs/starlight/components';
+import TableOfContentsList from './tableOfContentsList.astro';
+import type { Props } from '@astrojs/starlight/props';
 
-const { labels, toc } = Astro.props;
+const { toc } = Astro.props;
 ---
 
 {
@@ -19,7 +19,7 @@ const { labels, toc } = Astro.props;
                         class="sl-flex"
                     >
                         <div class="toggle sl-flex">
-                            {labels["tableOfContents.onThisPage"]}
+                            {Astro.locals.t("tableOfContents.onThisPage")}
                             <Icon
                                 name={"right-caret"}
                                 class="caret"

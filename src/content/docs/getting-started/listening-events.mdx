@@ -1,81 +1,90 @@
 ---
-title: Listening Events
+title: Listening to Events
 ---
 
 import { FileTree } from '@astrojs/starlight/components'
 
 :::note
-
-This section is only necessary for gateway applications, so if your bot is built in http application-only you may skip this section.
-
+This section is relevant only for **gateway**-based applications.  
+If your bot is built exclusively as an HTTP application, you can skip this section.
 :::
 
-## Updating seyfert config
+### Updating Seyfert's Configuration
 
-Before starting this chapter we shall update `seyfert.config.js` in order to tell seyfert where our events file will be.
+Before starting this section, you need to update the `seyfert.config.mjs` file to specify the location of the event files for Seyfert.
 
-```ts {11} title="seyfert.config.js" showLineNumbers
-// @ts-check
-const { config } = require('seyfert');
+```ts twoslash {10} title="seyfert.config.mjs" copy wrap
+import { config } from 'seyfert';
 
-module.exports = config.bot({
-  token: process.env.BOT_TOKEN ?? "",
-  intents: ["Guilds"],
-  locations: {
-    base: "src",
-    output: "dist",
-    commands: "commands",
-    events: "events" // - src/events will be our events directory
-  }
+export default config.bot({
+    token: process.env.BOT_TOKEN ?? '',
+    intents: ['Guilds'],
+    locations: {
+        base: 'dist',
+        commands: 'commands',
+        events: 'events' // - src/events will be our folder for events
+    }
 });
 ```
 
-## Listening Event
+## Listening to Events
 
-Each event file shall export by default the `createEvent` function so seyfert is able to load them
+Each event file must export the `createEvent` function as the default export so Seyfert can load it.  
+The `createEvent` function takes an object with two properties: `data` and `run`.
 
-Let's listen the `botReady` event as first example
+Let's listen to the `botReady` event as the first example:
 
-```ts title="src/events/botReady.ts" showLineNumbers
-import { createEvent } from "seyfert";
+```ts twoslash title="src/events/botReady.ts" showLineNumbers
+import { createEvent } from 'seyfert';
 
 export default createEvent({
-  // botReady executes when all shards and guilds are ready.
-  data: { once: true, name: "botReady" },
+// botReady is triggered when all shards and servers are ready.
+// `once` ensures the event runs only once.
+  data: { once: true, name: 'botReady' },
   run(user, client) {
+
+// @log: We can use client.logger to display messages in the console.
     client.logger.info(`${user.username} is ready`);
+
   }
 })
 ```
 
+<br />
 
-Let's check another example with `guildDelete` event:
+As a second example, let's look at the `guildDelete` event emitted by Discord when a bot is removed from a server or the server is deleted:
 
-```ts title="src/events/guildDelete.ts" showLineNumbers
-import { createEvent } from "seyfert";
+```ts twoslash title="src/events/guildDelete.ts" showLineNumbers wrap
+import { createEvent } from 'seyfert';
 
 export default createEvent({
-  data: { name: "guildDelete" },
+  data: { name: 'guildDelete' },
   run(unguild, client) {
-    // it's possible that the guild has been deleted.
+    // unguild is the server from which the bot was removed or deleted.
+    // It is also possible that the server was simply deleted.
     if (unguild.unavailable) return;
-    client.logger.info(`I have been kicked out of: ${unguild.id}`);
+
+    client.logger.info(`I was removed from: ${unguild.id}`);
   }
 })
 ```
 
-Below is the current file tree of the project if you did follow the previous steps.
+<br />
+
+After completing these steps, your project structure should look like this:
 
 <FileTree>
+
 - src
-	- commands
-		- ping.ts
-	- events
-		- **botReady.ts**
-		- **guildDelete.ts**
-	- index.ts
+  - commands
+    - ping.ts
+  - events
+    - **botReady.ts**
+    - **guildDelete.ts**
+  - index.ts
 - package.json
-- seyfert.config.js
-- .env
+- seyfert.config.mjs
 - tsconfig.json
+- .env
+
 </FileTree>

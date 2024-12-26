@@ -1,18 +1,16 @@
 ---
-title: Configuración de Seyfert
+title: Configurando Seyfert
 ---
 
-import {
-    FileTree, TabItem, Tabs
-} from '@astrojs/starlight/components'
+import { FileTree, TabItem, Tabs } from '@astrojs/starlight/components'
 
-### Configuración de Typescript
+### Configuración de TypeScript
  
 Para que Seyfert funcione correctamente debes actualizar tu archivo `tsconfig.json` y añadir `emitDecoratorMetadata` y `experimentalDecorators` para poder utilizar decoradores:
 
 <Tabs>
     <TabItem label ="tsconfig.json">
-    ```json {"Basta con añadir lo siguiente a su tsconfig":3-5} title="tsconfig.json" copy
+```json {"Basta con añadir lo siguiente a su tsconfig.json":3-5} title="tsconfig.json" copy
 {
     "compilerOptions": {
 
@@ -22,126 +20,165 @@ Para que Seyfert funcione correctamente debes actualizar tu archivo `tsconfig.js
 }
 ``` 
     </TabItem>
-    <TabItem label="ejemplo">
-    ```json title="tsconfig.json" copy
+    <TabItem label="Recomendado">
+```json title="tsconfig.json" copy
 {
-  "compilerOptions": {
-      "module": "CommonJS",
-      "target": "ESNext",
-      "moduleResolution": "node",
-      "strict": true,
-      "esModuleInterop": true,
-      "experimentalDecorators": true,
-      "emitDecoratorMetadata": true,
-      "preserveConstEnums": true,
-      "noImplicitAny": true,
-      "strictNullChecks": true,
-      "strictFunctionTypes": true,
-      "noImplicitThis": true,
-      "noUnusedLocals": true,
-      "noUnusedParameters": true,
-      "noImplicitReturns": true,
-      "skipLibCheck": true,
-      "noErrorTruncation": true,
-      "outDir": "./dist",
-      "rootDir": "./src",
-      "baseUrl": ".",
-      "stripInternal": true,
-  },
-  "exclude": ["node_modules"],
-  "include": ["src/**/*"]
+    "compilerOptions": {
+        "module": "CommonJS",
+        "target": "ESNext",
+        "moduleResolution": "node",
+        "strict": true,
+        "esModuleInterop": true,
+        "experimentalDecorators": true,
+        "emitDecoratorMetadata": true,
+        "preserveConstEnums": true,
+        "noImplicitAny": true,
+        "strictNullChecks": true,
+        "strictFunctionTypes": true,
+        "noImplicitThis": true,
+        "noUnusedLocals": true,
+        "noUnusedParameters": true,
+        "noImplicitReturns": true,
+        "skipLibCheck": true,
+        "noErrorTruncation": true,
+        "outDir": "./dist",
+        "rootDir": "./src",
+        "baseUrl": ".",
+        "stripInternal": true,
+    },
+    "exclude": ["node_modules"],
+    "include": ["src/**/*"]
 }
 ```
     </TabItem>
 </Tabs>
 
-### Seleccionar el tipo de bot
+<br/>
+---
 
-Actualmente, Seyfert soporta dos tipos de aplicaciones: una basada en la gateway de Discord, que es la más utilizada, y otra basada en el sistema de interacción Discord HTTP, que se utiliza con menos frecuencia. Es importante entender las diferencias entre estos dos tipos para elegir la aplicación adecuada a sus necesidades.
+### Selección del tipo de bot
 
-:::caution[Importante]
+Seyfert ofrece soporte para dos tipos de aplicaciones que interactúan con la API de Discord: una basada en la **gateway** (websocket) y otra basada en el sistema de **interacción HTTP**.
 
-En estos primeros pasos, se muestran las opciones que comparten ambos tipos de aplicaciones. Más adelante, se separarán.
-
-:::
+Cada tipo tiene un propósito distinto, y es crucial comprender sus diferencias para elegir el que mejor se adapte a tus necesidades. Si no estás seguro de qué tipo de bot elegir, te recomendamos usar la opción **Gateway**.
 
 <Tabs>
     <TabItem label="Gateway">
-        - El cliente Gateway recibe todos los eventos de Discord como messageCreate, interactionCreate, guildCreate, ready...
-        - Los eventos que recibe el cliente dependen de los intents del cliente.
+        - El cliente **Gateway** maneja todos los eventos emitidos por Discord, como `messageCreate`, `interactionCreate`, `guildCreate`, `ready`, entre otros.  
+        - Los eventos disponibles dependen de los **intents** configurados en el cliente.
     </TabItem>
     <TabItem label="HTTP">
-        - A diferencia del gateway, no recibe eventos.
-        - Solo ejecuta comandos con petición http desde Discord.
+        - A diferencia del gateway, el cliente **HTTP** no maneja eventos.  
+        - Su funcionalidad se limita a recibir interacciones (comandos y componentes) a través de peticiones HTTP enviadas desde Discord.
     </TabItem>
 </Tabs>
 
-### Configuración
+<br />
 
-Una vez modificado el `tsconfig.json`, aún nos quedan algunos pasos antes de poder ejecutar la aplicación. En este caso es necesario indicarle a Seyfert la estructura del proyecto:
-Para ello es necesario crear un fichero llamado `seyfert.config.js` en la carpeta raíz de tu proyecto y añadir el siguiente código:
+## Configuración
+
+Una vez modificado el `tsconfig.json` para soportar decoradores, aún nos quedan algunos pasos antes de poder ejecutar la aplicación. Seyfert se ajusta para cargar tus comandos, eventos, componentes e idioma de forma automática.
+
+Para ello es necesario crear un archivo llamado `seyfert.config.mjs` en la carpeta raíz de tu proyecto y añadir la configuración según el tipo de bot que elegiste:
 
 <Tabs>
     <TabItem label="Gateway">
- ```js title="seyfert.config.js" copy wrap 
-// @ts-check is better
-const { config } = require('seyfert');
+```ts twoslash title="seyfert.config.mjs" copy wrap 
+import { config } from "seyfert";
 
-module.exports = config.bot({
+export default config.bot({
     token: process.env.BOT_TOKEN ?? "",
+    locations: {
+        base: "dist", // reemplazar por "src" en caso de usar bun
+        commands: "commands"
+    },
     intents: ["Guilds"],
-    locations: {
-        base: "src",    
-        output: "dist", // Si utiliza bun, defina "src" en su lugar
-        commands: "commands"
-    }
+    // Esta configuración es opcional, por si desea recibir las interacciones por HTTP
+    // Así se puede usar tanto la gateway como el HTTP webhook
+    publicKey: "...", // reemplazar por tu clave pública
+    port: 4444, // reemplazar por el puerto de tu aplicación 
 });
 ```
     </TabItem>
     <TabItem label="HTTP">
-```js title="seyfert.config.js" copy
-// @ts-check is better
-const { config } = require('seyfert');
+```ts twoslash title="seyfert.config.mjs" copy
+// Esto no se muestra, previene errores.
+process.env.BOT_APP_ID = '';
+process.env.BOT_PUBLIC_KEY = '';
+// ---cut---
+import { config } from "seyfert";
 
-module.exports = config.http({
+export default config.http({
     token: process.env.BOT_TOKEN ?? "",
-    applicationId: process.env.BOT_APP_ID,
-    port: 3000, // by default is 8080
-    publicKey: process.env.BOT_PUBLIC_KEY,
     locations: {
-        base: "src",
-        output: "dist", // Si utiliza bun, defina "src" en su lugar
+        base: "dist", // reemplazar por "src" en caso de usar bun
         commands: "commands"
-    }
+    },
+    applicationId: process.env.BOT_APP_ID,
+    port: 3000, // por defecto es 8080
+    publicKey: process.env.BOT_PUBLIC_KEY,
 });
 ```
     </TabItem>
 </Tabs>
 
-Y vamos a crear el archivo principal llamado `index.ts` dentro de la carpeta `src` y añadir el siguiente código:
+
+Esto no es todo, también necesitas crear un archivo principal llamado `index.ts` dentro de la carpeta `src` (especificada como *base* en la configuración) y empezar a usar 
 
 <Tabs>
     <TabItem label="Gateway">
-```ts {5-8} title="src/index.ts" copy wrap
-import { Client } from 'seyfert';
+```ts twoslash {5-8} title="src/index.ts" copy wrap
+import { Client } from "seyfert";
 
 const client = new Client();
 
-// Esto iniciará la conexión con la gateway de Discord y cargará comandos, eventos, componentes y langs
+// Esto iniciará la conexión con la gateway de Discord y cargará comandos, eventos, componentes e idioma (i18n)
 client.start();
 ```
     </TabItem>
     <TabItem label="HTTP">
-```ts {5-8} title="src/index.ts" copy wrap
-import { HttpClient } from 'seyfert';
+```ts twoslash {9-11} title="src/index.ts" copy wrap
+// @exactOptionalPropertyTypes: false
+// @errors: 2345
+import { HttpClient } from "seyfert";
+import { UwsAdapter } from "@slipher/uws-adapter";
+// import { GenericAdapter } from "@slipher/generic-adapter";
 
 const client = new HttpClient();
 
-// Esto empezará a escuchar `https://yourweb.xyz/interactions` y cargará comandos, componentes y langs
+const adapter = new UwsAdapter(client); // También puedes pasar un `Client` o `WorkerClient`.
+
+// Esto empezará a escuchar `https://yourweb.xyz/interactions` y cargará comandos, componentes e idioma (i18n)
 client.start();
+adapter.start();
 ```
+
+> En el caso de utilizar Cloudfare Workers, te recomendamos seguir la guía en su [página correspondiente](../recipes/cloudflare-workers).
+
     </TabItem>
 </Tabs>
+
+<br />
+
+Además de lo anterior, debes configurar los tipos correspondientes según el cliente que uses:
+
+```ts twoslash {"Gateway":4-5} {"HTTP":7-8} {"Worker":10-11} copy
+import type { ParseClient, Client, HttpClient, WorkerClient } from 'seyfert';
+
+declare module 'seyfert' {
+
+    interface UsingClient extends ParseClient<Client<true>> { }
+  
+  
+    interface UsingClient extends ParseClient<HttpClient> { }
+  
+  
+    interface UsingClient extends ParseClient<WorkerClient<true>> { }
+}
+```
+
+> Para más información sobre cómo declarar los tipos y qué puedes hacer con ellos, visita [extendiendo declare module](./declare-module).
+
 
 Una vez completado los pasos, la estructura de su proyecto debe tener este aspecto:
 
@@ -150,9 +187,9 @@ Una vez completado los pasos, la estructura de su proyecto debe tener este aspec
 - src
   - commands/
   - index.ts
-- seyfert.config.js
 - package.json
-- .env
+- seyfert.config.mjs
 - tsconfig.json
+- .env
 
 </FileTree>

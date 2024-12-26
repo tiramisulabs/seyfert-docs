@@ -2,22 +2,21 @@
 title: Handling components
 ---
 
-## Updating seyfert config
+## Updating Seyfert config
 
 Having sent the component within a channel it's about time you want to handle the interaction from the component.
 
 To handle them we have to tell seyfert where will be the components located in our project. We have to do this within our seyfert config file.
 
-```js title="seyfert.config.js" showLineNumbers copy ins={12}
+```js title="seyfert.config.mjs" showLineNumbers copy ins={11}
 // @ts-check
-const { config } = require('seyfert');
+import { config } from "seyfert";
 
-module.exports = config.bot({
+export default config.bot({
   token: process.env.BOT_TOKEN ?? "",
   intents: ["Guilds"],
   locations: {
-    base: "src",
-    output: "dist",
+    base: "dist",
     commands: "commands",
     events: "events",
     components: 'components'

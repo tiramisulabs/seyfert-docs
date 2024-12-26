@@ -1,0 +1,54 @@
+---
+title: Eventos Personalizados
+---
+:::tip
+Como en otras secciones, se usará la [ampliación de módulos](/getting-started/declare-module), recomendamos leerla primero.
+:::
+
+Seyfert permite cargar, integrar y ejecutar eventos personalizados que pueden ser llamados desde cualquier lugar. Para este ejemplo, crearemos un evento simple llamado <a href="https://cdn-useast1.kapwing.com/static/templates/our-meme-template-regular-50760e0b.webp" target="_blank">`ourEvent`</a>.
+
+:::note
+Si dos eventos tienen el mismo nombre, estos serán sobrescritos.
+:::
+
+## Integración
+
+Primero necesitamos informar al sistema de tipos de Seyfert que tendremos un evento personalizado.
+
+```ts title="index.ts"
+declare module "seyfert" {
+	interface CustomEvents {
+		ourEvent: (text: string) => void;
+	}
+}
+```
+
+### Cargando eventos
+
+Esto está aquí solo para demostrar que no necesitas hacer nada especial; simplemente coloca tus eventos en la carpeta designada en `seyfert.config`.
+
+```ts title="seyfert.config.ts"
+import { createEvent } from 'seyfert';
+
+export default createEvent({
+	data: { name: "ourEvent", once: false },
+	run: (text) => {
+		console.log(text);
+	}
+});
+```
+
+### Ejecución
+
+```ts title="index.ts"
+import { Client } from "seyfert";
+
+const client = new Client();
+
+(async () => {
+	await client.start();
+	client.events?.runCustom('ourEvent', '¡Hola, mundo!');
+})();
+```
+
+Después de ejecutar el código, deberías ver `¡Hola, mundo!` en la consola. ¡Eso es todo!

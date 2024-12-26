@@ -21,7 +21,7 @@ With Docker, scaling a bot horizontally is simple, allowing workloads to be dist
 There are four files we need:
 
 - `package.json`: support for JavaScript modules
-- `seyfert.config.js`: configurations for Seyfert
+- `seyfert.config.mjs`: configurations for Seyfert
 - `/node_modules`: dependencies
 - `/src` or `/dist`: application entry point
 
@@ -46,7 +46,7 @@ COPY package*.json ./
 RUN npm ci
 
 COPY tsconfig.json ./
-COPY seyfert.config.js ./
+COPY seyfert.config.mjs ./
 COPY /src ./src
 
 # Ref: https://docs.npmjs.com/cli/v10/commands/npm-prune
@@ -86,7 +86,7 @@ COPY package*.json ./
 RUN npm ci
 
 COPY tsconfig.json ./
-COPY seyfert.config.js ./
+COPY seyfert.config.mjs ./
 COPY /src ./src
 
 RUN npm run build && \
@@ -99,7 +99,7 @@ COPY --from=build /usr/bin/dumb-init /usr/bin/dumb-init
 COPY --from=build $DIR/node_modules $DIR/node_modules
 COPY --from=build $DIR/dist $DIR/dist
 COPY --from=build $DIR/package.json $DIR/package.json
-COPY --from=build $DIR/seyfert.config.js $DIR/seyfert.config.js
+COPY --from=build $DIR/seyfert.config.mjs $DIR/seyfert.config.mjs
 
 ENV USER node
 ENV NODE_ENV=production

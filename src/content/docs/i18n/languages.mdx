@@ -14,18 +14,17 @@ For this section we are going to follow the setup we did in **Getting Started** 
 
 ## Updating seyfert config
 
-Before starting this chapter we could update `seyfert.config.js` to tell seyfert where our languages file will be.
+Before starting this chapter we could update `seyfert.config.mjs` to tell seyfert where our languages file will be.
 
-```ts {12} title="seyfert.config.js" showLineNumbers
+```ts {12} title="seyfert.config.mjs" showLineNumbers
 // @ts-check
-const { config } = require('seyfert');
+import { config } from "seyfert";
 
-module.exports = config.bot({
+export default config.bot({
   token: process.env.BOT_TOKEN ?? "",
   intents: ["Guilds"],
   locations: {
-    base: "src",
-    output: "dist",
+    base: "dist",
     commands: "commands",
     events: "events",
     langs: "languages" // - src/languages will be our languages directory
@@ -55,7 +54,7 @@ export default {
 You can create as many language files as you want, seyfert will load them and they will be available to use in your bot.
 
 ```ts title="languages/es.ts" showLineNumbers wrap
-import English from "./en";
+import type English from "./en";
 
 export default {
   hello: "Hola, mundo!",
@@ -68,7 +67,7 @@ export default {
     "También puedes usar arrays para crear una lista de traducciones",
     "Este es el segundo elemento de la lista"
   ].join("\n")
-} satisfies English; // This is a utility type to ensure that object is the same across languages
+} satisfies typeof English; // This is a utility type to ensure that object is the same across languages
 ```
 
 :::note
@@ -87,7 +86,7 @@ Next we must do some updates to the `declare module` on index file:
 
 ```ts {1,12} title="src/index.ts" copy
 import type English from './languages/en';
-import { Client, ParseClient, ParseLocales } from "seyfert";
+import { Client, type ParseClient, type ParseLocales } from "seyfert";
 
 const client = new Client();
 
@@ -100,6 +99,13 @@ declare module 'seyfert' {
   interface DefaultLocale extends ParseLocales<typeof English> { }
 }
 ```
+
+:::note[Preventing errors]
+You can assign a default language to avoid getting `undefined`.
+```ts
+client.setService({ langs: { default: 'en-US' } });
+```
+:::
 
 :::tip
 You can pass any of the language files to the `DefaultLocale` interface since they should be the same object structure.
@@ -177,7 +183,7 @@ Below is the current file tree of the project if you did follow the previous ste
 		- **es.ts**
 	- index.ts
 - package.json
-- seyfert.config.js
+- seyfert.config.mjs
 - .env
 - tsconfig.json
 </FileTree>

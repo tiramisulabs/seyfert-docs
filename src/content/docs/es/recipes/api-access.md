@@ -8,7 +8,7 @@ Los **Shorters** son una combinación simple de los métodos de Seyfert y la API
 
 Supongamos que tenemos un sistema de bienvenida; en su base de datos ya tiene acceso al ID del canal donde enviar su mensaje, entonces, ¿por qué debería buscar ese canal en la caché? ¿Por qué debería obtener datos que no necesita solo para enviar un mensaje? Ahí es donde entran en juego los **Shorters**.
 
-```ts copy ins={13-15}
+```ts twoslash copy ins={13-15}
 import { createEvent } from 'seyfert';
 
 const db = new Map<string, string>();
@@ -30,7 +30,7 @@ export default createEvent({
 
 Esto se aplica a todo Seyfert: los métodos en las clases que representan objetos de Discord son solo una capa extra de los **Shorters** para facilitar el acceso. Por ejemplo, por defecto Seyfert no añade propiedades de caché a los objetos, pero proporciona facilidades para acceder a ellas.
 
-```ts copy wrap {11-12}
+```ts twoslash copy wrap {11-12}
 import { createEvent } from 'seyfert';
 
 const db = new Map<string, string>();
@@ -61,7 +61,7 @@ El objeto proxy es la capa que está debajo de los **Shorters** y se encarga de 
 
 ¿Hay algo que no esté soportado en Seyfert? Entonces accédalo directamente, vamos a crear un hilo directamente con la API de Discord:
 
-```ts wrap copy {10-15}
+```ts twoslash wrap copy {10-15}
 import { createEvent } from 'seyfert';
 
 export default createEvent({
