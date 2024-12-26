@@ -1,20 +1,20 @@
 ---
-title: Construyendo Componentes
+title: Componentes de construcción
 ---
 
 import { TabItem, Tabs } from '@astrojs/starlight/components'
 
-Los componentes se construyen con un constructor, que es una clase JavaScript, que lo representa. Dentro de este constructor se puede personalizar el componente como su texto o su color.
+Los componentes se construyen con un generador, que es una clase de JavaScript, la cual lo representa. Dentro de este generador, puedes personalizar el componente para que sea de texto o color.
 
-Hay diferentes tipos de constructores de componentes con diferente personalización, pero todos tienen una propiedad común: el Id personalizado. Un identificador único que se utiliza para manejar las interacciones del componente.
+Existen diferentes tipos de generadores de componentes con distintas personalizaciones, pero todos tienen una propiedad común: el Id personalizado. Un identificador único que se utiliza para gestionar las interacciones del componente.
 
 ## ActionRow
 
-Todos los constructores se envían dentro de una [`ActionRow`](https://github.com/tiramisulabs/seyfert/blob/455ed12b0ebcb3ddf55bc8b3274b0ce904becc62/src/builders/ActionRow.ts#L16). Cada mensaje puede contener un máximo de 5 acciones fila.
+Todos los generadores se envían dentro de una [`ActionRow`](https://github.com/tiramisulabs/seyfert/blob/455ed12b0ebcb3ddf55bc8b3274b0ce904becc62/src/builders/ActionRow.ts#L16). Cada mensaje puede contener un máximo de 5 filas de acción.
 
-Así es como creamos un ActionRow básico:
+Aquí se muestra cómo crear una ActionRow básica:
 
-```ts {"Establece todos los componentes dentro de este ActionRow": 4-5} {"Añadir componentes al ActionRow": 6-7} showLineNumbers copy
+```ts {"Establece todos los componentes dentro de esta ActionRow": 4-5} {"Añadir componentes a la ActionRow": 6-7} showLineNumbers copy
 
 import { ActionRow } from 'seyfert';
 
@@ -26,14 +26,12 @@ const row = new ActionRow()
 
 ```
 
-## Construcción de cada componente
+## Construyendo cada componente
 
-Ahora vamos a construir cada tipo de componente y establecerlo dentro de un ActionRow:
+Ahora vamos a construir cada tipo de componente y establecerlo dentro de una ActionRow:
 
 <Tabs>
-<TabItem label="button.ts">
-
-### Buttons
+<TabItem label="Botones">
 
 Una ActionRow no debe contener más de 5 botones.
 
@@ -42,26 +40,23 @@ import { ActionRow, Button } from 'seyfert';
 import { ButtonStyle } from 'seyfert/lib/types';
 
 const button = new Button()
-  .setCustomId('first-button')
+  .setCustomId('primer-boton')
   .setStyle(ButtonStyle.Primary)
-  .setLabel('First Button');
+  .setLabel('Primer Botón');
 
 const row = new ActionRow<Button>().setComponents([button]);
 
 ```
 </TabItem>
-<TabItem label="menu.ts">
+<TabItem label="Menús Select">
 
-### Select Menu
+Una ActionRow no debe contener más de un menú select.
 
-Una ActionRow no debe contener más de un select menu.
+Existen diferentes tipos de menús select: [`StringSelectMenu`](https://github.com/tiramisulabs/seyfert/blob/455ed12b0ebcb3ddf55bc8b3274b0ce904becc62/src/builders/SelectMenu.ts#L276), [`UserSelectMenu`](https://github.com/tiramisulabs/seyfert/blob/455ed12b0ebcb3ddf55bc8b3274b0ce904becc62/src/builders/SelectMenu.ts#L114), [`RoleSelectMenu`](https://github.com/tiramisulabs/seyfert/blob/455ed12b0ebcb3ddf55bc8b3274b0ce904becc62/src/builders/SelectMenu.ts#L149), [`ChannelSelectMenu`](https://github.com/tiramisulabs/seyfert/blob/455ed12b0ebcb3ddf55bc8b3274b0ce904becc62/src/builders/SelectMenu.ts#L227) y [`MentionableSelectMenu`](https://github.com/tiramisulabs/seyfert/blob/455ed12b0ebcb3ddf55bc8b3274b0ce904becc62/src/builders/SelectMenu.ts#L185).
 
-Hay diferentes tipos de Select Menu: [`StringSelectMenu`](https://github.com/tiramisulabs/seyfert/blob/455ed12b0ebcb3ddf55bc8b3274b0ce904becc62/src/builders/SelectMenu.ts#L276), [`UserSelectMenu`](https://github.com/tiramisulabs/seyfert/blob/455ed12b0ebcb3ddf55bc8b3274b0ce904becc62/src/builders/SelectMenu.ts#L114), [`RoleSelectMenu`](https://github.com/tiramisulabs/seyfert/blob/455ed12b0ebcb3ddf55bc8b3274b0ce904becc62/src/builders/SelectMenu.ts#L149), [`ChannelSelectMenu`](https://github.com/tiramisulabs/seyfert/blob/455ed12b0ebcb3ddf55bc8b3274b0ce904becc62/src/builders/SelectMenu.ts#L227) and [`MentionableSelectMenu`](https://github.com/tiramisulabs/seyfert/blob/455ed12b0ebcb3ddf55bc8b3274b0ce904becc62/src/builders/SelectMenu.ts#L185).
+Vamos a crear diferentes filas de acción para cada menú select.
 
-Vamos a hacer diferentes ActionRows para cada select menu.
-
-
-```ts {"String select menu": 10-19} {"User select menu": 20-27} {"Role select menu": 28-35} {"Channel select menu": 36-45} {"Mentionable select menu": 46-58} showLineNumbers copy
+```ts {"Menú select de cadenas": 10-19} {"Menú select de usuarios": 20-27} {"Menú select de roles": 28-35} {"Menú select de canales": 36-45} {"Menú select de mencionables": 46-58} showLineNumbers copy
 
 import {
   ActionRow,
@@ -74,81 +69,82 @@ import {
 } from 'seyfert';
 
 const stringMenu = new StringSelectMenu()
-  .setCustomId('string-menu')
-  .setPlaceholder('Select an string option')
-  .setOptions(
-    new StringSelectOption().setLabel('Option 1').setValue('1'),
-    new StringSelectOption().setLabel('Option 2').setValue('2')
+  .setCustomId('menu-de-cadenas')
+  .setPlaceholder('Selecciona una opción de cadena')
+  .addOption(
+    new StringSelectOption().setLabel('Opción 1').setValue('1'),
+    new StringSelectOption().setLabel('Opción 2').setValue('2')
   );
 
 const stringRow = new ActionRow<StringSelectMenu>().setComponents([stringMenu]);
 
 const userMenu = new UserSelectMenu()
-  .setCustomId('user-menu')
-  .setPlaceholder('Select an user')
-  //user id's
+  .setCustomId('menu-de-usuarios')
+  .setPlaceholder('Selecciona un usuario')
+  //id de usuarios
   .setDefaultUsers('123456789', '987654321');
 
 const userRow = new ActionRow<UserSelectMenu>().setComponents([userMenu]);
 
 const roleMenu = new RoleSelectMenu()
-  .setCustomId('role-menu')
-  .setPlaceholder('Select a role')
-  //role id's
+  .setCustomId('menu-de-roles')
+  .setPlaceholder('Selecciona un rol')
+  //id de roles
   .setDefaultRoles('123456789', '987654321');
 
 const roleRow = new ActionRow<RoleSelectMenu>().setComponents([roleMenu]);
 
 const channelMenu = new ChannelSelectMenu()
-  .setCustomId('channel-menu')
-  .setPlaceholder('Select a channel')
-  //channel id's
+  .setCustomId('menu-de-canales')
+  .setPlaceholder('Selecciona un canal')
+  //id de canales
   .setDefaultChannels('123456789', '987654321');
 
-const channelRow = new ActionRow<ChannelSelectMenu>().setComponents([
-  channelMenu
-]);
+const channelRow = new ActionRow<ChannelSelectMenu>().setComponents([channelMenu]);
 
 const mentionableMenu = new MentionableSelectMenu()
-  .setCustomId('mentionable-menu')
-  .setPlaceholder('Select a mentionable')
-  //mentionable id's (role or user)
+  .setCustomId('menu-de-mencionables')
+  .setPlaceholder('Selecciona un mencionable')
+  //id de mencionables (rol o usuario)
   .setDefaultMentionables(
-    { type: 'User', id: '123456789' },
-    { type: 'Role', id: '987654321' }
+    { type: 'Usuario', id: '123456789' },
+    { type: 'Rol', id: '987654321' }
   );
 
-const mentionableRow = new ActionRow<MentionableSelectMenu>().setComponents([
-  mentionableMenu
-]);
+const mentionableRow = new ActionRow<MentionableSelectMenu>().setComponents([mentionableMenu]);
 
 ```
 
 </TabItem>
 
-<TabItem label="input.ts">
-
-### TextInputs
-
-Una ActionRow no debe contener más de una entrada de texto.
-
-Una entrada de texto es un componente único en los modales y no sólo puede adjuntarse dentro de las líneas de acción de un modal.
-
-```ts showLineNumbers copy
-
-import { ActionRow, TextInput } from 'seyfert';
-
-import { TextInputStyle } from 'seyfert/lib/types';
-
-const input = new TextInput()
-  .setCustomId('textinput')
-  .setLabel('My Name')
-  .setPlaceholder('Enter text')
-  .setStyle(TextInputStyle.Short)
-  .setLength({ min: 10, max: 30 });
-
-const row = new ActionRow<TextInput>().setComponents([input]);
-
-```
-</TabItem>
 </Tabs>
+
+## Enviando los componentes
+
+Después de crear los componentes, debes enviar la ActionRow al campo de componentes. Puedes ver un ejemplo a continuación:
+
+```ts {13-16,20} showLineNumbers copy
+import { Declare, Command, type CommandContext, ActionRow, Button, ButtonStyle } from 'seyfert';
+
+@Declare({
+  name: 'ping',
+  description: 'Muestra el ping con Discord'
+})
+export default class PingCommand extends Command {
+
+	async run(ctx: CommandContext) {
+		// latencia promedio entre fragmentos
+    const ping = ctx.client.gateway.latency;
+
+    const row = new ActionRow()
+      .setComponents([ 
+        new Button().setCustomId('pingbtn').setLabel(`Ping: ${ping}`).setStyle(ButtonStyle.Primary)
+      ])
+
+    await ctx.write({
+      content: `El ping es \`${ping}\``,
+      components: [row]
+    });
+  }
+}
+```

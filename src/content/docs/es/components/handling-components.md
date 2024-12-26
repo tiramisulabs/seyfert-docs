@@ -2,6 +2,28 @@
 title: Manejando Componentes
 ---
 
+## Actualización de la configuración de Seyfert
+
+Después de haber enviado el componente dentro de un canal, es hora de manejar la interacción desde el componente.
+
+Para manejarlas, debemos indicarle a Seyfert dónde estarán ubicados los componentes en nuestro proyecto. Debemos hacer esto dentro de nuestro archivo de configuración de Seyfert.
+
+```js title="seyfert.config.mjs" showLineNumbers copy ins={11}
+// @ts-check
+import { config } from "seyfert";
+
+export default config.bot({
+  token: process.env.BOT_TOKEN ?? "",
+  intents: ["Guilds"],
+  locations: {
+    base: "dist",
+    commands: "commands",
+    events: "events",
+    components: 'components'
+  }
+});
+```
+
 Habiendo enviado el componente dentro de un canal, es momento de manejar la interacción del componente.
 
 Primero vamos a crear un archivo dentro del directorio que hemos establecido al inicio de nuestro proyecto para los componentes.

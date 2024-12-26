@@ -1,32 +1,24 @@
 ---
-title: Sub Commands
+title: Sub-Zero (Sub Commands)
 ---
 
 import { FileTree, Tabs, TabItem } from '@astrojs/starlight/components'
 
-## Creating a Sub Commands
+We’ve covered the basics of creating a command, but what if we want to create a command that has subcommands? For example, we want to create a command with a `create` subcommand and a `delete` subcommand. This is where subcommands come into play.
 
-In order to create Sub Commands you need to create a `parent` class command and then create the sub commands as classes that extends `SubCommand` and finally you need to add the sub commands to the parent command using the `@Options` decorator.
+## Creating a Subcommand
 
-:::note
+To create a subcommand, we need to create a new class that extends `SubCommand` and implement the `run` method. Then, we need to add the subcommand to the main command.
 
-Why we need to add the sub commands to the parent command using the `@Options` decorator?
-
-Well, the answer in simple words is because discord treats sub commands as options of the parent command. And following that way in seyfert you pass the sub commands as options to the parent command.
-
-:::
-
-
-
-Let's check an example. Suppose you have the following directory structure:
+Let’s assume you have the following directory structure:
 
 <FileTree>
 - src
  - commands
 	- account
-	 	- **create.command.ts**
-	 	- **delete.command.ts**
-	 	- **parent.ts**
+	 	- create.command.ts
+	 	- delete.command.ts
+	 	- parent.ts
  - index.ts
 - seyfert.config.mjs
 - package.json
@@ -38,24 +30,24 @@ Let's check an example. Suppose you have the following directory structure:
 
 :::tip
 
-With this file structure you can use `@Autoload()` and seyfert will add the commands for you so you don't add them manually in the `@Options` decorator.
-But make sure you export by default the sub-commands.
+With this file structure, you can use `@Autoload()` and Seyfert will automatically add the commands for you.
+But make sure to export the subcommands by default.
 
 :::
 
 
-	```ts copy
+```ts copy
 import { Declare, Command, Options } from "seyfert";
 import { CreateCommand } from "./create.command";
 import { DeleteCommand } from "./delete.command";
 
 @Declare({
-		name: "account",
-		description: "account command"
+	name: "account",
+	description: "account command"
 })
-// Being in the same folder with @AutoLoad() you can save this
+// Being in the same folder with @AutoLoad() you can save this step
 @Options([CreateCommand, DeleteCommand])
-export class AccountCommand extends Command {}
+export default class AccountCommand extends Command {}
 
 ```
 	</TabItem>
@@ -70,7 +62,7 @@ import { type CommandContext, Declare, SubCommand } from "seyfert";
 })
 export class CreateCommand extends SubCommand {
 	run(ctx: CommandContext) {
-		// some logic there
+		// some logic here
 
 		return ctx.write({
 			content: "create command executed"
@@ -99,3 +91,9 @@ export class DeleteCommand extends SubCommand {
 ```
 	</TabItem>
 </Tabs>
+
+In the example above, we created a `create` subcommand and a `delete` subcommand. Then, we added the subcommands to the main command using the `@Options` decorator.
+
+:::note
+Note that we essentially treat the subcommand as an option of the main command. (In fact, this is how Discord handles subcommands too)
+:::

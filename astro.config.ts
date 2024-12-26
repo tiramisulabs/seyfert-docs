@@ -1,8 +1,10 @@
 import starlight from '@astrojs/starlight';
-import ecTwoSlash from "expressive-code-twoslash";
-import { defineConfig } from 'astro/config';
-import sidebar from './sidebar.items';
 import tailwind from '@astrojs/tailwind';
+import { ExpressiveCodeTheme } from 'astro-expressive-code';
+import { defineConfig } from 'astro/config';
+import ecTwoSlash from 'expressive-code-twoslash';
+import dacezuThemeJSON from './public/dacezu.json';
+import sidebar from './sidebar.items';
 
 // https://astro.build/config
 export default defineConfig({
@@ -25,10 +27,12 @@ export default defineConfig({
       },
       expressiveCode: {
         plugins: [ecTwoSlash()],
-        themes: ['github-dark-default', 'github-light'],
+        themes: [ExpressiveCodeTheme.fromJSONString(JSON.stringify(dacezuThemeJSON)), 'github-light'],
         styleOverrides: {
           codeFontFamily: 'JetBrains Mono Variable',
           uiFontFamily: 'JetBrains Mono Variable',
+          //@ts-expect-error
+          'twoSlash.cursorColor': 'red',
         },
       },
       favicon: '/icon.svg',

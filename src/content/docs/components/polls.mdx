@@ -1,20 +1,21 @@
 ---
 title: Creating Polls
 ---
+
 import { TabItem, Tabs, FileTree } from '@astrojs/starlight/components'
 
 In Seyfert, the ability to create `polls` is just around the corner!<br/>
-This section shows the **basic creation of polls, events and examples**.
+This section will show the **basic creation of polls, events, and examples**.
 
 :::note
 
-In order to receive `poll events`, some new intents are required.
+To receive `poll events`, new intents are required.
 :::
 
 <Tabs>
 <TabItem label='Gateway Intents'>
 
-> This is an extended section of the [configuration file](/getting-started/setup-project#configuration).
+> This is an expanded section of the [configuration file](/en/getting-started/setup-project#configuration).
 
 ```js title='seyfert.config.mjs' showLineNumbers
 export default config.bot({
@@ -27,20 +28,24 @@ export default config.bot({
 
 ### Receiving Events
 
-> Currently there are 2 events for polls: `messagePollVoteAdd` and `messagePollVoteRemove`.
+> There are currently 2 events for polls: `messagePollVoteAdd` and `messagePollVoteRemove`.
 
 :::caution
 
-If you do not have the **specified intents** the bot will not be able to receive `poll events`.
+If you don't have the **specified intents**, the bot won't be able to receive `poll events`.
 :::
 
+:::note
+
+This is tied to the section on [event creation](/en/getting-started/listening-events).
+:::
 <Tabs>
 <TabItem label='events/addVote.ts'>
 ```ts title='addVote.ts' showLineNumbers
 export default createEvent({
     data: { name: 'messagePollVoteAdd' },
     run: (data) => {
-        //You can do whatever you want with the data
+        // You can do whatever you want with the data
         console.log(`The user: ${data.userId} added a vote to the poll: ${data.messageId}`);
     },
 });
@@ -52,28 +57,28 @@ export default createEvent({
 export default createEvent({
     data: { name: 'messagePollVoteRemove' },
     run: (data) => {
-        //You can do whatever you want with the data
-        console.log(`The user: ${data.userId} removed a vote to the poll: ${data.messageId}`);
+        // You can do whatever you want with the data
+        console.log(`The user: ${data.userId} removed a vote from the poll: ${data.messageId}`);
     },
 });
 ```
 </TabItem>
 </Tabs>
 
-### Ending Event
+### End of Event
 
-> The way to check when a poll is ended is to use the `messageUpdate` event.
+> To check when a poll ends, use the `messageUpdate` event.
 
-Here is a quick example that edits the message when a poll is completed:
+Here’s a quick example that edits the message when a poll is completed:
 
 ```ts title='messageUpdate.ts' showLineNumbers
 export default createEvent({
     data: { name: 'messageUpdate' },
-    //This is [oldMessage, newMessage]
-    //But in this example we only need newMessage
+    // This is [oldMessage, newMessage]
+    // But in this example, we only need newMessage
     run: ([, newMessage]) => {
         if (newMessage.poll?.results?.isFinalized) {
-            console.log(`The poll with the id: ${newMessage.id}'s ended`)
+            console.log(`The poll with the id: ${newMessage.id} has ended`)
         }
     },
 });
@@ -81,20 +86,22 @@ export default createEvent({
 
 ### Commands
 
-> Quick examples on **how to create a poll** and **how to end it**.
+> Quick examples of **how to create a poll** and **how to end it**.
 
 :::caution
 
-The data to obtain from the polls seems to be unstable.<br/>
-Consider reading the [official documentation](https://discord.com/developers/docs/resources/poll#poll-results-object) to learn more.
+The data obtained from polls seems to be unstable.<br/>
+Consider reading the [official documentation](https://discord.com/developers/docs/resources/poll#poll-results-object) for more information.
+
+Proceed with caution.
 :::
 
 :::note
 
-This goes together with the [Commands](/commands/options) section.
+This goes along with the [Commands](/en/commands/options) section.
 :::
 
-It’s suppose you have the following directory structure:
+Let’s assume you have the following directory structure:
 
 <FileTree>
 - src
@@ -108,11 +115,6 @@ It’s suppose you have the following directory structure:
 - package.json
 - tsconfig.json
 </FileTree>
-
-:::tip
-
-You can learn more about the [PollBuilder](https://github.com/tiramisulabs/seyfert/blob/449be8ea3840fb31a36b1df84ef1b352fe350702/src/builders/Poll.ts#L6).
-:::
 
 <Tabs>
 <TabItem label='parent.ts'>
@@ -150,18 +152,18 @@ const options = {
     answers: createStringOption({
         description: 'Poll answers separated by commas.',
         required: true,
-        //This can be improved, but is a quick example
+        // This can be improved, but it’s a quick example
         value: ({ value }, ok: OKFunction<string[] | null>) => {
-            //This is to have more options in the poll
-            //Example: ganyu, supremacy
+            // This is for more poll options
+            // Example: ganyu, supremacy
             const answers = value.split(', ');
             if (!answers.length) return ok(null);
             
             return ok(answers);
         },
     }),
-    //The poll duration in hours.
-    //Example: 1, 2, 5...
+    // Poll duration in hours.
+    // Example: 1, 2, 5...
     hours: createNumberOption({
         description: 'The duration of the poll.'
     }),
@@ -181,22 +183,21 @@ export default class StartPoll extends SubCommand {
         if (!answers)
             return ctx.editOrReply({
                 flags: MessageFlags.Ephemeral,
-                content: 'Answers needs to be separed by commas!',
+                content: 'Answers need to be separated by commas!',
             });
 
         const hours = options.hours ?? 1;
 
-        //We have a new Builder! 
-        //PollBuilder will make easier for us to create Polls.
+        // We have a new poll builder.
+        // PollBuilder makes it easier to create polls.
         const newPoll = new PollBuilder()
             .allowMultiselect(true)
             .setQuestion({ text: question })
             .setAnswers(
-                //The poll answers                
-                //With a maximum of 10 answers
+                // Answers have a limit of 10              
                 answers.map((text) => ({ 
                     text,
-                    //You can add emojis too!
+                    // You can also add emojis
                     emoji: '🐐'
                 }))
             )
@@ -228,7 +229,7 @@ import { MessageFlags } from 'seyfert/lib/types';
 
 const options = {
     message: createStringOption({
-        description: 'The poll\'s message id',
+        description: 'The message id of the poll',
         required: true,
     }),
 };
@@ -254,3 +255,7 @@ export default class EndPoll extends SubCommand {
 </TabItem>
 </Tabs>
 
+:::tip
+
+You can find more information about [PollBuilder](https://github.com/tiramisulabs/seyfert/blob/455ed12b0ebcb3ddf55bc8b3274b0ce904becc62/src/builders/Poll.ts#L4).
+:::

@@ -46,7 +46,7 @@ Esto se aplica de manera similar a los middlewares globales, los cuales se ejecu
 
 ```ts {2,5} copy
 // Suponiendo que exportaste todos los middlewares de './globalMiddlewares';
-import type * as allMiddlewares from './globalMiddlewares';
+import type * as globalMiddlewares from './globalMiddlewares';
 
 declare module 'seyfert' {
     interface GlobalMetadata extends ParseMiddlewares<typeof globalMiddlewares> {}

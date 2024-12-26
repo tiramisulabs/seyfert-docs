@@ -8,7 +8,7 @@ Having sent the component within a channel it's about time you want to handle th
 
 To handle them we have to tell seyfert where will be the components located in our project. We have to do this within our seyfert config file.
 
-```js title="seyfert.config.mjs" showLineNumbers copy ins={12}
+```js title="seyfert.config.mjs" showLineNumbers copy ins={11}
 // @ts-check
 import { config } from "seyfert";
 

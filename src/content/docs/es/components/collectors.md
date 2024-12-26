@@ -44,7 +44,7 @@ export default class HelloWorldCommand extends Command {
     // Para obtener el mensaje al que se le adjunta un botón, puedes configurar la fetchReply en "true".
     const message = await ctx.write(
       {
-        content: 'You want a hello world. Click the button below.',
+        content: 'Do you want a hello world? Click the button below.',
         components: [row],
       },
       true
@@ -86,7 +86,7 @@ export default class HelloWorldCommand extends Command {
 
     const message = await ctx.write(
       {
-        content: 'You want a hello world. Click the button below.',
+        content: 'Do you want a hello world? Click the button below.',
         components: [row],
       },
       true
@@ -144,7 +144,7 @@ export default class HelloWorldCommand extends Command {
 
     const message = await ctx.write(
       {
-        content: 'You want a hello world. Click the button below.',
+        content: 'Do you want a hello world? Click the button below.',
         components: [row],
       },
       true
@@ -199,7 +199,7 @@ export default class HelloWorldCommand extends Command {
 
     const message = await ctx.write(
       {
-        content: 'You want a hello world. Click the button below.',
+        content: 'Do you want a hello world? Click the button below.',
         components: [row],
       },
       true
