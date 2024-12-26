@@ -18,23 +18,27 @@ Seyfert provides a way to use the locales in your bot. The way to do it is quite
 
 ### Using `@LocalesT` decorator
 
+You can automatically translate all command content using the `@LocalesT` decorator.
 This decorator will get all the locales that you have defined as `DefaultLocale`.
 
-<TabItem label='supremacy.ts'>
-```ts title="src/commands/supremacy.ts" showLineNumbers
-import { Command, Declare, LocalesT } from 'seyfert';
+```ts twoslash
+import type { ParseLocales } from 'seyfert';
+const lang = {
+    'my-command': {
+        name: '',
+        description: '',
+    },
+};
+declare module 'seyfert' {
+    interface DefaultLocale extends ParseLocales<typeof lang> {}
+}
+// ---cut---
+import { Command, LocalesT } from 'seyfert';
 
-@Declare({
-	name: 'supremacy',
-	description: 'Ganyu Supremacy.'
-})
-// You can also pass 'undefined'
-// if you don't want to add a command localized name or description!
-// Like this: @LocalesT(undefined 'some.command.description')
-@LocalesT('hello', 'foo.bar')
-export default class SupremacyCommand extends Command { }
+@LocalesT('my-command.name', 'my-command.description')
+//                   ^|
+class MyCommand extends Command {}
 ```
-</TabItem>
 
 ### Using `@GroupsT` decorator
 
