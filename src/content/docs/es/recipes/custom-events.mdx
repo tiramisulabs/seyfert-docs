@@ -5,90 +5,50 @@ title: Eventos Personalizados
 Como en otras secciones, se usará la [ampliación de módulos](/getting-started/declare-module), recomendamos leerla primero.
 :::
 
-Seyfert permite cargar, integrar y ejecutar eventos personalizados que pueden ser llamados desde cualquier lugar. En este ejemplo se pondrá en práctica el uso de [módulos de música](/recipes/music).
+Seyfert permite cargar, integrar y ejecutar eventos personalizados que pueden ser llamados desde cualquier lugar. Para este ejemplo, crearemos un evento simple llamado <a href="https://cdn-useast1.kapwing.com/static/templates/our-meme-template-regular-50760e0b.webp" target="_blank">`ourEvent`</a>.
 
-## Integración
-:::danger
-Ten en cuenta que pueden existir eventos con el mismo nombre. En tiempo de ejecución, estos serán sobrescritos.
+:::note
+Si dos eventos tienen el mismo nombre, estos serán sobrescritos.
 :::
 
-Debes asegurarte de declarar los eventos que existan, para ello definimos los tipos:
+## Integración
+
+Primero necesitamos informar al sistema de tipos de Seyfert que tendremos un evento personalizado.
 
 ```ts title="index.ts"
-import type { ShoukakuEvents } from 'shoukaku';
-
-type MappedEvents = {
-    [K in keyof Omit<ShoukakuEvents, 'ready' | 'raw'>]: (...params: ShoukakuEvents[K]) => never;
-};
-
 declare module "seyfert" {
-	interface CustomEvents extends MappedEvents {
-		shoukakuReady: (...params: ShoukakuEvents['ready']) => never;
-		shoukakuRaw: (...params: ShoukakuEvents['raw']) => never;
+	interface CustomEvents {
+		ourEvent: (text: string) => void;
 	}
 }
 ```
 
 ### Cargando eventos
 
-No necesitas hacer nada especial; simplemente coloca tus eventos en la carpeta designada en `seyfert.config`.
+Esto está aquí solo para demostrar que no necesitas hacer nada especial; simplemente coloca tus eventos en la carpeta designada en `seyfert.config`.
 
-```ts title="events/music/ready.ts"
+```ts title="seyfert.config.ts"
 import { createEvent } from 'seyfert';
 
 export default createEvent({
-	data: { name: "shoukakuReady", once: true },
-	run: (name) => {
-		console.log(`Lavalink ${name}: ¡Listo!`);
+	data: { name: "ourEvent", once: false },
+	run: (text) => {
+		console.log(text);
 	}
 });
 ```
 
-## Ejecución
+### Ejecución
 
-```ts title="index.ts" {3,28,30-32,38-40}
+```ts title="index.ts"
 import { Client } from "seyfert";
-import { Kazagumo } from "kazagumo";
-import type { ShoukakuEvents } from 'shoukaku';
-import { type NodeOption, Connectors } from "shoukaku";
 
 const client = new Client();
-const nodes: NodeOption[] = [
-	{
-		name: "Node",
-		url: "localhost:2333",
-		auth: "youshallnotpass",
-		secure: false
-	}
-];
 
-// Configuración básica, perfecta para este caso
-client.kazagumo = new Kazagumo(
-	{
-		defaultSearchEngine: "youtube",
-		send: (guildId, payload) =>
-			client.gateway.send(client.gateway.calculateShardId(guildId), payload)
-	},
-	new Connectors.Seyfert(client),
-	nodes
-);
-
-// Para verificar si el nodo está conectado
-client.kazagumo.shoukaku.on("ready", (...args) => client.events?.runCustom('ready', ...args));
-
-type MappedEvents = {
-    [K in keyof Omit<ShoukakuEvents, 'ready' | 'raw'>]: (...params: ShoukakuEvents[K]) => never;
-};
-
-declare module "seyfert" {
-	interface Client {
-		kazagumo: Kazagumo;
-	}
-	interface CustomEvents extends MappedEvents {
-		shoukakuReady: (...params: ShoukakuEvents['ready']) => never;
-		shoukakuRaw: (...params: ShoukakuEvents['raw']) => never;
-	}
-}
-
-client.start().then(() => client.uploadCommands());
+(async () => {
+	await client.start();
+	client.events?.runCustom('ourEvent', '¡Hola, mundo!');
+})();
 ```
+
+Después de ejecutar el código, deberías ver `¡Hola, mundo!` en la consola. ¡Eso es todo!

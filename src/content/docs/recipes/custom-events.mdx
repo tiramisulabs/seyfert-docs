@@ -16,7 +16,6 @@ If two events have the same name, they will be overwritten.
 First we need to let know Seyfert typing system that we will have an custom event.
 
 ```ts title="index.ts"
-
 declare module "seyfert" {
 	interface CustomEvents {
 		ourEvent: (text: string) => void;
@@ -28,7 +27,7 @@ declare module "seyfert" {
 
 This is just here to flex that you don't have to do anything, just put your events in the designated folder in `seyfert.config`.
 
-```ts title="seyfert.config.ts"
+```ts
 import { createEvent } from 'seyfert';
 
 export default createEvent({
@@ -50,6 +49,12 @@ const client = new Client();
 	await client.start();
 	client.events?.runCustom('ourEvent', 'Hello, world!');
 })();
+
+declare module "seyfert" {
+	interface CustomEvents {
+		ourEvent: (text: string) => void;
+	}
+}
 ```
 
 After running the code, you should see `Hello, world!` in the console. That's it!

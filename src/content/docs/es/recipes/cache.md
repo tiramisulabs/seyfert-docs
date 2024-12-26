@@ -3,18 +3,18 @@ title: Caché
 ---
 # ¿Qué es el caché?
 
-En seyfert el caché es el almacenamiento en memoria (en cuanto menos) de los datos emitidos por Discord. Seyfert provee varias formas de manejar el caché para los datos de Discord.
+El caché es una capa de almacenamiento temporal que mantiene los datos frecuentemente accedidos disponibles para un acceso rápido. En Seyfert, el sistema de caché almacena los datos de Discord en memoria por defecto, aunque puede configurarse para usar otras soluciones de almacenamiento como Redis.
 
-## Resources
+## Resources (Recursos)
 
-Todas las entidades soportadas por el caché de seyfert son `recursos` dígase `canales`, `usuarios`, `miembros`... Por ello, cada uno se maneja, si bien de la misma forma, se permite modificar y gestionar de diferentes formas en relación con el `Adaptador`.
+Todas las entidades soportadas por el caché de Seyfert son `recursos`, como `canales`, `usuarios`, `miembros`, etc. Cada uno de estos recursos se gestiona de la misma manera, pero pueden ser modificados y manejados de forma diferente según el `Adaptador`.
 
 ### Deshabilitando
 
-Seyfert permite deshabilitar estos `recursos` por separado
+Seyfert permite deshabilitar estos `recursos` por separado.
 
 :::note[Datos Globales]
-En seyfert el caché es global, por lo que todo se guarda en el mismo recurso, sin distinción de guild hasta el momento de obtenerlos donde se requeriría especificar la fuente
+En Seyfert, el caché es global, lo que significa que todo se almacena en el mismo recurso, sin distinción entre servidores, hasta que se recuperan, momento en el que necesitarías especificar la fuente.
 :::
 
 | Recurso         | Elementos                                              |
@@ -39,12 +39,11 @@ import { Client } from 'seyfert';
 const client = new Client();
 
 client.setServices({ cache: { disabledCache: { bans: true } } })
-
 ```
-El ejemplo deshabilitaría el caché de bans y dicho recurso no existiría en runtime.
+El ejemplo anterior deshabilita el caché de baneos, y ese recurso no existiría en tiempo de ejecución.
 
-:::tip[Deshabilitando el caché]
-Puedes remover la funcionalidad del caché por completo
+:::tip[Deshabilitando el Caché]
+Puedes eliminar completamente la funcionalidad del caché:
 ```ts twoslash
 import { Client } from 'seyfert';
 
@@ -53,9 +52,10 @@ const client = new Client();
 client.setServices({ cache: { disabledCache: true } })
 ```
 :::
+
 ### Filtrando
 
-Por ejemplo, desde que todos los canales se guardan en el mismo `recurso`, supongamos que su aplicación no tiene una utilidad para ciertos canales, así que podemos `filtrar` la entrada de los datos:
+Puedes filtrar qué datos se almacenan en un recurso. Por ejemplo, si tu aplicación no necesita almacenar en caché los canales de MD, puedes filtrarlos:
 
 ```ts twoslash title="index.ts" copy showLineNumbers
 import { Client } from "seyfert";
@@ -74,55 +74,40 @@ client.cache.channels!.filter = (
 };
 ```
 
-## Adapters
+## Adaptadores
 
-Seyfert permite proporcionar tu propio adaptador para el caché, puedes llamarlo un driver para que seyfert use una herramienta no soportada. Por defecto seyfert incorpora `MemoryAdapter` y `LimitedMemoryAdapter` ambos trabajan en RAM.
+Seyfert te permite proporcionar tu propio adaptador para el caché, que puedes pensar como un controlador para permitir que Seyfert use una herramienta no soportada. Por defecto, Seyfert incluye `MemoryAdapter` y `LimitedMemoryAdapter`, ambos operan en RAM. Además, Seyfert tiene soporte oficial para Redis a través del [`Adaptador Redis`](https://github.com/tiramisulabs/extra/tree/main/packages/redis-adapter).
 
-:::tip[Redis]
-Seyfert tiene soporte oficial para redis
-```bash
-pnpm i @slipher/redis-adapter
-```
+:::note[Diferencia entre MemoryAdapter y LimitedMemoryAdapter]
+El `MemoryAdapter` almacena todos los datos en memoria, mientras que el `LimitedMemoryAdapter` limita la cantidad de datos almacenados en memoria proporcionando tiempos de expiración y límites de entradas.
 :::
-```ts twoslash
-import { Client } from 'seyfert';
-import { RedisAdapter } from '@slipher/redis-adapter';
 
-const client = new Client();
+## Construyendo Tu Propio Caché
 
-client.setServices({
-    cache: {
-        adapter: new RedisAdapter({ redisOptions: { url: 'redis://127.0.0.1:6379' } })
-    }
-});
-```
+### Recurso Personalizado
 
-## Armando tu propio caché
+Un `recurso personalizado` es simplemente una nueva entidad de caché, por lo que integrarlo es relativamente simple. Tomemos como ejemplo el recurso [Cooldown](https://github.com/tiramisulabs/extra/blob/main/packages/cooldown/src/resource.ts) del paquete [cooldown](https://docs).
 
-### Custom Resource
+Es importante notar que Seyfert proporciona una base para tres tipos de recursos:
 
-Un `recurso custom` no es mas que una nueva entidad de caché, por lo que integrarlo es relativamente simple, tomemos de ejemplo el recurso [Cooldown](https://github.com/tiramisulabs/extra/blob/main/packages/cooldown/src/resource.ts) del paquete de [cooldown](/recipes/cooldown).
-
-Es importante destacar que seyfert proporciona una base para 3 tipo de recursos:
-
-- **BaseResource**: entidad basica, que deberia ser totalmente independiente
-- **GuildBaseResource**: entidad que va ligada a una guild (como los bans)
-- **GuildRelatedResource**: entidad que puede ir o no ligada a una guild (como los mensajes)
+- **BaseResource**: una entidad básica, que debe ser completamente independiente
+- **GuildBaseResource**: una entidad vinculada a un servidor (como los baneos)
+- **GuildRelatedResource**: una entidad que puede estar o no vinculada a un servidor (como los mensajes)
 
 ```ts title="resource.ts"
 import { BaseResource } from 'seyfert/lib/cache';
 
 export class CooldownResource extends BaseResource<CooldownData> {
-    // el namespace es la base que separa cada recurso
+    // El namespace es la base que separa cada recurso
     namespace = 'cooldowns';
 
-    // sobre-escribimos el set para darle el typing y el formato que deseamos
+    // Sobrescribimos set para aplicar el tipado y formato que queremos
     override set(id: string, data: MakePartial<CooldownData, 'lastDrip'>) {
         return super.set(id, { ...data, lastDrip: data.lastDrip ?? Date.now() });
     }
 }
 ```
-Ten en cuenta, que un custom resource es para uso del desarrollador, seyfert no interactuara con el a menos que se indique en el codigo de la aplicacion.
+Ten en cuenta que un recurso personalizado es para uso del desarrollador; Seyfert no interactuará con él a menos que se especifique en el código de la aplicación.
 
 ```ts
 import { Client } from 'seyfert';
@@ -139,15 +124,16 @@ declare module "seyfert" {
     interface UsingClient extends ParseClient<Client> {}
 }
 ```
-## Custom adapter
 
-¿No te convence guardar el caché en memoria o en Redis? ¿O simplemente prefieres hacerlo a tu manera?
+## Adaptador Personalizado
 
-Aquí aprenderás cómo crear tu propio adaptador para el caché.
+¿No te gusta almacenar el caché en memoria o Redis? ¿O tal vez simplemente quieres hacerlo a tu manera?
 
-### Antes de comenzar
+Aquí aprenderás cómo crear tu propio adaptador de caché.
 
-Debes tomar en cuenta si tu adaptador puede llegar a ser asíncrono, si es así, debes especificarlo:
+### Antes de Empezar
+
+Considera si tu adaptador podría ser asíncrono; si lo es, necesitarás especificarlo:
 
 ```ts twoslash
 // @noErrors
@@ -157,21 +143,22 @@ class MiAdaptador implements Adapter {
     isAsync = true;
 
     async start() {
-        // Esta función se ejecutará antes de comenzar el bot
+        // Esta función se ejecutará antes de iniciar el bot
     }
 }
 ```
-> En esta guía, se aborda como si fueras a crear un adaptador asíncrono, si quieres uno síncrono, simplemente no devuelvas una promesa en ninguno de los metodos (el `start` puede ser asíncrono).
+> Esta guía es para crear un adaptador asíncrono. Si quieres uno síncrono, simplemente no devuelvas una promesa en ninguno de los métodos (el método `start` puede ser asíncrono).
 
-### Guardando datos
+### Almacenando Datos
 
-En el cache de seyfert, existen las relaciones, para así saber a quien le pertenece algún recurso.
+En el caché de Seyfert, hay relaciones, para que puedas saber a quién pertenece un recurso.
 
-Hay 4 metodos que debes implementar en tu adaptador para guardar valores: `set`, `patch`, `bulkPatch` y `bulkSet`.
+Hay cuatro métodos que debes implementar en tu adaptador para almacenar valores: `set`, `patch`, `bulkPatch`, y `bulkSet`.
 
 #### `set` y `bulkSet`
 
-Comenzando por lo más sencillo:
+Empezando por lo más simple:
+
 ```ts twoslash
 interface SeyfertDotDev {
     set(key: string, value: any): Promise<void>;
@@ -198,7 +185,7 @@ class MiAdaptador implements Adapter {
 
 #### `patch` y `bulkPatch`
 
-El metodo `patch` no debe sobreescribir totalmente las propiedades del anterior valor, solo las propiedades que se le pase.
+El método `patch` no debe sobrescribir todas las propiedades del valor anterior, solo las que se pasan.
 
 ```ts twoslash
 interface SeyfertDotDev {
@@ -230,9 +217,9 @@ class MiAdaptador implements Adapter {
 }
 ```
 
-#### Guardando relaciones
+#### Almacenando Relaciones
 
-Para guardar las relaciones, se usan los metodos `bulkAddToRelationShip` y `addToRelationship`
+Para almacenar relaciones, usas los métodos `bulkAddToRelationShip` y `addToRelationship`.
 
 ```ts twoslash
 interface SeyfertDotDev {
@@ -248,7 +235,7 @@ class MiAdaptador implements Adapter {
     // ---cut-end---
     async addToRelationship(id: string, keys: string | string[]) {
         for (const key of Array.isArray(keys) ? keys : [keys]) {
-            // Lo agregamos a un "Set", las ids deben ser únicas.
+            // Agregar a un "Set", los IDs deben ser únicos
             await this.almacenamiento.setAdd(id, key);
         }
     }
@@ -261,13 +248,14 @@ class MiAdaptador implements Adapter {
 }
 ```
 
-### Obteniendo datos
+### Recuperando Datos
 
-Hay 3 metodos que debes implementar en tu adaptador para obtener los valores: `get`, `bulkGet` y `scan`.
+Debes implementar tres métodos en tu adaptador para recuperar valores: `get`, `bulkGet`, y `scan`.
 
 #### `get` y `bulkGet`
 
-Comenzando por lo más sencillo:
+Empezando por lo más simple:
+
 ```ts twoslash
 interface SeyfertDotDev {
     get(key: string): Promise<any>;
@@ -291,30 +279,30 @@ class MiAdaptador implements Adapter {
         }
 
         return (await Promise.all(values))
-            // No debes retornar valores nulos
+            // No devolver valores nulos
             .filter(value => value)
     }
 }
 ```
 
-#### El metodo `scan`
+#### El método `scan`
 
-Actualmente estamos guardando los datos en este formato:
+Actualmente, estamos almacenando datos en este formato:
 ```ts
 <resource>.<id2>.<id1> // member.1003825077969764412.1095572785482444860
 <resource>.<id1> // user.863313703072170014
 ```
 
-Al metodo `scan`, se le pasa un string con este formato:
+El método `scan` toma una cadena con este formato:
 ```ts
 <resource>.<*>.<*> // member.*.*
 <resource>.<*>.<id> // member.*.1095572785482444860
 <resource>.<id>.<*> // member.1003825077969764412.*
 <resource>.<*> // user.*
 ```
-El `*` indica que puede haber cualquier id.
+El `*` indica que puede haber cualquier ID.
 
-Debes regresar todas coincidencias.
+Debes devolver todas las coincidencias.
 
 ```ts twoslash
 interface SeyfertDotDev {
@@ -333,7 +321,7 @@ class MiAdaptador implements Adapter {
     async scan(query: string, keys = false) {
         const values: (string | unknown)[] = [];
         const sq = query.split('.');
-        // Seguramente tu cliente tendrá una forma más optimizada de hacer esto.
+        // Tu cliente probablemente tendrá una forma más optimizada de hacer esto.
         // Como nuestro adaptador de Redis.
         for (const [key, value] of await this.almacenamiento.entries()) {
             const match = key.split('.')
@@ -347,10 +335,11 @@ class MiAdaptador implements Adapter {
     }
 }
 ```
-> <a href="https://github.com/tiramisulabs/extra/blob/db36914ace5f4b948ee109a3c25987e162811b44/packages/redis-adapter/src/adapter.ts#L46" target="_blank">Ejemplo del adaptador de redis</a>
-#### Obteniendo relaciones
+> [Ejemplo del adaptador de Redis](https://github.com/tiramisulabs/extra/blob/db36914ace5f4b948ee109a3c25987e162811b44/packages/redis-adapter/src/adapter.ts#L46)
 
-Para obtener las ids de una relación, tenemos el metodo `getToRelationship`
+#### Recuperando Relaciones
+
+Para obtener los IDs de una relación, tenemos el método `getToRelationship`.
 
 ```ts twoslash
 interface SeyfertDotDev {
@@ -419,11 +408,11 @@ class MiAdaptador implements Adapter {
 }
 ```
 
-### Borrando datos
+### Eliminando Datos
 
 #### `remove`, `bulkRemove` y `flush`
 
-Hay 3 metodos que debes implementar en tu adaptador para borrar valores: `remove`, `bulkRemove` y `flush`.
+Hay tres métodos que debes implementar en tu adaptador para eliminar valores: `remove`, `bulkRemove`, y `flush`.
 
 ```ts twoslash
 interface SeyfertDotDev {
@@ -450,15 +439,15 @@ class MiAdaptador implements Adapter {
     }
 
     async flush() {
-        await this.almacenamiento.flush(); // Borrar los valores
-        await this.almacenamiento.setFlush(); // Borrar las relaciones
+        await this.almacenamiento.flush(); // Eliminar valores
+        await this.almacenamiento.setFlush(); // Eliminar relaciones
     }
 }
 ```
 
-#### Borrando relaciones
+#### Eliminando Relaciones
 
-Para borrar ids de una relacion, tenemos los metodos `removeToRelationship` y `removeRelationship`
+Para eliminar IDs de una relación, tenemos los métodos `removeToRelationship` y `removeRelationship`.
 
 ```ts twoslash
 interface SeyfertDotDev {
@@ -474,12 +463,12 @@ class MiAdaptador implements Adapter {
     almacenamiento: SeyfertDotDev;
     // ---cut-end---
     async removeToRelationship(to: string) {
-        // Borrar el "Set" por completo
+        // Eliminar el "Set" completamente
         await this.almacenamiento.setRemove(to);
     }
 
     async removeRelationship(to: string, key: string | string[]) {
-        // Quitar las id del "Set"
+        // Eliminar el/los ID(s) del "Set"
         const keys = Array.isArray(key) ? key : [key];
         await this.almacenamiento.setPull(to, keys);
     }
@@ -487,7 +476,7 @@ class MiAdaptador implements Adapter {
 ```
 
 ### Probando
-Si quieres asegurarte de que tu adaptador funciona, ejecuta el metodo `testAdapter` de `Cache`
+Para asegurarte de que tu adaptador funciona, ejecuta el método `testAdapter` de `Cache`.
 
 ```ts twoslash
 // @errors: 2304
