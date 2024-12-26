@@ -9,11 +9,11 @@ In seyfert the sharding approach is to give the full benefit of scaling while ke
 
 ## Why sharding?
 
-While, by default, seyfert handles sharding internally in the `Client` instance, this has a processing limit, starting with the fact that javascript runtimes are single-threaded, so all the load is evaluated together, spreading this load is what sharding is all about (although it is still an imperfect technique).
+JavaScript runtimes are single-threaded, which means that without sharding, all processing would happen in a single thread. This creates a processing limit where all the load is evaluated together. Seyfert handles sharding internally in the `Client` instance to help distribute this load across multiple processes or threads (although it is still an imperfect technique).
 
 ## Managing shards
 
-The base of the `Worker` is to allow to execute code in parallel in different parts of the cpu, either in threads or different processes. In terms of discord, this means the ability to connect several `shards` by spreading the load on each `Worker`, for seyfert this is just changing the `mode` property in the `WorkerManager` to decide the execution mode between `threads` to `spawn` clients on processor threads or `cluster` to `spawn` clients on different processes of the runtime.
+The base of the `Worker` is to allow to execute code in parallel in different parts of the CPU, either in threads or different processes. In terms of discord, this means the ability to connect several `shards` by spreading the load on each `Worker`, for seyfert this is just changing the `mode` property in the `WorkerManager` to decide the execution mode between `threads` to `spawn` clients on processor threads or `cluster` to `spawn` clients on different processes of the runtime.
 
 <Tabs>
 	<TabItem label='manager.ts'>
@@ -48,9 +48,11 @@ declare module 'seyfert' {
 Too simple? Seyfert takes care of all the logic so your project shouldn't change much just by switching to a `WorkerSharding`.
 
 ## Cache
-Unlike other libraries, by having sharding completely unified, Seyfert maintains control in certain areas, including *the cache*. You can centralize the cache in the main process, that is, the executor of `WorkerManager`. No matter where you are in the code, you will always have access to all the data. 
-To achieve this, it's necessary to use the WorkerAdapter:
-```ts twoslash
+Unlike traditional Discord libraries, Seyfert offers unified cache management across all shards. The cache can be centralized in the main process (the `WorkerManager` executor), ensuring consistent data access throughout your application. 
+
+To implement centralized caching, use the WorkerAdapter:
+
+```ts
 import { WorkerClient, WorkerAdapter } from 'seyfert';
 
 const client = new WorkerClient();
@@ -75,6 +77,3 @@ client.tellWorker(
 	vars = { workerId: client.workerId }
 );
 ```
-# Advanced
-
-While seyfert takes care of much of the logic, that does not mean that it is not applicable on the developer's side. Not only can you provide your own system by implementing `CustomManagerAdapter`, you can also do horizontal scaling either statically by defining the number of workers and shards on each machine or dynamically with a `central` api that balances things out. We hope to provide a better implementation of this soon.

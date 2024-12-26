@@ -97,3 +97,51 @@ In the example above, we created a `create` subcommand and a `delete` subcommand
 :::note
 Note that we essentially treat the subcommand as an option of the main command. (In fact, this is how Discord handles subcommands too)
 :::
+
+
+## Subcommand Groups  
+
+For a more divided structure, you can create groups for subcommands using the `@Group` and `@Groups` decorators in the main command.
+
+<Tabs>
+<TabItem label="parent.ts">
+
+```ts twoslash copy
+// @noErrors
+import { Command, Declare, Options, Groups } from 'seyfert';
+import MySubCommand from './sub';
+
+@Declare({
+    name: 'parent',
+    description: 'My main command',
+})
+@Options([MySubCommand])
+@Groups({
+    'my-group': {
+        defaultDescription: 'A subcommand group',
+    }
+})
+export default class ParentCommand extends Command {}
+```
+</TabItem>
+
+<TabItem label="mygroup-sub.ts">
+
+```ts twoslash
+import { SubCommand, Declare, CommandContext, Group } from 'seyfert';
+
+@Declare({
+    name: 'subcommand',
+    description: 'One of my subcommands within the my-group group',
+})
+@Group('my-group')
+export default class GroupMySubCommand extends SubCommand {
+    run(ctx: CommandContext) {
+        return ctx.write({
+            content: 'Hello from the subcommand!',
+        });
+    }
+}
+```
+</TabItem>
+</Tabs>

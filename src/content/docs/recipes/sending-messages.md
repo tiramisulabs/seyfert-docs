@@ -2,7 +2,7 @@
 title: Sending Messages
 ---
 
-The basic feature of Discord Bots is sending messages across Discord. And in Seyfert, you can do it the easiest way.
+The basic feature of Discord Bots is sending messages across Discord. That's why here we will see how to send messages with Seyfert.
 
 First of all, we need to set up a basic `Hello World` command.
 

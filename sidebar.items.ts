@@ -57,7 +57,7 @@ export default [
 				collapsed: true,
 				items: [
 					{
-						label: 'Introducction',
+						label: 'Introduction',
 						translations: {
 							es: 'Introducción',
 						},

@@ -3,7 +3,7 @@ title: Cache
 ---
 # What is cache?
 
-In seyfert the cache is the storage in memory (at least) of the data emitted by Discord. Seyfert provides several ways to handle the cache for Discord data.
+Cache is a temporary storage layer that keeps frequently accessed data readily available for quick access. In Seyfert, the cache system stores Discord data in memory by default, though it can be configured to use other storage solutions like Redis.
 
 ## Resources
 
@@ -54,7 +54,7 @@ client.setServices({ cache: { disabledCache: true } })
 :::
 ### Filtering
 
-For example, since all channels are stored in the same `resource`, suppose your application does not need certain channels, so we can `filter` the data entry:
+You can filter which data gets stored in a resource. For example, if your application doesn't need to cache DM channels, you can filter them out:
 
 ```ts twoslash title="index.ts" copy showLineNumbers
 import { Client } from "seyfert";
@@ -75,26 +75,11 @@ client.cache.channels!.filter = (
 
 ## Adapters
 
-Seyfert allows you to provide your own adapter for the cache, which you can think of as a driver to let Seyfert use an unsupported tool. By default, Seyfert includes `MemoryAdapter` and `LimitedMemoryAdapter`, both of which operate in RAM.
+Seyfert allows you to provide your own adapter for the cache, which you can think of as a driver to let Seyfert use an unsupported tool. By default, Seyfert includes `MemoryAdapter` and `LimitedMemoryAdapter`, both of which operate in RAM. Additionally, Seyfert has official Redis support through the [`Redis Adapter`](https://github.com/tiramisulabs/extra/tree/main/packages/redis-adapter).
 
-:::tip[Redis]
-Seyfert has official Redis support.
-```bash
-pnpm i @slipher/redis-adapter
-```
+:::note[Difference between MemoryAdapter and LimitedMemoryAdapter]
+The `MemoryAdapter` stores all data in memory, while the `LimitedMemoryAdapter` limits the amount of data stored in memory by providing expiration times and limits of entries.
 :::
-```ts twoslash
-import { Client } from 'seyfert';
-import { RedisAdapter } from '@slipher/redis-adapter';
-
-const client = new Client();
-
-client.setServices({
-    cache: {
-        adapter: new RedisAdapter({ redisOptions: { url: 'redis://127.0.0.1:6379' } })
-    }
-});
-```
 
 ## Building Your Own Cache
 
