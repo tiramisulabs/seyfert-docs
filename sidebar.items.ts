@@ -237,6 +237,13 @@ export default [
 					},
 				],
 			},
+			{
+				label: 'Changelog',
+				translations: {
+					es: 'Changelog',
+				},
+				link: '/changelog',
+			}
 		],
 	},
 ];
