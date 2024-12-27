@@ -154,7 +154,7 @@ export default class PingCommand extends Command {
     const lang = ctx.options.language;
 
     // Obtener las traducciones del idioma
-    const t = ctx.t(lang);
+    const t = ctx.t.get(lang);
 
     // latencia promedio entre shards
     const ping = ctx.client.gateway.latency;
