@@ -10,7 +10,7 @@ description: Cambios en Seyfert
 - `WorkerAdapter` ya no es el adaptador de caché predeterminado del `WorkerClient`.
 - Se cambiaron las funciones `Context.guild`, `Context.channel` y `Context.me` para usar el modo `flow` por defecto.
 - Se eliminaron las ubicaciones `output` y `templates` del archivo de configuración.
-- Se eliminó el parámetro `updateOnly` del adaptador de caché.
+- Se eliminó el parámetro `updateOnly` del metodo `patch` en el adaptador de caché.
 
 **Correcciones:**
 - Se solucionaron problemas con las conexiones zombie.

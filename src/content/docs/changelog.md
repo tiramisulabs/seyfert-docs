@@ -10,7 +10,7 @@ description: Seyfert changes
 - `WorkerAdapter` is no longer the default cache adapter of the WorkerClient.
 - Changed `Context.guild`, `Context.channel`, and `Context.me` functions to use the `flow` mode by default.
 - Removed `output` and `templates` locations from the configuration file.
-- Removed `updateOnly` parameter from the cache Adapter.
+- Removed `updateOnly` parameter from the `patch` method in the cache Adapter.
 
 **Fixed:**
 - Fixed issues with zombie connections.
