@@ -18,6 +18,8 @@ import TimelineEntry from '../../components/custom/timeline-entry.astro';
     - Changed `Context.guild`, `Context.channel`, and `Context.me` functions to use the `flow` mode by default.
     - Removed `output` and `templates` locations from the configuration file.
     - Removed `updateOnly` parameter from the `patch` method in the cache Adapter.
+    - Removed deprecated types and Intents.
+    - Renamed `VoiceChannelMethods#setVoiceState` to `VoiceChannelMethods#setVoiceStatus`
 
     **Fixed:**
     - Fixed issues with zombie connections.
