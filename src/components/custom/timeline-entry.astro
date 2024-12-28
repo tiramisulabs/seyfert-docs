@@ -1,0 +1,76 @@
+---
+interface Props {
+  title: string;
+  date: string;
+  link?: string;
+}
+
+const { title, date, link = "#" } = Astro.props;
+---
+
+<div class="timeline-item">
+  <div class="timeline-badge">
+    <svg class="octicon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" width="20" height="20">
+      <path fill="currentColor" d="M11.93 8.5a4.002 4.002 0 0 1-7.86 0H.75a.75.75 0 0 1 0-1.5h3.32a4.002 4.002 0 0 1 7.86 0h3.32a.75.75 0 0 1 0 1.5Zm-1.43-.75a2.5 2.5 0 1 0-5 0 2.5 2.5 0 0 0 5 0Z"></path>
+    </svg>
+  </div>
+  <div class="timeline-body">
+    <a href={link} class="timeline-title">
+      <h3>{title}</h3>
+    </a>
+    <div class="timeline-date">{date}</div>
+    <div class="timeline-description">
+      <slot />
+    </div>
+  </div>
+</div>
+
+<style>
+  .timeline-item {
+    position: relative;
+    margin-bottom: 2rem;
+  }
+
+  .timeline-badge {
+    position: absolute;
+    left: -2.9rem;
+    width: 2rem;
+    height: 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #1a1a1a;
+    border-radius: 50%;
+    border: 2px solid #4b5563;
+    color: #9ca3af;
+  }
+
+  .timeline-body {
+    padding: 1.25rem;
+    transition: all 0.2s ease;
+  }
+
+  .timeline-title {
+    text-decoration: none;
+    color: inherit;
+  }
+
+  .timeline-title h3 {
+    margin: 0;
+    font-size: 1.25rem;
+    color: #e5e7eb;
+    font-weight: 600;
+  }
+
+  .timeline-date {
+    font-size: 0.875rem;
+    color: #9ca3af;
+    margin-top: 0.25rem;
+  }
+
+  .timeline-description {
+    margin-top: 0.75rem;
+    color: #d1d5db;
+    line-height: 1.5;
+  }
+</style> 

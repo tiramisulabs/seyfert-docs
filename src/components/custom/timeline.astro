@@ -1,0 +1,21 @@
+<div class="timeline-container">
+  <slot />
+</div>
+
+<style>
+  .timeline-container {
+    position: relative;
+    padding-left: 2rem;
+    margin-left: 1rem;
+  }
+
+  .timeline-container::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    width: 2px;
+    background-color: #30363d;
+  }
+</style>

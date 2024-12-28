@@ -1,0 +1,62 @@
+---
+import type { Props } from '@astrojs/starlight/props';
+import seyfertIcon from '../../../public/icon.svg';
+import { Image } from 'astro:assets';
+import SidebarList from './sidebarList.astro';
+import { Icon } from '@astrojs/starlight/components';
+import LanguageSelect from 'virtual:starlight/components/LanguageSelect';
+import ThemeSelect from './themeSelect.astro';
+
+const { sidebar } = Astro.props;
+---
+
+<aside
+    class={"sidebar-pane fixed top-0 left-0 z-20 h-screen ease-in-out duration-300 w-80 transform -translate-x-full md:translate-x-0 md:block"}
+>
+    <div class="h-full flex flex-col px-8 py-5 overflow-y-auto">
+        <button
+            class="px-0 transition-transform ease-in-out duration-300 mb-1 pb-2 bg-transparent text-center border-b border-gray-300 dark:border-[#2e2e32]"
+        >
+            <a class="flex items-center gap-2 cursor-pointer font-bold text-inherit no-underline" href="https://seyfert.dev">
+                <Image src={seyfertIcon} alt="Seyfert" class="w-8 h-8" />
+                Seyfert
+            </a>
+        </button>
+
+        <SidebarList sublist={sidebar} first />
+
+        <div class="flex flex-row md:hidden right-group items-center text-center justify-between">
+            <LanguageSelect {...Astro.props} />
+            <ThemeSelect {...Astro.props} />
+        </div>
+    </div>
+</aside>
+
+<button
+    id="mobile-menu-toggle"
+    class="fixed right-2 z-20 top-2 p-2 rounded-md md:hidden bg-transparent cursor-pointer"
+>
+    <Icon name="bars" class="w-6 h-6 text-black dark:text-gray-300 show-sidebar" />
+    <Icon name="close" class="w-6 h-6 text-black dark:text-gray-300 hidden close-sidebar" />
+</button>
+
+<style>
+    .sidebar-pane {
+        background-color: var(--sl-color-bg-sidebar);
+    }
+</style>
+
+<script>
+    const mobileMenuToggle = document.getElementById('mobile-menu-toggle');
+    const sidebar = document.querySelector('.sidebar-pane');
+    const showSidebar = document.querySelector('.show-sidebar');
+    const closeSidebar = document.querySelector('.close-sidebar');
+
+    if (mobileMenuToggle && sidebar && showSidebar && closeSidebar) {   
+        mobileMenuToggle.addEventListener('click', () => {
+            sidebar.classList.toggle('-translate-x-full');
+            showSidebar.classList.toggle('hidden');
+            closeSidebar.classList.toggle('hidden');
+        });
+    }
+</script>
