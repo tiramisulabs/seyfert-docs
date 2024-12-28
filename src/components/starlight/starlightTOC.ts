@@ -1,9 +1,9 @@
 const PAGE_TITLE_ID = '_top';
 
 export class StarlightTOC extends HTMLElement {
-    private _current = this.querySelector('a[aria-current="true"]') as HTMLAnchorElement | null;
-    private minH = parseInt(this.dataset.minH || '2', 10);
-    private maxH = parseInt(this.dataset.maxH || '3', 10);
+    private _current = this.querySelector<HTMLAnchorElement>('a[aria-current="true"]');
+    private minH = Number.parseInt(this.dataset.minH || '2', 10);
+    private maxH = Number.parseInt(this.dataset.maxH || '3', 10);
 
     protected set current(link: HTMLAnchorElement) {
         if (link === this._current) return;
@@ -12,9 +12,15 @@ export class StarlightTOC extends HTMLElement {
         this._current = link;
     }
 
+    private onIdle = (cb: IdleRequestCallback) =>
+        (window.requestIdleCallback || ((cb) => setTimeout(cb, 1)))(cb);
+
     constructor() {
         super();
+        this.onIdle(() => this.init());
+    }
 
+    private init = (): void => {
         /** All the links in the table of contents. */
         const links = [...this.querySelectorAll('a')];
 
@@ -26,7 +32,7 @@ export class StarlightTOC extends HTMLElement {
                 // Check the heading level is within the user-configured limits for the ToC
                 const level = el.tagName[1];
                 if (level) {
-                    const int = parseInt(level, 10);
+                    const int = Number.parseInt(level, 10);
                     if (int >= this.minH && int <= this.maxH) return true;
                 }
             }
@@ -53,12 +59,12 @@ export class StarlightTOC extends HTMLElement {
         };
 
         /** Handle intersections and set the current link to the heading for the current intersection. */
-        const setCurrent: IntersectionObserverCallback = entries => {
+        const setCurrent: IntersectionObserverCallback = (entries) => {
             for (const { isIntersecting, target } of entries) {
                 if (!isIntersecting) continue;
                 const heading = getElementHeading(target);
                 if (!heading) continue;
-                const link = links.find(link => link.hash === '#' + encodeURIComponent(heading.id));
+                const link = links.find((link) => link.hash === `#${encodeURIComponent(heading.id)}`);
                 if (link) {
                     this.current = link;
                     break;
@@ -73,21 +79,23 @@ export class StarlightTOC extends HTMLElement {
 
         let observer: IntersectionObserver | undefined;
         const observe = () => {
-            if (observer) observer.disconnect();
+            if (observer) return;
             observer = new IntersectionObserver(setCurrent, { rootMargin: this.getRootMargin() });
-            toObserve.forEach(h => observer!.observe(h));
+            toObserve.forEach((h) => observer!.observe(h));
         };
         observe();
 
-        const onIdle = window.requestIdleCallback || (cb => setTimeout(cb, 1));
         let timeout: NodeJS.Timeout;
         window.addEventListener('resize', () => {
             // Disable intersection observer while window is resizing.
-            if (observer) observer.disconnect();
+            if (observer) {
+                observer.disconnect();
+                observer = undefined;
+            }
             clearTimeout(timeout);
-            timeout = setTimeout(() => onIdle(observe), 200);
+            timeout = setTimeout(() => this.onIdle(observe), 200);
         });
-    }
+    };
 
     private getRootMargin(): `-${number}px 0% ${number}px` {
         const navBarHeight = document.querySelector('header')?.getBoundingClientRect().height || 0;
@@ -101,3 +109,5 @@ export class StarlightTOC extends HTMLElement {
         return `-${top}px 0% ${bottom - height}px`;
     }
 }
+
+customElements.define('starlight-toc', StarlightTOC);

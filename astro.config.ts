@@ -51,11 +51,12 @@ export default defineConfig({
       },
       sidebar,
       components: {
-        Sidebar: './src/components/newSidebar.astro',
-        PageFrame: './src/components/pageFrame.astro',
-        PageTitle: './src/components/pageTitle.astro',
-        Header: './src/components/header.astro',
-        MobileTableOfContents: './src/components/mobileTableOfContents.astro',
+        Sidebar: './src/components/starlight/newSidebar.astro',
+        PageFrame: './src/components/starlight/pageFrame.astro',
+        PageTitle: './src/components/starlight/pageTitle.astro',
+        Header: './src/components/starlight/header.astro',
+        MobileTableOfContents: './src/components/starlight/mobileTableOfContents.astro',
+        TableOfContents: './src/components/starlight/tableOfContents.astro',
       },
     }),
     tailwind({

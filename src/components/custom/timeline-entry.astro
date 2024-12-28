@@ -2,10 +2,9 @@
 interface Props {
   title: string;
   date: string;
-  link?: string;
 }
 
-const { title, date, link = "#" } = Astro.props;
+const { title, date } = Astro.props;
 ---
 
 <div class="timeline-item">
@@ -14,9 +13,9 @@ const { title, date, link = "#" } = Astro.props;
       <path fill="currentColor" d="M11.93 8.5a4.002 4.002 0 0 1-7.86 0H.75a.75.75 0 0 1 0-1.5h3.32a4.002 4.002 0 0 1 7.86 0h3.32a.75.75 0 0 1 0 1.5Zm-1.43-.75a2.5 2.5 0 1 0-5 0 2.5 2.5 0 0 0 5 0Z"></path>
     </svg>
   </div>
-  <div class="timeline-body">
-    <a href={link} class="timeline-title">
-      <h3>{title}</h3>
+  <div class="timeline-body" id={title.toLowerCase().replace(/\s+/g, '-')}>
+    <a href={`#${title.toLowerCase().replace(/\s+/g, '-')}`} class="timeline-title">
+      <h2>{title}</h2>
     </a>
     <div class="timeline-date">{date}</div>
     <div class="timeline-description">
