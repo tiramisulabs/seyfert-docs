@@ -106,18 +106,23 @@ export default config.bot({
 // This is not shown, prevents errors.
 process.env.BOT_APP_ID = '';
 process.env.BOT_PUBLIC_KEY = '';
+process.env.BOT_TOKEN = '';
 // ---cut---
 import { config } from "seyfert";
 
+const  {
+    BOT_TOKEN, BOT_APP_ID, BOT_PUBLIC_KEY
+} = process.env;
+
 export default config.http({
-    token: process.env.BOT_TOKEN ?? "",
+    token: BOT_TOKEN,
     locations: {
         base: "dist", // replace with "src" if using bun
         commands: "commands"
     },
-    applicationId: process.env.BOT_APP_ID,
+    applicationId: BOT_APP_ID,
     port: 3000, // default is 8080
-    publicKey: process.env.BOT_PUBLIC_KEY,
+    publicKey: BOT_PUBLIC_KEY,
 });
 ```
     </TabItem>
