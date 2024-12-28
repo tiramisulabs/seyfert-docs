@@ -52,4 +52,85 @@ import TimelineEntry from '../../../components/custom/timeline-entry.astro';
     - `HttpServerAdapter` ahora soporta cualquier tipo de `Client` (`HttpClient`, `Client` o `WorkerClient`).
     - Se añadió `channel.messages.list()` para obtener todos los mensajes de un canal.
   </TimelineEntry>
+  <TimelineEntry 
+    title="Cambios V2.1.0"
+    date="7 de Septiembre de 2024"
+  >
+    **Correcciones:**
+    - Se maneja correctamente el estado http 429 (límite de velocidad)
+    - No se podía deshabilitar la caché con `.setServices` en un `WorkerClient`
+
+    **Adiciones:**
+    - `EntryPointInteraction`, `ButtonPointContext`, `EntryPointCommand`
+    - Redistribución de shards para `Client` (habilitado por defecto)
+    - Tipo `AnyContext`
+    - Evento `WORKER_SHARD_CONNECTED`
+    - `SUBSCRIPTION_DELETE`, `SUBSCRIPTION_UPDATE`, `SUBSCRIPTION_CREATE`
+    - Ahora los shards registran errores sin necesidad del modo debug
+    - Los workers ahora tienen una cola para generarse
+
+    **Cambios importantes:**
+
+    - La interfaz `AttachmentData` cambió la propiedad `name` a `filename`
+    ```ts del={2} ins={3}
+    interface AttachmentData {
+      name: string;
+      filename: string;
+    }
+    ```
+
+    - Ahora WorkerClient no envía todos los eventos al padre (WorkerManager) por defecto, si quieres habilitarlo, simplemente:
+    ```ts
+    new WorkerClient({
+        sendPayloadToParent: true
+    });
+    ```
+
+    - La opción `disabledCache` en `WorkerClient` ya no existe, usa `setServices` en su lugar
+  </TimelineEntry>
+  <TimelineEntry 
+    title="Cambios V2.0.0"
+    date="23 de Agosto de 2024"
+  >
+
+    Con esta versión, nos enorgullece anunciar que seyfert ahora no tiene dependencias, incluyendo un cliente websocket construido desde cero.
+  
+    **Adiciones:**
+
+    - **Manejo de comandos**
+    Ahora seyfert maneja todos los comandos a través de la misma estructura. Si usas un analizador de argumentos personalizado o algo similar, revísalo. Además, si tienes un plugin de seyfert o planeas hacer uno, todas las estructuras de seyfert son modificables, así que solo apúntalo donde quieras que vaya.
+    ```ts
+    import { HandleCommand } from 'seyfert'
+
+    client.setServices({ handleCommand: class extends HandleCommand { argsParser = yourParser() } })
+    ```
+
+    - **Transformadores**
+    Ahora seyfert te permite transformar los datos de discord como desees, seyfert lo llamará y lo usará en toda la biblioteca.
+    ```ts
+    import { Transformers } from 'seyfert';
+    const storage = new Map();
+    class MyPoll extends Poll {
+        storage() {
+            return storage.set(this.id, this);
+        }
+    }
+
+    Transformers.Poll = (...args: ConstructorParameters<typeof MyPoll>) => new MyPoll(...args);
+
+    declare module 'seyfert' {
+        interface CustomStructures {
+            Poll: MyPoll;
+        }
+    }
+    ```
+
+    - **API de Discord**
+    Ahora soportamos `Monetización`, `Encuestas (con constructores)`, `Emojis de Aplicación`, `Obtener Rol`, `Obtener estados de voz`, etc.
+
+    **Cambios menores:**
+    - Ahora las opciones de disabledCaches son un objeto
+    - Resueltos algunos errores de caché en eventos
+    - Corregidos los bits de permisos resueltos
+  </TimelineEntry>
 </Timeline>

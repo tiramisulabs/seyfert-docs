@@ -9,7 +9,7 @@ import TimelineEntry from '../../components/custom/timeline-entry.astro';
 <Timeline>
   <TimelineEntry 
     title="V2.2.0 Changes"
-    date="Saturday December 28, 2024"
+    date="December 28, 2024"
   >
     **Breaking Changes:**
     - Channel threads are no longer part of the main cache; they are now merged with channels.
@@ -51,5 +51,86 @@ import TimelineEntry from '../../components/custom/timeline-entry.astro';
     - Added webhook event types for `applicationAuthorized`, `entitlementCreated`, and `questUserEnrollment`.
     - `HttpServerAdapter` now supports any type of `Client` (`HttpClient`, `Client`, or `WorkerClient`).
     - Added `channel.messages.list()` to fetch all messages in a channel.
+  </TimelineEntry>
+  <TimelineEntry 
+    title="V2.1.0 Changes"
+    date="September 7, 2024"
+  >
+    **Fixed:**
+    - Handle http status 429 correctly (ratelimited)
+    - Could not disable cache with `.setServices` in a `WorkerClient`
+
+    **Additions:**
+    - `EntryPointInteraction`, `ButtonPointContext`, `EntryPointCommand`
+    - Resharding for `Client` (enabled by default)
+    - `AnyContext` type
+    - `WORKER_SHARD_CONNECTED` event
+    - `SUBSCRIPTION_DELETE`, `SUBSCRIPTION_UPDATE`, `SUBSCRIPTION_CREATE`
+    - Now shards logs errors without need of debug mode
+    - Workers now have a queue to spawn
+
+    **Breaking Changes:**
+
+    - Interface `AttachmentData` changed property `name` to `ilename`
+    ```ts del={2} ins={3}
+    interface AttachmentData {
+      name: string;
+      filename: string;
+    }
+    ```
+
+    - Now WorkerClient does not send all events to parent (WorkerManager) by default, if you want to enable it, just
+    ```ts
+    new WorkerClient({
+        sendPayloadToParent: true
+    });
+    ```
+
+    - `disabledCache` option in `WorkerClient` is not longer there, use `setServices` instead
+  </TimelineEntry>
+  <TimelineEntry 
+    title="V2.0.0 Changes"
+    date="August 23, 2024"
+  >
+
+    With this version, we are proud to announce that seyfert now has 0 dependencies including a websocket client built from scratch.
+  
+    **Additions:**
+
+    - **Handle commands**
+    Now seyfert handle all commands across the same struct, if you use a custom argsParser o something check it, also, if you have a seyfert plugin or plan to make one, all seyfert structures are modifiable, so just point it where you want it to go.
+    ```ts
+    import { HandleCommand } from 'seyfert'
+
+    client.setServices({ handleCommand: class extends HandleCommand { argsParser = yourParser() } })
+    ```
+
+    - **Transformers**
+    Now seyfert allows you to transform discord data as you want,  seyfert will call it and use it in the whole library.
+    ```ts
+    import { Transformers } from 'seyfert';
+    const storage = new Map();
+    class MyPoll extends Poll {
+        storage() {
+            return storage.set(this.id, this);
+        }
+    }
+
+    Transformers.Poll = (...args: ConstructorParameters<typeof MyPoll>) => new MyPoll(...args);
+
+    declare module 'seyfert' {
+        interface CustomStructures {
+            Poll: MyPoll;
+        }
+    }
+    ```
+
+    - **Discord API**
+    Now we support `Monetization`, `Polls (with builders)`, `Application Emojis`, `Get Role`, `Get voice states`, etc.
+
+    **Little changes:**
+    - Now disabledCaches options is a object
+    - Some events cache bugs resolved
+    - Fixed permissions bits resolved
   </TimelineEntry>
 </Timeline>
