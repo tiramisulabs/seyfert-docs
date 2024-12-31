@@ -1,0 +1,100 @@
+---
+title: Setting Custom Activity and Presence
+---
+
+## Customizing Your Bot’s Presence and Activity
+
+Custom statuses and activities are a great way to make your bot more engaging and informative for users. With Seyfert, you can define your bot’s activity and presence during client initialization or dynamically update them after the bot is running. This guide explores both approaches and provides recommendations for achieving the best results.
+
+### Setting Presence During Client Initialization
+
+The most straightforward way to define your bot’s status and activity is during client initialization. Below is an example of setting the bot's presence:
+
+```ts
+import { Client, ActivityType } from "seyfert";
+
+const client = new Client({
+    presence: (shardId) => ({
+        status: "idle",
+        activities: [{
+            name: "your servers",
+            type: ActivityType.Watching,
+        }],
+    })
+});
+```
+
+#### Explanation:
+- **`status`**: Defines the bot’s online status. Possible values are `online`, `idle`, `dnd` (Do Not Disturb), or `invisible`.
+- **`activities`**: An array of activities the bot is engaged in. Each activity requires:
+  - **`name`**: The custom status message.
+  - **`type`**: The activity type, such as `Playing`, `Listening`, `Watching`, etc. These types are constants in the `ActivityType` enum.
+
+### Rendering the Bot as "Mobile"
+
+To display your bot as if it’s running on a mobile device, you can specify custom gateway properties. Here’s how:
+
+```ts
+const client = new Client({
+    gateway: {
+        properties: {
+            os: 'android',
+            browser: 'Discord Android',
+            device: 'android'
+        }
+    },
+    presence: (shardId) => ({
+        // status: "idle" - Leave blank
+        activities: [{
+            name: "your servers",
+            type: ActivityType.Watching,
+        }],
+    })
+});
+```
+
+#### Important Notes:
+- **`gateway.properties`**: Defines the operating system, browser, and device to emulate. When set to mimic a mobile device (e.g., `os: 'android'`), the bot will appear with a mobile icon.
+- **Avoiding `status`**: If you set the `status` property explicitly, the mobile icon will not be rendered. For example, leaving `status` undefined allows the mobile icon to appear.
+
+### Dynamically Updating Presence
+
+Once the bot is running, you can dynamically update its presence by creating a command to handle presence updates. This is particularly useful when the update is triggered by user interaction or other events:
+
+```ts
+import { Command, ActivityType, PresenceUpdateStatus } from "seyfert";
+
+@Declare({
+    name: 'presence',
+    description: 'Change bot presence'
+})
+export default class PresenceCommand extends Command {
+    async run(ctx: GuildCommandContext) {
+        ctx.client.gateway.setPresence({
+            activities: [{
+                name: "with Seyfert",
+                type: ActivityType.Playing,
+            }],
+            status: PresenceUpdateStatus.Online,
+            since: Date.now(),
+            afk: false
+        });
+
+        await ctx.editOrReply({ content: 'Switched Presence' });
+    }
+}
+```
+
+#### Explanation:
+- **Command Definition**: The `@Declare` decorator defines a command called `presence` to handle presence updates.
+- **`setPresence` Method**: Updates the bot’s activities, status, and additional details dynamically.
+- **User Feedback**: After updating the presence, the bot confirms the action by sending a message.
+
+### Best Practices
+
+1. **Use Meaningful Activities**: Ensure that your activity messages are clear and provide value to your users. For example, a bot managing a server could display "Watching over your server" or "Playing with configuration settings."
+2. **Dynamic Updates for Engagement**: Consider updating the bot’s activity periodically to reflect its current state or to keep users engaged.
+3. **Test Mobile Presence Carefully**: When emulating a mobile presence, always test to ensure that the intended icon displays correctly. Avoid setting the `status` property if you want the mobile icon to appear.
+4. **Respect Discord's Terms of Service**: Ensure that your custom statuses and activities align with Discord’s guidelines to avoid any potential issues.
+
+By leveraging these techniques, you can create a bot presence that not only stands out but also enhances the overall user experience.
