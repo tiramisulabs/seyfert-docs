@@ -238,6 +238,27 @@ export default [
 				],
 			},
 			{
+				label: 'Tips & Miscellaneous',
+				collapsed: true,
+				items: [
+					{
+						label: 'Introduction',
+						translations: {
+							es: 'Introducción',
+						},
+						link: '/tips-misc/intro',
+					},
+					{
+						label: 'Setting Custom Activity and Presence',
+						translations: {
+							es: 'Configurar Actividad y Presencia Personalizada'
+						},
+						link: '/tips-misc/presence',
+					}
+				],
+			},
+
+			{
 				label: 'Changelog',
 				translations: {
 					es: 'Changelog',
