@@ -1,0 +1,87 @@
+---
+title: Adding Uptime to the Client
+---
+
+## Tracking Uptime in Your Seyfert Bot
+
+Adding an `uptime` property to your bot’s client is a simple way to track when your bot started running. This guide will show you how to extend the Seyfert client, initialize the `uptime` property, and use it with a timestamp formatter for displaying the bot's uptime.
+
+### Adding `uptime` to the Client
+
+To begin, extend the `UsingClient` interface by adding the `uptime` property. This ensures that the property is type-checked across your project.
+
+#### Step 1: Extend the Interface
+
+Update your [Declare Module](https://docs.seyfert.dev/getting-started/declare-module) file with the following code:
+
+```ts
+declare module "seyfert" {
+  interface UsingClient extends ParseClient<Client<true>> {
+    // Other custom properties...
+    uptime: Date; // Tracks when the bot started
+  }
+
+  // Other declarations...
+}
+```
+
+### Initializing `uptime`
+
+The `uptime` property should be set when the bot is ready. This can be done in the `ready` event handler.
+
+#### Step 2: Set `uptime` in the Ready Event
+
+Add the following code to your `ready` event handler:
+
+```ts
+import { createEvent } from "seyfert";
+
+export default createEvent({
+  data: { once: true, name: "botReady" },
+  run(user, client) {
+    // Set the uptime to the current date and time
+    client.uptime = new Date();
+
+    // Other startup logic...
+  },
+});
+```
+
+This ensures that `client.uptime` is initialized to the exact moment the bot becomes ready.
+
+### Using the `uptime` Property
+
+You can display the `uptime` using a timestamp formatter. This is especially useful for commands or logs.
+
+#### Step 3: Format `uptime` as a Timestamp
+
+To format and display the `uptime` value, use the `Formatter.timestamp` method:
+
+```ts
+Formatter.timestamp(client.uptime);
+```
+
+This will return a formatted timestamp that you can include in your messages or logs.
+
+### Example Command
+
+Here’s an example command to display the bot’s uptime:
+
+```ts
+import { Command, Formatter } from "seyfert";
+
+@Declare({
+    name: 'uptime',
+    description: 'Show the bot’s uptime',
+})
+export default class UptimeCommand extends Command {
+    async run(ctx) {
+        const uptimeFormatted = Formatter.timestamp(ctx.client.uptime);
+        await ctx.editOrReply({ content: `The bot has been running since ${uptimeFormatted}.` });
+    }
+}
+```
+
+### Conclusion
+
+By extending your client with an `uptime` property, you gain the ability to track and display your bot's runtime in a user-friendly way. This feature not only improves monitoring but also enhances the overall user experience.
