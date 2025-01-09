@@ -1,0 +1,105 @@
+---
+title: Extending the Client with Uptime
+---
+
+### Tracking Ready Time (or Uptime) in Your Seyfert Bot
+
+Adding a `readyAt` property to your bot’s client is a simple way to track when your bot became ready.
+
+##### Adding `readyAt` to the Client
+
+To begin, extend the `UsingClient` interface by adding the `readyAt` property. This ensures that the property is type-checked across your project.
+
+#### Step 1: Extend the Interface
+
+Update your [Declare Module](https://docs.seyfert.dev/getting-started/declare-module) file with the following code:
+
+```ts twoslash title="src/events/botReady.ts" showLineNumbers wrap
+import type { ParseClient, Client } from 'seyfert';
+// ---cut---
+declare module "seyfert" {
+  interface UsingClient extends ParseClient<Client<true>> {
+    // Other custom properties...
+    readyAt?: Date; // Tracks when the bot became ready (uptime)
+  }
+
+  // Other declarations...
+}
+```
+
+### Initializing `readyAt`
+
+The `readyAt` property should be set when the bot is ready. This can be done in the `ready` event handler.
+
+#### Step 2: Set `readyAt` in the Ready Event
+
+Add the following code to your `botReady` event:
+
+```ts twoslash title="src/events/botReady.ts" showLineNumbers wrap
+import type { ParseClient, Client } from 'seyfert';
+declare module 'seyfert' {
+  interface UsingClient extends ParseClient<Client<true>> {
+    readyAt?: Date
+  }
+}
+// ---cut---
+import { createEvent } from "seyfert";
+
+export default createEvent({
+  data: { once: true, name: "botReady" },
+  run(user, client) {
+    // Set the readyAt to the current date and time
+    client.readyAt = new Date();
+
+    // Other startup logic...
+  },
+});
+```
+This ensures that `client.readyAt` is initialized to the exact moment the bot becomes ready.
+
+> For more information on how to declare events, visit [Listening to Events](../getting-started/listening-events.mdx).
+
+
+### Using the `readyAt` Property
+
+You can display the `readyAt` time using a timestamp formatter. This is especially useful for commands or logs.
+
+#### Step 3: Format `readyAt` as a Timestamp
+
+To format and display the `readyAt` value, use the `Formatter.timestamp` method:
+
+```ts
+Formatter.timestamp(client.readyAt);
+```
+
+This will return a formatted timestamp that you can include in your messages or logs.
+
+### Example Command
+
+Here’s an example command to display the bot’s ready time:
+
+```ts twoslash title="src/commands/uptime.ts" showLineNumbers wrap
+import type { ParseClient, Client } from 'seyfert';
+declare module 'seyfert' {
+  interface UsingClient extends ParseClient<Client<true>> {
+    readyAt: Date
+  }
+}
+// ---cut---
+import { Declare, type CommandContext, Command, Formatter } from "seyfert";
+
+@Declare({
+    name: 'uptime',
+    description: 'Show the bot’s ready time',
+})
+export default class ReadyAtCommand extends Command {
+    async run(ctx: CommandContext) {
+        const readyAtFormatted = Formatter.timestamp(ctx.client.readyAt);
+        await ctx.editOrReply({ content: `The bot became ready on ${readyAtFormatted}.` });
+    }
+}
+```
+
+### Conclusion
+
+By extending your client with a `readyAt` property, you gain the ability to track and display your bot's ready time (or "uptime") in a user-friendly way. This feature not only improves monitoring but also enhances the overall user experience.

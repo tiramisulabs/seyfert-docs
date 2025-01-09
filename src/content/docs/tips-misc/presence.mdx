@@ -10,16 +10,19 @@ Custom statuses and activities are a great way to make your bot more engaging an
 
 The most straightforward way to define your bot’s status and activity is during client initialization. Below is an example of setting the bot's presence:
 
-```ts
-import { Client, ActivityType } from "seyfert";
+```ts twoslash title="src/index.ts" showLineNumbers wrap
+import { Client } from "seyfert";
+import { ActivityType, PresenceUpdateStatus } from 'seyfert/lib/types';
 
 const client = new Client({
     presence: (shardId) => ({
-        status: "idle",
+        status: PresenceUpdateStatus.Idle,
         activities: [{
             name: "your servers",
             type: ActivityType.Watching,
         }],
+        since: Date.now(),
+        afk: false,
     })
 });
 ```
@@ -34,7 +37,10 @@ const client = new Client({
 
 To display your bot as if it’s running on a mobile device, you can specify custom gateway properties. Here’s how:
 
-```ts
+```ts twoslash showLineNumbers wrap
+import { Client } from "seyfert";
+import { ActivityType, GatewayPresenceUpdateData, PresenceUpdateStatus } from 'seyfert/lib/types';
+// ---cut---
 const client = new Client({
     gateway: {
         properties: {
@@ -44,11 +50,13 @@ const client = new Client({
         }
     },
     presence: (shardId) => ({
-        // status: "idle" - Leave blank
+        status: PresenceUpdateStatus.Idle,
         activities: [{
             name: "your servers",
             type: ActivityType.Watching,
         }],
+        since: Date.now(),
+        afk: false,
     })
 });
 ```
@@ -61,8 +69,14 @@ const client = new Client({
 
 Once the bot is running, you can dynamically update its presence by creating a command to handle presence updates. This is particularly useful when the update is triggered by user interaction or other events:
 
-```ts
-import { Command, ActivityType, PresenceUpdateStatus } from "seyfert";
+```ts twoslash title="src/commands/presence.ts" showLineNumbers wrap
+import type { ParseClient, Client } from 'seyfert';
+declare module 'seyfert' {
+  interface UsingClient extends ParseClient<Client<true>> {}
+}
+// ---cut---
+import { Command, Declare, GuildCommandContext } from "seyfert";
+import { ActivityType, PresenceUpdateStatus } from 'seyfert/lib/types';
 
 @Declare({
     name: 'presence',
