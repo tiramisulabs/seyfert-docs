@@ -152,7 +152,7 @@ interface LoggerData {
 
 export const loggerMiddleware = createMiddleware<LoggerData>((middle) => {
     // Log the command
-    console.log(`${middle.context.author.username} (${middle.context.author.id}) ran /(${middle.context.resolver.fullCommandName}`);
+    console.log(`${middle.context.author.username} (${middle.context.author.id}) ran /${middle.context.resolver.fullCommandName}`);
 
     // Pass the data to the command
     middle.next({ time: Date.now() });
@@ -194,7 +194,7 @@ Global middlewares follow the same rule and structure explained above, with the 
 ```ts
 import { type ParseGlobalMiddlewares, Client } from 'seyfert';
 import { middlewares } from "./path/to/middlewares";
-import { global } from "./path/to/globas";
+import { global } from "./path/to/globals";
 
 const globalMiddlewares: (keyof typeof global)[] = ['logger']
 
