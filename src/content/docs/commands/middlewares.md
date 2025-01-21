@@ -25,6 +25,10 @@ export const loggerMiddleware = createMiddleware<void>(
 );
 ```
 
+:::tip
+This example uses `console.log` to log command details, if you want to make use of the built in logger to make your logs consistant or just to have the extra decoration you can call `middle.context.client.logger`.  
+e.g. `middle.context.client.logger.info("Log message")`
+:::
 
 Now let's register the middlewares on seyfert but first we should create a file to export all our middleware
 
