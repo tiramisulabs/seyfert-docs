@@ -5,7 +5,7 @@ En Seyfert también se pueden crear modals. Se crean con un constructor como otr
 
 Aquí tienes un ejemplo de cómo crear un modal con dos campos de texto:
 
-```ts showLineNumbers copy
+```ts twoslash showLineNumbers copy
 
 import { Modal, TextInput, ActionRow } from 'seyfert';
 
@@ -37,7 +37,7 @@ const modal = new Modal()
 
 Para manejar modales, dado que no son componentes, Seyfert ofrece la clase `ModalCommand` que tiene la misma lógica que la clase `ComponentCommand`.
 
-```ts showLineNumbers copy
+```ts twoslash showLineNumbers copy
 
 import { ModalCommand, type ModalContext } from 'seyfert';
 

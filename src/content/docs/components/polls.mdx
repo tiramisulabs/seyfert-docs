@@ -41,7 +41,9 @@ This is tied to the section on [event creation](/en/getting-started/listening-ev
 :::
 <Tabs>
 <TabItem label='events/addVote.ts'>
-```ts title='addVote.ts' showLineNumbers
+```ts twoslash title='addVote.ts' showLineNumbers
+import { createEvent } from 'seyfert';
+
 export default createEvent({
     data: { name: 'messagePollVoteAdd' },
     run: (data) => {
@@ -53,7 +55,9 @@ export default createEvent({
 </TabItem>
 
 <TabItem label='events/removeVote.ts'>
-```ts title='removeVote.ts' showLineNumbers
+```ts twoslash title='removeVote.ts' showLineNumbers
+import { createEvent } from 'seyfert';
+
 export default createEvent({
     data: { name: 'messagePollVoteRemove' },
     run: (data) => {
@@ -71,12 +75,14 @@ export default createEvent({
 
 Here’s a quick example that edits the message when a poll is completed:
 
-```ts title='messageUpdate.ts' showLineNumbers
+```ts twoslash title='messageUpdate.ts' showLineNumbers
+import { createEvent } from 'seyfert';
+
 export default createEvent({
     data: { name: 'messageUpdate' },
-    // This is [oldMessage, newMessage]
+    // This is [newMessage, oldMessage]
     // But in this example, we only need newMessage
-    run: ([, newMessage]) => {
+    run: ([newMessage]) => {
         if (newMessage.poll?.results?.isFinalized) {
             console.log(`The poll with the id: ${newMessage.id} has ended`)
         }
@@ -118,7 +124,7 @@ Let’s assume you have the following directory structure:
 
 <Tabs>
 <TabItem label='parent.ts'>
-```ts title='poll.parent.ts' showLineNumbers
+```ts twoslash title='poll.parent.ts' showLineNumbers
 import { AutoLoad, Declare, Command } from 'seyfert';
 
 @Declare({
@@ -131,7 +137,8 @@ export default class PollCommand extends Command {}
 ```
 </TabItem>
 <TabItem label='start.command.ts'>
-```ts title='start.command.ts' showLineNumbers
+```ts twoslash title='start.command.ts' showLineNumbers
+// @exactOptionalPropertyTypes: false
 import { 
     type CommandContext,
     Declare,
@@ -176,10 +183,12 @@ const options = {
 @Options(options)
 export default class StartPoll extends SubCommand {
     async run(ctx: CommandContext<typeof options>) {
-        const { options, channel } = ctx;
+        const { options } = ctx;
         const { question, answers } = options;
 
-        if (!channel?.isTextGuild()) return;
+        const channel = await ctx.channel('rest');
+
+        if (!channel.isTextGuild()) return;
         if (!answers)
             return ctx.editOrReply({
                 flags: MessageFlags.Ephemeral,
@@ -209,15 +218,16 @@ export default class StartPoll extends SubCommand {
         });
 
         await ctx.editOrReply({
-            flags: MessageFlags.Ephemeral,
             content: `Poll started in the channel: ${channel.toString()}`,
+            flags: MessageFlags.Ephemeral,
         });
     }
 }
 ```
 </TabItem>
 <TabItem label='end.command.ts'>
-```ts title='start.command.ts' showLineNumbers
+```ts twoslash title='start.command.ts' showLineNumbers
+// @exactOptionalPropertyTypes: false
 import { 
     type CommandContext,
     Declare,

@@ -16,7 +16,7 @@ Para esta sección vamos a seguir la configuración que hicimos en **Empezando**
 
 Antes de empezar este capítulo debe actualizar `seyfert.config.mjs` para decirle a seyfert donde estará nuestro fichero de idiomas.
 
-```ts {12} title="seyfert.config.mjs" showLineNumbers
+```ts twoslash {12} title="seyfert.config.mjs" showLineNumbers
 // @ts-check
 import { config } from "seyfert";
 
@@ -36,7 +36,7 @@ export default config.bot({
 
 Cada fichero de idioma exportará por defecto un objeto que contendrá las traducciones del idioma.
 
-```ts title="languages/en.ts" showLineNumbers wrap
+```ts twoslash title="languages/en.ts" showLineNumbers wrap
 export default {
   hello: "Each key value pair will be the translation for the key",
   foo: {
@@ -102,8 +102,11 @@ declare module 'seyfert' {
 
 :::tip[Previniendo errores]
 Puedes asignar un lenguaje por defecto para evitar obtener `undefined`
-```ts
-client.setService({ langs: { default: 'en-US' } });
+```ts twoslash
+import { Client } from "seyfert";
+const client = new Client();
+// ---cut--- snoopy
+client.setServices({ langs: { default: 'en-US' } });
 ```
 :::
 
@@ -118,7 +121,22 @@ Una vez hecho esto, podrá utilizar el idioma en sus comandos, eventos, componen
 
 Veamos un ejemplo con nuestro comando `ping` añadiendo una opción para responder en un idioma específico
 
-```ts {35, 41} title="src/commands/ping.ts" showLineNumbers
+```ts twoslash {35, 41} title="src/commands/ping.ts" showLineNumbers
+// @exactOptionalPropertyTypes: false
+import type { ParseClient, Client, ParseLocales } from 'seyfert';
+const English = {
+  foo: {
+    ping(data: { ping: number }) {
+      return `Pong: ${data.ping}` as const
+    }
+  }
+};
+declare module 'seyfert' {
+  interface UsingClient extends ParseClient<Client<true>> {}
+
+  interface DefaultLocale extends ParseLocales<typeof English> {}
+}
+// ---cut---
 import {
   Command,
   Declare,

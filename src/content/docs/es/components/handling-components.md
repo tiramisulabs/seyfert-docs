@@ -8,7 +8,7 @@ Después de haber enviado el componente dentro de un canal, es hora de manejar l
 
 Para manejarlas, debemos indicarle a Seyfert dónde estarán ubicados los componentes en nuestro proyecto. Debemos hacer esto dentro de nuestro archivo de configuración de Seyfert.
 
-```js title="seyfert.config.mjs" showLineNumbers copy ins={11}
+```js twoslash title="seyfert.config.mjs" showLineNumbers copy ins={11}
 // @ts-check
 import { config } from "seyfert";
 
@@ -66,7 +66,7 @@ export default class HelloWorldButton extends ComponentCommand {
 
 Si la función de filtro tiene éxito y devuelve `true`, el manejador ejecutará una función `run` con la lógica de tu código.
 
-```ts ins={14-19} showLineNumbers copy
+```ts twoslash ins={14-19} showLineNumbers copy
 
 import { ComponentCommand, type ComponentContext } from 'seyfert';
 

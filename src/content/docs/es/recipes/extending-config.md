@@ -9,7 +9,7 @@ Asimismo, solo funcionará si has especificado la ruta de "seyfert.config.(ts|mt
 :::
 
 Podrías tener una configuración como la siguiente:
-```ts
+```ts twoslash
 import { config } from "seyfert";
 
 export default config.bot({

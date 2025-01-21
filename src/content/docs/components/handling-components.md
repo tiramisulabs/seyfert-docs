@@ -8,7 +8,7 @@ Having sent the component within a channel it's about time you want to handle th
 
 To handle them we have to tell seyfert where will be the components located in our project. We have to do this within our seyfert config file.
 
-```js title="seyfert.config.mjs" showLineNumbers copy ins={11}
+```ts twoslash title="seyfert.config.mjs" showLineNumbers copy ins={11}
 // @ts-check
 import { config } from "seyfert";
 
@@ -65,7 +65,7 @@ export default class HelloWorldButton extends ComponentCommand {
 
 If the filter function success and returns `true` the handler will then execute a `run` function with your code logic.
 
-```ts ins={14-19} showLineNumbers copy
+```ts twoslash ins={14-19} showLineNumbers copy
 
 import { ComponentCommand, type ComponentContext } from 'seyfert';
 

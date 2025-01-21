@@ -10,7 +10,7 @@ Seyfert no solo maneja comandos de aplicación, sino también `comandos de prefi
 
 Aquí tienes un ejemplo en el que vamos a configurar múltiples prefijos para todos los comandos.
 
-```ts showLineNumbers copy ins={4-9} wrap
+```ts twoslash showLineNumbers copy ins={4-9} wrap
 
 import { Client } from 'seyfert';
 
@@ -35,7 +35,13 @@ Para que esta propiedad aparezca en nuestro CommandContext lo único que debemos
 
 En este ejemplo vamos a crear un comando que `republica` el mensaje que fue enviado en un canal de anuncios.
 
-```ts showLineNumbers copy
+```ts twoslash showLineNumbers copy
+declare module 'seyfert' {
+    interface InternalOptions {
+        withPrefix: true;
+    }
+}
+//---cut---
 import { 
     Command,
     CommandContext,
@@ -58,7 +64,13 @@ export default class CrosspostCommand extends Command {
 
 Puedes decidir si un comando ignorará ser un slash command o un comando de texto.
 
-```ts showLineNumbers copy ins={5,11}
+```ts twoslash showLineNumbers copy ins={5,11}
+declare module 'seyfert' {
+    interface InternalOptions {
+        withPrefix: true;
+    }
+}
+//---cut---
 import { 
     Command,
     CommandContext,
@@ -88,7 +100,7 @@ Por defecto, cuando usas la función `write` o `editOrReply`, solo enviará un m
 
 Aquí tienes un ejemplo detallado de cómo se verá tu cliente con todas las modificaciones mencionadas en esta guía:
 
-```ts showLineNumbers copy ins={9} wrap
+```ts twoslash showLineNumbers copy ins={9} wrap
 
 import { Client } from 'seyfert';
 
@@ -154,7 +166,7 @@ Aquí hay un ejemplo de cómo modificamos las opciones del cliente y cómo hacem
 <Tabs>
 <TabItem label='index.ts'>
 
-```ts showLineNumbers copy ins={10} wrap
+```ts twoslash showLineNumbers copy ins={10} wrap
 
 import { Client } from 'seyfert';
 

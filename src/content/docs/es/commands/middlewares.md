@@ -25,6 +25,11 @@ export const loggerMiddleware = createMiddleware<void>(
 );
 ```
 
+:::tip
+Este ejemplo usa `console.log` para registrar los detalles del comando. Si deseas utilizar el registrador integrado para que tus registros sean consistentes o simplemente para tener una decoración adicional, puedes llamar a `middle.context.client.logger`.  
+Ejemplo: `middle.context.client.logger.info("Mensaje de registro")`  
+:::
+
 Ahora vamos a registrar el middleware en Seyfert [extendiendo el cliente](/es/getting-started/declare-module), pero primero debemos crear un comando para exportar todos nuestros middlewares
 
 ```ts title="middlewares.ts" wrap copy
@@ -37,7 +42,7 @@ export const middlewares = {
 ```
 
 ```ts title="index.ts" ins={2,7-9,15-16} copy
-import { type ParseLocales, Client, type ParseMiddlewares, type ParseClient } from "seyfert";
+import { Client, type ParseMiddlewares, type ParseClient } from "seyfert";
 import { middlewares } from "./path/to/middlewares";
 
 const client = new Client();
@@ -58,7 +63,7 @@ declare module "seyfert" {
 
 Ahora podemos usar el middleware `logger` en cualquier comando.
 
-```ts title="ping.command.ts" copy
+```ts title="ping.command.ts" {1} ins={8} copy
 import { Middlewares, Declare, Command, type CommandContext } from "seyfert";
 
 @Declare({
@@ -86,7 +91,7 @@ Como dijimos, puedes usar middlewares para hacer verificaciones, y puedes detene
 
 Vamos a ver agregando algo de lógica al middleware de registro.
 
-```ts title="logger.middleware.ts" ins={11-13} copy wrap
+```ts title="logger.middleware.ts" ins={2, 11-13} copy wrap 
 import { createMiddleware } from "seyfert";
 import { ChannelType } from "seyfert/lib/types";
 
@@ -114,7 +119,7 @@ Observa que puedes unirte a los datos de interacción usando `middle.context.int
 
 Por otro lado, podríamos ignorar la interacción (ignorar la interacción y literalmente no hacer nada) usando `middle.pass()`
 
-```ts title="logger.middleware.ts" ins={11} copy
+```ts title="logger.middleware.ts" {12} copy
 import { createMiddleware } from "seyfert";
 import { ChannelType } from "seyfert/lib/types";
 
@@ -140,7 +145,7 @@ Lo último que podemos hacer con middlewares es pasar datos al comando. Esto pue
 
 Continuaremos con el middleware de registro y pasaremos algunos datos al comando.
 
-```ts title="logger.middleware.ts" copy
+```ts title="logger.middleware.ts" ins={4-6,13} {8} copy
 import { createMiddleware } from "seyfert";
 
 // Esta interfaz se usará para que el middleware sepa qué tipo de datos pasará al comando
@@ -165,7 +170,7 @@ Si quieres pasar datos de más de un middleware, puedes usar el operador `|`, po
 
 :::
 
-```ts title="ping.command.ts" ins={10-11} copy
+```ts title="ping.command.ts" {9} ins={10-11} copy
 import { Middlewares, Declare, Command, type CommandContext } from "seyfert";
 
 @Declare({
@@ -188,10 +193,15 @@ export default class PingCommand extends Command {
 
 Los middlewares globales siguen la misma regla y estructura explicada anteriormente, con la breve diferencia de que tienen una propiedad unica en el context y se declaran de forma separada
 
-```ts
-import { type ParseGlobalMiddlewares, Client } from 'seyfert';
+```ts title="index.ts" {18} ins={5,8,10,14,24-25}
+import {
+  Client,
+  type ParseMiddlewares,
+  type ParseClient,
+  type ParseGlobalMiddlewares
+} from 'seyfert';
 import { middlewares } from "./path/to/middlewares";
-import { global } from "./path/to/globas";
+import { global } from "./path/to/globals";
 
 const globalMiddlewares: (keyof typeof global)[] = ['logger']
 

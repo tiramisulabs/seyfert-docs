@@ -21,7 +21,7 @@ The base of the `Worker` is to allow to execute code in parallel in different pa
 
 <Tabs>
 	<TabItem label='manager.ts'>
-```ts showLineNumbers
+```ts twoslash showLineNumbers
 import { WorkerManager } from 'seyfert';
 
 const manager = new WorkerManager({
@@ -35,7 +35,7 @@ manager.start();
 ```
 	</TabItem>
 	<TabItem label='client.ts'>
-```ts showLineNumbers
+```ts twoslash showLineNumbers
 import { ParseClient, WorkerClient } from "seyfert";
 
 const client = new WorkerClient();
@@ -56,7 +56,7 @@ Unlike traditional Discord libraries, Seyfert offers unified cache management ac
 
 To implement centralized caching, use the WorkerAdapter:
 
-```ts
+```ts twoslash
 import { WorkerClient, WorkerAdapter } from 'seyfert';
 
 const client = new WorkerClient();
@@ -73,11 +73,13 @@ await client.start();
 ## Talking to other workers
 If for some reason (I did not find any for the example), you want a specific worker to execute an action that another one received, you can simply ask it.
 
-```ts
-// I wish typescript allowed to represent parameters like python
+```ts twoslash
+import { WorkerClient } from 'seyfert';
+const client = new WorkerClient();
+//---cut---
 client.tellWorker(
-	workerId = 1,
+	1,
 	(worker, vars) => console.log(`Hii worker #${worker.workerId} from ${vars.workerId}`),
-	vars = { workerId: client.workerId }
+	{ workerId: client.workerId }
 );
 ```

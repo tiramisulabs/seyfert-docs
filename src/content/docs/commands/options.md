@@ -268,9 +268,9 @@ We can transform the value of any option using the `value` method, which takes t
 function isUrl(url: string): boolean { return true; }
 // ---cut---
 import { Options, createStringOption, Command } from 'seyfert';
-import type { OKFunction } from 'seyfert';
+import type { OKFunction, CommandContext } from 'seyfert';
 
-@Options({
+const options = {
     url: createStringOption({
         description: 'how to be a gamer',
 
@@ -279,8 +279,15 @@ import type { OKFunction } from 'seyfert';
             fail('expected a valid url');
         }
     })
-})
-class Ping extends Command {}
+}
+
+@Options(options)
+class Ping extends Command {
+    run(ctx: CommandContext<typeof options>) {
+        ctx.options.url;
+                  // ^?
+    }
+}
 ```
 
 Now, the command’s option value is of type `URL`. If it’s not valid, an error will be thrown.

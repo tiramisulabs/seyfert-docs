@@ -14,7 +14,7 @@ All the builders are sent within an [`ActionRow`](https://github.com/tiramisulab
 
 Here is how we create a basic ActionRow:
 
-```ts {"Set all the components within this ActionRow": 4-5} {"Add components to the ActionRow": 6-7} showLineNumbers copy
+```ts twoslash {"Set all the components within this ActionRow": 4-5} {"Add components to the ActionRow": 6-7} showLineNumbers copy
 
 import { ActionRow } from 'seyfert';
 
@@ -35,7 +35,7 @@ Now we are going to build each type of component and set it within an ActionRow:
 
 An ActionRow shouldn't contain more than 5 buttons.
 
-```ts showLineNumbers copy
+```ts twoslash showLineNumbers copy
 import { ActionRow, Button } from 'seyfert';
 import { ButtonStyle } from 'seyfert/lib/types';
 
@@ -57,7 +57,7 @@ There are diffrent types of select menus: [`StringSelectMenu`](https://github.co
 We are going to make diffrent action rows for each select menu. 
 
 
-```ts {"String select menu": 10-19} {"User select menu": 20-27} {"Role select menu": 28-35} {"Channel select menu": 36-45} {"Mentionable select menu": 46-58} showLineNumbers copy
+```ts twoslash {"String select menu": 10-19} {"User select menu": 20-27} {"Role select menu": 28-35} {"Channel select menu": 36-45} {"Mentionable select menu": 46-58} showLineNumbers copy
 
 import {
   ActionRow,
@@ -128,8 +128,14 @@ const mentionableRow = new ActionRow<MentionableSelectMenu>().setComponents([
 
 After creating the components you have to send the ActionRow into the components field. You can check example below:
 
-```ts {13-16,20} showLineNumbers copy
-import { Declare, Command, type CommandContext, ActionRow, Button, ButtonStyle } from 'seyfert';
+```ts twoslash {13-16,20} showLineNumbers copy
+import type { ParseClient, Client } from 'seyfert';
+declare module 'seyfert' {
+  interface UsingClient extends ParseClient<Client<true>> {}
+}
+// ---cut---
+import { Declare, Command, type CommandContext, ActionRow, Button } from 'seyfert';
+import { ButtonStyle } from 'seyfert/lib/types';
 
 @Declare({
   name: 'ping',

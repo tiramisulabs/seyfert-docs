@@ -17,7 +17,7 @@ Collectors are built using the [`createComponentCollector`](https://github.com/t
 
 Here's an example of how to build a simple collector after sending a message with an attached button in a "hello world" command.
 
-```ts ins={30} showLineNumbers copy
+```ts twoslash ins={30} showLineNumbers copy
 import {
   Button,
   ActionRow,
@@ -60,7 +60,7 @@ Once the collector is created from a message, we'll handle the button interactio
 
 Here’s an example:
 
-```ts ins={35-37} showLineNumbers copy
+```ts twoslash ins={35-37} showLineNumbers copy
 import {
   Button,
   ActionRow,
@@ -118,7 +118,7 @@ However, Seyfert simply implements a `filter` option when creating the collector
 
 Let’s implement the filter to restrict the user who executed the interaction and filter the interaction to only button interactions.
 
-```ts ins={33} showLineNumbers copy
+```ts twoslash ins={33} showLineNumbers copy
 import {
   Button,
   ActionRow,
@@ -173,7 +173,7 @@ The return function will take two parameters:
 
 Here’s an example of how we add an idle timeout of 1000ms to the collector and refresh it every time it enters the `onStop` return function.
 
-```ts ins={34-38} showLineNumbers copy
+```ts twoslash ins={34-38} showLineNumbers copy
 import {
   Button,
   ActionRow,
@@ -227,7 +227,7 @@ Since modals are not message components, it’s not possible to create a `messag
 
 Here’s an example using `run` within the modal constructor:
 
-```ts showLineNumbers copy
+```ts twoslash showLineNumbers copy
 import {
   Modal,
   Command,

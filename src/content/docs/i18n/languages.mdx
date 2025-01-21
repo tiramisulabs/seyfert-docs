@@ -16,7 +16,7 @@ For this section we are going to follow the setup we did in **Getting Started** 
 
 Before starting this chapter we could update `seyfert.config.mjs` to tell seyfert where our languages file will be.
 
-```ts {12} title="seyfert.config.mjs" showLineNumbers
+```ts twoslash {12} title="seyfert.config.mjs" showLineNumbers
 // @ts-check
 import { config } from "seyfert";
 
@@ -36,7 +36,7 @@ export default config.bot({
 
 Each language file shall export by default an object containing the translations for the language.
 
-```ts title="languages/en.ts" showLineNumbers wrap
+```ts twoslash title="languages/en.ts" showLineNumbers wrap
 export default {
   hello: "Each key value pair will be the translation for the key",
   foo: {
@@ -102,7 +102,10 @@ declare module 'seyfert' {
 
 :::note[Preventing errors]
 You can assign a default language to avoid getting `undefined`.
-```ts
+```ts twoslash
+import { Client } from "seyfert";
+const client = new Client();
+// ---cut--- snoopy
 client.setServices({ langs: { default: 'en-US' } });
 ```
 :::
@@ -119,7 +122,22 @@ After doing this, you can use the language in your commands, events, components,
 
 Let's see an example with our `ping` command by adding an option to respond in a specific language
 
-```ts {35, 41} title="src/commands/ping.ts" showLineNumbers
+```ts twoslash {35, 41} title="src/commands/ping.ts" showLineNumbers
+// @exactOptionalPropertyTypes: false
+import type { ParseClient, Client, ParseLocales } from 'seyfert';
+const English = {
+  foo: {
+    ping(data: { ping: number }) {
+      return `Pong: ${data.ping}` as const
+    }
+  }
+};
+declare module 'seyfert' {
+  interface UsingClient extends ParseClient<Client<true>> {}
+
+  interface DefaultLocale extends ParseLocales<typeof English> {}
+}
+// ---cut---
 import {
   Command,
   Declare,

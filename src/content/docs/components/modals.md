@@ -6,7 +6,7 @@ Modals can also be created in Seyfert. They are created with a builder like othe
 
 Here is an example of how to create a modal with two text inputs:
 
-```ts showLineNumbers copy
+```ts twoslash showLineNumbers copy
 
 import { Modal, TextInput, ActionRow } from 'seyfert';
 
@@ -38,9 +38,9 @@ const modal = new Modal()
 
 To handle modals, as they aren't components, Seyfert provides `ModalCommmand` class which has the same logic as the `ComponentCommand` class.
 
-```ts showLineNumbers copy
+```ts twoslash showLineNumbers copy
 
-import { ModalCommand, type ModalSubmitInteraction } from 'seyfert';
+import { ModalCommand, type ModalContext } from 'seyfert';
 
 export default class MyModal extends ModalCommand {
   filter(context: ModalContext) {

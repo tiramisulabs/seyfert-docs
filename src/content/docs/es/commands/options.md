@@ -269,9 +269,9 @@ Podemos transformar el valor de cualquier opción en algo más, para eso utiliza
 function isUrl(url: string): boolean { return true; }
 // ---cut---
 import { Options, createStringOption, Command } from 'seyfert';
-import type { OKFunction } from 'seyfert';
+import type { OKFunction, CommandContext } from 'seyfert';
 
-@Options({
+const options = {
     url: createStringOption({
         description: 'how to be a gamer',
 
@@ -280,8 +280,15 @@ import type { OKFunction } from 'seyfert';
             fail('expected a valid url');
         }
     })
-})
-class Ping extends Command {}
+}
+
+@Options(options)
+class Ping extends Command {
+    run(ctx: CommandContext<typeof options>) {
+        ctx.options.url;
+                  // ^?
+    }
+}
 ```
 
 Ahora el tipo de dato que recibe el valor del comando es `URL`, si no es así se lanzará un error.

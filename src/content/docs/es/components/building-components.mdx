@@ -14,7 +14,7 @@ Todos los generadores se envían dentro de una [`ActionRow`](https://github.com/
 
 Aquí se muestra cómo crear una ActionRow básica:
 
-```ts {"Establece todos los componentes dentro de esta ActionRow": 4-5} {"Añadir componentes a la ActionRow": 6-7} showLineNumbers copy
+```ts twoslash twoslash {"Establece todos los componentes dentro de esta ActionRow": 4-5} {"Añadir componentes a la ActionRow": 6-7} showLineNumbers copy
 
 import { ActionRow } from 'seyfert';
 
@@ -35,7 +35,7 @@ Ahora vamos a construir cada tipo de componente y establecerlo dentro de una Act
 
 Una ActionRow no debe contener más de 5 botones.
 
-```ts showLineNumbers copy
+```ts twoslash showLineNumbers copy
 import { ActionRow, Button } from 'seyfert';
 import { ButtonStyle } from 'seyfert/lib/types';
 
@@ -56,7 +56,7 @@ Existen diferentes tipos de menús select: [`StringSelectMenu`](https://github.c
 
 Vamos a crear diferentes filas de acción para cada menú select.
 
-```ts {"Menú select de cadenas": 10-19} {"Menú select de usuarios": 20-27} {"Menú select de roles": 28-35} {"Menú select de canales": 36-45} {"Menú select de mencionables": 46-58} showLineNumbers copy
+```ts twoslash {"Menú select de cadenas": 10-19} {"Menú select de usuarios": 20-27} {"Menú select de roles": 28-35} {"Menú select de canales": 36-45} {"Menú select de mencionables": 46-58} showLineNumbers copy
 
 import {
   ActionRow,
@@ -107,8 +107,8 @@ const mentionableMenu = new MentionableSelectMenu()
   .setPlaceholder('Selecciona un mencionable')
   //id de mencionables (rol o usuario)
   .setDefaultMentionables(
-    { type: 'Usuario', id: '123456789' },
-    { type: 'Rol', id: '987654321' }
+    { type: 'User', id: '123456789' },
+    { type: 'Role', id: '987654321' }
   );
 
 const mentionableRow = new ActionRow<MentionableSelectMenu>().setComponents([mentionableMenu]);
@@ -123,8 +123,14 @@ const mentionableRow = new ActionRow<MentionableSelectMenu>().setComponents([men
 
 Después de crear los componentes, debes enviar la ActionRow al campo de componentes. Puedes ver un ejemplo a continuación:
 
-```ts {13-16,20} showLineNumbers copy
-import { Declare, Command, type CommandContext, ActionRow, Button, ButtonStyle } from 'seyfert';
+```ts twoslash {13-16,20} showLineNumbers copy
+import type { ParseClient, Client } from 'seyfert';
+declare module 'seyfert' {
+  interface UsingClient extends ParseClient<Client<true>> {}
+}
+// ---cut---
+import { Declare, Command, type CommandContext, ActionRow, Button } from 'seyfert';
+import { ButtonStyle } from 'seyfert/lib/types';
 
 @Declare({
   name: 'ping',

@@ -17,7 +17,7 @@ Los colectores se construyen utilizando el método [`createComponentCollector`](
 
 Aquí tienes un ejemplo de cómo construir un colector simple después de enviar un mensaje con un botón adjunto en un comando de `hola mundo`.
 
-```ts ins={30} showLineNumbers copy
+```ts twoslash ins={30} showLineNumbers copy
 import {
   Button,
   ActionRow,
@@ -60,7 +60,7 @@ Una vez creado el colector a partir de un mensaje, vamos a manejar la interacci�
 
 Aquí tienes un ejemplo:
 
-```ts ins={35-37} showLineNumbers copy
+```ts twoslash ins={35-37} showLineNumbers copy
 import {
   Button,
   ActionRow,
@@ -118,7 +118,7 @@ Pero Seyfert implementa simplemente una opción de `filter` al crear el colector
 
 Vamos a implementar el filtro para filtrar al usuario que ejecutó la interacción y filtrar la interacción solo para las interacciones de botón.
 
-```ts ins={33} showLineNumbers copy
+```ts twoslash ins={33} showLineNumbers copy
 import {
   Button,
   ActionRow,
@@ -173,7 +173,7 @@ La función de retorno tomará dos parámetros:
 
 Aquí tienes un ejemplo de cómo añadimos un tiempo de inactividad al colector de 1000ms y luego, cada vez que entra en la función de retorno `onStop`, lo refrescamos.
 
-```ts ins={34-38} showLineNumbers copy
+```ts twoslash ins={34-38} showLineNumbers copy
 import {
   Button,
   ActionRow,
@@ -227,7 +227,7 @@ Dado que los modales no son componentes de mensajes, no es posible crear un `col
 
 Aquí tienes un ejemplo utilizando `run` dentro del constructor de modales:
 
-```ts showLineNumbers copy
+```ts twoslash showLineNumbers copy
 import {
   Modal,
   Command,

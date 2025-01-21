@@ -30,14 +30,14 @@ importers:
         specifier: ^5.0.21
         version: 5.1.1
       '@slipher/cooldown':
-        specifier: https://pkg.pr.new/tiramisulabs/extra/@slipher/cooldown@a2ab047
-        version: https://pkg.pr.new/tiramisulabs/extra/@slipher/cooldown@a2ab047
+        specifier: https://pkg.pr.new/tiramisulabs/extra/@slipher/cooldown@3efa14e
+        version: https://pkg.pr.new/tiramisulabs/extra/@slipher/cooldown@3efa14e
       '@slipher/redis-adapter':
-        specifier: https://pkg.pr.new/tiramisulabs/extra/@slipher/redis-adapter@a2ab047
-        version: https://pkg.pr.new/tiramisulabs/extra/@slipher/redis-adapter@a2ab047
+        specifier: https://pkg.pr.new/tiramisulabs/extra/@slipher/redis-adapter@3efa14e
+        version: https://pkg.pr.new/tiramisulabs/extra/@slipher/redis-adapter@3efa14e
       '@slipher/uws-adapter':
-        specifier: https://pkg.pr.new/tiramisulabs/extra/@slipher/uws-adapter@a2ab047
-        version: https://pkg.pr.new/tiramisulabs/extra/@slipher/uws-adapter@a2ab047
+        specifier: https://pkg.pr.new/tiramisulabs/extra/@slipher/uws-adapter@3efa14e
+        version: https://pkg.pr.new/tiramisulabs/extra/@slipher/uws-adapter@3efa14e
       astro:
         specifier: ^4.16.13
         version: 4.16.18(@types/node@22.10.2)(rollup@4.29.1)(typescript@5.7.2)
@@ -48,8 +48,8 @@ importers:
         specifier: ^0.2.3
         version: 0.2.6(@expressive-code/core@0.38.3)(typescript@5.7.2)
       seyfert:
-        specifier: 2.1.1-dev-12489494190.0
-        version: 2.1.1-dev-12489494190.0
+        specifier: 2.2.1-dev-12889384680.0
+        version: 2.2.1-dev-12889384680.0
       tailwindcss:
         specifier: ^3.4.7
         version: 3.4.17
@@ -796,17 +796,17 @@ packages:
   '@shikijs/vscode-textmate@9.3.1':
     resolution: {integrity: sha512-79QfK1393x9Ho60QFyLti+QfdJzRQCVLFb97kOIV7Eo9vQU/roINgk7m24uv0a7AUvN//RDH36FLjjK48v0s9g==}
 
-  '@slipher/cooldown@https://pkg.pr.new/tiramisulabs/extra/@slipher/cooldown@a2ab047':
-    resolution: {tarball: https://pkg.pr.new/tiramisulabs/extra/@slipher/cooldown@a2ab047}
-    version: 0.0.1
+  '@slipher/cooldown@https://pkg.pr.new/tiramisulabs/extra/@slipher/cooldown@3efa14e':
+    resolution: {tarball: https://pkg.pr.new/tiramisulabs/extra/@slipher/cooldown@3efa14e}
+    version: 0.0.2
 
-  '@slipher/redis-adapter@https://pkg.pr.new/tiramisulabs/extra/@slipher/redis-adapter@a2ab047':
-    resolution: {tarball: https://pkg.pr.new/tiramisulabs/extra/@slipher/redis-adapter@a2ab047}
-    version: 0.0.1
+  '@slipher/redis-adapter@https://pkg.pr.new/tiramisulabs/extra/@slipher/redis-adapter@3efa14e':
+    resolution: {tarball: https://pkg.pr.new/tiramisulabs/extra/@slipher/redis-adapter@3efa14e}
+    version: 0.0.2
 
-  '@slipher/uws-adapter@https://pkg.pr.new/tiramisulabs/extra/@slipher/uws-adapter@a2ab047':
-    resolution: {tarball: https://pkg.pr.new/tiramisulabs/extra/@slipher/uws-adapter@a2ab047}
-    version: 0.0.1
+  '@slipher/uws-adapter@https://pkg.pr.new/tiramisulabs/extra/@slipher/uws-adapter@3efa14e':
+    resolution: {tarball: https://pkg.pr.new/tiramisulabs/extra/@slipher/uws-adapter@3efa14e}
+    version: 0.0.2
 
   '@types/acorn@4.0.6':
     resolution: {integrity: sha512-veQTnWP+1D/xbxVrPC3zHnCZRjSrKfhbMUlEA43iMZLu7EsnTtkJklIuwrCPbOi8YkvDQAiW05VQQFvvz9oieQ==}
@@ -2187,8 +2187,8 @@ packages:
     engines: {node: '>=10'}
     hasBin: true
 
-  seyfert@2.1.1-dev-12489494190.0:
-    resolution: {integrity: sha512-rC/2GmnhBDWKaLLZ/mQZkz2lkUtRM3dmRcD1e2f6DFLigMh8zEOTlln9y9OtveXkJWBhjk8zRA4sE3VuKs6rYw==}
+  seyfert@2.2.1-dev-12889384680.0:
+    resolution: {integrity: sha512-dsY3C6+8AXCh/haN1dUfwud8gD7my/EyAtHW1ErL4Y9HAhCRwRHJcSgqGdGCrNXIuFr4vayNP1qFHa5p2aXXzQ==}
 
   sharp@0.33.5:
     resolution: {integrity: sha512-haPVm1EkS9pgvHrQ/F3Xy+hgcuMV0Wm9vfIBSiwZ05k+xgb0PkBQpGsAA/oWdDobNaZTH5ppvHtzCFbnSEwHVw==}
@@ -3405,18 +3405,18 @@ snapshots:
 
   '@shikijs/vscode-textmate@9.3.1': {}
 
-  '@slipher/cooldown@https://pkg.pr.new/tiramisulabs/extra/@slipher/cooldown@a2ab047':
+  '@slipher/cooldown@https://pkg.pr.new/tiramisulabs/extra/@slipher/cooldown@3efa14e':
     dependencies:
-      seyfert: 2.1.1-dev-12489494190.0
+      seyfert: 2.2.1-dev-12889384680.0
 
-  '@slipher/redis-adapter@https://pkg.pr.new/tiramisulabs/extra/@slipher/redis-adapter@a2ab047':
+  '@slipher/redis-adapter@https://pkg.pr.new/tiramisulabs/extra/@slipher/redis-adapter@3efa14e':
     dependencies:
       '@redis/client': 1.6.0
-      seyfert: 2.1.1-dev-12489494190.0
+      seyfert: 2.2.1-dev-12889384680.0
 
-  '@slipher/uws-adapter@https://pkg.pr.new/tiramisulabs/extra/@slipher/uws-adapter@a2ab047':
+  '@slipher/uws-adapter@https://pkg.pr.new/tiramisulabs/extra/@slipher/uws-adapter@3efa14e':
     dependencies:
-      seyfert: 2.1.1-dev-12489494190.0
+      seyfert: 2.2.1-dev-12889384680.0
       tweetnacl: 1.0.3
       uWebSockets.js: https://codeload.github.com/uNetworking/uWebSockets.js/tar.gz/442087c0a01bf146acb7386910739ec81df06700
 
@@ -5357,7 +5357,7 @@ snapshots:
 
   semver@7.6.3: {}
 
-  seyfert@2.1.1-dev-12489494190.0: {}
+  seyfert@2.2.1-dev-12889384680.0: {}
 
   sharp@0.33.5:
     dependencies:

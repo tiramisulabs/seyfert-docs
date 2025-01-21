@@ -32,10 +32,13 @@ Currently there are 3 events for entitlements:
 
 <Tabs>
 <TabItem label='entitlementCreate.ts'>
-```ts title='events/entitlementCreate.ts' showLineNumbers
+```ts twoslash title='events/entitlementCreate.ts' showLineNumbers
+import { createEvent } from 'seyfert';
+//---cut---
 export default createEvent({
     data: { name: 'entitlementCreate' },
     async run(entitlement, client) {
+        if (!entitlement.userId) return;
         const subscribedUser = await client.users.fetch(entitlement.userId);
         client.messages.write('LOG_CHANNEL_ID', {
             content: `${subscribedUser.globalName} (${subscribedUser.id}) has been subscribed to ${entitlement.skuId}`,
@@ -46,7 +49,9 @@ export default createEvent({
 </TabItem>
 
 <TabItem label='entitlementDelete.ts'>
-```ts title='events/entitlementDelete.ts' showLineNumbers
+```ts twoslash title='events/entitlementDelete.ts' showLineNumbers
+import { createEvent } from 'seyfert';
+//---cut---
 export default createEvent({
     data: { name: 'entitlementDelete' },
     run(entitlement, client) {
@@ -59,13 +64,16 @@ export default createEvent({
 </TabItem>
 
 <TabItem label='entitlementUpdate.ts'>
-```ts title='events/entitlementUpdate.ts' showLineNumbers
+```ts twoslash title='events/entitlementUpdate.ts' showLineNumbers
+import { createEvent } from 'seyfert';
+//---cut---
 export default createEvent({
     data: { name: 'entitlementUpdate' },
-    async run: (entitlement, client) => {
-        const subscribedUser = await client.users.fetch(newEntitlement.userId);
+    run: async (entitlement, client) => {
+        if (!entitlement.userId) return;
+        const subscribedUser = await client.users.fetch(entitlement.userId);
         client.messages.write('LOG_CHANNEL_ID', {
-            content: `Subscription (${newEntitlement.skuId}) renewed by ${subscribedUser.globalName}`,
+            content: `Subscription (${entitlement.skuId}) renewed by ${subscribedUser.globalName}`,
         });
     },
 });
@@ -79,13 +87,13 @@ Now you can create a **Button** that redirects to any item in your store, such a
 
 This type of button does not need a CustomID or Label, but it does need a SkuID, which you can get from your store menu at https://discord.com/developers/applications/{APP_ID}/skus
 
-```ts showLineNumbers
+```ts twoslash showLineNumbers
 import { Button } from 'seyfert';
 import { ButtonStyle } from 'seyfert/lib/types';
 
 new Button()
 .setSKUId('STORE_ITEM_SKU_ID')
-.setSyle(ButtonStyle.Premium)
+.setStyle(ButtonStyle.Premium)
 ```
 
 :::note[Learn more]
@@ -99,7 +107,7 @@ For more information about the premium buttons visit the discord documentation [
 In each **Interaction** you can also get all the active entitlements, with them you can detect if the user has any subscriptions, consumables, etc.
 
 Example:
-```ts title='commands/premium.ts' showLineNumbers
+```ts twoslash title='commands/premium.ts' showLineNumbers
 import { Declare, Command, type CommandContext, ActionRow, Button } from 'seyfert';
 import { ButtonStyle } from 'seyfert/lib/types';
 
@@ -112,11 +120,11 @@ export class PremiumCommand extends Command  {
     const isPremium = ctx.interaction.entitlements.length;
 
     const row = new ActionRow()
-    .setComponents(
+    .setComponents([
         new Button()
-        .setSkuId('STORE_ITEM_SKU_ID')
-        .setSyle(ButtonStyle.Premium)
-    );
+        .setSKUId('STORE_ITEM_SKU_ID')
+        .setStyle(ButtonStyle.Premium)
+    ]);
 
     if (!isPremium) return ctx.editOrReply({ 
         content: 'Click to subscribe and get access to the command!',
