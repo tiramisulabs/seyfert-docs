@@ -195,8 +195,13 @@ export default class PingCommand extends Command {
 
 Global middlewares follow the same rule and structure explained above, with the brief difference that they have a unique property in the context and are declared separately.
 
-```ts title="index.ts" {1,13} ins={3,5,9,19-20}
-import { Client, type ParseMiddlewares, type ParseClient, type ParseGlobalMiddlewares } from 'seyfert';
+```ts title="index.ts" {18} ins={5,8,10,14,24-25}
+import {
+  Client,
+  type ParseMiddlewares,
+  type ParseClient,
+  type ParseGlobalMiddlewares
+} from 'seyfert';
 import { middlewares } from "./path/to/middlewares";
 import { global } from "./path/to/globals";
 
