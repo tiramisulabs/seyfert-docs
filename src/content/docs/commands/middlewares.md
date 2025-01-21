@@ -39,7 +39,7 @@ export const middlewares = {
 
 
 ```ts title="index.ts" ins={2,7-9,15-16} copy
-import { type ParseLocales, Client, type ParseMiddlewares, type ParseClient } from "seyfert";
+import { Client, type ParseMiddlewares, type ParseClient } from "seyfert";
 import { middlewares } from "./path/to/middlewares";
 
 const client = new Client();
@@ -192,7 +192,7 @@ export default class PingCommand extends Command {
 Global middlewares follow the same rule and structure explained above, with the brief difference that they have a unique property in the context and are declared separately.
 
 ```ts
-import { type ParseGlobalMiddlewares, Client } from 'seyfert';
+import { Client, type ParseMiddlewares, type ParseClient, type ParseGlobalMiddlewares } from 'seyfert';
 import { middlewares } from "./path/to/middlewares";
 import { global } from "./path/to/globals";
 
