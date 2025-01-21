@@ -120,7 +120,7 @@ Notice you can access to the interaction data using `middle.context.interaction`
 
 On the other hand we could skip the interaction (ignore the interaction and literally do nothing) by using `middle.pass()`
 
-```ts title="logger.middleware.ts" {11-12} copy
+```ts title="logger.middleware.ts" {12} copy
 import { createMiddleware } from "seyfert";
 import { ChannelType } from 'seyfert/lib/types';
 
