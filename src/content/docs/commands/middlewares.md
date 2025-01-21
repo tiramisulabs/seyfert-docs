@@ -94,7 +94,7 @@ Let's take a look adding some logic to the logger middleware.
 
 ```ts title="logger.middleware.ts" ins={2, 11-13} copy wrap 
 import { createMiddleware } from "seyfert";
-import { ChannelTypes } from 'seyfert/lib/types';
+import { ChannelType } from 'seyfert/lib/types';
 
 export const loggerMiddleware = createMiddleware<void>((middle) => {
   // Log the command
@@ -122,7 +122,7 @@ On the other hand we could skip the interaction (ignore the interaction and lite
 
 ```ts title="logger.middleware.ts" {11-12} copy
 import { createMiddleware } from "seyfert";
-import { ChannelTypes } from 'seyfert/lib/types';
+import { ChannelType } from 'seyfert/lib/types';
 
 export const loggerMiddleware = createMiddleware<void>((middle) => {
   // Log the command
