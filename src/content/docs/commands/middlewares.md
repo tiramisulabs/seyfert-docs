@@ -64,7 +64,7 @@ declare module "seyfert" {
 
 Now we can use the `logger` middleware on any command.
 
-```ts title="ping.command.ts" copy
+```ts title="ping.command.ts" {1} ins={8} copy
 import { Middlewares, Declare, Command, type CommandContext } from "seyfert";
 
 @Declare({
@@ -92,7 +92,7 @@ As we had said you can use middlewares to do verifications, and you can stop the
 
 Let's take a look adding some logic to the logger middleware.
 
-```ts title="logger.middleware.ts" ins={11-13} copy wrap 
+```ts title="logger.middleware.ts" ins={2, 11-13} copy wrap 
 import { createMiddleware } from "seyfert";
 import { ChannelTypes } from 'seyfert/lib/types';
 
@@ -120,7 +120,7 @@ Notice you can access to the interaction data using `middle.context.interaction`
 
 On the other hand we could skip the interaction (ignore the interaction and literally do nothing) by using `middle.pass()`
 
-```ts title="logger.middleware.ts" ins={11} copy
+```ts title="logger.middleware.ts" {11-12} copy
 import { createMiddleware } from "seyfert";
 import { ChannelTypes } from 'seyfert/lib/types';
 
@@ -146,7 +146,7 @@ The last thing we can do with middlewares is to pass data to the command. This c
 
 We'll continue with the logger middleware and pass some data to the command.
 
-```ts title="logger.middleware.ts" copy
+```ts title="logger.middleware.ts" ins={4-6,13} {8} copy
 import { createMiddleware } from "seyfert";
 
 // This interface is used to let the middleware know what type of data to pass to the command
@@ -171,7 +171,7 @@ If you want to pass data from more than one middleware you can use the `|` opera
 
 :::
 
-```ts title="ping.command.ts" ins={10-11} copy
+```ts title="ping.command.ts" {9} ins={10-11} copy
 import { Middlewares, Declare, Command, type CommandContext } from "seyfert";
 
 @Declare({
@@ -195,7 +195,7 @@ export default class PingCommand extends Command {
 
 Global middlewares follow the same rule and structure explained above, with the brief difference that they have a unique property in the context and are declared separately.
 
-```ts
+```ts title="index.ts" {1,13} ins={3,5,9,19-20}
 import { Client, type ParseMiddlewares, type ParseClient, type ParseGlobalMiddlewares } from 'seyfert';
 import { middlewares } from "./path/to/middlewares";
 import { global } from "./path/to/globals";
