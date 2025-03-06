@@ -12,99 +12,100 @@ This guide assumes you have knowledge of the following topics:
 
 ## Why Docker?
 
-Docker provides a consistent environment that ensures the correct operation of any bot in both development and production, as well as simplifying workflow by integrating with CI/CD tools.
+Docker provides a consistent environment that ensures the proper functioning of any bot in both development and production, as well as simplifying the integration with CI/CD tools.
 
-With Docker, scaling a bot horizontally is simple, allowing workloads to be distributed across multiple instances as needed.
+With Docker scaling a bot horizontally is simple, allowing workloads to be distributed across multiple instances as needed.
 
-## What files does a Seyfert project need?
+## What files does a Seyfert project require?
 
-There are four files we need:
-
-- `package.json`: support for JavaScript modules
-- `seyfert.config.mjs`: configurations for Seyfert
-- `/node_modules`: dependencies
-- `/src` or `/dist`: application entry point
+- `package.json`
+- `seyfert.config.mjs`
+- `/node_modules`
+- `/src` or `/dist`
 
 ## Deploying with Node.js
 
-### Dockerfile for a TypeScript project
+### Container file for a TypeScript project
 
-The example `Dockerfile` assumes the following about your project:
-
-- It has the following *npm scripts*:
-    - `start`: runs the application's entry point
-    - `build`: transpiles TypeScript code to JavaScript
+A basic container file looks as follows:
 
 ```docker title="Dockerfile" copy
 FROM node:<VERSION_TAG>
 
-WORKDIR /project
+WORKDIR /bot
 
 COPY package*.json ./
 
-# Ref: https://docs.npmjs.com/cli/v10/commands/npm-ci
-RUN npm ci
+RUN npm install --production
 
-COPY tsconfig.json ./
-COPY seyfert.config.mjs ./
+RUN npm i -g typescript
+
+COPY tsconfig.json seyfert.config.mjs ./
 COPY /src ./src
 
-# Ref: https://docs.npmjs.com/cli/v10/commands/npm-prune
-RUN npm run build && \
-    npm prune --production
+# Build typescript files
+RUN tsc --project tsconfig.json
 
-ENV USER node
 ENV NODE_ENV=production
 
-# Restrict user permissions in production
-USER $USER
-
-CMD ["npm", "start"]
+ENTRYPOINT ["node", "dist/index.js"]
 ```
 
 You must replace `<VERSION_TAG>` with the Node.js version you want to use.
 
-### With Multi-stage builds
+### Container file with multi-stage builds
 
-While the previous image is functional, it's not very optimal or secure. The following example uses `multi-stage builds` and `dumb-init`:
+Although the previous container image is simple and practical, it can still be improved by adding multi-stage builds and other best practices:
 
 ```docker title="Dockerfile" copy
-# Base stage
-FROM node:<VERSION_TAG>-alpine<ALPINE_VERSION> AS base
+# [ base ] #
+FROM node:<VERSION_TAG>-alpine AS base
 
-ENV DIR /project
+ENV DIR /bot
 WORKDIR $DIR
 
-# Build stage
-FROM base AS build
+# [ OS packages ] #
+FROM base AS pkg
 
-# Ref: https://github.com/Yelp/dumb-init
 RUN apk update && apk add --no-cache dumb-init
+
+# [ project builder ] #
+FROM base AS build
 
 COPY package*.json ./
 
+## Ref: https://docs.npmjs.com/cli/v10/commands/npm-ci
 RUN npm ci
+## Ref: https://docs.npmjs.com/cli/v10/commands/npm-prune
+RUN npm prune --production
 
-COPY tsconfig.json ./
-COPY seyfert.config.mjs ./
+RUN npm i -g typescript
+
+COPY tsconfig.json seyfert.config.mjs ./
 COPY /src ./src
 
-RUN npm run build && \
-    npm prune --production
+## Build typescript
+RUN tsc --project tsconfig.json
 
-# Production stage
+# [ production ready ] #
 FROM base AS production
 
-COPY --from=build /usr/bin/dumb-init /usr/bin/dumb-init
-COPY --from=build $DIR/node_modules $DIR/node_modules
-COPY --from=build $DIR/dist $DIR/dist
-COPY --from=build $DIR/package.json $DIR/package.json
-COPY --from=build $DIR/seyfert.config.mjs $DIR/seyfert.config.mjs
+# Joining stages
+## Packages
+COPY --from=pkg /usr/bin/dumb-init /usr/bin/dumb-init
+## Dependencies
+COPY --from=build $DIR/node_modules ./node_modules
+## Builder
+COPY --from=build $DIR/dist ./dist
+COPY --from=build $DIR/package.json ./package.json
+COPY --from=build $DIR/seyfert.config.js ./seyfert.config.js
 
+# Environment permissions
+ENV NODE_ENV production
+## Remove if your project needs root permissions
 ENV USER node
-ENV NODE_ENV=production
-
 USER $USER
 
-CMD ["dumb-init", "node", "dist/index.js"]
+# Run the application
+ENTRYPOINT ["dumb-init", "node", "dist/index.js"]
 ```
