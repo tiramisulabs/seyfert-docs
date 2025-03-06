@@ -14,97 +14,98 @@ Esta guía asume que tiene nociones en los siguientes temas:
 
 Docker proporciona un entorno consistente que garantiza el correcto funcionamiento de cualquier bot tanto en desarrollo como en producción, además de simplificar el flujo de trabajo mediante la integración con herramientas de CI/CD.
 
-Con Docker, escalar un bot horizontalmente es sencillo, permitiendo distribuir la carga de trabajo entre múltiples instancias cuando sea necesario.
+Con Docker escalar un bot horizontalmente es sencillo, permitiendo distribuir la carga de trabajo entre múltiples instancias en caso de ser necesario.
 
 ## ¿Qué archivos necesita un proyecto de Seyfert?
 
-Son cuatro los archivos que necesitamos:
-
-- `package.json`: soporte para JavaScript modules
-- `seyfert.config.mjs`: configuraciones para Seyfert
-- `/node_modules`: dependencias
-- `/src` ó `/dist`: punto de entrada de la aplicación
+- `package.json`
+- `seyfert.config.mjs`
+- `/node_modules`
+- `/src` o `/dist`
 
 ## Desplegando con Node.js
 
-### Dockerfile para un proyecto TypeScript
+### Imagen para un proyecto TypeScript
 
-El `Dockerfile` de ejemplo asume lo siguiente sobre su proyecto:
-
-- Posee los siguientes *scripts de npm*:
-    - `start`: ejecuta el punto de entrada de la aplicación
-    - `build`: transpila el código de TypeScript a JavaScript
+Una imagen sencilla para desplegar un bot sería la siguiente:
 
 ```docker title="Dockerfile" copy
 FROM node:<VERSION_TAG>
 
-WORKDIR /project
+WORKDIR /bot
 
 COPY package*.json ./
 
-# Ref: https://docs.npmjs.com/cli/v10/commands/npm-ci
-RUN npm ci
+RUN npm install --production
 
-COPY tsconfig.json ./
-COPY seyfert.config.mjs ./
+RUN npm i -g typescript
+
+COPY tsconfig.json seyfert.config.mjs ./
 COPY /src ./src
 
-# Ref: https://docs.npmjs.com/cli/v10/commands/npm-prune
-RUN npm run build && \
-    npm prune --production
+# Build typescript files
+RUN tsc --project tsconfig.json
 
-ENV USER node
 ENV NODE_ENV=production
 
-# Restringe los permisos de usuario en producción
-USER $USER
-
-CMD ["npm", "start"]
+ENTRYPOINT ["node", "dist/index.js"]
 ```
 
 Debe reemplazar `<VERSION_TAG>` por la versión de Node.js que quiera utilizar.
 
-### Con Multi-stage builds
+### Imagen con multi-stage builds
 
-Si bien la anterior imagen es funcional, no es muy óptima o segura. El siguiente ejemplo hace uso de las `multi-stage builds` y `dumb-init`:
+Pese a que la anterior imagen es sencilla y práctica, todavía puede mejorarse añadiendo multi-stage builds y otras buenas prácticas:
 
 ```docker title="Dockerfile" copy
-# Base stage
-FROM node:<VERSION_TAG>-alpine<ALPINE_VERSION> AS base
+# [ base ] #
+FROM node:<VERSION_TAG>-alpine AS base
 
-ENV DIR /project
+ENV DIR /bot
 WORKDIR $DIR
 
-# Build stage
-FROM base AS build
+# [ OS packages ] #
+FROM base AS pkg
 
-# Ref: https://github.com/Yelp/dumb-init
 RUN apk update && apk add --no-cache dumb-init
+
+# [ project builder ] #
+FROM base AS build
 
 COPY package*.json ./
 
+## Ref: https://docs.npmjs.com/cli/v10/commands/npm-ci
 RUN npm ci
+## Ref: https://docs.npmjs.com/cli/v10/commands/npm-prune
+RUN npm prune --production
 
-COPY tsconfig.json ./
-COPY seyfert.config.mjs ./
+RUN npm i -g typescript
+
+COPY tsconfig.json seyfert.config.mjs ./
 COPY /src ./src
 
-RUN npm run build && \
-    npm prune --production
+## Build typescript
+RUN tsc --project tsconfig.json
 
-# Production stage
+# [ production ready ] #
 FROM base AS production
 
-COPY --from=build /usr/bin/dumb-init /usr/bin/dumb-init
-COPY --from=build $DIR/node_modules $DIR/node_modules
-COPY --from=build $DIR/dist $DIR/dist
-COPY --from=build $DIR/package.json $DIR/package.json
-COPY --from=build $DIR/seyfert.config.mjs $DIR/seyfert.config.mjs
+# Joining stages
+## Packages
+COPY --from=pkg /usr/bin/dumb-init /usr/bin/dumb-init
+## Dependencies
+COPY --from=build $DIR/node_modules ./node_modules
+## Builder
+COPY --from=build $DIR/dist ./dist
+COPY --from=build $DIR/package.json ./package.json
+COPY --from=build $DIR/seyfert.config.js ./seyfert.config.js
 
+# Environment permissions
+ENV NODE_ENV production
+## Remove if your project needs root permissions
 ENV USER node
-ENV NODE_ENV=production
-
 USER $USER
 
-CMD ["dumb-init", "node", "dist/index.js"]
+# Run the application
+ENTRYPOINT ["dumb-init", "node", "dist/index.js"]
 ```
