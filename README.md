@@ -1,3 +1,6 @@
+> Documentation has moved!  
+> See the new docs at [tiramisulabs/seyfert-web](https://github.com/tiramisulabs/seyfert-web).
+
 <div align='center'>
 
   # **Seyfert**
